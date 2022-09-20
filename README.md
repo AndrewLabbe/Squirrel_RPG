@@ -24,4 +24,4 @@ Changes to content in the `docs` folder will not show up on the website unless t
 Garrett Goldberg
 
 
-Garrett Goldberg, Micaela Grajales
+Garrett Goldberg, Micaela Grajales, Philip Caldarella
