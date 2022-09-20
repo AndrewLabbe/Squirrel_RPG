@@ -20,8 +20,4 @@ Changes to content in the `docs` folder will not show up on the website unless t
 
 ## Credits
 **Alex Thimineur**: Programmed the game, made the art.
-<<<<<<< HEAD
-Garrett Goldberg, Micaela Grajales, Philip Caldarella
-=======
-Garrett Goldberg, Micaela Grajales, Philip Caldarella
->>>>>>> 0b3ef291d2277ba9ac2e9f52b6cb677949df0ad8
+Garrett Goldberg, Micaela Grajales, Philip Caldarella, Andrew Labbe
