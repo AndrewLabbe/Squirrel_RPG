@@ -47,7 +47,7 @@ public class TestMap extends Map {
         dinosaur.setInteractScript(new DinoScript());
         npcs.add(dinosaur); 
        
-        Fox fox = new Fox(2, getMapTile(13, 20).getLocation().subtractY(40));
+        Fox fox = new Fox(3, getMapTile(13, 20).getLocation());
         fox.setInteractScript(new FoxScript());
         npcs.add(fox);
 
