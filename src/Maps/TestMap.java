@@ -6,10 +6,12 @@ import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Dinosaur;
+import NPCs.Fox;
 import NPCs.Walrus;
 import NPCs.Zombie;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
+import Scripts.TestMap.FoxScript;
 import Scripts.TestMap.LostBallScript;
 import Scripts.TestMap.TreeScript;
 import Scripts.TestMap.WalrusScript;
@@ -44,11 +46,10 @@ public class TestMap extends Map {
         dinosaur.setExistenceFlag("hasTalkedToDinosaur");
         dinosaur.setInteractScript(new DinoScript());
         npcs.add(dinosaur); 
-        
-        /*Dinosaur dino = new Dinosaur(3, getMapTile(12, 5).getLocation());
-        dino.setExistenceFlag("hasTalkedToDinosaur");
-        dino.setInteractScript(new DinoScript());
-        npcs.add(dino);*/
+       
+        Fox fox = new Fox(2, getMapTile(13, 20).getLocation().subtractY(40));
+        fox.setInteractScript(new FoxScript());
+        npcs.add(fox);
 
         Zombie zombie = new Zombie(4, getMapTile(21, 25).getLocation()); 
         npcs.add(zombie); 
