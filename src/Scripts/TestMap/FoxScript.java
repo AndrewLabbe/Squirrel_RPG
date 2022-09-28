@@ -19,9 +19,9 @@ public class FoxScript extends Script<NPC>{
             addTextToTextboxQueue("Say, if you could rid them from the forest,\nI would be forever greatful :)");
             addTextToTextboxQueue("What says you to that?");
             addTextToTextboxQueue("You're in? Terrific! You should start by clearing\nsome of these guys out with that weapon of yours.");
-            addTextToTextboxQueue("Oh I forgot to mention, if you want to permanetly\n rid the forest of these vile creatures, remember this.");
+            addTextToTextboxQueue("Oh I forgot to mention, if you want to permanetly\nrid the forest of these vile creatures, remember this.");
             addTextToTextboxQueue("At the top of the tallest mountain, where no creature\nhas set foot before");
-            addTextToTextboxQueue(" a lost temple will purify the forest...");
+            addTextToTextboxQueue("A lost temple will purify the forest...");
         }
         else {
             addTextToTextboxQueue("Why are you bothering me for? Go defeat these things\nand don't forget what I said.");
