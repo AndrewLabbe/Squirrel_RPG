@@ -1,11 +1,16 @@
 package Screens;
 
+
+
 import Engine.GraphicsHandler;
+import Engine.Key;
+import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
 import Maps.TestMap;
+import NPCs.Currency;
 import Players.Cat;
 import Utils.Direction;
 import Utils.Point;
@@ -18,12 +23,20 @@ public class PlayLevelScreen extends Screen {
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
     protected FlagManager flagManager;
+    
+    public Currency screenCoin;
+    protected Key MOVE_LEFT_KEY = Key.LEFT;
+    protected Key MOVE_RIGHT_KEY = Key.RIGHT;
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
     }
 
     public void initialize() {
+    	// Setup Currency
+    	screenCoin = new Currency();
+    	screenCoin.setCoin(2);
+    	
         // setup state
         flagManager = new FlagManager();
         flagManager.addFlag("hasLostBall", false);
@@ -83,12 +96,20 @@ public class PlayLevelScreen extends Screen {
             case RUNNING:
                 player.update();
                 map.update(player);
+                screenCoin.updateCoin();
                 break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 winScreen.update();
                 break;
         }
+        
+        if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
+    		screenCoin.loseCoin(2);
+    	} 
+    	else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
+    		screenCoin.addCoin(3);
+    	}
 
         // if flag is set at any point during gameplay, game is "won"
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {
@@ -101,6 +122,7 @@ public class PlayLevelScreen extends Screen {
         switch (playLevelScreenState) {
             case RUNNING:
                 map.draw(player, graphicsHandler);
+                screenCoin.draw(graphicsHandler);
                 break;
             case LEVEL_COMPLETED:
                 winScreen.draw(graphicsHandler);

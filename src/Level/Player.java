@@ -6,6 +6,7 @@ import Engine.Keyboard;
 import GameObject.GameObject;
 import GameObject.Rectangle;
 import GameObject.SpriteSheet;
+import NPCs.Currency;
 import Utils.Direction;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public abstract class Player extends GameObject {
         playerState = PlayerState.STANDING;
         previousPlayerState = playerState;
         this.affectedByTriggers = true;
+        
     }
 
     public void update() {
@@ -72,6 +74,7 @@ public abstract class Player extends GameObject {
 
         // update player's animation
         super.update();
+        
     }
 
     // based on player's current state, call appropriate player state handling method
