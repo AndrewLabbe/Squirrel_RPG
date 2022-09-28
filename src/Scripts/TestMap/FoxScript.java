@@ -4,6 +4,7 @@ import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
 
+//script for talking to fox NPC
 public class FoxScript extends Script<NPC>{
 	
 	@Override
@@ -11,7 +12,7 @@ public class FoxScript extends Script<NPC>{
         lockPlayer();
         showTextbox();
 
-        // changes what walrus says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
+        // changes what fox says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
         if (!isFlagSet("hasTalkedToFox")) {
             addTextToTextboxQueue("Hey you, squirrel over there!");
             addTextToTextboxQueue("This place seems to be ridden with zombies,\nI don't know how they got there but they don't belong.");
@@ -23,13 +24,14 @@ public class FoxScript extends Script<NPC>{
             addTextToTextboxQueue(" a lost temple will purify the forest...");
         }
         else {
-            addTextToTextboxQueue("Why are you bothering me for? Go defeat these things and\ndon't forget what I said.");
-            addTextToTextboxQueue("At the top of the tallest mountain, where no\ncreature set foot before, a lost temple will purify the forest...");
+            addTextToTextboxQueue("Why are you bothering me for? Go defeat these things\nand don't forget what I said.");
+            addTextToTextboxQueue("At the top of the tallest mountain, where no\ncreature set foot before,");
+            addTextToTextboxQueue("A lost temple will purify the forest...");
         }
         entity.facePlayer(player);
     }
 
-    @Override
+	@Override
     protected void cleanup() {
         unlockPlayer();
         hideTextbox();
