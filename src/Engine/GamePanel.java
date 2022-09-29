@@ -32,6 +32,9 @@ public class GamePanel extends JPanel {
 	private KeyLocker keyLocker = new KeyLocker();
 	private final Key pauseKey = Key.P;
 	private final Key invKey = Key.I;
+	
+	//Initialize sound
+		Sound sound = new Sound();
 
 	/*
 	 * The JPanel and various important class instances are setup here
@@ -74,6 +77,9 @@ public class GamePanel extends JPanel {
 		setBackground(Colors.CORNFLOWER_BLUE);
 		screenManager.initialize(new Rectangle(getX(), getY(), getWidth(), getHeight()));
 		doPaint = true;
+		
+		//Play background music
+				playMusic(0);
 	}
 
 	// this starts the timer (the game loop is started here
@@ -109,6 +115,21 @@ public class GamePanel extends JPanel {
 			screenManager.update();
 		}
 	}
+	
+	//Sound Effects
+			public void playMusic(int i) {
+				sound.setFile(i);
+				sound.play();
+				sound.loop();
+			}
+			public void stopMusic() {
+				sound.stop();
+			}
+			public void playSE(int i) {
+				sound.setFile(i);
+				sound.play();
+
+			}
 
 	public void draw() {
 		screenManager.draw(graphicsHandler);
