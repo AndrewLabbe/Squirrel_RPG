@@ -1,4 +1,5 @@
 package Engine;
+
 import GameObject.Rectangle;
 import SpriteFont.SpriteFont;
 import Utils.Colors;
@@ -25,11 +26,12 @@ public class GamePanel extends JPanel {
 
 	private boolean doPaint = false;
 	private boolean isGamePaused = false;
+	private boolean isInvOpen = false;	
 	private SpriteFont pauseLabel;
+	private SpriteFont invLabel;
 	private KeyLocker keyLocker = new KeyLocker();
 	private final Key pauseKey = Key.P;
-	//Initialize sound
-	Sound sound = new Sound();
+	private final Key invKey = Key.I;
 
 	/*
 	 * The JPanel and various important class instances are setup here
@@ -48,7 +50,12 @@ public class GamePanel extends JPanel {
 		pauseLabel = new SpriteFont("PAUSE", 365, 280, "Comic Sans", 24, Color.white);
 		pauseLabel.setOutlineColor(Color.black);
 		pauseLabel.setOutlineThickness(2.0f);
+		
+		invLabel = new SpriteFont("Inventory", 330, 280, "Comic Sans", 30, Color.white);
+		invLabel.setOutlineColor(Color.black);
+		invLabel.setOutlineThickness(5.0f);
 
+		
 		// Every timer "tick" will call the update method as well as tell the JPanel to repaint
 		// Remember that repaint "schedules" a paint rather than carries it out immediately
 		// If the game is really laggy/slow, I would consider upping the FPS in the Config file.
@@ -67,8 +74,6 @@ public class GamePanel extends JPanel {
 		setBackground(Colors.CORNFLOWER_BLUE);
 		screenManager.initialize(new Rectangle(getX(), getY(), getWidth(), getHeight()));
 		doPaint = true;
-		//Play background music
-		playMusic(0);
 	}
 
 	// this starts the timer (the game loop is started here
@@ -81,15 +86,25 @@ public class GamePanel extends JPanel {
 	}
 
 	public void update() {
+		if (Keyboard.isKeyDown(invKey) && !keyLocker.isKeyLocked(invKey)) {
+			isInvOpen = !isInvOpen;
+			keyLocker.lockKey(invKey);
+		}
 		if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey)) {
 			isGamePaused = !isGamePaused;
 			keyLocker.lockKey(pauseKey);
 		}
 		
+		if (Keyboard.isKeyUp(invKey)) {
+			keyLocker.unlockKey(invKey);
+		}
 		if (Keyboard.isKeyUp(pauseKey)) {
 			keyLocker.unlockKey(pauseKey);
 		}
 
+		if (!isInvOpen) {
+			screenManager.update();
+		}
 		if (!isGamePaused) {
 			screenManager.update();
 		}
@@ -99,6 +114,10 @@ public class GamePanel extends JPanel {
 		screenManager.draw(graphicsHandler);
 
 		// if game is paused, draw pause gfx over Screen gfx
+		if (isInvOpen) {
+			invLabel.draw(graphicsHandler);
+			graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));
+		}
 		if (isGamePaused) {
 			pauseLabel.draw(graphicsHandler);
 			graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));
@@ -115,19 +134,4 @@ public class GamePanel extends JPanel {
 			draw();
 		}
 	}
-		//Sound Effects
-		public void playMusic(int i) {
-			sound.setFile(i);
-			sound.play();
-			sound.loop();
-		}
-		public void stopMusic() {
-			sound.stop();
-		}
-		public void playSE(int i) {
-			sound.setFile(i);
-			sound.play();
-			
-		}
-	
 }
