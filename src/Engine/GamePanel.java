@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.TimerTask;
 
 /*
  * This is where the game loop starts
@@ -34,8 +35,12 @@ public class GamePanel extends JPanel {
 	private final Key invKey = Key.I;
 	
 	//Initialize sound
-		Sound sound = new Sound();
-
+	Sound sound = new Sound();
+	
+	// Color for Day/Night Cycle
+	private int shade = 0;
+	private int time = 0;
+	
 	/*
 	 * The JPanel and various important class instances are setup here
 	 */
@@ -66,6 +71,8 @@ public class GamePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				update();
 				repaint();
+				
+				time++;
 			}
 		});
 		timer.setRepeats(true);
@@ -77,6 +84,8 @@ public class GamePanel extends JPanel {
 		setBackground(Colors.CORNFLOWER_BLUE);
 		screenManager.initialize(new Rectangle(getX(), getY(), getWidth(), getHeight()));
 		doPaint = true;
+		
+	
 		
 		//Play background music
 				playMusic(0);
@@ -114,6 +123,11 @@ public class GamePanel extends JPanel {
 		if (!isGamePaused) {
 			screenManager.update();
 		}
+		
+		if (time % 100 == 0) {
+			cycleDay();
+			System.out.println("Time: " + time);
+		}
 	}
 	
 	//Sound Effects
@@ -130,6 +144,16 @@ public class GamePanel extends JPanel {
 				sound.play();
 
 			}
+			
+	// Create Day/Night Cycle
+			public void cycleDay() {
+				if (shade < 100) {
+					shade += 10;
+				}
+				else if (shade >= 1) {
+					shade = 0;
+				}
+			}
 
 	public void draw() {
 		screenManager.draw(graphicsHandler);
@@ -143,6 +167,9 @@ public class GamePanel extends JPanel {
 			pauseLabel.draw(graphicsHandler);
 			graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));
 		}
+		
+		// Shade for Day Night Cycle
+		graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, shade));
 	}
 
 	@Override
