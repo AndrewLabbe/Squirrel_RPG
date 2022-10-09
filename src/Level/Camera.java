@@ -25,7 +25,10 @@ public class Camera extends Rectangle {
     // current map entities that are to be included in this frame's update/draw cycle
     private ArrayList<EnhancedMapTile> activeEnhancedMapTiles = new ArrayList<>();
     private ArrayList<NPC> activeNPCs = new ArrayList<>();
-    private ArrayList<Trigger> activeTriggers = new ArrayList<>();
+    private ArrayList<Trigger> activeTriggers = new ArrayList<>(); 
+    
+    //Projectile map entities 
+    private ArrayList<Projectile> activeProjectiles = new ArrayList<>();
 
     // determines how many tiles off screen an entity can be before it will be deemed inactive and not included in the update/draw cycles until it comes back in range
     private final int UPDATE_OFF_SCREEN_RANGE = 4;
@@ -64,14 +67,21 @@ public class Camera extends Rectangle {
     // active entities are calculated each frame using the loadActiveEntity methods below
     public void updateMapEntities(Player player) {
         activeEnhancedMapTiles = loadActiveEnhancedMapTiles();
-        activeNPCs = loadActiveNPCs();
-
+        activeNPCs = loadActiveNPCs(); 
+        //Define active projectiles
+        activeProjectiles = loadActiveProjectiles();
+        
         for (EnhancedMapTile enhancedMapTile : activeEnhancedMapTiles) {
             enhancedMapTile.update(player);
         }
 
         for (NPC npc : activeNPCs) {
             npc.update(player);
+        } 
+        
+        //For each active projectile call its update method
+        for(Projectile projectile : activeProjectiles) {
+        	projectile.update();
         }
     }
 
@@ -231,6 +241,12 @@ public class Camera extends Rectangle {
                     drawNpcsAfterPlayer.add(npc);
                 }
             }
+        } 
+        //Draws the active projectiles to the screen
+        for(Projectile projectile : activeProjectiles ) {
+        	if (containsDraw(projectile)) { 
+        		projectile.draw(graphicsHandler);
+        	}
         }
 
         // player is drawn to screen
@@ -239,7 +255,7 @@ public class Camera extends Rectangle {
         // npcs determined to be drawn after player from the above step are drawn here
         for (NPC npc : drawNpcsAfterPlayer) {
             npc.draw(graphicsHandler);
-        }
+        } 
 
         // Uncomment this to see triggers drawn on screen
         // helps for placing them in the correct spot/debugging
@@ -296,5 +312,33 @@ public class Camera extends Rectangle {
 
     public boolean isAtBottomOfMap() {
         return this.getEndBoundY() >= map.getEndBoundY();
+    } 
+    
+    //determine which projectiles are on screen and return them 
+    private ArrayList<Projectile> loadActiveProjectiles() {
+        ArrayList<Projectile> activeProjectiles = new ArrayList<>();
+        for (int i = map.getProjectiles().size() - 1; i >= 0; i--) {
+            Projectile projectile = map.getProjectiles().get(i);
+
+            if (isMapEntityActive(projectile)) {
+                activeProjectiles.add(projectile);
+                if (projectile.mapEntityStatus == MapEntityStatus.INACTIVE) {
+                    projectile.setMapEntityStatus(MapEntityStatus.ACTIVE);
+                }
+                
+            } 
+            else if (projectile.getMapEntityStatus() == MapEntityStatus.ACTIVE) {
+                projectile.setMapEntityStatus(MapEntityStatus.INACTIVE);
+                
+            } 
+            else if (projectile.getMapEntityStatus() == MapEntityStatus.REMOVED) {
+                map.getProjectiles().remove(i);
+            }
+        }
+        return activeProjectiles;
+    } 
+    
+    public ArrayList<Projectile> getActiveProjectiles() {
+    	return activeProjectiles;
     }
 }

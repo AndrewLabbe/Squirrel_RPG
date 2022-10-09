@@ -56,7 +56,9 @@ public abstract class Map {
     // lists to hold map entities that are a part of the map
     protected ArrayList<EnhancedMapTile> enhancedMapTiles;
     protected ArrayList<NPC> npcs;
-    protected ArrayList<Trigger> triggers;
+    protected ArrayList<Trigger> triggers; 
+    //Array which will hold all projectiles in game 
+    protected ArrayList<Projectile> projectiles;
 
     protected Script activeInteractScript;
 
@@ -106,6 +108,12 @@ public abstract class Map {
         this.triggers = loadTriggers();
         for (Trigger trigger: this.triggers) {
             trigger.setMap(this);
+        }
+        
+        //Puts projectiles on the map upon set up
+        this.projectiles = loadProjectiles();
+        for (Projectile projectile : this.projectiles) {
+        		projectile.setMap(this);
         }
 
         this.loadScripts();
@@ -558,5 +566,30 @@ public abstract class Map {
     public Textbox getTextbox() { return textbox; }
 
     public int getEndBoundX() { return endBoundX; }
-    public int getEndBoundY() { return endBoundY; }
+    public int getEndBoundY() { return endBoundY; } 
+    
+    //Projectiles on the map 
+    protected ArrayList<Projectile> loadProjectiles() { 
+    	return new ArrayList<>(); 
+    }
+    
+    //Add projectile to the map and the array containing the projectiles 
+    public void addProjectiles(Projectile projectile) {
+    	//Adds projectile to the map
+    	projectile.setMap(this); 
+    	//Adds the projectile to the array of projectiles 
+    	this.projectiles.add(projectile);
+    } 
+    
+    //Returns the projectiles in projectile array 
+    public ArrayList<Projectile> getProjectiles() {
+    	return projectiles;
+    } 
+    
+    //Returns only the projectiles in the camera view 
+    public ArrayList<Projectile> getActiveProjectiles() {
+    	return camera.getActiveProjectiles();
+    }
+    
+    
 }
