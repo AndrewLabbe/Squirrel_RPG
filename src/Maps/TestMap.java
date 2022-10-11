@@ -8,6 +8,7 @@ import Level.Trigger;
 import NPCs.Dinosaur;
 import NPCs.Fox;
 import NPCs.Walrus;
+import NPCs.Wolf;
 import NPCs.Zombie;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
@@ -15,6 +16,7 @@ import Scripts.TestMap.FoxScript;
 import Scripts.TestMap.LostBallScript;
 import Scripts.TestMap.TreeScript;
 import Scripts.TestMap.WalrusScript;
+import Scripts.TestMap.WolfScript;
 import Tilesets.CommonTileset;
 
 import java.util.ArrayList;
@@ -53,6 +55,10 @@ public class TestMap extends Map {
 
         Zombie zombie = new Zombie(4, getMapTile(21, 25).getLocation()); 
         npcs.add(zombie); 
+        
+        Wolf wolf = new Wolf(5, getMapTile(1, 18).getLocation());
+        wolf.setInteractScript(new WolfScript());
+        npcs.add(wolf);
         
         return npcs;
     }

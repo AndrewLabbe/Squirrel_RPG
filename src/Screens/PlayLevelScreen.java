@@ -4,6 +4,7 @@ package Screens;
 
 import Engine.GraphicsHandler;
 import Engine.Key;
+import Engine.KeyLocker;
 import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
@@ -23,10 +24,12 @@ public class PlayLevelScreen extends Screen {
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
     protected FlagManager flagManager;
-    
+    private KeyLocker keyLocker = new KeyLocker();
     public Currency screenCoin;
     protected Key MOVE_LEFT_KEY = Key.LEFT;
     protected Key MOVE_RIGHT_KEY = Key.RIGHT;
+	private final Key buyKey = Key.ONE;
+	private final Key sellKey = Key.TWO;
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -111,11 +114,29 @@ public class PlayLevelScreen extends Screen {
     	else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
     		screenCoin.addCoin(3);
     	}
+        
+        if (Keyboard.isKeyDown(buyKey)) {
+    		screenCoordinator.setGameState(GameState.BUY);
+    		keyLocker.lockKey(buyKey);
+    	} 
+        if (Keyboard.isKeyDown(sellKey)) {
+        	screenCoordinator.setGameState(GameState.SELL);
+        	keyLocker.lockKey(sellKey);
+    	} 
+        
+        if (Keyboard.isKeyUp(buyKey)) {
+			keyLocker.unlockKey(buyKey);
+		}
+		if (Keyboard.isKeyUp(sellKey)) {
+			keyLocker.unlockKey(sellKey);
+		}
 
         // if flag is set at any point during gameplay, game is "won"
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         }
+        
+        screenCoordinator.setLevelScreen(this);
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
