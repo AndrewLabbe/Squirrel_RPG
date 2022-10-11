@@ -3,10 +3,12 @@ package Level;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
+import Level.Projectile;
 import GameObject.GameObject;
 import GameObject.Rectangle;
 import GameObject.SpriteSheet;
 import NPCs.Currency;
+import Projectiles.Bullet;
 import Utils.Direction;
 
 import java.util.ArrayList;
@@ -40,7 +42,10 @@ public abstract class Player extends GameObject {
     protected Key MOVE_RIGHT_KEY = Key.RIGHT;
     protected Key MOVE_UP_KEY = Key.UP;
     protected Key MOVE_DOWN_KEY = Key.DOWN;
-    protected Key INTERACT_KEY = Key.SPACE;
+    protected Key INTERACT_KEY = Key.SPACE; 
+    
+    //Key for firing projectiles
+    protected Key FIRE_KEY = Key.F;
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -74,6 +79,11 @@ public abstract class Player extends GameObject {
 
         // update player's animation
         super.update();
+        
+        //Fires a projectile if the fire key is hit and the player is not interacting 
+        if(Keyboard.isKeyDown(FIRE_KEY) && playerState != PlayerState.INTERACTING) {
+        	fire();
+        }
         
     }
 
@@ -267,5 +277,29 @@ public abstract class Player extends GameObject {
         else if (direction == Direction.RIGHT) {
             moveX(speed);
         }
+    }
+    
+    //Creates new projectile when called
+    public void fire() {
+    	int projectileX;
+    	int projectileY; 
+    	int direction;
+    	
+    	//Sets spawn point and direction of projectile depending on which was character is facing 
+    	if(facingDirection == Direction.LEFT) {
+    		projectileX = Math.round(getX()); 
+    		direction = -1;
+    	}
+    	else {
+    		projectileX = Math.round(getX()) + 20; 
+    		direction = 1;
+    	}
+    	//Sets Y spawn coordinate to the middle of the main character roughly
+    	projectileY = Math.round(getY()) + 40;
+    	
+    	//Creates a new bullet 
+    	Bullet bullet = new Bullet(projectileX, projectileY, direction); 
+    	map.addProjectiles(bullet);
+    
     }
 }

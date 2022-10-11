@@ -88,4 +88,5 @@ public class MapEntity extends GameObject {
     public void setExistenceFlag(String existenceFlag) {
         this.existenceFlag = existenceFlag;
     }
+    
 }
