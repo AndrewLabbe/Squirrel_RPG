@@ -3,9 +3,11 @@ package Game;
 import Engine.DefaultScreen;
 import Engine.GraphicsHandler;
 import Engine.Screen;
+import Screens.BuyScreen;
 import Screens.CreditsScreen;
 import Screens.MenuScreen;
 import Screens.PlayLevelScreen;
+import Screens.SellScreen;
 
 /*
  * Based on the current game state, this class determines which Screen should be shown
@@ -14,6 +16,7 @@ import Screens.PlayLevelScreen;
 public class ScreenCoordinator extends Screen {
 	// currently shown Screen
 	protected Screen currentScreen = new DefaultScreen();
+	protected Screen levelScreen;
 
 	// keep track of gameState so ScreenCoordinator knows which Screen to show
 	protected GameState gameState;
@@ -23,11 +26,15 @@ public class ScreenCoordinator extends Screen {
 		return gameState;
 	}
 
+	public void setLevelScreen(PlayLevelScreen s) {
+		this.levelScreen = s;
+	}
+	
 	// Other Screens can set the gameState of this class to force it to change the currentScreen
 	public void setGameState(GameState gameState) {
 		this.gameState = gameState;
 	}
-
+	
 	@Override
 	public void initialize() {
 		// start game off with Menu Screen
@@ -47,6 +54,12 @@ public class ScreenCoordinator extends Screen {
 					case LEVEL:
 						currentScreen = new PlayLevelScreen(this);
 						break;
+					case BUY:
+						currentScreen = new BuyScreen(this);
+						break;
+					case SELL:
+						currentScreen = new SellScreen(this);
+						break;
 					case CREDITS:
 						currentScreen = new CreditsScreen(this);
 						break;
@@ -57,9 +70,16 @@ public class ScreenCoordinator extends Screen {
 
 			// call the update method for the currentScreen
 			currentScreen.update();
+			
 		} while (previousGameState != gameState);
 	}
-
+	
+	public void switchBackToLevel() {
+		currentScreen = levelScreen;
+		previousGameState = gameState;
+		currentScreen.update();
+	}
+	
 	@Override
 	public void draw(GraphicsHandler graphicsHandler) {
 		// call the draw method for the currentScreen
