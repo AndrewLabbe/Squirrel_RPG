@@ -3,7 +3,6 @@ package Engine;
 import GameObject.Rectangle;
 import SpriteFont.SpriteFont;
 import Utils.Colors;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -57,7 +56,6 @@ public class GamePanel extends JPanel {
 		invLabel = new SpriteFont("Inventory", 330, 280, "Comic Sans", 30, Color.white);
 		invLabel.setOutlineColor(Color.black);
 		invLabel.setOutlineThickness(5.0f);
-
 		
 		// Every timer "tick" will call the update method as well as tell the JPanel to repaint
 		// Remember that repaint "schedules" a paint rather than carries it out immediately
@@ -79,7 +77,7 @@ public class GamePanel extends JPanel {
 		doPaint = true;
 		
 		//Play background music
-				playMusic(0);
+		playMusic(0);
 	}
 
 	// this starts the timer (the game loop is started here
@@ -92,6 +90,7 @@ public class GamePanel extends JPanel {
 	}
 
 	public void update() {
+		
 		if (Keyboard.isKeyDown(invKey) && !keyLocker.isKeyLocked(invKey)) {
 			isInvOpen = !isInvOpen;
 			keyLocker.lockKey(invKey);
@@ -107,7 +106,7 @@ public class GamePanel extends JPanel {
 		if (Keyboard.isKeyUp(pauseKey)) {
 			keyLocker.unlockKey(pauseKey);
 		}
-
+		
 		if (!isInvOpen) {
 			screenManager.update();
 		}
@@ -117,19 +116,18 @@ public class GamePanel extends JPanel {
 	}
 	
 	//Sound Effects
-			public void playMusic(int i) {
-				sound.setFile(i);
-				sound.play();
-				sound.loop();
-			}
-			public void stopMusic() {
-				sound.stop();
-			}
-			public void playSE(int i) {
-				sound.setFile(i);
-				sound.play();
-
-			}
+	public void playMusic(int i) {
+		sound.setFile(i);
+		sound.play();
+		sound.loop();
+	}
+	public void stopMusic() {
+		sound.stop();
+	}
+	public void playSE(int i) {
+		sound.setFile(i);
+		sound.play();
+	}
 
 	public void draw() {
 		screenManager.draw(graphicsHandler);
