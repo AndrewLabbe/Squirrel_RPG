@@ -25,7 +25,7 @@ public class SellScreen extends Screen {
     }
 	
     public void initialize() {
-    	System.out.println("New Screen initiated.");
+
     }   
 
 	public void update() {
