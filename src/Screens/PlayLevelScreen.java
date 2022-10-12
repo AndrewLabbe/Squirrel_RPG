@@ -28,6 +28,7 @@ public class PlayLevelScreen extends Screen {
     public Currency screenCoin;
     protected Key MOVE_LEFT_KEY = Key.LEFT;
     protected Key MOVE_RIGHT_KEY = Key.RIGHT;
+    private final Key invKey = Key.I;
 	private final Key buyKey = Key.ONE;
 	private final Key sellKey = Key.TWO;
 
@@ -122,7 +123,12 @@ public class PlayLevelScreen extends Screen {
         if (Keyboard.isKeyDown(sellKey)) {
         	screenCoordinator.setGameState(GameState.SELL);
         	keyLocker.lockKey(sellKey);
-    	} 
+    	}
+        
+        if (Keyboard.isKeyDown(invKey)) {
+    		screenCoordinator.setGameState(GameState.INVENTORY);
+    		keyLocker.lockKey(buyKey);
+    	}
         
         if (Keyboard.isKeyUp(buyKey)) {
 			keyLocker.unlockKey(buyKey);
@@ -130,6 +136,10 @@ public class PlayLevelScreen extends Screen {
 		if (Keyboard.isKeyUp(sellKey)) {
 			keyLocker.unlockKey(sellKey);
 		}
+		if (Keyboard.isKeyUp(invKey)) {
+			keyLocker.unlockKey(invKey);
+		}
+		
 
         // if flag is set at any point during gameplay, game is "won"
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {
