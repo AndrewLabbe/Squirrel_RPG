@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.TimerTask;
+import Level.Player;
 
 /*
  * This is where the game loop starts
@@ -31,7 +32,6 @@ public class GamePanel extends JPanel {
 	private SpriteFont invLabel;
 	private KeyLocker keyLocker = new KeyLocker();
 	private final Key pauseKey = Key.P;
-	private final Key invKey = Key.I;
 	
 	//Initialize sound
 	Sound sound = new Sound();
@@ -58,9 +58,6 @@ public class GamePanel extends JPanel {
 		pauseLabel.setOutlineColor(Color.black);
 		pauseLabel.setOutlineThickness(2.0f);
 		
-		invLabel = new SpriteFont("Inventory", 330, 280, "Comic Sans", 30, Color.white);
-		invLabel.setOutlineColor(Color.black);
-		invLabel.setOutlineThickness(5.0f);
 		
 		// Every timer "tick" will call the update method as well as tell the JPanel to repaint
 		// Remember that repaint "schedules" a paint rather than carries it out immediately
@@ -83,10 +80,8 @@ public class GamePanel extends JPanel {
 		screenManager.initialize(new Rectangle(getX(), getY(), getWidth(), getHeight()));
 		doPaint = true;
 		
-	
-		
 		//Play background music
-		playMusic(0);
+			playMusic(0);
 	}
 
 	// this starts the timer (the game loop is started here
@@ -100,25 +95,16 @@ public class GamePanel extends JPanel {
 
 	public void update() {
 		
-		if (Keyboard.isKeyDown(invKey) && !keyLocker.isKeyLocked(invKey)) {
-			isInvOpen = !isInvOpen;
-			keyLocker.lockKey(invKey);
-		}
+
 		if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey)) {
 			isGamePaused = !isGamePaused;
 			keyLocker.lockKey(pauseKey);
 		}
 		
-		if (Keyboard.isKeyUp(invKey)) {
-			keyLocker.unlockKey(invKey);
-		}
 		if (Keyboard.isKeyUp(pauseKey)) {
 			keyLocker.unlockKey(pauseKey);
 		}
 		
-		if (!isInvOpen) {
-			screenManager.update();
-		}
 		if (!isGamePaused) {
 			screenManager.update();
 		}

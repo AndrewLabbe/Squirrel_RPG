@@ -1,6 +1,7 @@
 package Level;
 
 import Engine.Key;
+import Engine.Sound;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import Level.Projectile;
@@ -24,6 +25,9 @@ public abstract class Player extends GameObject {
     protected Direction currentWalkingYDirection;
     protected Direction lastWalkingXDirection;
     protected Direction lastWalkingYDirection;
+    
+	//Initialize sound
+	Sound sound = new Sound();
 
     // values used to handle player movement
     protected float moveAmountX, moveAmountY;
@@ -102,7 +106,7 @@ public abstract class Player extends GameObject {
                 playerWalking();
                 break;
             case INTERACTING:
-                playerInteracting();
+                //playerInteracting();
                 break;
         }
     }
@@ -128,7 +132,7 @@ public abstract class Player extends GameObject {
         }
 
         // if walk left key is pressed, move player to the left
-        if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
+        if (Keyboard.isKeyDown(MOVE_LEFT_KEY)&& Math.round(getX()) > -15) {
             moveAmountX -= walkSpeed;
             facingDirection = Direction.LEFT;
             currentWalkingXDirection = Direction.LEFT;
@@ -136,8 +140,12 @@ public abstract class Player extends GameObject {
         }
 
         // if walk right key is pressed, move player to the right
+
         else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
         	moveAmountX += walkSpeed;
+        }
+        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < 1090) {
+            moveAmountX += walkSpeed;
             facingDirection = Direction.RIGHT;
             currentWalkingXDirection = Direction.RIGHT;
             lastWalkingXDirection = Direction.RIGHT;
@@ -146,7 +154,7 @@ public abstract class Player extends GameObject {
             currentWalkingXDirection = Direction.NONE;
         }
 
-        if (Keyboard.isKeyDown(MOVE_UP_KEY)) {
+        if (Keyboard.isKeyDown(MOVE_UP_KEY)&& Math.round(getY()) > -15) {
             moveAmountY -= walkSpeed;
             currentWalkingYDirection = Direction.UP;
             lastWalkingYDirection = Direction.UP;
@@ -174,11 +182,15 @@ public abstract class Player extends GameObject {
     }
 
     // player INTERACTING state logic -- intentionally does nothing so player is locked in place while a script is running
-    protected void playerInteracting() { }
+    /*protected void playerInteracting() { 
+    	playSE(5);
+    }*/
+    
 
     protected void updateLockedKeys() {
         if (Keyboard.isKeyUp(INTERACT_KEY) && playerState != PlayerState.INTERACTING) {
             keyLocker.unlockKey(INTERACT_KEY);
+            
         }
     }
 
@@ -310,4 +322,16 @@ public abstract class Player extends GameObject {
     	} 
     }
     
+	/*public void playMusic(int i) {
+		sound.setFile(i);
+		sound.play();
+		sound.loop();
+	}
+	public void stopMusic() {
+		sound.stop();
+	}
+	public void playSE(int i) {
+		sound.setFile(i);
+		sound.play();
+	}*/
 }

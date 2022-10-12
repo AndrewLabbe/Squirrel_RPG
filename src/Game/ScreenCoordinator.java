@@ -5,6 +5,7 @@ import Engine.GraphicsHandler;
 import Engine.Screen;
 import Screens.BuyScreen;
 import Screens.CreditsScreen;
+import Screens.InventoryScreen;
 import Screens.MenuScreen;
 import Screens.PlayLevelScreen;
 import Screens.SellScreen;
@@ -63,6 +64,8 @@ public class ScreenCoordinator extends Screen {
 					case CREDITS:
 						currentScreen = new CreditsScreen(this);
 						break;
+					case INVENTORY:
+						currentScreen = new InventoryScreen(this);
 				}
 				currentScreen.initialize();
 			}
