@@ -4,6 +4,7 @@ import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
 
+
 //script for talking to fox NPC
 public class FoxScript extends Script<NPC>{
 	
@@ -45,6 +46,7 @@ public class FoxScript extends Script<NPC>{
         start();
         if (!isTextboxQueueEmpty()) {
             return ScriptState.RUNNING;
+ 
         }
         end();
         return ScriptState.COMPLETED;

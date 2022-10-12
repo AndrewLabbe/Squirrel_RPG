@@ -1,6 +1,7 @@
 package Level;
 
 import Engine.Key;
+import Engine.Sound;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import Level.Projectile;
@@ -22,6 +23,9 @@ public abstract class Player extends GameObject {
     protected Direction currentWalkingYDirection;
     protected Direction lastWalkingXDirection;
     protected Direction lastWalkingYDirection;
+    
+	//Initialize sound
+	Sound sound = new Sound();
 
     // values used to handle player movement
     protected float moveAmountX, moveAmountY;
@@ -169,11 +173,15 @@ public abstract class Player extends GameObject {
     }
 
     // player INTERACTING state logic -- intentionally does nothing so player is locked in place while a script is running
-    protected void playerInteracting() { }
+    protected void playerInteracting() { 
+    	playSE(5);
+    }
+    
 
     protected void updateLockedKeys() {
         if (Keyboard.isKeyUp(INTERACT_KEY) && playerState != PlayerState.INTERACTING) {
             keyLocker.unlockKey(INTERACT_KEY);
+            
         }
     }
 
@@ -302,4 +310,17 @@ public abstract class Player extends GameObject {
     	map.addProjectiles(bullet);
     
     }
+    
+	public void playMusic(int i) {
+		sound.setFile(i);
+		sound.play();
+		sound.loop();
+	}
+	public void stopMusic() {
+		sound.stop();
+	}
+	public void playSE(int i) {
+		sound.setFile(i);
+		sound.play();
+	}
 }

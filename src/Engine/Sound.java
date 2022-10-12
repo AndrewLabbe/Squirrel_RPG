@@ -16,6 +16,10 @@ public class Sound {
 	public Sound() {
 		soundURL [0] = getClass().getResource("/sound/BlueBoyAdventure.wav");
 		soundURL [1] = getClass().getResource("/sound/Forest.wav");
+		soundURL [2] = getClass().getResource("/sound/Monster.wav");
+		soundURL [3] = getClass().getResource("/sound/Beast.wav");
+		soundURL [4] = getClass().getResource("/sound/WildCat.wav");
+		soundURL [5] = getClass().getResource("/sound/monster purr.wav");
 	}
 	
 	public void setFile(int i) {
@@ -39,5 +43,8 @@ public class Sound {
 	public void stop() {
 		clip.stop();
 	}
+	
+	
+	
 
 }

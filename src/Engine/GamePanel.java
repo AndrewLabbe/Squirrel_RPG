@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.TimerTask;
+import Level.Player;
 
 /*
  * This is where the game loop starts
@@ -79,10 +80,8 @@ public class GamePanel extends JPanel {
 		screenManager.initialize(new Rectangle(getX(), getY(), getWidth(), getHeight()));
 		doPaint = true;
 		
-	
-		
 		//Play background music
-		playMusic(0);
+			playMusic(0);
 	}
 
 	// this starts the timer (the game loop is started here
