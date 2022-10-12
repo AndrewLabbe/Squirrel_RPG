@@ -3,8 +3,6 @@ package Screens;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
-
 import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.Key;
