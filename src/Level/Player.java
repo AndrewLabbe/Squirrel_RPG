@@ -182,9 +182,9 @@ public abstract class Player extends GameObject {
     }
 
     // player INTERACTING state logic -- intentionally does nothing so player is locked in place while a script is running
-    /*protected void playerInteracting() { 
+    protected void playerInteracting() { 
     	playSE(5);
-    }*/
+    }
     
 
     protected void updateLockedKeys() {
@@ -322,7 +322,7 @@ public abstract class Player extends GameObject {
     	} 
     }
     
-	/*public void playMusic(int i) {
+	public void playMusic(int i) {
 		sound.setFile(i);
 		sound.play();
 		sound.loop();
@@ -333,5 +333,5 @@ public abstract class Player extends GameObject {
 	public void playSE(int i) {
 		sound.setFile(i);
 		sound.play();
-	}*/
+	}
 }
