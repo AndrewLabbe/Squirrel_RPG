@@ -318,6 +318,7 @@ public abstract class Player extends GameObject {
 	}
 	public void stopMusic() {
 		sound.stop();
+		
 	}
 	public void playSE(int i) {
 		sound.setFile(i);
