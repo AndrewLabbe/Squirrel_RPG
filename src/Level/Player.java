@@ -182,7 +182,7 @@ public abstract class Player extends GameObject {
 
     // player INTERACTING state logic -- intentionally does nothing so player is locked in place while a script is running
     protected void playerInteracting() { 
-    	playSE(1);
+    	playSE(6);
     }
     
 
