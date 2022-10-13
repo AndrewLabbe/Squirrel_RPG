@@ -1,8 +1,3 @@
-/* I made this bullet class to represent a bullet object which is a subclass of Projectile 
- * but I am currently using the acorn as the only projectile in game 
- * Perhaps it might be used as another projectile which can be implemented later on with a power-up
- */
-
 package Projectiles;
 
 import java.util.HashMap;
@@ -16,13 +11,13 @@ import Level.MapEntityStatus;
 import Level.Projectile;
 import Utils.Stopwatch;
 
-public class Bullet extends Projectile {
+public class Acorn extends Projectile {
 
 	private Stopwatch despawnTime; 
 	private int direction;
 	
-	public Bullet(int x, int y, int direction) {
-		super(x, y, new SpriteSheet(ImageLoader.load("Bullet.png"), 15, 7), "FIRE_RIGHT"); 
+	public Acorn(int x, int y, int direction) {
+		super(x, y, new SpriteSheet(ImageLoader.load("Acorn.png"), 29, 20), "FIRE_RIGHT"); 
 		despawnTime = new Stopwatch();
 		despawnTime.setWaitTime(5000);
 		this.direction = direction; 
@@ -34,8 +29,8 @@ public class Bullet extends Projectile {
 			mapEntityStatus = MapEntityStatus.REMOVED;
 		}
 		else {
-			//Changes bullet velocity --> speed and direction 
-			moveX(4*direction);
+			//Changes acorn velocity --> speed and direction 
+			moveX(3*direction);
 		} 
 		
 		//Sets animation based on direction the main character is facing
@@ -48,7 +43,7 @@ public class Bullet extends Projectile {
 		super.update();
 	}
 	
-	//Creates two different animations for the bullet --> one for firing right and one for firing left
+	//Creates two different animations for the acorn --> one for firing right and one for firing left
 	@Override
     public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {
         return new HashMap<String, Frame[]>() {{

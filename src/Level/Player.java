@@ -9,8 +9,10 @@ import GameObject.GameObject;
 import GameObject.Rectangle;
 import GameObject.SpriteSheet;
 import NPCs.Currency;
+import Projectiles.Acorn;
 import Projectiles.Bullet;
 import Utils.Direction;
+import Utils.Stopwatch;
 
 import java.util.ArrayList;
 
@@ -49,15 +51,18 @@ public abstract class Player extends GameObject {
     protected Key INTERACT_KEY = Key.SPACE; 
     
     //Key for firing projectiles
-    protected Key FIRE_KEY = Key.F;
-
+    protected Key FIRE_BULLET_KEY = Key.F; 
+    //Puts a delay on firing which eliminates infinite firing issue
+    private Stopwatch fireDelay;
+    
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
         facingDirection = Direction.RIGHT;
         playerState = PlayerState.STANDING;
         previousPlayerState = playerState;
         this.affectedByTriggers = true;
-        
+        fireDelay = new Stopwatch();
+        fireDelay.setWaitTime(1000);
     }
 
     public void update() {
@@ -84,14 +89,14 @@ public abstract class Player extends GameObject {
         // update player's animation
         super.update();
         
-        //Fires a projectile if the fire key is hit and the player is not interacting 
-        if(Keyboard.isKeyDown(FIRE_KEY) && playerState != PlayerState.INTERACTING) {
-        	fire();
-        }
+        //Fires a bullet if the f key is hit and the player is not interacting 
+        if(Keyboard.isKeyDown(FIRE_BULLET_KEY) && playerState != PlayerState.INTERACTING) {
+        	fireBullet();
+        } 
         
     }
 
-    // based on player's current state, call appropriate player state handling method
+	// based on player's current state, call appropriate player state handling method
     protected void handlePlayerState() {
         switch (playerState) {
             case STANDING:
@@ -101,7 +106,7 @@ public abstract class Player extends GameObject {
                 playerWalking();
                 break;
             case INTERACTING:
-                playerInteracting();
+                //playerInteracting();
                 break;
         }
     }
@@ -135,6 +140,10 @@ public abstract class Player extends GameObject {
         }
 
         // if walk right key is pressed, move player to the right
+
+        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
+        	moveAmountX += walkSpeed;
+        }
         else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < 1090) {
             moveAmountX += walkSpeed;
             facingDirection = Direction.RIGHT;
@@ -287,8 +296,9 @@ public abstract class Player extends GameObject {
         }
     }
     
-    //Creates new projectile when called
-    public void fire() {
+    //Creates new acorn when called
+    public void fireBullet() {
+    	if(fireDelay.isTimeUp()) {
     	int projectileX;
     	int projectileY; 
     	int direction;
@@ -303,12 +313,13 @@ public abstract class Player extends GameObject {
     		direction = 1;
     	}
     	//Sets Y spawn coordinate to the middle of the main character roughly
-    	projectileY = Math.round(getY()) + 40;
+    	projectileY = Math.round(getY()) + 30;
     	
     	//Creates a new bullet 
-    	Bullet bullet = new Bullet(projectileX, projectileY, direction); 
-    	map.addProjectiles(bullet);
-    
+    	Acorn acorn = new Acorn(projectileX, projectileY, direction); 
+    	map.addProjectiles(acorn); 
+    	fireDelay.reset();
+    	} 
     }
     
 	public void playMusic(int i) {
