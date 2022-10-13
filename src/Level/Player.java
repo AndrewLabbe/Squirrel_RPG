@@ -27,7 +27,7 @@ public abstract class Player extends GameObject {
     protected Direction lastWalkingYDirection;
     
 	//Initialize sound
-	Sound sound = new Sound();
+	Sound sound = new Sound(); 
 
     // values used to handle player movement
     protected float moveAmountX, moveAmountY;
@@ -80,8 +80,9 @@ public abstract class Player extends GameObject {
         if (playerState != PlayerState.INTERACTING) {
             lastAmountMovedY = super.moveYHandleCollision(moveAmountY);
             lastAmountMovedX = super.moveXHandleCollision(moveAmountX);
+            
         }
-
+        
         handlePlayerAnimation();
 
         updateLockedKeys();
@@ -106,7 +107,7 @@ public abstract class Player extends GameObject {
                 playerWalking();
                 break;
             case INTERACTING:
-                //playerInteracting();
+                playerInteracting();
                 break;
         }
     }
@@ -139,11 +140,8 @@ public abstract class Player extends GameObject {
             lastWalkingXDirection = Direction.LEFT;
         }
 
-        // if walk right key is pressed, move player to the right
-
-        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
-        	moveAmountX += walkSpeed;
-        }
+        // if walk right key is pressed, move player to the right 
+        //Checks to see if main character has reach map bounds
         else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < 1090) {
             moveAmountX += walkSpeed;
             facingDirection = Direction.RIGHT;
@@ -153,7 +151,8 @@ public abstract class Player extends GameObject {
         else {
             currentWalkingXDirection = Direction.NONE;
         }
-
+        
+        //Checks to see if main charactyer has hit map bounds
         if (Keyboard.isKeyDown(MOVE_UP_KEY)&& Math.round(getY()) > -15) {
             moveAmountY -= walkSpeed;
             currentWalkingYDirection = Direction.UP;
@@ -183,7 +182,7 @@ public abstract class Player extends GameObject {
 
     // player INTERACTING state logic -- intentionally does nothing so player is locked in place while a script is running
     protected void playerInteracting() { 
-    	playSE(5);
+    	playMusic(1);
     }
     
 
@@ -334,5 +333,5 @@ public abstract class Player extends GameObject {
 	public void playSE(int i) {
 		sound.setFile(i);
 		sound.play();
-	}
+	} 
 }

@@ -26,8 +26,9 @@ public class PlayLevelScreen extends Screen {
     protected FlagManager flagManager;
     private KeyLocker keyLocker = new KeyLocker();
     public Currency screenCoin;
-    protected Key MOVE_LEFT_KEY = Key.LEFT;
-    protected Key MOVE_RIGHT_KEY = Key.RIGHT;
+    private boolean wasSpacePressed = false;
+    //protected Key MOVE_LEFT_KEY = Key.LEFT;
+   // protected Key MOVE_RIGHT_KEY = Key.RIGHT;
     private final Key invKey = Key.I;
 	private final Key buyKey = Key.ONE;
 	private final Key sellKey = Key.TWO;
@@ -39,7 +40,7 @@ public class PlayLevelScreen extends Screen {
     public void initialize() {
     	// Setup Currency
     	screenCoin = new Currency();
-    	screenCoin.setCoin(2);
+    	screenCoin.setCoin(50);
     	
         // setup state
         flagManager = new FlagManager();
@@ -109,12 +110,17 @@ public class PlayLevelScreen extends Screen {
                 break;
         }
         
-        if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
-    		screenCoin.loseCoin(2);
-    	} 
-    	else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
-    		screenCoin.addCoin(3);
+       // if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
+    		//screenCoin.loseCoin(2);
+    	//} 
+    	 if (!wasSpacePressed && Keyboard.isKeyDown(Key.SPACE)) {
+    		screenCoin.addCoin(25);
+            wasSpacePressed = true; 
     	}
+
+        if (wasSpacePressed && Keyboard.isKeyUp(Key.SPACE)){
+            wasSpacePressed = false; 
+        }
         
         if (Keyboard.isKeyDown(buyKey)) {
     		screenCoordinator.setGameState(GameState.BUY);

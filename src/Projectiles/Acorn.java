@@ -30,7 +30,7 @@ public class Acorn extends Projectile {
 		}
 		else {
 			//Changes acorn velocity --> speed and direction 
-			moveX(3*direction);
+			moveX(5*direction);
 		} 
 		
 		//Sets animation based on direction the main character is facing
