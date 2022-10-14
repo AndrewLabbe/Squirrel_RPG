@@ -182,7 +182,7 @@ public abstract class Player extends GameObject {
 
     // player INTERACTING state logic -- intentionally does nothing so player is locked in place while a script is running
     protected void playerInteracting() { 
-    	playSE(6);
+    	//playSE(6);
     }
     
 
@@ -317,7 +317,9 @@ public abstract class Player extends GameObject {
     	//Creates a new bullet 
     	Acorn acorn = new Acorn(projectileX, projectileY, direction); 
     	map.addProjectiles(acorn); 
-    	fireDelay.reset();
+    	fireDelay.reset(); 
+    	
+    	playSE(7);
     	} 
     }
     
