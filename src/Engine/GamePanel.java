@@ -109,7 +109,7 @@ public class GamePanel extends JPanel {
 			screenManager.update();
 		}
 		
-		if (time % 100 == 0) {
+		if (time % 200 == 0) {
 			cycleDay();
 			System.out.println("Time: " + time);
 		}
@@ -133,8 +133,16 @@ public class GamePanel extends JPanel {
 				if (shade < 100) {
 					shade += 10;
 				}
-				else if (shade >= 1) {
+				
+				if (shade == 100) {
+					timeNight();
+				}
+			}
+			
+			public void timeNight() {				
+				if (time % 6000 == 0) {
 					shade = 0;
+					System.out.println("The Sun Rises...");
 				}
 			}
 
