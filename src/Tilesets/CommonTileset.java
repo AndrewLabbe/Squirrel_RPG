@@ -284,6 +284,126 @@ public class CommonTileset extends Tileset {
                 .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(doorTile);
+        
+        // Top Left Shop Roof
+        Frame shopRoof1 = new FrameBuilder(getSubImage(6, 0))
+                .withScale(tileScale)
+                .build();
+        
+        MapTileBuilder shopRoof1Tile = new MapTileBuilder(grassFrame)
+        		.withTopLayer(shopRoof1)
+        		.withTileType(TileType.PASSABLE);
+        
+        mapTiles.add(shopRoof1Tile);
+        
+        // Top Middle Shop Roof
+        Frame shopRoof2 = new FrameBuilder(getSubImage(6, 1))
+                .withScale(tileScale)
+                .build();
+        
+        MapTileBuilder shopRoof2Tile = new MapTileBuilder(grassFrame)
+        		.withTopLayer(shopRoof2)
+        		.withTileType(TileType.PASSABLE);
+        
+        mapTiles.add(shopRoof2Tile);
+        
+        // Bottom Left Shop Roof
+        Frame shopRoof3 = new FrameBuilder(getSubImage(7, 0))
+                .withScale(tileScale)
+                .build();
+        
+        MapTileBuilder shopRoof3Tile = new MapTileBuilder(grassFrame)
+        		.withTopLayer(shopRoof3)
+        		.withTileType(TileType.PASSABLE);
+        
+        mapTiles.add(shopRoof3Tile);
+        
+        // Middle Top of Front Shop House
+        Frame shopRoof4 = new FrameBuilder(getSubImage(7, 1))
+                .withScale(tileScale)
+                .build();
+        
+        MapTileBuilder shopRoof4Tile = new MapTileBuilder(grassFrame)
+        		.withTopLayer(shopRoof4)
+        		.withTileType(TileType.PASSABLE);
+        
+        mapTiles.add(shopRoof4Tile);
+        
+        // Bottom Right Shop Roof
+        Frame shopRoof5 = new FrameBuilder(getSubImage(7, 2))
+                .withScale(tileScale)
+                .build();
+        
+        MapTileBuilder shopRoof5Tile = new MapTileBuilder(grassFrame)
+        		.withTopLayer(shopRoof5)
+        		.withTileType(TileType.PASSABLE);
+        
+        mapTiles.add(shopRoof5Tile);
+        
+        // Middle Left Shop House
+        Frame shopRoof6 = new FrameBuilder(getSubImage(8, 0))
+                .withScale(tileScale)
+                .build();
+        
+        MapTileBuilder shopRoof6Tile = new MapTileBuilder(grassFrame)
+        		.withTopLayer(shopRoof6)
+        		.withTileType(TileType.PASSABLE);
+        
+        mapTiles.add(shopRoof6Tile);
+        
+        // Middle Center House
+        Frame shopRoof7 = new FrameBuilder(getSubImage(8, 1))
+                .withScale(tileScale)
+                .build();
+        
+        MapTileBuilder shopRoof7Tile = new MapTileBuilder(shopRoof7)
+        		.withTileType(TileType.NOT_PASSABLE);
+        
+        mapTiles.add(shopRoof7Tile);
+        
+        // Middle Right Shop House
+        Frame shopRoof8 = new FrameBuilder(getSubImage(8, 2))
+                .withScale(tileScale)
+                .build();
+        
+        MapTileBuilder shopRoof8Tile = new MapTileBuilder(grassFrame)
+        		.withTopLayer(shopRoof8)
+        		.withTileType(TileType.PASSABLE);
+        
+        mapTiles.add(shopRoof8Tile);
+        
+        // Left Bottom Shop House
+        Frame shopRoof9 = new FrameBuilder(getSubImage(9, 0))
+                .withScale(tileScale)
+                .build();
+        
+        MapTileBuilder shopRoof9Tile = new MapTileBuilder(grassFrame)
+        		.withTopLayer(shopRoof9)
+        		.withTileType(TileType.NOT_PASSABLE);
+        
+        mapTiles.add(shopRoof9Tile);
+        
+        // Door Shop House***
+        Frame shopRoof10 = new FrameBuilder(getSubImage(9, 1))
+                .withScale(tileScale)
+                .build();
+        
+        MapTileBuilder shopRoof10Tile = new MapTileBuilder(grassFrame)
+        		.withTopLayer(shopRoof10)
+        		.withTileType(TileType.NOT_PASSABLE);
+        
+        mapTiles.add(shopRoof10Tile);
+        
+        // Right Bottom Shop House
+        Frame shopRoof11 = new FrameBuilder(getSubImage(9, 2))
+                .withScale(tileScale)
+                .build();
+        
+        MapTileBuilder shopRoof11Tile = new MapTileBuilder(grassFrame)
+        		.withTopLayer(shopRoof11)
+        		.withTileType(TileType.NOT_PASSABLE);
+        
+        mapTiles.add(shopRoof11Tile);
 
         // top water
         Frame[] topWaterFrames = new Frame[] {
