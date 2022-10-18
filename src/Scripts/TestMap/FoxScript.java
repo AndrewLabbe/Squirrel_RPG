@@ -52,4 +52,3 @@ public class FoxScript extends Script<NPC>{
         return ScriptState.COMPLETED;
     }
 }
-
