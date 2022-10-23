@@ -9,6 +9,7 @@ import Screens.InventoryScreen;
 import Screens.MenuScreen;
 import Screens.PlayLevelScreen;
 import Screens.SellScreen;
+import Screens.TempleScreen;
 
 /*
  * Based on the current game state, this class determines which Screen should be shown
@@ -60,6 +61,9 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case SELL:
 						currentScreen = new SellScreen(this);
+						break;
+					case TEMPLE:
+						currentScreen = new TempleScreen(this);
 						break;
 					case CREDITS:
 						currentScreen = new CreditsScreen(this);
