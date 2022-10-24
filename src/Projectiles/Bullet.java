@@ -5,6 +5,7 @@
 
 package Projectiles;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import Builders.FrameBuilder;
@@ -12,6 +13,7 @@ import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
+import Level.Enemy;
 import Level.MapEntityStatus;
 import Level.Projectile;
 import Utils.Stopwatch;
@@ -29,7 +31,7 @@ public class Bullet extends Projectile {
 	}
 
 	@Override
-	public void update() {
+	public void update(ArrayList<Enemy> enemies) {
 		if (despawnTime.isTimeUp()) {
 			mapEntityStatus = MapEntityStatus.REMOVED;
 		}
@@ -45,7 +47,7 @@ public class Bullet extends Projectile {
 		else {
 			this.currentAnimationName = "FIRE_LEFT";
 		} 
-		super.update();
+		super.update(enemies);
 	}
 	
 	//Creates two different animations for the bullet --> one for firing right and one for firing left
@@ -66,6 +68,13 @@ public class Bullet extends Projectile {
                             .build()
             });
         }};
+    } 
+    
+    //Removes bullet from screen if it hits an enemy
+    @Override 
+    public void eliminateEnemy(Enemy enemy) {
+        super.eliminateEnemy(enemy); 
+        this.mapEntityStatus = mapEntityStatus.REMOVED;
     }
 	
 }

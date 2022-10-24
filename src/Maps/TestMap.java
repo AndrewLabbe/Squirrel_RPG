@@ -1,6 +1,7 @@
 package Maps;
 
 import EnhancedMapTiles.Rock;
+import Level.Enemy;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
@@ -20,6 +21,8 @@ import Scripts.TestMap.WolfScript;
 import Tilesets.CommonTileset;
 
 import java.util.ArrayList;
+
+import Enemies.ZombieEnemy;
 
 // Represents a test map to be used in a level
 public class TestMap extends Map {
@@ -53,8 +56,8 @@ public class TestMap extends Map {
         fox.setInteractScript(new FoxScript());
         npcs.add(fox);
 
-        Zombie zombie = new Zombie(4, getMapTile(21, 25).getLocation()); 
-        npcs.add(zombie); 
+        //Zombie zombie = new Zombie(4, getMapTile(21, 25).getLocation()); 
+        //npcs.add(zombie); 
         
         Wolf wolf = new Wolf(5, getMapTile(1, 18).getLocation());
         wolf.setInteractScript(new WolfScript());
@@ -81,6 +84,15 @@ public class TestMap extends Map {
         getMapTile(20, 4).setInteractScript(new SimpleTextScript("Dino's house"));
 
         getMapTile(2, 6).setInteractScript(new TreeScript());
+    } 
+    
+    //Adds enemies to the map
+    @Override 
+    public ArrayList<Enemy> loadEnemies() {
+    	ArrayList<Enemy> enemies = new ArrayList(); 
+    	
+    	enemies.add(new ZombieEnemy(getMapTile(18, 25).getLocation(), (float) 3.00));
+    	return enemies;
     }
 }
 
