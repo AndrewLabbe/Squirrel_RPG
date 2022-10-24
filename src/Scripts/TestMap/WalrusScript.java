@@ -1,12 +1,13 @@
 package Scripts.TestMap;
 
+import Engine.GamePanel;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
 
 // script for talking to walrus npc
 public class WalrusScript extends Script<NPC> {
-
+	GamePanel gamePanel = new GamePanel();
     @Override
     protected void setup() {
         lockPlayer();
@@ -14,11 +15,14 @@ public class WalrusScript extends Script<NPC> {
 
         // changes what walrus says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
         if (!isFlagSet("hasTalkedToWalrus")) {
+        	//Plays Sound Effect
+        	gamePanel.playSE(2);
             addTextToTextboxQueue( "Hi Cat!");
             addTextToTextboxQueue( "...oh, you lost your ball?");
             addTextToTextboxQueue( "Hmmm...my walrus brain remembers seeing Dino with\nit last. Maybe you can check with him?");
         }
         else {
+        	gamePanel.playSE(2);
             addTextToTextboxQueue( "I sure love doing walrus things!");
         }
         entity.facePlayer(player);
