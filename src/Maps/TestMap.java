@@ -17,6 +17,7 @@ import Scripts.TestMap.LostBallScript;
 import Scripts.TestMap.TreeScript;
 import Scripts.TestMap.WalrusScript;
 import Scripts.TestMap.WolfScript;
+import Scripts.TestMap.changeShop;
 import Tilesets.CommonTileset;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class TestMap extends Map {
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
         enhancedMapTiles.add(new Rock(getMapTile(2, 7).getLocation()));
+        
         return enhancedMapTiles;
     }
 
@@ -69,6 +71,7 @@ public class TestMap extends Map {
         triggers.add(new Trigger(790, 1030, 100, 10, new LostBallScript(), "hasLostBall"));
         triggers.add(new Trigger(790, 960, 10, 80, new LostBallScript(), "hasLostBall"));
         triggers.add(new Trigger(890, 960, 10, 80, new LostBallScript(), "hasLostBall"));
+        
         return triggers;
     }
 
@@ -81,6 +84,8 @@ public class TestMap extends Map {
         getMapTile(20, 4).setInteractScript(new SimpleTextScript("Dino's house"));
 
         getMapTile(2, 6).setInteractScript(new TreeScript());
+        
+        getMapTile(4, 19).setInteractScript(new changeShop());
     }
 }
 

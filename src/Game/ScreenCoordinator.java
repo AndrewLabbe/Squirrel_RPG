@@ -3,12 +3,14 @@ package Game;
 import Engine.DefaultScreen;
 import Engine.GraphicsHandler;
 import Engine.Screen;
+import Maps.shopInterior;
 import Screens.BuyScreen;
 import Screens.CreditsScreen;
 import Screens.InventoryScreen;
 import Screens.MenuScreen;
 import Screens.PlayLevelScreen;
 import Screens.SellScreen;
+import Screens.ShopkeeperScreen;
 
 /*
  * Based on the current game state, this class determines which Screen should be shown
@@ -66,6 +68,9 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case INVENTORY:
 						currentScreen = new InventoryScreen(this);
+						break;
+					case SHOPKEEP:
+						currentScreen = new ShopkeeperScreen(this);
 				}
 				currentScreen.initialize();
 			}
