@@ -7,12 +7,8 @@ import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
-import Level.EnhancedMapTile;
-import Level.Map;
-import Level.MapTile;
-import Level.NPC;
-import Level.Player;
-import Level.Trigger;
+import Level.*;
+import Maps.TestMap;
 import Maps.shopInterior;
 import NPCs.Currency;
 import Players.Cat;
@@ -20,15 +16,17 @@ import Utils.Direction;
 import Utils.Point;
 
 public class ShopkeeperScreen extends Screen {
-	
+
 	protected ScreenCoordinator screenCoordinator;
 	protected Map map;
 	protected Player player;
 
+	protected ShopkeeperScreenState shopkeeperScreenState;
+
 	private KeyLocker keyLocker = new KeyLocker();
-//	public Currency screenCoin;
+	//	public Currency screenCoin;
 	private boolean wasSpacePressed = false;
-	
+
 	//protected Key MOVE_LEFT_KEY = Key.LEFT;
 	// protected Key MOVE_RIGHT_KEY = Key.RIGHT;
 	private final Key invKey = Key.I;
@@ -56,6 +54,8 @@ public class ShopkeeperScreen extends Screen {
 		this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
 
 		this.player.setFacingDirection(Direction.LEFT);
+
+		this.shopkeeperScreenState = ShopkeeperScreenState.RUNNING;
 
 		map.getTextbox().setInteractKey(player.getInteractKey());
 
@@ -90,8 +90,16 @@ public class ShopkeeperScreen extends Screen {
 	@Override
 	public void update() {
 
+		switch (shopkeeperScreenState) {
+		case RUNNING:
+			player.update();
+			map.update(player);
+			//screencoin.updateCoin();
+			break;
+		}
+
 		if (!wasSpacePressed && Keyboard.isKeyDown(Key.SPACE)) {
-//			screenCoin.addCoin(25);
+			//	screenCoin.addCoin(25);
 			wasSpacePressed = true; 
 		}
 
@@ -128,8 +136,16 @@ public class ShopkeeperScreen extends Screen {
 
 	@Override
 	public void draw(GraphicsHandler graphicsHandler) {
-		map.draw(player, graphicsHandler);
-//        screenCoin.draw(graphicsHandler);
+		switch (shopkeeperScreenState) {
+		case RUNNING:
+			map.draw(player, graphicsHandler);
+			//			screencoin.draw(graphicsHandler);
+			break;
+		}
+	}
+
+	private enum ShopkeeperScreenState {
+		RUNNING
 	}
 
 }

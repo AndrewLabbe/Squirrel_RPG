@@ -13,7 +13,7 @@ public class shopInterior extends Map {
 	
 	public shopInterior() {
 		super("shop_Interior.txt", new CommonTileset());
-		this.playerStartPosition = getMapTile(10, 10).getLocation();
+		this.playerStartPosition = getMapTile(4, 5).getLocation();
 	}
 	
 	 public ArrayList<NPC> loadNPCs() {
