@@ -49,6 +49,7 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasTalkedToDinosaur", false);
         flagManager.addFlag("hasTalkedToFox", false);
         flagManager.addFlag("hasFoundBall", false);
+        flagManager.addFlag("hasEnteredTemple", false);
         flagManager.addFlag("hasEnteredShop", false);
 
         // define/setup map
@@ -151,6 +152,10 @@ public class PlayLevelScreen extends Screen {
         // if flag is set at any point during gameplay, game is "won"
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        }
+        
+        if (map.getFlagManager().isFlagSet("hasEnteredTemple")) {
+        	screenCoordinator.setGameState(GameState.TEMPLE);
         }
         
         // If Player Entered Door Change Map to Shop

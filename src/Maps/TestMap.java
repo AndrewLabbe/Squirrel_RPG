@@ -15,6 +15,7 @@ import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.FoxScript;
 import Scripts.TestMap.LostBallScript;
+import Scripts.TestMap.TempleScript;
 import Scripts.TestMap.TreeScript;
 import Scripts.TestMap.WalrusScript;
 import Scripts.TestMap.WolfScript;
@@ -74,6 +75,7 @@ public class TestMap extends Map {
         triggers.add(new Trigger(790, 1030, 100, 10, new LostBallScript(), "hasLostBall"));
         triggers.add(new Trigger(790, 960, 10, 80, new LostBallScript(), "hasLostBall"));
         triggers.add(new Trigger(890, 960, 10, 80, new LostBallScript(), "hasLostBall"));
+        triggers.add(new Trigger(525, 0, 48, 48, new TempleScript()));
         
         return triggers;
     }
