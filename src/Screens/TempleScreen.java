@@ -23,7 +23,7 @@ public class TempleScreen extends Screen {
     }
 	
     public void initialize() {
-    	templeLabel = new SpriteFont("TOP SECRET TEMPLE", (Config.GAME_WINDOW_WIDTH / 2) - 90, Config.GAME_WINDOW_HEIGHT / 2, "Comic Sans", 30, Color.white);
+    	templeLabel = new SpriteFont("TOP SECRET TEMPLE", (Config.GAME_WINDOW_WIDTH / 2) - 150, Config.GAME_WINDOW_HEIGHT / 2, "Comic Sans", 30, Color.white);
 		templeLabel.setOutlineColor(Color.black);
 		templeLabel.setOutlineThickness(5.0f);
 		
