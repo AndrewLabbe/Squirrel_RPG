@@ -1,5 +1,6 @@
 package Projectiles;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import Builders.FrameBuilder;
@@ -7,6 +8,7 @@ import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
+import Level.Enemy;
 import Level.MapEntityStatus;
 import Level.Projectile;
 import Utils.Stopwatch;
@@ -24,7 +26,7 @@ public class Acorn extends Projectile {
 	}
 
 	@Override
-	public void update() {
+	public void update(ArrayList<Enemy> enemies) {
 		if (despawnTime.isTimeUp()) {
 			mapEntityStatus = MapEntityStatus.REMOVED;
 		}
@@ -40,7 +42,7 @@ public class Acorn extends Projectile {
 		else {
 			this.currentAnimationName = "FIRE_LEFT";
 		} 
-		super.update();
+		super.update(enemies);
 	}
 	
 	//Creates two different animations for the acorn --> one for firing right and one for firing left
@@ -60,7 +62,14 @@ public class Acorn extends Projectile {
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
-        }};
+        }}; 
+    }
+        
+    //Remove acorn from screen upon collision with enemy
+    @Override 
+    public void eliminateEnemy(Enemy enemy) {
+        super.eliminateEnemy(enemy); 
+        this.mapEntityStatus = mapEntityStatus.REMOVED;
     }
 	
 }

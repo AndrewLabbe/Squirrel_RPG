@@ -49,6 +49,8 @@ public abstract class Player extends GameObject {
     protected Key MOVE_UP_KEY = Key.UP;
     protected Key MOVE_DOWN_KEY = Key.DOWN;
     protected Key INTERACT_KEY = Key.SPACE; 
+    //Key to walk faster
+    protected Key SPEED_KEY = Key.SHIFT;
     
     //Key for firing projectiles
     protected Key FIRE_BULLET_KEY = Key.F; 
@@ -133,8 +135,15 @@ public abstract class Player extends GameObject {
         }
 
         // if walk left key is pressed, move player to the left
-        if (Keyboard.isKeyDown(MOVE_LEFT_KEY)&& Math.round(getX()) > -15) {
+        if (Keyboard.isKeyDown(MOVE_LEFT_KEY)&& Math.round(getX()) > -15 && !Keyboard.isKeyDown(SPEED_KEY)) {
             moveAmountX -= walkSpeed;
+            facingDirection = Direction.LEFT;
+            currentWalkingXDirection = Direction.LEFT;
+            lastWalkingXDirection = Direction.LEFT;
+        }
+        //Walk faster
+        else if(Keyboard.isKeyDown(MOVE_LEFT_KEY)&& Math.round(getX()) > -15 && Keyboard.isKeyDown(SPEED_KEY)) {
+        	moveAmountX -= walkSpeed*5;
             facingDirection = Direction.LEFT;
             currentWalkingXDirection = Direction.LEFT;
             lastWalkingXDirection = Direction.LEFT;
@@ -142,24 +151,44 @@ public abstract class Player extends GameObject {
 
         // if walk right key is pressed, move player to the right 
         //Checks to see if main character has reach map bounds
-        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < 1090) {
+        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < 1090 && !Keyboard.isKeyDown(SPEED_KEY)) {
             moveAmountX += walkSpeed;
             facingDirection = Direction.RIGHT;
             currentWalkingXDirection = Direction.RIGHT;
             lastWalkingXDirection = Direction.RIGHT;
         }
+        //Walk faster
+        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < 1090 && Keyboard.isKeyDown(SPEED_KEY)) {
+            moveAmountX += walkSpeed*5;
+            facingDirection = Direction.RIGHT;
+            currentWalkingXDirection = Direction.RIGHT;
+            lastWalkingXDirection = Direction.RIGHT;
+        }
+        
         else {
             currentWalkingXDirection = Direction.NONE;
         }
         
-        //Checks to see if main charactyer has hit map bounds
-        if (Keyboard.isKeyDown(MOVE_UP_KEY)&& Math.round(getY()) > -15) {
+        //Checks to see if main character has hit map bounds
+        if (Keyboard.isKeyDown(MOVE_UP_KEY)&& Math.round(getY()) > -15 && !Keyboard.isKeyDown(SPEED_KEY)) {
             moveAmountY -= walkSpeed;
             currentWalkingYDirection = Direction.UP;
             lastWalkingYDirection = Direction.UP;
         }
-        else if (Keyboard.isKeyDown(MOVE_DOWN_KEY)) {
+        //Walk faster
+        if (Keyboard.isKeyDown(MOVE_UP_KEY)&& Math.round(getY()) > -15 && Keyboard.isKeyDown(SPEED_KEY)) {
+            moveAmountY -= walkSpeed*5;
+            currentWalkingYDirection = Direction.UP;
+            lastWalkingYDirection = Direction.UP;
+        }
+        else if (Keyboard.isKeyDown(MOVE_DOWN_KEY)&& !Keyboard.isKeyDown(SPEED_KEY)) {
             moveAmountY += walkSpeed;
+            currentWalkingYDirection = Direction.DOWN;
+            lastWalkingYDirection = Direction.DOWN;
+        }
+        //Walk faster
+        else if (Keyboard.isKeyDown(MOVE_DOWN_KEY)&& Keyboard.isKeyDown(SPEED_KEY)) {
+            moveAmountY += walkSpeed*5;
             currentWalkingYDirection = Direction.DOWN;
             lastWalkingYDirection = Direction.DOWN;
         }
@@ -317,7 +346,9 @@ public abstract class Player extends GameObject {
     	//Creates a new bullet 
     	Acorn acorn = new Acorn(projectileX, projectileY, direction); 
     	map.addProjectiles(acorn); 
-    	fireDelay.reset();
+    	fireDelay.reset(); 
+    	
+    	playSE(7);
     	} 
     }
     

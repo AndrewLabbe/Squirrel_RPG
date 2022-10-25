@@ -50,6 +50,7 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasTalkedToFox", false);
         flagManager.addFlag("hasFoundBall", false);
         flagManager.addFlag("hasEnteredTemple", false);
+        flagManager.addFlag("hasEnteredShop", false);
 
         // define/setup map
         this.map = new TestMap();
@@ -157,7 +158,14 @@ public class PlayLevelScreen extends Screen {
         	screenCoordinator.setGameState(GameState.TEMPLE);
         }
         
+        // If Player Entered Door Change Map to Shop
+        if (map.getFlagManager().isFlagSet("hasEnteredShop")) {
+        	screenCoordinator.setGameState(GameState.SHOPKEEP);
+        	System.out.println("Shop entered");
+        }
+        
         screenCoordinator.setLevelScreen(this);
+        
     }
 
     public void draw(GraphicsHandler graphicsHandler) {

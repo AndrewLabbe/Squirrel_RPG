@@ -28,7 +28,10 @@ public class Camera extends Rectangle {
     private ArrayList<Trigger> activeTriggers = new ArrayList<>(); 
     
     //Projectile map entities 
-    private ArrayList<Projectile> activeProjectiles = new ArrayList<>();
+    private ArrayList<Projectile> activeProjectiles = new ArrayList<>(); 
+    
+    //Enemy map entities 
+    private ArrayList<Enemy> activeEnemies = new ArrayList();
 
     // determines how many tiles off screen an entity can be before it will be deemed inactive and not included in the update/draw cycles until it comes back in range
     private final int UPDATE_OFF_SCREEN_RANGE = 4;
@@ -69,7 +72,9 @@ public class Camera extends Rectangle {
         activeEnhancedMapTiles = loadActiveEnhancedMapTiles();
         activeNPCs = loadActiveNPCs(); 
         //Define active projectiles
-        activeProjectiles = loadActiveProjectiles();
+        activeProjectiles = loadActiveProjectiles(); 
+        //Define active enemies 
+        activeEnemies = loadActiveEnemies();
         
         for (EnhancedMapTile enhancedMapTile : activeEnhancedMapTiles) {
             enhancedMapTile.update(player);
@@ -81,7 +86,11 @@ public class Camera extends Rectangle {
         
         //For each active projectile call its update method
         for(Projectile projectile : activeProjectiles) {
-        	projectile.update();
+        	projectile.update(activeEnemies);
+        } 
+        
+        for(Enemy enemy : activeEnemies) {
+        	enemy.update(player);
         }
     }
 
@@ -247,6 +256,12 @@ public class Camera extends Rectangle {
         	if (containsDraw(projectile)) { 
         		projectile.draw(graphicsHandler);
         	}
+        } 
+        
+        for(Enemy enemy : activeEnemies) {
+        	if(containsDraw(enemy)) {
+        		enemy.draw(graphicsHandler);
+        	}
         }
 
         // player is drawn to screen
@@ -340,5 +355,34 @@ public class Camera extends Rectangle {
     
     public ArrayList<Projectile> getActiveProjectiles() {
     	return activeProjectiles;
+    }
+    
+    //Same as for projectiles 
+    //determine which enemies are on screen and return them 
+    private ArrayList<Enemy> loadActiveEnemies() {
+        ArrayList<Enemy> activeEnemies = new ArrayList<>();
+        for (int i = map.getEnemies().size() - 1; i >= 0; i--) {
+            Enemy enemy = map.getEnemies().get(i);
+
+            if (isMapEntityActive(enemy)) {
+                activeEnemies.add(enemy);
+                if (enemy.mapEntityStatus == MapEntityStatus.INACTIVE) {
+                    enemy.setMapEntityStatus(MapEntityStatus.ACTIVE);
+                }
+                
+            } 
+            else if (enemy.getMapEntityStatus() == MapEntityStatus.ACTIVE) {
+                enemy.setMapEntityStatus(MapEntityStatus.INACTIVE);
+                
+            } 
+            else if (enemy.getMapEntityStatus() == MapEntityStatus.REMOVED) {
+                map.getEnemies().remove(i);
+            }
+        }
+        return activeEnemies;
+    } 
+    
+    public ArrayList<Enemy> getActiveEnemies() {
+    	return activeEnemies;
     }
 }
