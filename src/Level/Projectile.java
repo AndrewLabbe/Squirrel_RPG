@@ -10,8 +10,18 @@ public class Projectile extends MapEntity {
 		super(x, y, spriteSheet, startingAnimation);
 	}
 
-	public void update() {
+	public void update(ArrayList<Enemy> enemies) {
 		super.update(); 
+		//Eliminate enemy if a projectile collides with it
+		for(Enemy enemy : enemies) {
+			if(this.intersects(enemy)) {
+				eliminateEnemy(enemy); 
+			}
+		}
+	} 
+	//Eliminate enemy
+	public void eliminateEnemy(Enemy enemy) {
+		enemy.eliminateEnemy(enemy); 
 	}
 	
 }

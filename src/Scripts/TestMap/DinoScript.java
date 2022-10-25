@@ -2,6 +2,7 @@ package Scripts.TestMap;
 
 import Builders.FrameBuilder;
 import Builders.MapTileBuilder;
+import Engine.GamePanel;
 import GameObject.Frame;
 import Level.*;
 import Utils.Direction;
@@ -10,7 +11,7 @@ import Utils.Point;
 // script for talking to dino npc
 // the script is segmented -- it has multiple setups, cleanups, and executions based on its current action
 public class DinoScript extends Script<NPC> {
-
+	GamePanel gamePanel = new GamePanel();
     private int sequence = 0;
     private int amountMoved = 0;
 
@@ -19,11 +20,15 @@ public class DinoScript extends Script<NPC> {
         lockPlayer();
 
         if (!isFlagSet("hasTalkedToWalrus")) {
+        	//Plays Sound Effect
+            gamePanel.playSE(5);
             showTextbox();
             addTextToTextboxQueue("Isn't my garden so lovely?");
         }
         else if (isFlagSet("hasTalkedToWalrus") && !isFlagSet("hasTalkedToDinosaur")) {
             if (sequence == 0) {
+            	 //Plays Sound Effect
+                gamePanel.playSE(5);
                 showTextbox();
                 addTextToTextboxQueue("Isn't my garden so lovely?");
             }
@@ -32,6 +37,8 @@ public class DinoScript extends Script<NPC> {
             }
             else if (sequence == 2) {
                 entity.facePlayer(player);
+                //Plays Sound Effect
+                gamePanel.playSE(5);
                 showTextbox();
                 addTextToTextboxQueue("Oh, you're still here...");
                 addTextToTextboxQueue("...You heard from Walrus that he saw me with your\nball?");

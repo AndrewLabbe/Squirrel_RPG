@@ -34,7 +34,7 @@ public class GamePanel extends JPanel {
 	private final Key pauseKey = Key.P;
 	
 	//Initialize sound
-	Sound sound = new Sound();
+	public Sound sound = new Sound();
 	
 	// Color for Day/Night Cycle
 	private int shade = 0;

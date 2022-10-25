@@ -14,14 +14,20 @@ public class Sound {
 	//Constructor
 	
 	public Sound() {
+		//Background Music
 		soundURL [0] = getClass().getResource("/sound/BlueBoyAdventure.wav");
 		soundURL [1] = getClass().getResource("/sound/Forest.wav");
-		soundURL [2] = getClass().getResource("/sound/Monster.wav");
-		soundURL [3] = getClass().getResource("/sound/Beast.wav");
-		soundURL [4] = getClass().getResource("/sound/WildCat.wav");
-		soundURL [5] = getClass().getResource("/sound/monster purr.wav");
+		//WalrusSE
+		soundURL [2] = getClass().getResource("/sound/Walrus.wav");
+		//WolfSE
+		soundURL [3] = getClass().getResource("/sound/wolf.wav");
+		//FoxSE
+		soundURL [4] = getClass().getResource("/sound/fox.wav");
+		//DinoSE
+		soundURL [5] = getClass().getResource("/sound/Dino.wav");
 		soundURL [6] = getClass().getResource("/sound/Roar.wav"); 
 		soundURL [7] = getClass().getResource("/sound/blip.wav");
+		
 	}
 	
 	public void setFile(int i) {
@@ -45,6 +51,7 @@ public class Sound {
 	public void stop() {
 		clip.stop();
 	}
+	
 	
 	
 	
