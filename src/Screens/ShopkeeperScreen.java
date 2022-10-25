@@ -20,6 +20,7 @@ public class ShopkeeperScreen extends Screen {
 	protected ScreenCoordinator screenCoordinator;
 	protected Map map;
 	protected Player player;
+	 protected FlagManager flagManager;
 
 	protected ShopkeeperScreenState shopkeeperScreenState;
 
@@ -44,9 +45,12 @@ public class ShopkeeperScreen extends Screen {
 		// TODO: Figure out Screen Coins
 		//		screenCoin = new Currency();
 		//		screenCoin = screenCoin.getCoin();
+		
+		 flagManager = new FlagManager();
 
 		this.map = new shopInterior();
 		map.reset();
+		map.setFlagManager(flagManager);
 
 		this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
 		this.player.setMap(map);

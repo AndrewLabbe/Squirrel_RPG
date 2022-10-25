@@ -62,9 +62,9 @@ public class TestMap extends Map {
         //Zombie zombie = new Zombie(4, getMapTile(21, 25).getLocation()); 
         //npcs.add(zombie); 
         
-        Wolf wolf = new Wolf(5, getMapTile(1, 18).getLocation());
-        wolf.setInteractScript(new WolfScript());
-        npcs.add(wolf);
+//        Wolf wolf = new Wolf(5, getMapTile(1, 18).getLocation());
+//        wolf.setInteractScript(new WolfScript());
+//        npcs.add(wolf);
         
         return npcs;
     }
