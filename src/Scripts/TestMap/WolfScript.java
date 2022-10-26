@@ -14,9 +14,8 @@ public class WolfScript extends Script<NPC>{
         showTextbox();
         //Plays Sound Effect
         gamePanel.playSE(3);
-        addTextToTextboxQueue("Hello there squirrel, I see you have some coins there.");
-        addTextToTextboxQueue("I will trade you something nice for them! \n1. Buy              2. Sell");
-        setFlag("InShop");
+        addTextToTextboxQueue("I will trade you for those coins! \n1. Buy              2. Sell");
+        setFlag("inShop");
         entity.facePlayer(player);
     }
 
