@@ -39,6 +39,8 @@ public class GamePanel extends JPanel {
 	// Color for Day/Night Cycle
 	private int shade = 0;
 	private int time = 0;
+	boolean day = true;
+	boolean night = false;
 	
 	/*
 	 * The JPanel and various important class instances are setup here
@@ -129,22 +131,29 @@ public class GamePanel extends JPanel {
 		}
 			
 	// Create Day/Night Cycle
-			public void cycleDay() {
+		public void cycleDay() {
+			if (day = true) {
 				if (shade < 100) {
 					shade += 10;
 				}
-				
+
 				if (shade == 100) {
-					timeNight();
+					System.out.println("Night has fallen...");
+					day = false;
+					night = true;
 				}
 			}
 			
-			public void timeNight() {				
+			else if (night = true) {
 				if (time % 6000 == 0) {
 					shade = 0;
 					System.out.println("The Sun Rises...");
+					
+					night = false;
+					day = true;
 				}
 			}
+		}
 
 	public void draw() {
 		screenManager.draw(graphicsHandler);
