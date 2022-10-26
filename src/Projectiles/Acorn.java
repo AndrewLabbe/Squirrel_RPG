@@ -52,13 +52,13 @@ public class Acorn extends Projectile {
             put("FIRE_RIGHT", new Frame[]{
                     new FrameBuilder(spriteSheet.getSprite(0, 0), 0)
                             .withScale(1)
-                            .withBounds(1, 1, 7, 15) 
+                            .withBounds(8, 0, 13, 19) 
                             .build()
             });
             put("FIRE_LEFT", new Frame[]{
                     new FrameBuilder(spriteSheet.getSprite(0, 0), 0)
                             .withScale(1)
-                            .withBounds(1, 1, 7, 15) 
+                            .withBounds(8, 0, 13, 19) 
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
