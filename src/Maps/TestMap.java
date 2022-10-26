@@ -15,9 +15,11 @@ import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.FoxScript;
 import Scripts.TestMap.LostBallScript;
+import Scripts.TestMap.TempleScript;
 import Scripts.TestMap.TreeScript;
 import Scripts.TestMap.WalrusScript;
 import Scripts.TestMap.WolfScript;
+import Scripts.TestMap.changeShop;
 import Tilesets.CommonTileset;
 
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ public class TestMap extends Map {
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
         enhancedMapTiles.add(new Rock(getMapTile(2, 7).getLocation()));
+        
         return enhancedMapTiles;
     }
 
@@ -59,9 +62,9 @@ public class TestMap extends Map {
         //Zombie zombie = new Zombie(4, getMapTile(21, 25).getLocation()); 
         //npcs.add(zombie); 
         
-        Wolf wolf = new Wolf(5, getMapTile(1, 18).getLocation());
-        wolf.setInteractScript(new WolfScript());
-        npcs.add(wolf);
+//        Wolf wolf = new Wolf(5, getMapTile(1, 18).getLocation());
+//        wolf.setInteractScript(new WolfScript());
+//        npcs.add(wolf);
         
         return npcs;
     }
@@ -72,6 +75,8 @@ public class TestMap extends Map {
         triggers.add(new Trigger(790, 1030, 100, 10, new LostBallScript(), "hasLostBall"));
         triggers.add(new Trigger(790, 960, 10, 80, new LostBallScript(), "hasLostBall"));
         triggers.add(new Trigger(890, 960, 10, 80, new LostBallScript(), "hasLostBall"));
+        triggers.add(new Trigger(525, 0, 48, 48, new TempleScript()));
+        
         return triggers;
     }
 
@@ -84,6 +89,8 @@ public class TestMap extends Map {
         getMapTile(20, 4).setInteractScript(new SimpleTextScript("Dino's house"));
 
         getMapTile(2, 6).setInteractScript(new TreeScript());
+        
+        getMapTile(4, 19).setInteractScript(new changeShop());
     } 
     
     //Adds enemies to the map

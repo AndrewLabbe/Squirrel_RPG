@@ -49,6 +49,8 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasTalkedToDinosaur", false);
         flagManager.addFlag("hasTalkedToFox", false);
         flagManager.addFlag("hasFoundBall", false);
+        flagManager.addFlag("hasEnteredTemple", false);
+        flagManager.addFlag("hasEnteredShop", false);
 
         // define/setup map
         this.map = new TestMap();
@@ -122,15 +124,6 @@ public class PlayLevelScreen extends Screen {
             wasSpacePressed = false; 
         }
         
-        if (Keyboard.isKeyDown(buyKey)) {
-    		screenCoordinator.setGameState(GameState.BUY);
-    		keyLocker.lockKey(buyKey);
-    	} 
-        if (Keyboard.isKeyDown(sellKey)) {
-        	screenCoordinator.setGameState(GameState.SELL);
-        	keyLocker.lockKey(sellKey);
-    	}
-        
         if (Keyboard.isKeyDown(invKey)) {
     		screenCoordinator.setGameState(GameState.INVENTORY);
     		keyLocker.lockKey(buyKey);
@@ -152,7 +145,18 @@ public class PlayLevelScreen extends Screen {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         }
         
+        if (map.getFlagManager().isFlagSet("hasEnteredTemple")) {
+        	screenCoordinator.setGameState(GameState.TEMPLE);
+        }
+        
+        // If Player Entered Door Change Map to Shop
+        if (map.getFlagManager().isFlagSet("hasEnteredShop")) {
+        	screenCoordinator.setGameState(GameState.SHOPKEEP);
+        	System.out.println("Shop entered");
+        }
+        
         screenCoordinator.setLevelScreen(this);
+        
     }
 
     public void draw(GraphicsHandler graphicsHandler) {

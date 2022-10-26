@@ -36,8 +36,8 @@ public class BuyScreen extends Screen {
 
 	public void update() {
 		if (Keyboard.isKeyDown(escKey)) {
-			screenCoordinator.setGameState(GameState.LEVEL);
-			screenCoordinator.switchBackToLevel();
+			screenCoordinator.setGameState(GameState.SHOPKEEP);
+			screenCoordinator.switchBackToShop();
 		}
 	}
 
