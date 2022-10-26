@@ -99,6 +99,9 @@ public class TestMap extends Map {
     	ArrayList<Enemy> enemies = new ArrayList(); 
     	
     	enemies.add(new ZombieEnemy(getMapTile(18, 25).getLocation(), (float) 3.00));
+    	enemies.add(new ZombieEnemy(getMapTile(18, 10).getLocation(), (float) 3.00)); 
+    	enemies.add(new ZombieEnemy(getMapTile(10, 8).getLocation(), (float) 3.00)); 
+    	enemies.add(new ZombieEnemy(getMapTile(10, 25).getLocation(), (float) 3.00));
     	return enemies;
     }
 }

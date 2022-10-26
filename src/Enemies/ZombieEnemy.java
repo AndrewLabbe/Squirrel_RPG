@@ -15,35 +15,49 @@ import Utils.Stopwatch;
 public class ZombieEnemy extends Enemy {
 
 	private float direction; 
-	private Stopwatch timer;
+	
+	private int rangeX; 
+	private int rangeY;
 	
 	public ZombieEnemy(Utils.Point point, float direction) {
 		//Placeholder
 		super(point.x, point.y, new SpriteSheet(ImageLoader.load("Zombie.png"), 25, 30), "STAND_RIGHT"); 
 		this.direction = direction; 
-		timer = new Stopwatch(); 
-		timer.setWaitTime(5000);
+		
+		rangeX = 200; 
+		rangeY = 200;
 	} 
 	
 	//Updates enemy location 
 	public void update(Player player) {
 		
-		//Moves zombie enemy back and forth on the screen using a timer
-		if(timer.isTimeUp() == false) {
-			moveX(direction); 
-		} 
-		else {
-			timer.reset(); 
-			direction = (float) (direction * -1.00); 
-			if(direction > 1) {
-				this.currentAnimationName = "STAND_RIGHT"; 
-			} 
-			else {
-				this.currentAnimationName = "STAND_LEFT";
+		//Basic AI tracking system which enables the zombie enemy to move towards the player if the player gets close enough
+		if(player.getX() < this.x + rangeX && player.getX() > this.x - rangeX) { 
+			if(player.getY() < this.y + rangeY && player.getY() > this.y - rangeY) {
+				if(player.getX() > this.x) {
+					direction = 1.0F;
+				} 
+				if(player.getX() < this.x) {
+					direction = -1.0F;
+				}
+				moveX(direction); 
+				if(direction > 0) {
+					this.currentAnimationName = "STAND_RIGHT"; 
+				} 
+				else {
+					this.currentAnimationName = "STAND_LEFT";
+				}
+				if(player.getY() > this.y) {
+					direction = 1.0F;
+				} 
+				if(player.getY() < this.y) {
+					direction = -1.0F;
+				}
+				moveY(direction);
 			}
-			
-		} 
+		}
 		super.update();
+		
 	} 
 	
 	@Override
