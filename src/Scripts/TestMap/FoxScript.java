@@ -35,7 +35,6 @@ public class FoxScript extends Script<NPC>{
             addTextToTextboxQueue("At the top of the tallest mountain, where no\ncreature set foot before,");
             addTextToTextboxQueue("A lost temple will purify the forest...");
         }
-        entity.facePlayer(player);
     }
 
 	@Override
