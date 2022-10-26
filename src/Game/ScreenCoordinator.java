@@ -21,6 +21,7 @@ public class ScreenCoordinator extends Screen {
 	// currently shown Screen
 	protected Screen currentScreen = new DefaultScreen();
 	protected Screen levelScreen;
+	protected Screen shopScreen;
 
 	// keep track of gameState so ScreenCoordinator knows which Screen to show
 	protected GameState gameState;
@@ -32,6 +33,10 @@ public class ScreenCoordinator extends Screen {
 
 	public void setLevelScreen(PlayLevelScreen s) {
 		this.levelScreen = s;
+	}
+	
+	public void setShopScreen(ShopkeeperScreen s) {
+		this.shopScreen = s;
 	}
 	
 	// Other Screens can set the gameState of this class to force it to change the currentScreen
@@ -88,6 +93,12 @@ public class ScreenCoordinator extends Screen {
 	
 	public void switchBackToLevel() {
 		currentScreen = levelScreen;
+		previousGameState = gameState;
+		currentScreen.update();
+	}
+	
+	public void switchBackToShop() {
+		currentScreen = shopScreen;
 		previousGameState = gameState;
 		currentScreen.update();
 	}

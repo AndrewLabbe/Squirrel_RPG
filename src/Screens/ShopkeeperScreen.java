@@ -47,6 +47,7 @@ public class ShopkeeperScreen extends Screen {
 		//		screenCoin = screenCoin.getCoin();
 		
 		 flagManager = new FlagManager();
+		 flagManager.addFlag("inShop", false);
 
 		this.map = new shopInterior();
 		map.reset();
@@ -111,15 +112,17 @@ public class ShopkeeperScreen extends Screen {
 			wasSpacePressed = false; 
 		}
 
-		if (Keyboard.isKeyDown(buyKey)) {
-			screenCoordinator.setGameState(GameState.BUY);
-			keyLocker.lockKey(buyKey);
-		} 
-		if (Keyboard.isKeyDown(sellKey)) {
-			screenCoordinator.setGameState(GameState.SELL);
-			keyLocker.lockKey(sellKey);
+		if(map.getFlagManager().isFlagSet("inShop")) {
+			if (Keyboard.isKeyDown(buyKey)) {
+				screenCoordinator.setGameState(GameState.BUY);
+				keyLocker.lockKey(buyKey);
+			} 
+			if (Keyboard.isKeyDown(sellKey)) {
+				screenCoordinator.setGameState(GameState.SELL);
+				keyLocker.lockKey(sellKey);
+			}
 		}
-
+		
 		if (Keyboard.isKeyDown(invKey)) {
 			screenCoordinator.setGameState(GameState.INVENTORY);
 			keyLocker.lockKey(buyKey);
@@ -135,6 +138,8 @@ public class ShopkeeperScreen extends Screen {
 			keyLocker.unlockKey(invKey);
 		}
 
+		screenCoordinator.setShopScreen(this);
+		
 	}
 
 
