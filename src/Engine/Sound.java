@@ -24,7 +24,7 @@ public class Sound {
 		//FoxSE
 		soundURL [4] = getClass().getResource("/sound/fox.wav");
 		//DinoSE
-		soundURL [5] = getClass().getResource("/sound/Dino.wav");
+		soundURL [5] = getClass().getResource("/sound/Dino3.wav");
 		soundURL [6] = getClass().getResource("/sound/Roar.wav"); 
 		soundURL [7] = getClass().getResource("/sound/blip.wav");
 		

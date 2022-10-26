@@ -81,7 +81,7 @@ public class GamePanel extends JPanel {
 		doPaint = true;
 		
 		//Play background music
-			playMusic(0);
+			//playMusic(0);
 	}
 
 	// this starts the timer (the game loop is started here

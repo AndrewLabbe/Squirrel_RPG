@@ -18,7 +18,8 @@ public class DinoScript extends Script<NPC> {
     @Override
     protected void setup() {
         lockPlayer();
-
+        gamePanel.playSE(5);
+        System.out.println("Test");
         if (!isFlagSet("hasTalkedToWalrus")) {
         	//Plays Sound Effect
             gamePanel.playSE(5);

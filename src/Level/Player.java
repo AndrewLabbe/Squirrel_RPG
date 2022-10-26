@@ -42,7 +42,7 @@ public abstract class Player extends GameObject {
     // classes that listen to player events can be added to this list
     protected ArrayList<PlayerListener> listeners = new ArrayList<>();
 
-    // define keys
+    // define keyscd cd 
     protected KeyLocker keyLocker = new KeyLocker();
     protected Key MOVE_LEFT_KEY = Key.LEFT;
     protected Key MOVE_RIGHT_KEY = Key.RIGHT;
