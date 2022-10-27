@@ -30,6 +30,7 @@ public class PlayLevelScreen extends Screen {
     //protected Key MOVE_LEFT_KEY = Key.LEFT;
    // protected Key MOVE_RIGHT_KEY = Key.RIGHT;
     private final Key invKey = Key.I;
+    private final Key opsKey = Key.O;
 	private final Key buyKey = Key.ONE;
 	private final Key sellKey = Key.TWO;
 
@@ -127,6 +128,11 @@ public class PlayLevelScreen extends Screen {
         if (Keyboard.isKeyDown(invKey)) {
     		screenCoordinator.setGameState(GameState.INVENTORY);
     		keyLocker.lockKey(buyKey);
+    	}
+        
+        if (Keyboard.isKeyDown(opsKey)) {
+    		screenCoordinator.setGameState(GameState.OPTIONS);
+    		keyLocker.lockKey(opsKey);
     	}
         
         if (Keyboard.isKeyUp(buyKey)) {

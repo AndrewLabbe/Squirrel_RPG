@@ -8,6 +8,7 @@ import Screens.BuyScreen;
 import Screens.CreditsScreen;
 import Screens.InventoryScreen;
 import Screens.MenuScreen;
+import Screens.OptionsScreen;
 import Screens.PlayLevelScreen;
 import Screens.SellScreen;
 import Screens.TempleScreen;
@@ -78,6 +79,9 @@ public class ScreenCoordinator extends Screen {
 					case INVENTORY:
 						currentScreen = new InventoryScreen(this);
 						break;
+					case OPTIONS:
+						currentScreen = new OptionsScreen(this);
+						break;
 					case SHOPKEEP:
 						currentScreen = new ShopkeeperScreen(this);
 				}
@@ -102,6 +106,10 @@ public class ScreenCoordinator extends Screen {
 		previousGameState = gameState;
 		currentScreen.update();
 	}
+	
+	public Screen checkCurrentScreen() {
+		return currentScreen;}
+	
 	
 	@Override
 	public void draw(GraphicsHandler graphicsHandler) {

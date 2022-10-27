@@ -30,7 +30,7 @@ public class PathingTileset extends Tileset {
 		pathTiles.add(topLeftPathTile);
 
 		// Top Left Path
-		Frame topMidPath = new FrameBuilder(getSubImage(1, 0))
+		Frame topMidPath = new FrameBuilder(getSubImage(0, 1))
 				.withScale(tileScale)
 				.build();
 
@@ -40,7 +40,7 @@ public class PathingTileset extends Tileset {
 		pathTiles.add(topMidPathTile);
 
 		// Top Right Path
-		Frame topRightPath = new FrameBuilder(getSubImage(2, 0))
+		Frame topRightPath = new FrameBuilder(getSubImage(0, 2))
 				.withScale(tileScale)
 				.build();
 
@@ -50,7 +50,7 @@ public class PathingTileset extends Tileset {
 		pathTiles.add(topRightPathTile);
 
 		// Mid Left Path
-		Frame midLeftPath = new FrameBuilder(getSubImage(0, 1))
+		Frame midLeftPath = new FrameBuilder(getSubImage(1, 0))
 				.withScale(tileScale)
 				.build();
 
@@ -70,7 +70,7 @@ public class PathingTileset extends Tileset {
 		pathTiles.add(grassColorPathTile);
 
 		// Mid Right Path
-		Frame midRightPath = new FrameBuilder(getSubImage(2, 1))
+		Frame midRightPath = new FrameBuilder(getSubImage(1, 2))
 				.withScale(tileScale)
 				.build();
 
@@ -80,7 +80,7 @@ public class PathingTileset extends Tileset {
 		pathTiles.add(midRightPathTile);
 
 		// Bottom Left Path
-		Frame bottomLeftPath = new FrameBuilder(getSubImage(0, 2))
+		Frame bottomLeftPath = new FrameBuilder(getSubImage(2, 0))
 				.withScale(tileScale)
 				.build();
 
@@ -90,7 +90,7 @@ public class PathingTileset extends Tileset {
 		pathTiles.add(bottomLeftPathTile);
 
 		// Bottom Middle Path
-		Frame bottomMiddlePath = new FrameBuilder(getSubImage(1, 2))
+		Frame bottomMiddlePath = new FrameBuilder(getSubImage(2, 1))
 				.withScale(tileScale)
 				.build();
 
@@ -110,7 +110,7 @@ public class PathingTileset extends Tileset {
 		pathTiles.add(bottomRightPathTile);
 
 		// Left Top Corner Path
-		Frame leftTopCornerPath = new FrameBuilder(getSubImage(3, 0))
+		Frame leftTopCornerPath = new FrameBuilder(getSubImage(0, 3))
 				.withScale(tileScale)
 				.build();
 
@@ -120,7 +120,7 @@ public class PathingTileset extends Tileset {
 		pathTiles.add(leftTopCornerPathTile);
 
 		// Right Top Corner Path
-		Frame rightTopCornerPath = new FrameBuilder(getSubImage(4, 0))
+		Frame rightTopCornerPath = new FrameBuilder(getSubImage(0, 4))
 				.withScale(tileScale)
 				.build();
 
@@ -130,7 +130,7 @@ public class PathingTileset extends Tileset {
 		pathTiles.add(rightTopCornerPathTile);
 
 		// Left Bottom Corner Path
-		Frame leftBottomCornerPath = new FrameBuilder(getSubImage(3, 1))
+		Frame leftBottomCornerPath = new FrameBuilder(getSubImage(1, 3))
 				.withScale(tileScale)
 				.build();
 
@@ -140,7 +140,7 @@ public class PathingTileset extends Tileset {
 		pathTiles.add(leftBottomCornerPathTile);
 
 		// Left Bottom Corner Path
-		Frame rightBottomCornerPath = new FrameBuilder(getSubImage(4, 1))
+		Frame rightBottomCornerPath = new FrameBuilder(getSubImage(1, 4))
 				.withScale(tileScale)
 				.build();
 
@@ -150,7 +150,7 @@ public class PathingTileset extends Tileset {
 		pathTiles.add(rightBottomCornerPathTile);
 
 		// Right Diag Path
-		Frame rightDiagPath = new FrameBuilder(getSubImage(3, 2))
+		Frame rightDiagPath = new FrameBuilder(getSubImage(2, 3))
 				.withScale(tileScale)
 				.build();
 
@@ -160,7 +160,7 @@ public class PathingTileset extends Tileset {
 		pathTiles.add(rightDiagPathTile);
 
 		// Left Diag Path
-		Frame leftDiagPath = new FrameBuilder(getSubImage(4, 2))
+		Frame leftDiagPath = new FrameBuilder(getSubImage(2, 4))
 				.withScale(tileScale)
 				.build();
 
@@ -200,7 +200,7 @@ public class PathingTileset extends Tileset {
 		pathTiles.add(pinkFlowersTile);
 
 		// Red Flowers
-		Frame redFlowers = new FrameBuilder(getSubImage(4, 3))
+		Frame redFlowers = new FrameBuilder(getSubImage(3, 4))
 				.withScale(tileScale)
 				.build();
 
