@@ -132,7 +132,7 @@ public class GamePanel extends JPanel {
 			
 	// Create Day/Night Cycle
 		public void cycleDay() {
-			if (day = true) {
+			if (day == true) {
 				if (shade < 100) {
 					shade += 10;
 				}
@@ -144,7 +144,7 @@ public class GamePanel extends JPanel {
 				}
 			}
 			
-			else if (night = true) {
+			if (night == true) {
 				if (time % 6000 == 0) {
 					shade = 0;
 					System.out.println("The Sun Rises...");

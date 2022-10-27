@@ -6,6 +6,8 @@ import Level.Map;
 import Level.NPC;
 import NPCs.Wolf;
 import Scripts.TestMap.WolfScript;
+import Scripts.TestMap.changeShop;
+import Scripts.TestMap.exitShop;
 import Tilesets.CommonTileset;
 import Tilesets.InteriorTileset;
 
@@ -17,6 +19,7 @@ public class shopInterior extends Map {
 		this.playerStartPosition = getMapTile(7, 11).getLocation();
 	}
 	
+	 @Override
 	 public ArrayList<NPC> loadNPCs() {
 	        ArrayList<NPC> npcs = new ArrayList<>();
 	        
@@ -26,4 +29,12 @@ public class shopInterior extends Map {
 	        
 	        return npcs;
 	 }
+	 
+	 @Override
+	 public void loadScripts() {
+		 getMapTile(5, 14).setInteractScript(new exitShop());
+		 
+		 getMapTile(6, 15).setInteractScript(new exitShop());
+	 }
+	 
 }
