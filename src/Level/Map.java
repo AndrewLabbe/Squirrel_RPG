@@ -1,5 +1,5 @@
 package Level;
-
+ 
 import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.Keyboard;
@@ -7,24 +7,24 @@ import Engine.ScreenManager;
 import GameObject.Rectangle;
 import Utils.Direction;
 import Utils.Point;
-
+ 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+ 
 /*
-    This class is for defining a map that is used for a specific level
-    The map class handles/manages a lot of different things, including:
-    1. tile map -- the map tiles that make up the map
-    2. entities in the map -- this includes enemies, enhanced map tiles, and npcs
-    3. the map's camera, which does a lot of work itself in the Camera class
-    4. adjusting camera location based off of player location
-    5. calculating which tile a game object is currently on based on its x and y location
+   This class is for defining a map that is used for a specific level
+   The map class handles/manages a lot of different things, including:
+   1. tile map -- the map tiles that make up the map
+   2. entities in the map -- this includes enemies, enhanced map tiles, and npcs
+   3. the map's camera, which does a lot of work itself in the Camera class
+   4. adjusting camera location based off of player location
+   5. calculating which tile a game object is currently on based on its x and y location
 */
-
+ 
 public abstract class Map {
     // the tile map (map tiles that make up the entire map image)
     protected MapTile[] mapTiles;
@@ -640,6 +640,4 @@ public abstract class Map {
     public ArrayList<Enemy> getActiveEnemies() {
     	return camera.getActiveEnemies(); 
     } 
-    
-    
 }
