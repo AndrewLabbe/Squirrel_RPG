@@ -21,6 +21,7 @@ public class WolfScript extends Script<NPC>{
 
 	@Override
     protected void cleanup() {
+		setFlag("leftShop");
         unlockPlayer();
         hideTextbox();
     }
