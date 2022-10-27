@@ -59,7 +59,9 @@ public abstract class Map {
     protected ArrayList<NPC> npcs;
     protected ArrayList<Trigger> triggers; 
     //Array which will hold all projectiles in game 
-    protected ArrayList<Projectile> projectiles;
+    protected ArrayList<Projectile> projectiles; 
+    //Array which holds the enemies in game 
+    protected ArrayList<Enemy> enemies;
 
     protected Script activeInteractScript;
 
@@ -122,7 +124,12 @@ public abstract class Map {
         for (Projectile projectile : this.projectiles) {
         		projectile.setMap(this);
         }
-
+        //Puts enemies on the map 
+        this.enemies = loadEnemies();
+        for (Enemy enemy: this.enemies) {
+        	enemy.setMap(this);
+        }
+        
         this.loadScripts();
 
         this.camera = new Camera(0, 0, tileset.getScaledSpriteWidth(), tileset.getScaledSpriteHeight(), this);
@@ -614,6 +621,25 @@ public abstract class Map {
     public ArrayList<Projectile> getActiveProjectiles() {
     	return camera.getActiveProjectiles();
     }
+    
+    //Enemy methods --> Same as above projectile methods 
+    //Loads enemies onto the map 
+    public ArrayList<Enemy> loadEnemies() {
+    	return new ArrayList();
+    }
+
+    public void addEnemies(Enemy enemy) {
+    	enemy.setMap(this);
+    	this.enemies.add(enemy);
+    } 
+
+    public ArrayList<Enemy> getEnemies() {
+    	return enemies;
+    }
+
+    public ArrayList<Enemy> getActiveEnemies() {
+    	return camera.getActiveEnemies(); 
+    } 
     
     
 }
