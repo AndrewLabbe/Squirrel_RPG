@@ -77,25 +77,24 @@ public abstract class Player extends GameObject {
             previousPlayerState = playerState;
             handlePlayerState();
         } while (previousPlayerState != playerState);
-
+        
         // move player with respect to map collisions based on how much player needs to move this frame
         if (playerState != PlayerState.INTERACTING) {
             lastAmountMovedY = super.moveYHandleCollision(moveAmountY);
             lastAmountMovedX = super.moveXHandleCollision(moveAmountX);
             
         }
+      //Fires a bullet if the f key is hit and the player is not interacting 
+        if(Keyboard.isKeyDown(FIRE_BULLET_KEY) && playerState != PlayerState.INTERACTING) {
+        	fireBullet();
+        } 
         
         handlePlayerAnimation();
 
         updateLockedKeys();
-
+        
         // update player's animation
         super.update();
-        
-        //Fires a bullet if the f key is hit and the player is not interacting 
-        if(Keyboard.isKeyDown(FIRE_BULLET_KEY) && playerState != PlayerState.INTERACTING) {
-        	fireBullet();
-        } 
         
     }
 
@@ -143,7 +142,7 @@ public abstract class Player extends GameObject {
         }
         //Walk faster
         else if(Keyboard.isKeyDown(MOVE_LEFT_KEY)&& Math.round(getX()) > -15 && Keyboard.isKeyDown(SPEED_KEY)) {
-        	moveAmountX -= walkSpeed*5;
+        	moveAmountX -= walkSpeed*2;
             facingDirection = Direction.LEFT;
             currentWalkingXDirection = Direction.LEFT;
             lastWalkingXDirection = Direction.LEFT;
@@ -159,7 +158,7 @@ public abstract class Player extends GameObject {
         }
         //Walk faster
         else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < 1090 && Keyboard.isKeyDown(SPEED_KEY)) {
-            moveAmountX += walkSpeed*5;
+            moveAmountX += walkSpeed*2;
             facingDirection = Direction.RIGHT;
             currentWalkingXDirection = Direction.RIGHT;
             lastWalkingXDirection = Direction.RIGHT;
@@ -173,11 +172,11 @@ public abstract class Player extends GameObject {
         if (Keyboard.isKeyDown(MOVE_UP_KEY)&& Math.round(getY()) > -15 && !Keyboard.isKeyDown(SPEED_KEY)) {
             moveAmountY -= walkSpeed;
             currentWalkingYDirection = Direction.UP;
-            lastWalkingYDirection = Direction.UP;
+            lastWalkingYDirection = Direction.UP; 
         }
         //Walk faster
-        if (Keyboard.isKeyDown(MOVE_UP_KEY)&& Math.round(getY()) > -15 && Keyboard.isKeyDown(SPEED_KEY)) {
-            moveAmountY -= walkSpeed*5;
+        else if (Keyboard.isKeyDown(MOVE_UP_KEY)&& Math.round(getY()) > -15 && Keyboard.isKeyDown(SPEED_KEY)) {
+            moveAmountY -= walkSpeed*2;
             currentWalkingYDirection = Direction.UP;
             lastWalkingYDirection = Direction.UP;
         }
@@ -188,7 +187,7 @@ public abstract class Player extends GameObject {
         }
         //Walk faster
         else if (Keyboard.isKeyDown(MOVE_DOWN_KEY)&& Keyboard.isKeyDown(SPEED_KEY)) {
-            moveAmountY += walkSpeed*5;
+            moveAmountY += walkSpeed*2;
             currentWalkingYDirection = Direction.DOWN;
             lastWalkingYDirection = Direction.DOWN;
         }
@@ -326,28 +325,73 @@ public abstract class Player extends GameObject {
     
     //Creates new acorn when called
     public void fireBullet() {
-    	if(fireDelay.isTimeUp()) {
+    	if(fireDelay.isTimeUp()) { 
     	int projectileX;
     	int projectileY; 
-    	int direction;
+    	float directionX; 
+    	float directionY;
+    	
+    	projectileX = Math.round(getX()); 
+    	directionX = -1;
+    	directionY = 0; 
     	
     	//Sets spawn point and direction of projectile depending on which was character is facing 
-    	if(facingDirection == Direction.LEFT) {
-    		projectileX = Math.round(getX()); 
-    		direction = -1;
+    	//If moving in horizontally or vertically only set movement to 1 but if traveling both vertically 
+    	//and horizontally at the same time use .71 and .71 because length of that vector will equal 1 
+    	//This eliminates the bug where firing diagonally moves faster 
+    	//If player is moving left 
+    	if(getCurrentWalkingXDirection() == Direction.LEFT || getLastWalkingXDirection() == Direction.LEFT) {
+    		directionX = -1;
+    		//If player is moving left and up
+    		if(getCurrentWalkingYDirection() == Direction.UP || getLastWalkingYDirection() == Direction.UP) {
+        		directionY = -.71F; 
+        	}
+    		//If player is moving left and down
+        	if(getCurrentWalkingYDirection() == Direction.DOWN || getLastWalkingYDirection() == Direction.DOWN){
+        		directionY = .71F; 
+        	}
     	}
-    	else {
-    		projectileX = Math.round(getX()) + 20; 
-    		direction = 1;
+    	//If player is moving right
+    	else if(getCurrentWalkingXDirection() == Direction.RIGHT || getLastWalkingXDirection() == Direction.RIGHT) {
+    		projectileX = Math.round(getX()) + 40; 
+    		directionX = 1;
+    		//If player is moving right and up 
+    		if(getCurrentWalkingYDirection() == Direction.UP || getLastWalkingYDirection() == Direction.UP) {
+        		directionY = -.71F; 
+        	}
+    		//If player is moving right and down 
+        	if(getCurrentWalkingYDirection() == Direction.DOWN || getLastWalkingYDirection() == Direction.DOWN){
+        		directionY = .71F; 
+        	}
+    	} 
+    	//If player is moving up 
+    	else if(getCurrentWalkingYDirection() == Direction.UP || getLastWalkingYDirection() == Direction.UP) {
+    		directionY = -1.0F; 
+    		directionX = 0.0F; 
+    		//If player is facing right
+    		if(facingDirection == Direction.RIGHT) {
+    			projectileX = Math.round(getX() + 40); 
+    		}
     	}
+    	//If player is moving down 
+    	else if(getCurrentWalkingYDirection() == Direction.DOWN || getLastWalkingYDirection() == Direction.DOWN){
+    		directionY = 1.0F; 
+    		directionX = 0.0F;
+    		//If player is facing right
+    		if(facingDirection == Direction.RIGHT) {
+    			projectileX = Math.round(getX() + 40); 
+    		}
+    	}
+    	
     	//Sets Y spawn coordinate to the middle of the main character roughly
     	projectileY = Math.round(getY()) + 30;
     	
     	//Creates a new bullet 
-    	Acorn acorn = new Acorn(projectileX, projectileY, direction); 
+    	Acorn acorn = new Acorn(projectileX, projectileY, directionX, directionY); 
     	map.addProjectiles(acorn); 
     	fireDelay.reset(); 
     	
+    	//Firing sound 
     	playSE(7);
     	} 
     }

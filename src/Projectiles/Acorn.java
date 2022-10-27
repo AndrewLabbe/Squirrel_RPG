@@ -16,13 +16,15 @@ import Utils.Stopwatch;
 public class Acorn extends Projectile {
 
 	private Stopwatch despawnTime; 
-	private int direction;
+	private float directionX; 
+	private float directionY; 
 	
-	public Acorn(int x, int y, int direction) {
+	public Acorn(int x, int y, float directionX, float directionY) {
 		super(x, y, new SpriteSheet(ImageLoader.load("Acorn.png"), 29, 20), "FIRE_RIGHT"); 
 		despawnTime = new Stopwatch();
 		despawnTime.setWaitTime(5000);
-		this.direction = direction; 
+		this.directionX = directionX; 
+		this.directionY = directionY;
 	}
 
 	@Override
@@ -32,11 +34,12 @@ public class Acorn extends Projectile {
 		}
 		else {
 			//Changes acorn velocity --> speed and direction 
-			moveX(5*direction);
+			moveX(5*directionX); 
+			moveY(5*directionY);
 		} 
 		
 		//Sets animation based on direction the main character is facing
-		if(direction == 1) {
+		if(directionX == 1) {
 			this.currentAnimationName = "FIRE_RIGHT"; 
 		}
 		else {
