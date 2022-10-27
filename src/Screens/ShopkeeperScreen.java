@@ -48,6 +48,7 @@ public class ShopkeeperScreen extends Screen {
 		
 		 flagManager = new FlagManager();
 		 flagManager.addFlag("inShop", false);
+		 flagManager.addFlag("hasExitedShop", false);
 
 		this.map = new shopInterior();
 		map.reset();
@@ -137,6 +138,11 @@ public class ShopkeeperScreen extends Screen {
 		if (Keyboard.isKeyUp(invKey)) {
 			keyLocker.unlockKey(invKey);
 		}
+		
+		if (map.getFlagManager().isFlagSet("hasExitedShop")) {
+        	screenCoordinator.setGameState(GameState.LEVEL);
+        	System.out.println("Shop entered");
+        }
 
 		screenCoordinator.setShopScreen(this);
 		
