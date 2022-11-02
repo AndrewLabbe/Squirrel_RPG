@@ -208,8 +208,148 @@ public class PathingTileset extends Tileset {
 				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(redFlowersTile);
-		
-		
+
+		// Dirt Path
+		Frame dirtPath = new FrameBuilder(getSubImage(4, 0))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder dirtPathTile = new MapTileBuilder(dirtPath)
+				.withTileType(TileType.PASSABLE);
+
+		pathTiles.add(dirtPathTile);
+
+		// Lake Top Left
+		Frame lakeTopLeftPath = new FrameBuilder(getSubImage(5, 0))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder lakeTopLeftPathTile = new MapTileBuilder(lakeTopLeftPath)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(lakeTopLeftPathTile);
+
+		// Lake Top Middle
+		Frame lakeTopMiddlePath = new FrameBuilder(getSubImage(5, 1))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder lakeTopMiddlePathTile = new MapTileBuilder(lakeTopMiddlePath)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(lakeTopMiddlePathTile);
+
+		// Lake Top Right
+		Frame lakeTopRightPath = new FrameBuilder(getSubImage(5, 2))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder lakeTopRightPathTile = new MapTileBuilder(lakeTopRightPath)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(lakeTopRightPathTile);
+
+		// Lake Mid Left
+		Frame lakeMidLeftPath = new FrameBuilder(getSubImage(6, 0))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder lakeMidLeftPathTile = new MapTileBuilder(lakeMidLeftPath)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(lakeMidLeftPathTile);
+
+		// Lake Tile
+		Frame lakePath = new FrameBuilder(getSubImage(6, 1))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder lakePathTile = new MapTileBuilder(lakePath)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(lakePathTile);
+
+		// Lake Mid Right
+		Frame lakeMidRightPath = new FrameBuilder(getSubImage(6, 2))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder lakeMidRightPathTile = new MapTileBuilder(lakeMidRightPath)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(lakeMidRightPathTile);
+
+		// Lake Bottom Left
+		Frame lakeBottomLeftPath = new FrameBuilder(getSubImage(7, 0))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder lakeBottomLeftPathTile = new MapTileBuilder(lakeBottomLeftPath)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(lakeBottomLeftPathTile);
+
+		// Lake Bottom Mid
+		Frame lakeBottomMidPath = new FrameBuilder(getSubImage(7, 1))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder lakeBottomMidPathTile = new MapTileBuilder(lakeBottomMidPath)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(lakeBottomMidPathTile);
+
+		// Lake Bottom Mid
+		Frame lakeBottomRightPath = new FrameBuilder(getSubImage(7, 2))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder lakeBottomRightPathTile = new MapTileBuilder(lakeBottomRightPath)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(lakeBottomRightPathTile);
+
+		// Lake Top Left Corner
+		Frame lakeTopLeftCorner = new FrameBuilder(getSubImage(5, 3))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder lakeTopLeftCornerTile = new MapTileBuilder(lakeTopLeftCorner)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(lakeTopLeftCornerTile);
+
+		// Lake Top Right Corner
+		Frame lakeTopRightCorner = new FrameBuilder(getSubImage(5, 4))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder lakeTopRightCornerTile = new MapTileBuilder(lakeTopRightCorner)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(lakeTopRightCornerTile);
+
+		// Lake Bottom Left Corner
+		Frame lakeBottomLeftCorner = new FrameBuilder(getSubImage(6, 3))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder lakeBottomLeftCornerTile = new MapTileBuilder(lakeBottomLeftCorner)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(lakeBottomLeftCornerTile);
+
+		// Lake Bottom Right Corner
+		Frame lakeBottomRightCorner = new FrameBuilder(getSubImage(6, 4))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder lakeBottomRightCornerTile = new MapTileBuilder(lakeBottomRightCorner)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(lakeBottomRightCornerTile);
+
+
 
 		return pathTiles;
 	}
