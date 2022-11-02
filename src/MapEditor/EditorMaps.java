@@ -5,6 +5,7 @@ import Maps.TestMap;
 import Maps.TitleScreenMap;
 import Maps.newTileMap;
 import Maps.shopInterior;
+import Maps.templeMap;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ public class EditorMaps {
             add("TitleScreen");
             add("ShopInterior");
             add("NewTileMap");
+            add("TempleMap");
         }};
     }
 
@@ -28,6 +30,8 @@ public class EditorMaps {
             	return new shopInterior();
             case "NewTileMap":
             	return new newTileMap();
+            case "TempleMap":
+            	return new templeMap();
             default:
                 throw new RuntimeException("Unrecognized map name");
         }
