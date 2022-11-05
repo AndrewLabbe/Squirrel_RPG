@@ -5,12 +5,14 @@ import Level.Enemy;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
+import Level.PowerUp;
 import Level.Trigger;
 import NPCs.Dinosaur;
 import NPCs.Fox;
 import NPCs.Walrus;
 import NPCs.Wolf;
 import NPCs.Zombie;
+import PowerUps.SpeedBoost;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.FoxScript;
@@ -103,6 +105,14 @@ public class TestMap extends Map {
     	enemies.add(new ZombieEnemy(getMapTile(10, 8).getLocation(), (float) 3.00)); 
     	enemies.add(new ZombieEnemy(getMapTile(10, 25).getLocation(), (float) 3.00));
     	return enemies;
+    } 
+    
+    @Override 
+    public ArrayList<PowerUp> loadPowerUps() {
+    	ArrayList<PowerUp> powerUps = new ArrayList(); 
+    	
+    	powerUps.add(new SpeedBoost(getMapTile(20,25).getLocation())); 
+    	return powerUps;
     }
 }
 

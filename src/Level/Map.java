@@ -61,7 +61,9 @@ public abstract class Map {
     //Array which will hold all projectiles in game 
     protected ArrayList<Projectile> projectiles; 
     //Array which holds the enemies in game 
-    protected ArrayList<Enemy> enemies;
+    protected ArrayList<Enemy> enemies; 
+    //Array which holds all of the power-ups in game 
+    protected ArrayList<PowerUp> powerUps; 
 
     protected Script activeInteractScript;
 
@@ -126,8 +128,14 @@ public abstract class Map {
         }
         //Puts enemies on the map 
         this.enemies = loadEnemies();
-        for (Enemy enemy: this.enemies) {
+        for (Enemy enemy : this.enemies) {
         	enemy.setMap(this);
+        } 
+        
+        //Puts power-ups on the map 
+        this.powerUps = loadPowerUps(); 
+        for (PowerUp powerUp : this.powerUps) {
+        	powerUp.setMap(this);
         }
         
         this.loadScripts();
@@ -627,17 +635,37 @@ public abstract class Map {
     public ArrayList<Enemy> loadEnemies() {
     	return new ArrayList();
     }
-
+    //Adds enemy to the map 
     public void addEnemies(Enemy enemy) {
     	enemy.setMap(this);
     	this.enemies.add(enemy);
     } 
-
+    //Returns all enemies 
     public ArrayList<Enemy> getEnemies() {
     	return enemies;
     }
-
+    //Returns active enemies 
     public ArrayList<Enemy> getActiveEnemies() {
     	return camera.getActiveEnemies(); 
     } 
+    
+    //Power-up methods 
+    //Load powerups onto the map 
+    public ArrayList<PowerUp> loadPowerUps() {
+    	return new ArrayList();
+    } 
+    //Adds powerup to the map 
+    public void addPowerUp(PowerUp powerUp) {
+    	powerUp.setMap(this); 
+    	this.powerUps.add(powerUp); 
+    } 
+    //Returns all powerups 
+    public ArrayList<PowerUp> getPowerUps() {
+    	return powerUps; 
+    }
+    //Returns all active power-ups 
+    public ArrayList<PowerUp> getActivePowerUps() {
+    	return camera.getActivePowerUps();
+    }
+    
 }

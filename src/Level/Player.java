@@ -55,7 +55,14 @@ public abstract class Player extends GameObject {
     //Key for firing projectiles
     protected Key FIRE_BULLET_KEY = Key.F; 
     //Puts a delay on firing which eliminates infinite firing issue
-    private Stopwatch fireDelay;
+    private Stopwatch fireDelay; 
+    
+    //Speed boost active or not 
+    private boolean speedBoost; 
+    //Speed boost timeout 
+    private Stopwatch speedBoostTimeout; 
+    
+    private final int powerUpDuraction = 20000;
     
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -64,7 +71,10 @@ public abstract class Player extends GameObject {
         previousPlayerState = playerState;
         this.affectedByTriggers = true;
         fireDelay = new Stopwatch();
-        fireDelay.setWaitTime(1000);
+        fireDelay.setWaitTime(1000);  
+        speedBoostTimeout = new Stopwatch();
+        //speedBoostTimeout.setWaitTime(1000);
+        speedBoost = false;
     }
 
     public void update() {
@@ -84,10 +94,12 @@ public abstract class Player extends GameObject {
             lastAmountMovedX = super.moveXHandleCollision(moveAmountX);
             
         }
-      //Fires a bullet if the f key is hit and the player is not interacting 
+        //Fires a bullet if the f key is hit and the player is not interacting 
         if(Keyboard.isKeyDown(FIRE_BULLET_KEY) && playerState != PlayerState.INTERACTING) {
         	fireBullet();
         } 
+        //Handle what power-ups are active
+        handlePowerUps();
         
         handlePlayerAnimation();
 
@@ -408,4 +420,26 @@ public abstract class Player extends GameObject {
 		sound.setFile(i);
 		sound.play();
 	} 
+	//Returns current player speed 
+	public float getWalkSpeed() {
+		return walkSpeed;
+	}
+	//Sets player movement speed 
+	public void setWalkSpeed(float speed) {
+		walkSpeed = speed;
+	} 
+	//Activates speed boost for given period of time 
+	public void setSpeedBoostActive() {
+		speedBoost = true; 
+		speedBoostTimeout.setWaitTime(powerUpDuraction);
+	} 
+	//Handles power-ups
+	public void handlePowerUps() {
+		if(speedBoost == true) {
+			if(speedBoostTimeout.isTimeUp() == true) {
+				speedBoost = false; 
+				setWalkSpeed(walkSpeed/2.0f);
+			}
+		}
+	}
 }
