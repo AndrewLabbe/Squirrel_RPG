@@ -29,10 +29,6 @@ public class Currency {
 		CoinNum += Increase;
 	}
 	
-	//public void loseCoin(int Decrease) {
-		//CoinNum -= Decrease;
-	//}
-	
 	public void updateCoin() {
 		Coin.setText("Coins: " + CoinNum);
 	}

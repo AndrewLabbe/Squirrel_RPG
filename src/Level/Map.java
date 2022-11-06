@@ -1,11 +1,14 @@
 package Level;
-
+ 
 import Engine.Config;
 import Engine.GraphicsHandler;
+import Engine.Keyboard;
 import Engine.ScreenManager;
 import GameObject.Rectangle;
+import NPCs.Currency;
 import Utils.Direction;
 import Utils.Point;
+import Utils.Stopwatch;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,17 +16,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+ 
 /*
-    This class is for defining a map that is used for a specific level
-    The map class handles/manages a lot of different things, including:
-    1. tile map -- the map tiles that make up the map
-    2. entities in the map -- this includes enemies, enhanced map tiles, and npcs
-    3. the map's camera, which does a lot of work itself in the Camera class
-    4. adjusting camera location based off of player location
-    5. calculating which tile a game object is currently on based on its x and y location
+   This class is for defining a map that is used for a specific level
+   The map class handles/manages a lot of different things, including:
+   1. tile map -- the map tiles that make up the map
+   2. entities in the map -- this includes enemies, enhanced map tiles, and npcs
+   3. the map's camera, which does a lot of work itself in the Camera class
+   4. adjusting camera location based off of player location
+   5. calculating which tile a game object is currently on based on its x and y location
 */
-
+ 
 public abstract class Map {
     // the tile map (map tiles that make up the entire map image)
     protected MapTile[] mapTiles;
@@ -60,7 +63,9 @@ public abstract class Map {
     //Array which will hold all projectiles in game 
     protected ArrayList<Projectile> projectiles; 
     //Array which holds the enemies in game 
-    protected ArrayList<Enemy> enemies;
+    protected ArrayList<Enemy> enemies; 
+    //Array which holds all of the power-ups in game 
+    protected ArrayList<PowerUp> powerUps; 
 
     protected Script activeInteractScript;
 
@@ -76,6 +81,23 @@ public abstract class Map {
     // map's textbox instance
     protected Textbox textbox;
 
+    //Health Bar 
+    protected HealthBar healthBar;
+
+    private boolean healthCheck = false; 
+    
+    //Currency tracker 
+    private Currency coins; 
+    //Points per elimination 
+    private int elimPoints;
+
+    //Double points active or not 
+    private boolean doublePoints; 
+    //Double points timeout 
+    private Stopwatch doublePointsTimeout; 
+    
+    private final int powerUpDuration = 20000; 
+    
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
         this.tileset = tileset;
@@ -86,7 +108,12 @@ public abstract class Map {
         this.endBoundY = height * tileset.getScaledSpriteHeight();
         this.xMidPoint = ScreenManager.getScreenWidth() / 2;
         this.yMidPoint = (ScreenManager.getScreenHeight() / 2);
-        this.playerStartPosition = new Point(0, 0);
+        this.playerStartPosition = new Point(0, 0); 
+        coins = new Currency(); 
+        coins.setCoin(0); 
+        elimPoints = 10; 
+        doublePointsTimeout = new Stopwatch();
+        doublePoints = false; 
     }
 
     // sets up map by reading in the map file to create the tile map
@@ -115,19 +142,25 @@ public abstract class Map {
         //Puts projectiles on the map upon set up
         this.projectiles = loadProjectiles();
         for (Projectile projectile : this.projectiles) {
-        	projectile.setMap(this);
-        } 
-        
+        		projectile.setMap(this);
+        }
         //Puts enemies on the map 
         this.enemies = loadEnemies();
-        for (Enemy enemy: this.enemies) {
+        for (Enemy enemy : this.enemies) {
         	enemy.setMap(this);
+        } 
+        
+        //Puts power-ups on the map 
+        this.powerUps = loadPowerUps(); 
+        for (PowerUp powerUp : this.powerUps) {
+        	powerUp.setMap(this);
         }
-
+        
         this.loadScripts();
 
         this.camera = new Camera(0, 0, tileset.getScaledSpriteWidth(), tileset.getScaledSpriteHeight(), this);
         this.textbox = new Textbox(this);
+        this.healthBar = new HealthBar(this);
     }
 
     // reads in a map file to create the map's tilemap
@@ -493,7 +526,23 @@ public abstract class Map {
         camera.update(player);
         if (textbox.isActive()) {
             textbox.update();
+        
         }
+
+        if (Keyboard.isKeyDown(healthBar.getInteractKey())) {
+            healthBar.getKeyLocker().lockKey(healthBar.getInteractKey());
+            healthCheck = true;
+        }
+
+        if(Keyboard.isKeyUp(healthBar.getInteractKey())) {
+            healthBar.getKeyLocker().unlockKey(healthBar.getInteractKey());
+            if(healthCheck) {
+                healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - (healthBar.getActualHealthBarWidth() / 5));
+                
+            }
+            healthCheck = false;
+        } 
+        handlePowerUps();
     }
 
     // based on the player's current X position (which in a level can potentially be updated each frame),
@@ -563,6 +612,8 @@ public abstract class Map {
         if (textbox.isActive()) {
             textbox.draw(graphicsHandler);
         }
+        healthBar.draw(graphicsHandler); 
+        coins.draw(graphicsHandler);
     }
 
     public FlagManager getFlagManager() { return flagManager; }
@@ -577,11 +628,10 @@ public abstract class Map {
     public int getEndBoundY() { return endBoundY; } 
     
     //Projectiles on the map 
-    public ArrayList<Projectile> loadProjectiles() { 
+    protected ArrayList<Projectile> loadProjectiles() { 
     	return new ArrayList<>(); 
     }
     
-    //Projectile methods
     //Add projectile to the map and the array containing the projectiles 
     public void addProjectiles(Projectile projectile) {
     	//Adds projectile to the map
@@ -605,18 +655,71 @@ public abstract class Map {
     public ArrayList<Enemy> loadEnemies() {
     	return new ArrayList();
     }
-
+    //Adds enemy to the map 
     public void addEnemies(Enemy enemy) {
     	enemy.setMap(this);
     	this.enemies.add(enemy);
     } 
-    
+    //Returns all enemies 
     public ArrayList<Enemy> getEnemies() {
     	return enemies;
     }
-    
+    //Returns active enemies 
     public ArrayList<Enemy> getActiveEnemies() {
     	return camera.getActiveEnemies(); 
     } 
+    
+    //Power-up methods 
+    //Load powerups onto the map 
+    public ArrayList<PowerUp> loadPowerUps() {
+    	return new ArrayList();
+    } 
+    //Adds powerup to the map 
+    public void addPowerUp(PowerUp powerUp) {
+    	powerUp.setMap(this); 
+    	this.powerUps.add(powerUp); 
+    } 
+    //Returns all powerups 
+    public ArrayList<PowerUp> getPowerUps() {
+    	return powerUps; 
+    }
+    //Returns all active power-ups 
+    public ArrayList<PowerUp> getActivePowerUps() {
+    	return camera.getActivePowerUps();
+    } 
+    //Reset healthbar 
+    public void resetHealthBar() {
+    	healthBar.setGreenBarWidth(healthBar.getActualHealthBarWidth());
+    } 
+    //Increment coins 
+    public void addCoins() {
+    	coins.setCoin(coins.getCoin() + elimPoints); 
+    	coins.updateCoin();
+    } 
+    //Returns points per elimination 
+    public int getElimPoints() {
+    	return elimPoints;
+    }
+    //Sets the points per elimination 
+    public void setElimPoints(int points) {
+    	elimPoints = points;
+    } 
+    public void doublePointsStart() {
+    	setElimPoints(getElimPoints()*2); 
+    	doublePoints = true; 
+		doublePointsTimeout.setWaitTime(powerUpDuration);
+    } 
+    //Handles power-ups
+  	public void handlePowerUps() {
+  		if(doublePoints == true) {
+  			if(doublePointsTimeout.isTimeUp() == true) {
+  				doublePoints = false; 
+  				setElimPoints(getElimPoints()/2);
+  			}
+  		}
+  	} 
+  	public void dealDamage() {
+		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - 2);
+	}
     
 }

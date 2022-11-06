@@ -11,6 +11,7 @@ import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
 import Maps.TestMap;
+import Maps.newTileMap;
 import NPCs.Currency;
 import Players.Cat;
 import Utils.Direction;
@@ -39,22 +40,19 @@ public class PlayLevelScreen extends Screen {
     }
 
     public void initialize() {
-    	// Setup Currency
-    	screenCoin = new Currency();
-    	screenCoin.setCoin(50);
-    	
         // setup state
         flagManager = new FlagManager();
-        flagManager.addFlag("hasLostBall", false);
-        flagManager.addFlag("hasTalkedToWalrus", false);
-        flagManager.addFlag("hasTalkedToDinosaur", false);
-        flagManager.addFlag("hasTalkedToFox", false);
-        flagManager.addFlag("hasFoundBall", false);
+//        flagManager.addFlag("hasLostBall", false);
+//        flagManager.addFlag("hasTalkedToWalrus", false);
+//        flagManager.addFlag("hasTalkedToDinosaur", false);
+//        flagManager.addFlag("hasTalkedToFox", false);
+//        flagManager.addFlag("hasFoundBall", false);
         flagManager.addFlag("hasEnteredTemple", false);
         flagManager.addFlag("hasEnteredShop", false);
 
         // define/setup map
-        this.map = new TestMap();
+//        this.map = new TestMap();
+        this.map = new newTileMap();
         map.reset();
         map.setFlagManager(flagManager);
 
@@ -64,7 +62,7 @@ public class PlayLevelScreen extends Screen {
         Point playerStartPosition = map.getPlayerStartPosition();
         this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
-        this.player.setFacingDirection(Direction.LEFT);
+        this.player.setFacingDirection(Direction.RIGHT);
 
         // let pieces of map know which button to listen for as the "interact" button
         map.getTextbox().setInteractKey(player.getInteractKey());
@@ -105,24 +103,11 @@ public class PlayLevelScreen extends Screen {
             case RUNNING:
                 player.update();
                 map.update(player);
-                screenCoin.updateCoin();
                 break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 winScreen.update();
                 break;
-        }
-        
-       // if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
-    		//screenCoin.loseCoin(2);
-    	//} 
-    	 if (!wasSpacePressed && Keyboard.isKeyDown(Key.SPACE)) {
-    		screenCoin.addCoin(25);
-            wasSpacePressed = true; 
-    	}
-
-        if (wasSpacePressed && Keyboard.isKeyUp(Key.SPACE)){
-            wasSpacePressed = false; 
         }
         
         if (Keyboard.isKeyDown(invKey)) {
@@ -170,7 +155,6 @@ public class PlayLevelScreen extends Screen {
         switch (playLevelScreenState) {
             case RUNNING:
                 map.draw(player, graphicsHandler);
-                screenCoin.draw(graphicsHandler);
                 break;
             case LEVEL_COMPLETED:
                 winScreen.draw(graphicsHandler);
