@@ -2,7 +2,6 @@ package Maps;
 
 import java.util.ArrayList;
 
-import Enemies.ZombieEnemy;
 import Level.Enemy;
 import Level.Map;
 import Level.NPC;
