@@ -61,7 +61,7 @@ public class ZombieEnemy extends Enemy {
 				moveY(direction);
 			}
 		}
-		super.update();
+		super.update(player, map);
 		
 	} 
 	

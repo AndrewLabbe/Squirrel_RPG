@@ -461,5 +461,5 @@ public abstract class Player extends GameObject {
 				damage = 10; 
 			}
 		}
-	}
+	} 
 }

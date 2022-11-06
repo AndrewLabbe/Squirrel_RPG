@@ -717,6 +717,9 @@ public abstract class Map {
   				setElimPoints(getElimPoints()/2);
   			}
   		}
-  	}
+  	} 
+  	public void dealDamage() {
+		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - 2);
+	}
     
 }
