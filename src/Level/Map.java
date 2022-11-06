@@ -5,6 +5,7 @@ import Engine.GraphicsHandler;
 import Engine.Keyboard;
 import Engine.ScreenManager;
 import GameObject.Rectangle;
+import NPCs.Currency;
 import Utils.Direction;
 import Utils.Point;
  
@@ -82,7 +83,9 @@ public abstract class Map {
     //Health Bar 
     protected HealthBar healthBar;
 
-    private boolean healthCheck = false;
+    private boolean healthCheck = false; 
+    
+    private Currency coins;
 
     
     public Map(String mapFileName, Tileset tileset) {
@@ -95,7 +98,9 @@ public abstract class Map {
         this.endBoundY = height * tileset.getScaledSpriteHeight();
         this.xMidPoint = ScreenManager.getScreenWidth() / 2;
         this.yMidPoint = (ScreenManager.getScreenHeight() / 2);
-        this.playerStartPosition = new Point(0, 0);
+        this.playerStartPosition = new Point(0, 0); 
+        coins = new Currency(); 
+        coins.setCoin(0);
     }
 
     // sets up map by reading in the map file to create the tile map
@@ -593,7 +598,8 @@ public abstract class Map {
         if (textbox.isActive()) {
             textbox.draw(graphicsHandler);
         }
-        healthBar.draw(graphicsHandler);
+        healthBar.draw(graphicsHandler); 
+        coins.draw(graphicsHandler);
     }
 
     public FlagManager getFlagManager() { return flagManager; }
@@ -670,6 +676,11 @@ public abstract class Map {
     //Reset healthbar 
     public void resetHealthBar() {
     	healthBar.setGreenBarWidth(healthBar.getActualHealthBarWidth());
-    }
+    } 
+    //Increment coins 
+    public void addCoins(int count) {
+    	coins.setCoin(coins.getCoin() + count); 
+    	coins.updateCoin();
+    } 
     
 }

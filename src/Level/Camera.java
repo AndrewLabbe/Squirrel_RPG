@@ -96,7 +96,7 @@ public class Camera extends Rectangle {
         
         //For each active enemy call its update method 
         for(Enemy enemy : activeEnemies) {
-        	enemy.update(player);
+        	enemy.update(player, map);
         } 
         
         //For each active power-up call its update method 

@@ -9,6 +9,7 @@ import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.Enemy;
+import Level.Map;
 import Level.Player;
 import Utils.Stopwatch;
 
@@ -29,7 +30,7 @@ public class ZombieEnemy extends Enemy {
 	} 
 	
 	//Updates enemy location 
-	public void update(Player player) {
+	public void update(Player player, Map map) {
 		
 		//Basic AI tracking system which enables the zombie enemy to move towards the player if the player gets close enough
 		if(player.getX() < this.x + rangeX && player.getX() > this.x - rangeX) { 

@@ -8,12 +8,13 @@ public class Enemy extends MapEntity {
 		super(x,y,spriteSheet,startingAnimation);
 	}
 	
-	public void update(Player player) {
+	public void update(Player player, Map map) {
 		super.update();
 	}
 	
 	//Remove enemy from the screen
 	public void eliminateEnemy(Enemy enemy) {
-		enemy.mapEntityStatus = mapEntityStatus.REMOVED;
+		enemy.mapEntityStatus = mapEntityStatus.REMOVED; 
+		map.addCoins(10);
 	}
 }

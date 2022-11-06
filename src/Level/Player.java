@@ -62,7 +62,7 @@ public abstract class Player extends GameObject {
     //Speed boost timeout 
     private Stopwatch speedBoostTimeout; 
     
-    private final int powerUpDuraction = 20000;
+    private final int powerUpDuraction = 20000; 
     
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -74,7 +74,7 @@ public abstract class Player extends GameObject {
         fireDelay.setWaitTime(1000);  
         speedBoostTimeout = new Stopwatch();
         //speedBoostTimeout.setWaitTime(1000);
-        speedBoost = false;
+        speedBoost = false; 
     }
 
     public void update() {

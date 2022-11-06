@@ -39,10 +39,6 @@ public class PlayLevelScreen extends Screen {
     }
 
     public void initialize() {
-    	// Setup Currency
-    	screenCoin = new Currency();
-    	screenCoin.setCoin(50);
-    	
         // setup state
         flagManager = new FlagManager();
         flagManager.addFlag("hasLostBall", false);
@@ -105,24 +101,11 @@ public class PlayLevelScreen extends Screen {
             case RUNNING:
                 player.update();
                 map.update(player);
-                screenCoin.updateCoin();
                 break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 winScreen.update();
                 break;
-        }
-        
-       // if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
-    		//screenCoin.loseCoin(2);
-    	//} 
-    	 if (!wasSpacePressed && Keyboard.isKeyDown(Key.SPACE)) {
-    		screenCoin.addCoin(25);
-            wasSpacePressed = true; 
-    	}
-
-        if (wasSpacePressed && Keyboard.isKeyUp(Key.SPACE)){
-            wasSpacePressed = false; 
         }
         
         if (Keyboard.isKeyDown(invKey)) {
@@ -170,7 +153,6 @@ public class PlayLevelScreen extends Screen {
         switch (playLevelScreenState) {
             case RUNNING:
                 map.draw(player, graphicsHandler);
-                screenCoin.draw(graphicsHandler);
                 break;
             case LEVEL_COMPLETED:
                 winScreen.draw(graphicsHandler);
