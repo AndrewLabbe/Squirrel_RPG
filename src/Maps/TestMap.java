@@ -12,6 +12,8 @@ import NPCs.Fox;
 import NPCs.Walrus;
 import NPCs.Wolf;
 import NPCs.Zombie;
+import PowerUps.DoublePoints;
+import PowerUps.InstaElim;
 import PowerUps.MaxHealth;
 import PowerUps.SpeedBoost;
 import Scripts.SimpleTextScript;
@@ -114,6 +116,8 @@ public class TestMap extends Map {
     	
     	powerUps.add(new SpeedBoost(getMapTile(20,25).getLocation())); 
     	powerUps.add(new MaxHealth(getMapTile(20,24).getLocation())); 
+    	powerUps.add(new DoublePoints(getMapTile(21,25).getLocation())); 
+    	powerUps.add(new InstaElim(getMapTile(21,24).getLocation()));
     	return powerUps;
     }
 }

@@ -8,7 +8,8 @@ import GameObject.Rectangle;
 import NPCs.Currency;
 import Utils.Direction;
 import Utils.Point;
- 
+import Utils.Stopwatch;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -85,8 +86,17 @@ public abstract class Map {
 
     private boolean healthCheck = false; 
     
-    private Currency coins;
+    //Currency tracker 
+    private Currency coins; 
+    //Points per elimination 
+    private int elimPoints;
 
+    //Double points active or not 
+    private boolean doublePoints; 
+    //Double points timeout 
+    private Stopwatch doublePointsTimeout; 
+    
+    private final int powerUpDuration = 20000; 
     
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
@@ -100,7 +110,10 @@ public abstract class Map {
         this.yMidPoint = (ScreenManager.getScreenHeight() / 2);
         this.playerStartPosition = new Point(0, 0); 
         coins = new Currency(); 
-        coins.setCoin(0);
+        coins.setCoin(0); 
+        elimPoints = 10; 
+        doublePointsTimeout = new Stopwatch();
+        doublePoints = false; 
     }
 
     // sets up map by reading in the map file to create the tile map
@@ -528,7 +541,8 @@ public abstract class Map {
                 
             }
             healthCheck = false;
-        }
+        } 
+        handlePowerUps();
     }
 
     // based on the player's current X position (which in a level can potentially be updated each frame),
@@ -678,9 +692,31 @@ public abstract class Map {
     	healthBar.setGreenBarWidth(healthBar.getActualHealthBarWidth());
     } 
     //Increment coins 
-    public void addCoins(int count) {
-    	coins.setCoin(coins.getCoin() + count); 
+    public void addCoins() {
+    	coins.setCoin(coins.getCoin() + elimPoints); 
     	coins.updateCoin();
     } 
+    //Returns points per elimination 
+    public int getElimPoints() {
+    	return elimPoints;
+    }
+    //Sets the points per elimination 
+    public void setElimPoints(int points) {
+    	elimPoints = points;
+    } 
+    public void doublePointsStart() {
+    	setElimPoints(getElimPoints()*2); 
+    	doublePoints = true; 
+		doublePointsTimeout.setWaitTime(powerUpDuration);
+    } 
+    //Handles power-ups
+  	public void handlePowerUps() {
+  		if(doublePoints == true) {
+  			if(doublePointsTimeout.isTimeUp() == true) {
+  				doublePoints = false; 
+  				setElimPoints(getElimPoints()/2);
+  			}
+  		}
+  	}
     
 }

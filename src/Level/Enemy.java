@@ -15,6 +15,10 @@ public class Enemy extends MapEntity {
 	//Remove enemy from the screen
 	public void eliminateEnemy(Enemy enemy) {
 		enemy.mapEntityStatus = mapEntityStatus.REMOVED; 
-		map.addCoins(10);
+		map.addCoins();
+	} 
+	//Damage enemy 
+	public void damageEnemy(Enemy enemy, int damage) {
+		eliminateEnemy(enemy);
 	}
 }

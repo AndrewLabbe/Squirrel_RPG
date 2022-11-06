@@ -148,7 +148,7 @@ public class GamePanel extends JPanel {
 		//Fade to day/night
 		public void cycleDay() {
 			if (fading == true) { 
-				System.out.println("Turning Night");
+				//System.out.println("Turning Night");
 				if(shade < 125) {
 					shade = shade + 5; 
 				} 
@@ -158,7 +158,7 @@ public class GamePanel extends JPanel {
 				}
 			}
 			else { 
-				System.out.println("Turning Day");
+				//System.out.println("Turning Day");
 				if(shade > 0) {
 					shade = shade - 5;
 				}

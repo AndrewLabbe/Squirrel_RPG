@@ -18,7 +18,9 @@ public class ZombieEnemy extends Enemy {
 	private float direction; 
 	
 	private int rangeX; 
-	private int rangeY;
+	private int rangeY; 
+	
+	private int health;
 	
 	public ZombieEnemy(Utils.Point point, float direction) {
 		//Placeholder
@@ -26,7 +28,9 @@ public class ZombieEnemy extends Enemy {
 		this.direction = direction; 
 		
 		rangeX = 200; 
-		rangeY = 200;
+		rangeY = 200; 
+		
+		health = 30;
 	} 
 	
 	//Updates enemy location 
@@ -78,6 +82,22 @@ public class ZombieEnemy extends Enemy {
                            .build()
            });
         }};
+    } 
+    
+    @Override
+    public void damageEnemy(Enemy enemy, int damage) {
+    	health = health - damage;
+    	if(health <= 0) { 
+    		super.damageEnemy(enemy, damage);
+    	}
     }
-	
+    
+    //Gets health 
+    public int getHealth() {
+    	return health;
+    } 
+    //Sets health
+    public void setHealth(int health) {
+    	this.health = health;
+    }
 }

@@ -61,8 +61,14 @@ public abstract class Player extends GameObject {
     private boolean speedBoost; 
     //Speed boost timeout 
     private Stopwatch speedBoostTimeout; 
-    
-    private final int powerUpDuraction = 20000; 
+    //Duration of power-ups
+    private final int powerUpDuration = 20000; 
+    //Projectile damage 
+    private int damage; 
+    //Insta elim active or not 
+    private boolean instaElim; 
+    //Insta elim timeout
+    private Stopwatch instaElimTimeout;
     
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -71,10 +77,12 @@ public abstract class Player extends GameObject {
         previousPlayerState = playerState;
         this.affectedByTriggers = true;
         fireDelay = new Stopwatch();
-        fireDelay.setWaitTime(1000);  
-        speedBoostTimeout = new Stopwatch();
-        //speedBoostTimeout.setWaitTime(1000);
+        fireDelay.setWaitTime(1000); 
         speedBoost = false; 
+        speedBoostTimeout = new Stopwatch();
+        damage = 10; 
+        instaElim = false; 
+        instaElimTimeout = new Stopwatch();
     }
 
     public void update() {
@@ -399,7 +407,7 @@ public abstract class Player extends GameObject {
     	projectileY = Math.round(getY()) + 30;
     	
     	//Creates a new bullet 
-    	Acorn acorn = new Acorn(projectileX, projectileY, directionX, directionY); 
+    	Acorn acorn = new Acorn(projectileX, projectileY, directionX, directionY, damage); 
     	map.addProjectiles(acorn); 
     	fireDelay.reset(); 
     	
@@ -431,14 +439,26 @@ public abstract class Player extends GameObject {
 	//Activates speed boost for given period of time 
 	public void setSpeedBoostActive() {
 		speedBoost = true; 
-		speedBoostTimeout.setWaitTime(powerUpDuraction);
+		speedBoostTimeout.setWaitTime(powerUpDuration); 
 	} 
+	//Activates the insta elim power up for a given period of time 
+	public void setInstaElimActive() {
+		instaElim = true; 
+		damage = 50;
+		instaElimTimeout.setWaitTime(powerUpDuration);
+	}
 	//Handles power-ups
 	public void handlePowerUps() {
 		if(speedBoost == true) {
 			if(speedBoostTimeout.isTimeUp() == true) {
 				speedBoost = false; 
 				setWalkSpeed(walkSpeed/2.0f);
+			}
+		} 
+		if(instaElim == true) {
+			if(instaElimTimeout.isTimeUp() == true) {
+				instaElim = false; 
+				damage = 10; 
 			}
 		}
 	}
