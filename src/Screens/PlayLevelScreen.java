@@ -11,6 +11,7 @@ import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
 import Maps.TestMap;
+import Maps.newTileMap;
 import NPCs.Currency;
 import Players.Cat;
 import Utils.Direction;
@@ -45,16 +46,17 @@ public class PlayLevelScreen extends Screen {
     	
         // setup state
         flagManager = new FlagManager();
-        flagManager.addFlag("hasLostBall", false);
-        flagManager.addFlag("hasTalkedToWalrus", false);
-        flagManager.addFlag("hasTalkedToDinosaur", false);
-        flagManager.addFlag("hasTalkedToFox", false);
-        flagManager.addFlag("hasFoundBall", false);
+//        flagManager.addFlag("hasLostBall", false);
+//        flagManager.addFlag("hasTalkedToWalrus", false);
+//        flagManager.addFlag("hasTalkedToDinosaur", false);
+//        flagManager.addFlag("hasTalkedToFox", false);
+//        flagManager.addFlag("hasFoundBall", false);
         flagManager.addFlag("hasEnteredTemple", false);
         flagManager.addFlag("hasEnteredShop", false);
 
         // define/setup map
-        this.map = new TestMap();
+//        this.map = new TestMap();
+        this.map = new newTileMap();
         map.reset();
         map.setFlagManager(flagManager);
 
@@ -64,7 +66,7 @@ public class PlayLevelScreen extends Screen {
         Point playerStartPosition = map.getPlayerStartPosition();
         this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
-        this.player.setFacingDirection(Direction.LEFT);
+        this.player.setFacingDirection(Direction.RIGHT);
 
         // let pieces of map know which button to listen for as the "interact" button
         map.getTextbox().setInteractKey(player.getInteractKey());
