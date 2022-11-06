@@ -29,7 +29,7 @@ import Tilesets.CommonTileset;
 
 import java.util.ArrayList;
 
-import Enemies.ZombieEnemy;
+import Enemies.GhostEnemy;
 
 // Represents a test map to be used in a level
 public class TestMap extends Map {
@@ -103,10 +103,10 @@ public class TestMap extends Map {
     public ArrayList<Enemy> loadEnemies() {
     	ArrayList<Enemy> enemies = new ArrayList(); 
     	
-    	enemies.add(new ZombieEnemy(getMapTile(18, 25).getLocation(), (float) 3.00));
-    	enemies.add(new ZombieEnemy(getMapTile(18, 10).getLocation(), (float) 3.00)); 
-    	enemies.add(new ZombieEnemy(getMapTile(10, 8).getLocation(), (float) 3.00)); 
-    	enemies.add(new ZombieEnemy(getMapTile(10, 25).getLocation(), (float) 3.00));
+    	enemies.add(new GhostEnemy(getMapTile(18, 25).getLocation(), (float) 3.00));
+    	enemies.add(new GhostEnemy(getMapTile(18, 10).getLocation(), (float) 3.00)); 
+    	enemies.add(new GhostEnemy(getMapTile(10, 8).getLocation(), (float) 3.00)); 
+    	enemies.add(new GhostEnemy(getMapTile(10, 25).getLocation(), (float) 3.00));
     	return enemies;
     } 
     
