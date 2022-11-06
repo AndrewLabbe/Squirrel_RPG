@@ -1,6 +1,7 @@
 package Level;
 
 import java.util.Timer;
+import Level.Map;
 
 import GameObject.SpriteSheet;
 
@@ -11,7 +12,7 @@ public class PowerUp extends MapEntity {
 		super(x, y, spriteSheet, startingAnimation); 
 	} 
 	
-	public void update(Player player) {
+	public void update(Player player, Map map) {
 		super.update();
 	} 
 	

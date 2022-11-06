@@ -101,7 +101,7 @@ public class Camera extends Rectangle {
         
         //For each active power-up call its update method 
         for(PowerUp powerUp : activePowerUps) {
-        	powerUp.update(player);
+        	powerUp.update(player, map);
         }
     }
 

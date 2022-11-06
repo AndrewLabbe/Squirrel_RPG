@@ -666,6 +666,10 @@ public abstract class Map {
     //Returns all active power-ups 
     public ArrayList<PowerUp> getActivePowerUps() {
     	return camera.getActivePowerUps();
+    } 
+    //Reset healthbar 
+    public void resetHealthBar() {
+    	healthBar.setGreenBarWidth(healthBar.getActualHealthBarWidth());
     }
     
 }

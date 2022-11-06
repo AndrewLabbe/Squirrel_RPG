@@ -12,6 +12,7 @@ import NPCs.Fox;
 import NPCs.Walrus;
 import NPCs.Wolf;
 import NPCs.Zombie;
+import PowerUps.MaxHealth;
 import PowerUps.SpeedBoost;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
@@ -112,6 +113,7 @@ public class TestMap extends Map {
     	ArrayList<PowerUp> powerUps = new ArrayList(); 
     	
     	powerUps.add(new SpeedBoost(getMapTile(20,25).getLocation())); 
+    	powerUps.add(new MaxHealth(getMapTile(20,24).getLocation())); 
     	return powerUps;
     }
 }
