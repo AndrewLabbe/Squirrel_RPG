@@ -1,5 +1,7 @@
 package NPCs;
 
+import java.util.HashMap;
+
 import Builders.FrameBuilder;
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
@@ -8,8 +10,6 @@ import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.NPC;
 import Utils.Point;
-
-import java.util.HashMap;
 
 // This class is for the dinosaur NPC
 public class Dinosaur extends NPC {

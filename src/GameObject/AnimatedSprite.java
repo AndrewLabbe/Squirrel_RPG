@@ -1,11 +1,11 @@
 package GameObject;
 
+import java.awt.Color;
+import java.util.HashMap;
+
 import Engine.GraphicsHandler;
 import Utils.Point;
 import Utils.Stopwatch;
-
-import java.awt.*;
-import java.util.HashMap;
 
 /*
 	Represents an animated sprite

@@ -1,19 +1,11 @@
 package Level;
 
+import java.awt.Color;
+
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
-import SpriteFont.SpriteFont;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 public class HealthBar {
     protected boolean isActive;

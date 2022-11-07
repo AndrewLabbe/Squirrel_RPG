@@ -1,9 +1,9 @@
 package Level;
 
+import java.awt.Color;
+
 import Engine.GraphicsHandler;
 import GameObject.Rectangle;
-
-import java.awt.*;
 
 // This class represents a trigger script that can be placed on a map
 // upon the player colliding with the trigger, it will play out the attached script

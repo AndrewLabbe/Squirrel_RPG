@@ -1,6 +1,5 @@
 package Enemies;
 
-import java.awt.Point;
 import java.util.HashMap;
 
 import Builders.FrameBuilder;
@@ -11,7 +10,6 @@ import GameObject.SpriteSheet;
 import Level.Enemy;
 import Level.Map;
 import Level.Player;
-import Utils.Stopwatch;
 
 public class GhostEnemy extends Enemy {
 

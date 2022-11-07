@@ -1,8 +1,8 @@
 package Engine;
 
-import Utils.Colors;
+import java.awt.Color;
 
-import java.awt.*;
+import Utils.Colors;
 
 /*
  * This class holds some constants like window width/height and resource folder locations

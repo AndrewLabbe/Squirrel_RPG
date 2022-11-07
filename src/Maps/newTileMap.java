@@ -2,25 +2,18 @@ package Maps;
 
 import java.util.ArrayList;
 
-import Level.Enemy;
 import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Dinosaur;
 import NPCs.Fox;
 import NPCs.Walrus;
-import NPCs.Wolf;
-import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.FoxScript;
 import Scripts.TestMap.IntroScript;
-import Scripts.TestMap.LostBallScript;
 import Scripts.TestMap.TempleScript;
-import Scripts.TestMap.TreeScript;
 import Scripts.TestMap.WalrusScript;
-import Scripts.TestMap.WolfScript;
 import Scripts.TestMap.changeShop;
-import Tilesets.CommonTileset;
 import Tilesets.PathingTileset;
 
 // Represents the Map for the Interior of Shopkeeper House

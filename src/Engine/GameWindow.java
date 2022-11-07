@@ -1,6 +1,6 @@
 package Engine;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
 /*
  * The JFrame that holds the GamePanel

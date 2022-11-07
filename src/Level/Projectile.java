@@ -1,7 +1,8 @@
 package Level;
 
-import GameObject.SpriteSheet;
-import java.util.ArrayList; 
+import java.util.ArrayList;
+
+import GameObject.SpriteSheet; 
 
 //This class is designed so that more than one projectile can be put into the game
 public class Projectile extends MapEntity {

@@ -4,7 +4,6 @@ import Level.Map;
 import Scripts.TestMap.CorrectTableScript;
 import Scripts.TestMap.GoldenTableScript;
 import Scripts.TestMap.SimpleTableScript;
-import Scripts.TestMap.TempleScript;
 import Scripts.TestMap.UpperLeftTableScript;
 import Tilesets.templeTileset;
 

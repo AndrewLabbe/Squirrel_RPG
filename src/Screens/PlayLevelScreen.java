@@ -9,12 +9,18 @@ import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
-import Level.*;
-import Maps.TestMap;
-import Maps.templeMap;
+import Level.EnhancedMapTile;
+import Level.FlagManager;
+import Level.KillCount;
+import Level.Map;
+import Level.MapTile;
+import Level.NPC;
+import Level.Player;
+import Level.Trigger;
 import Maps.newTileMap;
 import NPCs.Currency;
 import Players.Cat;
+import Players.Squirrel;
 import Utils.Direction;
 import Utils.Point;
 
@@ -70,7 +76,7 @@ public class PlayLevelScreen extends Screen {
         map.setFlagManager(flagManager);
 
         // setup player
-        this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, map);
+        this.player = new Squirrel(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, map);
         this.player.setMap(map);
         Point playerStartPosition = map.getPlayerStartPosition();
         this.player.setLocation(playerStartPosition.x, playerStartPosition.y);

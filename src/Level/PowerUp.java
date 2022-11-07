@@ -1,8 +1,5 @@
 package Level;
 
-import java.util.Timer;
-import Level.Map;
-
 import GameObject.SpriteSheet;
 
 //All power-ups can extend from this class

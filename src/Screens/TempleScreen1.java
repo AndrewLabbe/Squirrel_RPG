@@ -13,6 +13,7 @@ import Level.Player;
 import Level.Trigger;
 import Maps.templeMap;
 import Players.Cat;
+import Players.Squirrel;
 import Utils.Direction;
 import Utils.Point;
 
@@ -40,7 +41,7 @@ public class TempleScreen1 extends Screen {
 		map.reset();
 		map.setFlagManager(flagManager);
 		
-		this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, map);
+		this.player = new Squirrel(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, map);
 		this.player.setMap(map);
 		Point playerStartPosition = map.getPlayerStartPosition();
 		this.player.setLocation(playerStartPosition.x, playerStartPosition.y);

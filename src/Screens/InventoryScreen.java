@@ -1,14 +1,19 @@
 package Screens;
 
-import Engine.*;
+import java.awt.Color;
+
+import Engine.Config;
+import Engine.GraphicsHandler;
+import Engine.Key;
+import Engine.KeyLocker;
+import Engine.Keyboard;
+import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.Map;
 import Maps.TitleScreenMap;
 import SpriteFont.SpriteFont;
 import Utils.Stopwatch;
-
-import java.awt.*;
 
 // This is the class for the inventory menu screen
 public class InventoryScreen extends Screen {

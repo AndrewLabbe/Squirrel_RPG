@@ -1,5 +1,12 @@
 package Level;
  
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.Keyboard;
@@ -9,13 +16,6 @@ import NPCs.Currency;
 import Utils.Direction;
 import Utils.Point;
 import Utils.Stopwatch;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
  
 /*
    This class is for defining a map that is used for a specific level

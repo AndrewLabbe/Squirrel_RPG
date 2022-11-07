@@ -1,11 +1,14 @@
 package MapEditor;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import Level.Map;
 import Utils.Colors;
-import Utils.Direction;
-
-import javax.swing.*;
-import java.awt.*;
 
 public class MapBuilder extends JPanel {
     private Map map;
