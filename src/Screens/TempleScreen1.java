@@ -1,9 +1,6 @@
 package Screens;
 
 import Engine.GraphicsHandler;
-import Engine.Key;
-import Engine.KeyLocker;
-import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
@@ -19,7 +16,7 @@ import Players.Cat;
 import Utils.Direction;
 import Utils.Point;
 
-public class TempleScreen extends Screen {
+public class TempleScreen1 extends Screen {
 
 	protected ScreenCoordinator screenCoordinator;
 	protected Map map;
@@ -28,7 +25,7 @@ public class TempleScreen extends Screen {
 	
 	protected TempleScreenState templeScreenState;
 	
-	public TempleScreen(ScreenCoordinator screenCoordinator) {
+	public TempleScreen1(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
     }
 	
@@ -90,9 +87,13 @@ public class TempleScreen extends Screen {
             break;
         // if level has been completed, bring up level cleared screen
         case LEVEL_COMPLETED:
+        	screenCoordinator.setGameState(GameState.TEMPLELVL2);
             break;
 		}
 		
+		if (map.getFlagManager().isFlagSet("hasFinishedFirstLevel")) {
+            templeScreenState = TempleScreenState.LEVEL_COMPLETED;
+        }
 	}
 	
 	public void draw(GraphicsHandler graphicsHandler) {

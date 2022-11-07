@@ -156,7 +156,7 @@ public class PlayLevelScreen extends Screen {
         }
         
         if (map.getFlagManager().isFlagSet("hasEnteredTemple")) {
-        	screenCoordinator.setGameState(GameState.TEMPLE);
+        	screenCoordinator.setGameState(GameState.TEMPLELVL1);
         }
         
         // If Player Entered Door Change Map to Shop
