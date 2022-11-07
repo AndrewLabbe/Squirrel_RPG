@@ -51,6 +51,9 @@ public class PlayLevelScreen extends Screen {
     	
         // setup state
         flagManager = new FlagManager();
+        
+        flagManager.addFlag("hasLostGirlfriend", false);
+        
         flagManager.addFlag("enemyKilled",false);
 //        flagManager.addFlag("hasLostBall", false);
 //        flagManager.addFlag("hasTalkedToWalrus", false);
