@@ -27,7 +27,9 @@ public class PlayLevelScreen extends Screen {
     protected FlagManager flagManager;
     private KeyLocker keyLocker = new KeyLocker();
     public Currency screenCoin;
+    public KillCount screenKill;
     private boolean wasSpacePressed = false;
+    private boolean wasFPressed = false;
     //protected Key MOVE_LEFT_KEY = Key.LEFT;
    // protected Key MOVE_RIGHT_KEY = Key.RIGHT;
     private final Key invKey = Key.I;
@@ -40,8 +42,15 @@ public class PlayLevelScreen extends Screen {
     }
 
     public void initialize() {
+    	
+    	
+    	// Kill Count 
+    	screenKill = new KillCount();
+    	screenKill.setKill(0);
+    	
         // setup state
         flagManager = new FlagManager();
+        flagManager.addFlag("enemyKilled",false);
 //        flagManager.addFlag("hasLostBall", false);
 //        flagManager.addFlag("hasTalkedToWalrus", false);
 //        flagManager.addFlag("hasTalkedToDinosaur", false);
@@ -110,6 +119,12 @@ public class PlayLevelScreen extends Screen {
                 break;
         }
         
+        if (player.getUpdate()) {
+    		screenKill.addKill(1);
+            wasFPressed = true; 
+            player.setUpdate(false);
+    	}
+        
         if (Keyboard.isKeyDown(invKey)) {
     		screenCoordinator.setGameState(GameState.INVENTORY);
     		keyLocker.lockKey(buyKey);
@@ -155,6 +170,7 @@ public class PlayLevelScreen extends Screen {
         switch (playLevelScreenState) {
             case RUNNING:
                 map.draw(player, graphicsHandler);
+                screenKill.draw(graphicsHandler);
                 break;
             case LEVEL_COMPLETED:
                 winScreen.draw(graphicsHandler);

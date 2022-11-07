@@ -56,6 +56,8 @@ public abstract class Player extends GameObject {
     protected Key FIRE_BULLET_KEY = Key.F; 
     //Puts a delay on firing which eliminates infinite firing issue
     private Stopwatch fireDelay; 
+    private boolean hasHit = false;
+    protected boolean updateKillCount = false;
     
     //Speed boost active or not 
     private boolean speedBoost; 
@@ -112,6 +114,12 @@ public abstract class Player extends GameObject {
         handlePlayerAnimation();
 
         updateLockedKeys();
+        
+        
+        if(hasHit) {
+        	updateKillCount = true;
+        	hasHit = false;
+        }
         
         // update player's animation
         super.update();
@@ -461,5 +469,13 @@ public abstract class Player extends GameObject {
 				damage = 10; 
 			}
 		}
-	} 
-}
+		}
+		public boolean getUpdate() {
+			return this.updateKillCount;
+		}
+		
+		public void setUpdate(boolean set) {
+			this.updateKillCount = set;
+	
+		}
+	}

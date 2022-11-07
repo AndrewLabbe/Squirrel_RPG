@@ -10,6 +10,7 @@ import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.Enemy;
 import Level.MapEntityStatus;
+import Level.Player;
 import Level.Projectile;
 import Utils.Stopwatch;
 
@@ -19,6 +20,7 @@ public class Acorn extends Projectile {
 	private float directionX; 
 	private float directionY; 
 	private int damage;
+	private Player player;
 	
 	public Acorn(int x, int y, float directionX, float directionY, int damage) {
 		super(x, y, damage, new SpriteSheet(ImageLoader.load("Acorn.png"), 29, 20), "FIRE_RIGHT"); 
