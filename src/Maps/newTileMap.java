@@ -69,10 +69,11 @@ public class newTileMap extends Map {
 //	    }
 	 
 	 @Override
-	    public void loadScripts() {
+	 public void loadScripts() {
+		 getMapTile(9, 34).setInteractScript(new changeShop());
 	        
-	        getMapTile(9, 34).setInteractScript(new changeShop());
-	    } 
+	     getMapTile(24, 0).setInteractScript(new TempleScript());
+	 } 
 	 
 	 //Adds enemies to the map
 //	    @Override 

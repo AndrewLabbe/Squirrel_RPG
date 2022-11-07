@@ -96,6 +96,7 @@ public class TestMap extends Map {
         getMapTile(2, 6).setInteractScript(new TreeScript());
         
         getMapTile(4, 19).setInteractScript(new changeShop());
+       
     } 
     
     //Adds enemies to the map
