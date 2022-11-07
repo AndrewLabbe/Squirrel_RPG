@@ -55,7 +55,7 @@ public class ShopkeeperScreen extends Screen {
 		map.reset();
 		map.setFlagManager(flagManager);
 
-		this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+		this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, map);
 		this.player.setMap(map);
 		Point playerStartPosition = map.getPlayerStartPosition();
 		this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
@@ -127,7 +127,7 @@ public class ShopkeeperScreen extends Screen {
 		
 		if (Keyboard.isKeyDown(invKey)) {
 			screenCoordinator.setGameState(GameState.INVENTORY);
-			keyLocker.lockKey(buyKey);
+			keyLocker.lockKey(invKey);
 		}
 
 		if (Keyboard.isKeyUp(buyKey)) {

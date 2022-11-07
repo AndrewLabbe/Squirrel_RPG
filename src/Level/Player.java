@@ -28,6 +28,9 @@ public abstract class Player extends GameObject {
     
 	//Initialize sound
 	Sound sound = new Sound(); 
+	
+	//Map reference
+	protected Map map;
 
     // values used to handle player movement
     protected float moveAmountX, moveAmountY;
@@ -72,8 +75,9 @@ public abstract class Player extends GameObject {
     //Insta elim timeout
     private Stopwatch instaElimTimeout;
     
-    public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
+    public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName, Map map) {
         super(spriteSheet, x, y, startingAnimationName);
+        this.map = map;
         facingDirection = Direction.RIGHT;
         playerState = PlayerState.STANDING;
         previousPlayerState = playerState;

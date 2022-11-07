@@ -1,47 +1,111 @@
 package Screens;
 
-import java.awt.Color;
-import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.Key;
+import Engine.KeyLocker;
 import Engine.Keyboard;
 import Engine.Screen;
-import Engine.ScreenManager;
 import Game.GameState;
 import Game.ScreenCoordinator;
-import GameObject.Rectangle;
-import SpriteFont.SpriteFont;
+import Level.EnhancedMapTile;
+import Level.FlagManager;
+import Level.Map;
+import Level.MapTile;
+import Level.NPC;
+import Level.Player;
+import Level.Trigger;
+import Maps.templeMap;
+import Players.Cat;
+import Utils.Direction;
+import Utils.Point;
 
 public class TempleScreen extends Screen {
 
 	protected ScreenCoordinator screenCoordinator;
-	protected Rectangle background;
-	private SpriteFont templeLabel;
+	protected Map map;
+	protected Player player;
+	protected FlagManager flagManager;
+	
+	protected TempleScreenState templeScreenState;
 	
 	public TempleScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
     }
 	
     public void initialize() {
-    	templeLabel = new SpriteFont("TOP SECRET TEMPLE", (Config.GAME_WINDOW_WIDTH / 2) - 150, Config.GAME_WINDOW_HEIGHT / 2, "Comic Sans", 30, Color.white);
-		templeLabel.setOutlineColor(Color.black);
-		templeLabel.setOutlineThickness(5.0f);
+    	flagManager = new FlagManager();
+    	flagManager.addFlag("hasFoundKey", false);
+    	flagManager.addFlag("hasTalkedToTable", false);
+    	flagManager.addFlag("doneWithPuzzle", false);
+    	flagManager.addFlag("hasFinishedFirstLevel", false);
 		
-		//initialize actual temple map here
+    	this.map = new templeMap();
+		map.reset();
+		map.setFlagManager(flagManager);
+		
+		this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, map);
+		this.player.setMap(map);
+		Point playerStartPosition = map.getPlayerStartPosition();
+		this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
+
+		this.player.setFacingDirection(Direction.LEFT);
+		
+		this.templeScreenState = TempleScreenState.RUNNING;
+		
+		map.getTextbox().setInteractKey(player.getInteractKey());
+		
+		// setup map scripts to have references to the map and player
+        for (MapTile mapTile : map.getMapTiles()) {
+            if (mapTile.getInteractScript() != null) {
+                mapTile.getInteractScript().setMap(map);
+                mapTile.getInteractScript().setPlayer(player);
+            }
+        }
+        for (NPC npc : map.getNPCs()) {
+            if (npc.getInteractScript() != null) {
+                npc.getInteractScript().setMap(map);
+                npc.getInteractScript().setPlayer(player);
+            }
+        }
+        for (EnhancedMapTile enhancedMapTile : map.getEnhancedMapTiles()) {
+            if (enhancedMapTile.getInteractScript() != null) {
+                enhancedMapTile.getInteractScript().setMap(map);
+                enhancedMapTile.getInteractScript().setPlayer(player);
+            }
+        }
+        for (Trigger trigger : map.getTriggers()) {
+            if (trigger.getTriggerScript() != null) {
+                trigger.getTriggerScript().setMap(map);
+                trigger.getTriggerScript().setPlayer(player);
+            }
+        }
     }   
 
 	public void update() {
-		//logic within the temple map
-		/*
-		 * if (something){
-		 * 		screenCoordinator.setGameState(GameState.LEVEL);
-				screenCoordinator.switchBackToLevel();
-			}
-		 */
+		switch (templeScreenState) {
+		// if level is "running" update player and map to keep game logic for the platformer level going
+        case RUNNING:
+            player.update();
+            map.update(player);
+            break;
+        // if level has been completed, bring up level cleared screen
+        case LEVEL_COMPLETED:
+            break;
+		}
+		
 	}
 	
 	public void draw(GraphicsHandler graphicsHandler) {
-		graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(153, 102, 0));
-		templeLabel.draw(graphicsHandler);
+		switch (templeScreenState) {
+		 case RUNNING:
+             map.draw(player, graphicsHandler);
+             break;
+         case LEVEL_COMPLETED:
+             break;
+		}
+	}
+	
+	private enum TempleScreenState {
+		RUNNING, LEVEL_COMPLETED;
 	}
 }
