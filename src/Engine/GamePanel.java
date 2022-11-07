@@ -36,11 +36,17 @@ public class GamePanel extends JPanel {
 	//Initialize sound
 	public Sound sound = new Sound();
 	
-	// Color for Day/Night Cycle
-	private int shade = 0;
-	private int time = 0;
-	boolean day = true;
-	boolean night = false;
+	//Game time 
+	private int time; 
+	
+	//Opacity for Day/Night Cycle 
+	private int shade = 0; 
+	//Changing to night or day 
+	private boolean fading = true; 
+	//Day or night is happening 
+	private boolean changeDay = true; 
+	//Length of day/night
+	private static final int dayLength = 500;
 	
 	/*
 	 * The JPanel and various important class instances are setup here
@@ -112,9 +118,18 @@ public class GamePanel extends JPanel {
 		}
 		
 		if (time % 200 == 0) {
-			cycleDay();
 			System.out.println("Time: " + time);
-		}
+		} 
+		//If day/night time has ended commence fade 
+		if(time % dayLength == 0) {
+			changeDay = true; 
+		} 
+		//If day/night is changing call the day/night fade 
+		if(changeDay == true) {
+			if (time % 5 == 0) {
+				cycleDay(); 
+			}
+		} 
 	}
 	
 	public void playMusic(int i) {
@@ -130,27 +145,26 @@ public class GamePanel extends JPanel {
 			sound.play();
 		}
 			
-	// Create Day/Night Cycle
+		//Fade to day/night
 		public void cycleDay() {
-			if (day == true) {
-				if (shade < 100) {
-					shade += 10;
-				}
-
-				if (shade == 100) {
-					System.out.println("Night has fallen...");
-					day = false;
-					night = true;
+			if (fading == true) { 
+				//System.out.println("Turning Night");
+				if(shade < 125) {
+					shade = shade + 5; 
+				} 
+				else {
+					fading = false; 
+					changeDay = false;
 				}
 			}
-			
-			if (night == true) {
-				if (time % 6000 == 0) {
-					shade = 0;
-					System.out.println("The Sun Rises...");
-					
-					night = false;
-					day = true;
+			else { 
+				//System.out.println("Turning Day");
+				if(shade > 0) {
+					shade = shade - 5;
+				}
+				else {
+					fading = true;
+					changeDay = false;
 				}
 			}
 		}

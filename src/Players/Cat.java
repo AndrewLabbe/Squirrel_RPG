@@ -89,5 +89,5 @@ public class Cat extends Player {
                             .build()
             });
         }};
-    }
+    } 
 }

@@ -27,11 +27,14 @@ public class Camera extends Rectangle {
     private ArrayList<NPC> activeNPCs = new ArrayList<>();
     private ArrayList<Trigger> activeTriggers = new ArrayList<>(); 
     
-    //Projectile map entities 
+    //Active projectile map entities 
     private ArrayList<Projectile> activeProjectiles = new ArrayList<>(); 
     
-    //Enemy map entities 
-    private ArrayList<Enemy> activeEnemies = new ArrayList();
+    //Active enemy map entities 
+    private ArrayList<Enemy> activeEnemies = new ArrayList(); 
+    
+    //Active power-up map entities 
+    private ArrayList<PowerUp> activePowerUps = new ArrayList(); 
 
     // determines how many tiles off screen an entity can be before it will be deemed inactive and not included in the update/draw cycles until it comes back in range
     private final int UPDATE_OFF_SCREEN_RANGE = 4;
@@ -74,7 +77,9 @@ public class Camera extends Rectangle {
         //Define active projectiles
         activeProjectiles = loadActiveProjectiles(); 
         //Define active enemies 
-        activeEnemies = loadActiveEnemies();
+        activeEnemies = loadActiveEnemies(); 
+        //Define active power-ups 
+        activePowerUps = loadActivePowerUps();
         
         for (EnhancedMapTile enhancedMapTile : activeEnhancedMapTiles) {
             enhancedMapTile.update(player);
@@ -89,8 +94,14 @@ public class Camera extends Rectangle {
         	projectile.update(activeEnemies);
         } 
         
+        //For each active enemy call its update method 
         for(Enemy enemy : activeEnemies) {
-        	enemy.update(player);
+        	enemy.update(player, map);
+        } 
+        
+        //For each active power-up call its update method 
+        for(PowerUp powerUp : activePowerUps) {
+        	powerUp.update(player, map);
         }
     }
 
@@ -257,10 +268,16 @@ public class Camera extends Rectangle {
         		projectile.draw(graphicsHandler);
         	}
         } 
-        
+        //Draws the active enemies to the screen 
         for(Enemy enemy : activeEnemies) {
         	if(containsDraw(enemy)) {
         		enemy.draw(graphicsHandler);
+        	}
+        } 
+        //Draws the active power-ups to the screen 
+        for(PowerUp powerUp : activePowerUps) {
+        	if(containsDraw(powerUp)) {
+        		powerUp.draw(graphicsHandler);
         	}
         }
 
@@ -329,7 +346,7 @@ public class Camera extends Rectangle {
         return this.getEndBoundY() >= map.getEndBoundY();
     } 
     
-    //determine which projectiles are on screen and return them 
+    //Determines which projectiles are on screen and return them 
     private ArrayList<Projectile> loadActiveProjectiles() {
         ArrayList<Projectile> activeProjectiles = new ArrayList<>();
         for (int i = map.getProjectiles().size() - 1; i >= 0; i--) {
@@ -353,12 +370,13 @@ public class Camera extends Rectangle {
         return activeProjectiles;
     } 
     
+    //Returns active projectiles 
     public ArrayList<Projectile> getActiveProjectiles() {
     	return activeProjectiles;
     }
     
     //Same as for projectiles 
-    //determine which enemies are on screen and return them 
+    //Determines which enemies are on screen and return them 
     private ArrayList<Enemy> loadActiveEnemies() {
         ArrayList<Enemy> activeEnemies = new ArrayList<>();
         for (int i = map.getEnemies().size() - 1; i >= 0; i--) {
@@ -382,7 +400,37 @@ public class Camera extends Rectangle {
         return activeEnemies;
     } 
     
+    //Returns active enemies
     public ArrayList<Enemy> getActiveEnemies() {
     	return activeEnemies;
+    } 
+    
+    //Determines which power-ups are on the screen and returns them 
+    private ArrayList<PowerUp> loadActivePowerUps() {
+    	ArrayList<PowerUp> activePowerUps = new ArrayList(); 
+    	for (int i = map.getPowerUps().size() - 1; i >= 0; i--) {
+            PowerUp powerUp = map.getPowerUps().get(i);
+
+            if (isMapEntityActive(powerUp)) {
+                activePowerUps.add(powerUp);
+                if (powerUp.mapEntityStatus == MapEntityStatus.INACTIVE) {
+                    powerUp.setMapEntityStatus(MapEntityStatus.ACTIVE);
+                }
+                
+            } 
+            else if (powerUp.getMapEntityStatus() == MapEntityStatus.ACTIVE) {
+                powerUp.setMapEntityStatus(MapEntityStatus.INACTIVE);
+                
+            } 
+            else if (powerUp.getMapEntityStatus() == MapEntityStatus.REMOVED) {
+                map.getPowerUps().remove(i);
+            }
+        }
+        return activePowerUps;
+    } 
+    
+    //Returns active power-ups 
+    public ArrayList<PowerUp> getActivePowerUps() {
+    	return activePowerUps;
     }
 }

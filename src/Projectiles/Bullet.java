@@ -21,13 +21,15 @@ import Utils.Stopwatch;
 public class Bullet extends Projectile {
 
 	private Stopwatch despawnTime; 
-	private int direction;
+	private int direction; 
+	private int damage;
 	
-	public Bullet(int x, int y, int direction) {
-		super(x, y, new SpriteSheet(ImageLoader.load("Bullet.png"), 15, 7), "FIRE_RIGHT"); 
+	public Bullet(int x, int y, int direction, int damage) {
+		super(x, y, damage, new SpriteSheet(ImageLoader.load("Bullet.png"), 15, 7), "FIRE_RIGHT"); 
 		despawnTime = new Stopwatch();
 		despawnTime.setWaitTime(5000);
 		this.direction = direction; 
+		this.damage = damage;
 	}
 
 	@Override

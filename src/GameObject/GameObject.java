@@ -304,6 +304,9 @@ public class GameObject extends AnimatedSprite {
 			} 
 			if (this instanceof Projectile) {
 				drawBounds(graphicsHandler, new Color(255, 0, 200, 100));
+			} 
+			if (this instanceof PowerUp) {
+				drawBounds(graphicsHandler, new Color(255, 0, 200, 100));
 			}*/
 			
 		} else {

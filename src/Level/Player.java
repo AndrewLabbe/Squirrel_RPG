@@ -58,7 +58,22 @@ public abstract class Player extends GameObject {
     //Key for firing projectiles
     protected Key FIRE_BULLET_KEY = Key.F; 
     //Puts a delay on firing which eliminates infinite firing issue
-    private Stopwatch fireDelay;
+    private Stopwatch fireDelay; 
+    private boolean hasHit = false;
+    protected boolean updateKillCount = false;
+    
+    //Speed boost active or not 
+    private boolean speedBoost; 
+    //Speed boost timeout 
+    private Stopwatch speedBoostTimeout; 
+    //Duration of power-ups
+    private final int powerUpDuration = 20000; 
+    //Projectile damage 
+    private int damage; 
+    //Insta elim active or not 
+    private boolean instaElim; 
+    //Insta elim timeout
+    private Stopwatch instaElimTimeout;
     
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName, Map map) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -68,7 +83,12 @@ public abstract class Player extends GameObject {
         previousPlayerState = playerState;
         this.affectedByTriggers = true;
         fireDelay = new Stopwatch();
-        fireDelay.setWaitTime(1000);
+        fireDelay.setWaitTime(1000); 
+        speedBoost = false; 
+        speedBoostTimeout = new Stopwatch();
+        damage = 10; 
+        instaElim = false; 
+        instaElimTimeout = new Stopwatch();
     }
 
     public void update() {
@@ -88,14 +108,22 @@ public abstract class Player extends GameObject {
             lastAmountMovedX = super.moveXHandleCollision(moveAmountX);
             
         }
-      //Fires a bullet if the f key is hit and the player is not interacting 
+        //Fires a bullet if the f key is hit and the player is not interacting 
         if(Keyboard.isKeyDown(FIRE_BULLET_KEY) && playerState != PlayerState.INTERACTING) {
         	fireBullet();
         } 
+        //Handle what power-ups are active
+        handlePowerUps();
         
         handlePlayerAnimation();
 
         updateLockedKeys();
+        
+        
+        if(hasHit) {
+        	updateKillCount = true;
+        	hasHit = false;
+        }
         
         // update player's animation
         super.update();
@@ -154,14 +182,14 @@ public abstract class Player extends GameObject {
 
         // if walk right key is pressed, move player to the right 
         //Checks to see if main character has reach map bounds
-        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < 1090 && !Keyboard.isKeyDown(SPEED_KEY)) {
+        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < 2340 && !Keyboard.isKeyDown(SPEED_KEY)) {
             moveAmountX += walkSpeed;
             facingDirection = Direction.RIGHT;
             currentWalkingXDirection = Direction.RIGHT;
             lastWalkingXDirection = Direction.RIGHT;
         }
         //Walk faster
-        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < 1090 && Keyboard.isKeyDown(SPEED_KEY)) {
+        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < 2340 && Keyboard.isKeyDown(SPEED_KEY)) {
             moveAmountX += walkSpeed*2;
             facingDirection = Direction.RIGHT;
             currentWalkingXDirection = Direction.RIGHT;
@@ -184,13 +212,13 @@ public abstract class Player extends GameObject {
             currentWalkingYDirection = Direction.UP;
             lastWalkingYDirection = Direction.UP;
         }
-        else if (Keyboard.isKeyDown(MOVE_DOWN_KEY)&& !Keyboard.isKeyDown(SPEED_KEY)) {
+        else if (Keyboard.isKeyDown(MOVE_DOWN_KEY)&& Math.round(getY()) < 2340 && !Keyboard.isKeyDown(SPEED_KEY)) {
             moveAmountY += walkSpeed;
             currentWalkingYDirection = Direction.DOWN;
             lastWalkingYDirection = Direction.DOWN;
         }
         //Walk faster
-        else if (Keyboard.isKeyDown(MOVE_DOWN_KEY)&& Keyboard.isKeyDown(SPEED_KEY)) {
+        else if (Keyboard.isKeyDown(MOVE_DOWN_KEY)&& Math.round(getY()) < 2340 && Keyboard.isKeyDown(SPEED_KEY)) {
             moveAmountY += walkSpeed*2;
             currentWalkingYDirection = Direction.DOWN;
             lastWalkingYDirection = Direction.DOWN;
@@ -391,7 +419,7 @@ public abstract class Player extends GameObject {
     	projectileY = Math.round(getY()) + 30;
     	
     	//Creates a new bullet 
-    	Acorn acorn = new Acorn(projectileX, projectileY, directionX, directionY); 
+    	Acorn acorn = new Acorn(projectileX, projectileY, directionX, directionY, damage); 
     	map.addProjectiles(acorn); 
     	fireDelay.reset(); 
     	
@@ -412,4 +440,46 @@ public abstract class Player extends GameObject {
 		sound.setFile(i);
 		sound.play();
 	} 
-}
+	//Returns current player speed 
+	public float getWalkSpeed() {
+		return walkSpeed;
+	}
+	//Sets player movement speed 
+	public void setWalkSpeed(float speed) {
+		walkSpeed = speed;
+	} 
+	//Activates speed boost for given period of time 
+	public void setSpeedBoostActive() {
+		speedBoost = true; 
+		speedBoostTimeout.setWaitTime(powerUpDuration); 
+	} 
+	//Activates the insta elim power up for a given period of time 
+	public void setInstaElimActive() {
+		instaElim = true; 
+		damage = 50;
+		instaElimTimeout.setWaitTime(powerUpDuration);
+	}
+	//Handles power-ups
+	public void handlePowerUps() {
+		if(speedBoost == true) {
+			if(speedBoostTimeout.isTimeUp() == true) {
+				speedBoost = false; 
+				setWalkSpeed(walkSpeed/2.0f);
+			}
+		} 
+		if(instaElim == true) {
+			if(instaElimTimeout.isTimeUp() == true) {
+				instaElim = false; 
+				damage = 10; 
+			}
+		}
+		}
+		public boolean getUpdate() {
+			return this.updateKillCount;
+		}
+		
+		public void setUpdate(boolean set) {
+			this.updateKillCount = set;
+	
+		}
+	}

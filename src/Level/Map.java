@@ -5,9 +5,11 @@ import Engine.GraphicsHandler;
 import Engine.Keyboard;
 import Engine.ScreenManager;
 import GameObject.Rectangle;
+import NPCs.Currency;
 import Utils.Direction;
 import Utils.Point;
- 
+import Utils.Stopwatch;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -61,7 +63,9 @@ public abstract class Map {
     //Array which will hold all projectiles in game 
     protected ArrayList<Projectile> projectiles; 
     //Array which holds the enemies in game 
-    protected ArrayList<Enemy> enemies;
+    protected ArrayList<Enemy> enemies; 
+    //Array which holds all of the power-ups in game 
+    protected ArrayList<PowerUp> powerUps; 
 
     protected Script activeInteractScript;
 
@@ -80,8 +84,19 @@ public abstract class Map {
     //Health Bar 
     protected HealthBar healthBar;
 
-    private boolean healthCheck = false;
+    private boolean healthCheck = false; 
+    
+    //Currency tracker 
+    private Currency coins; 
+    //Points per elimination 
+    private int elimPoints;
 
+    //Double points active or not 
+    private boolean doublePoints; 
+    //Double points timeout 
+    private Stopwatch doublePointsTimeout; 
+    
+    private final int powerUpDuration = 20000; 
     
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
@@ -93,7 +108,12 @@ public abstract class Map {
         this.endBoundY = height * tileset.getScaledSpriteHeight();
         this.xMidPoint = ScreenManager.getScreenWidth() / 2;
         this.yMidPoint = (ScreenManager.getScreenHeight() / 2);
-        this.playerStartPosition = new Point(0, 0);
+        this.playerStartPosition = new Point(0, 0); 
+        coins = new Currency(); 
+        coins.setCoin(0); 
+        elimPoints = 10; 
+        doublePointsTimeout = new Stopwatch();
+        doublePoints = false; 
     }
 
     // sets up map by reading in the map file to create the tile map
@@ -126,8 +146,14 @@ public abstract class Map {
         }
         //Puts enemies on the map 
         this.enemies = loadEnemies();
-        for (Enemy enemy: this.enemies) {
+        for (Enemy enemy : this.enemies) {
         	enemy.setMap(this);
+        } 
+        
+        //Puts power-ups on the map 
+        this.powerUps = loadPowerUps(); 
+        for (PowerUp powerUp : this.powerUps) {
+        	powerUp.setMap(this);
         }
         
         this.loadScripts();
@@ -515,7 +541,8 @@ public abstract class Map {
                 
             }
             healthCheck = false;
-        }
+        } 
+        handlePowerUps();
     }
 
     // based on the player's current X position (which in a level can potentially be updated each frame),
@@ -585,7 +612,8 @@ public abstract class Map {
         if (textbox.isActive()) {
             textbox.draw(graphicsHandler);
         }
-        healthBar.draw(graphicsHandler);
+        healthBar.draw(graphicsHandler); 
+        coins.draw(graphicsHandler);
     }
 
     public FlagManager getFlagManager() { return flagManager; }
@@ -627,17 +655,71 @@ public abstract class Map {
     public ArrayList<Enemy> loadEnemies() {
     	return new ArrayList();
     }
-
+    //Adds enemy to the map 
     public void addEnemies(Enemy enemy) {
     	enemy.setMap(this);
     	this.enemies.add(enemy);
     } 
-
+    //Returns all enemies 
     public ArrayList<Enemy> getEnemies() {
     	return enemies;
     }
-
+    //Returns active enemies 
     public ArrayList<Enemy> getActiveEnemies() {
     	return camera.getActiveEnemies(); 
     } 
+    
+    //Power-up methods 
+    //Load powerups onto the map 
+    public ArrayList<PowerUp> loadPowerUps() {
+    	return new ArrayList();
+    } 
+    //Adds powerup to the map 
+    public void addPowerUp(PowerUp powerUp) {
+    	powerUp.setMap(this); 
+    	this.powerUps.add(powerUp); 
+    } 
+    //Returns all powerups 
+    public ArrayList<PowerUp> getPowerUps() {
+    	return powerUps; 
+    }
+    //Returns all active power-ups 
+    public ArrayList<PowerUp> getActivePowerUps() {
+    	return camera.getActivePowerUps();
+    } 
+    //Reset healthbar 
+    public void resetHealthBar() {
+    	healthBar.setGreenBarWidth(healthBar.getActualHealthBarWidth());
+    } 
+    //Increment coins 
+    public void addCoins() {
+    	coins.setCoin(coins.getCoin() + elimPoints); 
+    	coins.updateCoin();
+    } 
+    //Returns points per elimination 
+    public int getElimPoints() {
+    	return elimPoints;
+    }
+    //Sets the points per elimination 
+    public void setElimPoints(int points) {
+    	elimPoints = points;
+    } 
+    public void doublePointsStart() {
+    	setElimPoints(getElimPoints()*2); 
+    	doublePoints = true; 
+		doublePointsTimeout.setWaitTime(powerUpDuration);
+    } 
+    //Handles power-ups
+  	public void handlePowerUps() {
+  		if(doublePoints == true) {
+  			if(doublePointsTimeout.isTimeUp() == true) {
+  				doublePoints = false; 
+  				setElimPoints(getElimPoints()/2);
+  			}
+  		}
+  	} 
+  	public void dealDamage() {
+		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - 2);
+	}
+    
 }
