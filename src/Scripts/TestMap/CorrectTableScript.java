@@ -20,7 +20,9 @@ public class CorrectTableScript extends Script {
 
 	@Override
 	protected void cleanup() {
-		setFlag("hasFoundKey");
+		if(isFlagSet("hasTalkedToTable")) {
+			setFlag("hasFoundKey");
+		}
 		hideTextbox();
 		unlockPlayer();
 	}

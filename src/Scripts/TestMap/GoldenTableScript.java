@@ -38,6 +38,9 @@ public class GoldenTableScript extends Script {
 
 	@Override
 	protected void cleanup() {
+		if(!isFlagSet("hasTalkedToTable")) {
+			setFlag("hasTalkedToTable");
+		}
 		if(isFlagSet("hasFoundKey")) {
 			setFlag("doneWithPuzzle");
 		}

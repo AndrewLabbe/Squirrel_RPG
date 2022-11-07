@@ -5,6 +5,7 @@ import Scripts.TestMap.CorrectTableScript;
 import Scripts.TestMap.GoldenTableScript;
 import Scripts.TestMap.SimpleTableScript;
 import Scripts.TestMap.TempleScript;
+import Scripts.TestMap.UpperLeftTableScript;
 import Tilesets.templeTileset;
 
 // Represents the Map for the Temple
@@ -21,7 +22,7 @@ public class templeMap extends Map {
         getMapTile(7, 1).setInteractScript(new GoldenTableScript());
         
         //Trap Door Table
-        getMapTile(2, 2).setInteractScript(new CorrectTableScript());
+        getMapTile(2, 2).setInteractScript(new UpperLeftTableScript());
         
         //Middle Tables
         getMapTile(6, 13).setInteractScript(new SimpleTableScript());
@@ -63,6 +64,7 @@ public class templeMap extends Map {
         getMapTile(12, 12).setInteractScript(new SimpleTableScript());
         getMapTile(10, 14).setInteractScript(new SimpleTableScript());
         getMapTile(12, 14).setInteractScript(new SimpleTableScript());
+        getMapTile(12, 2).setInteractScript(new SimpleTableScript());
         
         //Key Table
         getMapTile(2, 12).setInteractScript(new CorrectTableScript());
