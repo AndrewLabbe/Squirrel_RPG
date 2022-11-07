@@ -164,7 +164,7 @@ public abstract class Player extends GameObject {
             keyLocker.lockKey(INTERACT_KEY);
             map.entityInteract(this);
         }
-
+        
         // if walk left key is pressed, move player to the left
         if (Keyboard.isKeyDown(MOVE_LEFT_KEY)&& Math.round(getX()) > -15 && !Keyboard.isKeyDown(SPEED_KEY)) {
             moveAmountX -= walkSpeed;
@@ -182,14 +182,15 @@ public abstract class Player extends GameObject {
 
         // if walk right key is pressed, move player to the right 
         //Checks to see if main character has reach map bounds
-        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < 2340 && !Keyboard.isKeyDown(SPEED_KEY)) {
-            moveAmountX += walkSpeed;
+        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < map.getWidthPixels() - 55 && !Keyboard.isKeyDown(SPEED_KEY)) {
+        	System.out.println("reached");
+        	moveAmountX += walkSpeed;
             facingDirection = Direction.RIGHT;
             currentWalkingXDirection = Direction.RIGHT;
             lastWalkingXDirection = Direction.RIGHT;
         }
         //Walk faster
-        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < 2340 && Keyboard.isKeyDown(SPEED_KEY)) {
+        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < map.getWidthPixels() - 55 && Keyboard.isKeyDown(SPEED_KEY)) {
             moveAmountX += walkSpeed*2;
             facingDirection = Direction.RIGHT;
             currentWalkingXDirection = Direction.RIGHT;
@@ -212,13 +213,13 @@ public abstract class Player extends GameObject {
             currentWalkingYDirection = Direction.UP;
             lastWalkingYDirection = Direction.UP;
         }
-        else if (Keyboard.isKeyDown(MOVE_DOWN_KEY)&& Math.round(getY()) < 2340 && !Keyboard.isKeyDown(SPEED_KEY)) {
+        else if (Keyboard.isKeyDown(MOVE_DOWN_KEY)&& Math.round(getY()) < map.getHeightPixels() - 60 && !Keyboard.isKeyDown(SPEED_KEY)) {
             moveAmountY += walkSpeed;
             currentWalkingYDirection = Direction.DOWN;
             lastWalkingYDirection = Direction.DOWN;
         }
         //Walk faster
-        else if (Keyboard.isKeyDown(MOVE_DOWN_KEY)&& Math.round(getY()) < 2340 && Keyboard.isKeyDown(SPEED_KEY)) {
+        else if (Keyboard.isKeyDown(MOVE_DOWN_KEY)&& Math.round(getY()) < map.getHeightPixels() - 60 && Keyboard.isKeyDown(SPEED_KEY)) {
             moveAmountY += walkSpeed*2;
             currentWalkingYDirection = Direction.DOWN;
             lastWalkingYDirection = Direction.DOWN;
