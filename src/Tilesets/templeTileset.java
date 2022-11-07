@@ -220,6 +220,26 @@ public class templeTileset extends Tileset {
 
 		templeTiles.add(topWallWithFloorTile);
 		
+		// L Shaped Wall Tile
+		Frame LWall = new FrameBuilder(getSubImage(7, 0))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder LWallTile = new MapTileBuilder(LWall)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		templeTiles.add(LWallTile);
+				
+		// Reverse L Shaped Wall Tile
+		Frame reverseLWall = new FrameBuilder(getSubImage(7, 1))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder reverseLWallTile = new MapTileBuilder(reverseLWall)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		templeTiles.add(reverseLWallTile);
+		
 		return templeTiles;
 	}
 
