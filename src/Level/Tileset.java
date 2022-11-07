@@ -1,14 +1,14 @@
 package Level;
 
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import Builders.FrameBuilder;
 import Builders.MapTileBuilder;
 import GameObject.SpriteSheet;
 import Utils.ImageUtils;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 // This class represents a tileset, which defines a set of tiles based on a sprite sheet image
 public abstract class Tileset extends SpriteSheet {

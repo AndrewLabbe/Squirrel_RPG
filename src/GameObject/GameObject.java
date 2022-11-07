@@ -1,13 +1,17 @@
 package GameObject;
 
+import java.awt.Color;
+import java.util.HashMap;
+
 import Engine.GraphicsHandler;
-import Level.*;
+import Level.Map;
+import Level.MapCollisionCheckResult;
+import Level.MapCollisionHandler;
+import Level.MapEntity;
+import Level.Trigger;
 import Utils.Direction;
 import Utils.ImageUtils;
 import Utils.MathUtils;
-
-import java.awt.*;
-import java.util.HashMap;
 
 /*
 	The all important GameObject class is what every "entity" used in this game should be based off of

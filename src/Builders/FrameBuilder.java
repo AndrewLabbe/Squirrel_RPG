@@ -1,10 +1,10 @@
 package Builders;
 
+import java.awt.image.BufferedImage;
+
 import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.Rectangle;
-
-import java.awt.image.BufferedImage;
 
 // Builder class to instantiate a Frame class
 public class FrameBuilder {

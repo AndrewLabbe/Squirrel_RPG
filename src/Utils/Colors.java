@@ -1,6 +1,6 @@
 package Utils;
 
-import java.awt.*;
+import java.awt.Color;
 
 // just defines some colors based on rgb that are used in the game
 public class Colors {

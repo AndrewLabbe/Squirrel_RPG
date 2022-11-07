@@ -1,5 +1,7 @@
 package Players;
 
+import java.util.HashMap;
+
 import Builders.FrameBuilder;
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
@@ -8,8 +10,6 @@ import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.Map;
 import Level.Player;
-
-import java.util.HashMap;
 
 // This is the class for the Cat player character
 // basically just sets some values for physics and then defines animations

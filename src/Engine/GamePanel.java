@@ -1,14 +1,17 @@
 package Engine;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
 import GameObject.Rectangle;
 import SpriteFont.SpriteFont;
 import Utils.Colors;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.TimerTask;
-import Level.Player;
 
 /*
  * This is where the game loop starts

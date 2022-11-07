@@ -1,8 +1,7 @@
 package Scripts.TestMap;
 
-import Level.NPC;
 import Engine.GamePanel;
-import Engine.Sound;
+import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
 

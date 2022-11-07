@@ -4,7 +4,11 @@ import Builders.FrameBuilder;
 import Builders.MapTileBuilder;
 import Engine.GamePanel;
 import GameObject.Frame;
-import Level.*;
+import Level.MapTile;
+import Level.NPC;
+import Level.Script;
+import Level.ScriptState;
+import Level.TileType;
 import Utils.Direction;
 import Utils.Point;
 

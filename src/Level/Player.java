@@ -1,20 +1,17 @@
 package Level;
 
+import java.util.ArrayList;
+
 import Engine.Key;
-import Engine.Sound;
 import Engine.KeyLocker;
 import Engine.Keyboard;
-import Level.Projectile;
+import Engine.Sound;
 import GameObject.GameObject;
 import GameObject.Rectangle;
 import GameObject.SpriteSheet;
-import NPCs.Currency;
 import Projectiles.Acorn;
-import Projectiles.Bullet;
 import Utils.Direction;
 import Utils.Stopwatch;
-
-import java.util.ArrayList;
 
 public abstract class Player extends GameObject {
     // values that affect player movement
