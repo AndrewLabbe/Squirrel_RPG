@@ -17,6 +17,7 @@ public class MenuScreen extends Screen {
     protected int menuItemSelected = -1;
     protected SpriteFont playGame;
     protected SpriteFont credits, options;
+    protected SpriteFont title;
     protected Map background;
     protected Stopwatch keyTimer = new Stopwatch();
     protected int pointerLocationX, pointerLocationY;
@@ -28,12 +29,16 @@ public class MenuScreen extends Screen {
 
     @Override
     public void initialize() {
-        playGame = new SpriteFont("PLAY GAME", 200, 150, "Comic Sans", 30, new Color(49, 207, 240));
+    	title = new SpriteFont("SQUIRREL GAME", 25, 50, "Comic Sans", 30, new Color(49, 207, 240));
+    	title.setOutlineColor(Color.black);
+    	title.setOutlineThickness(3);
+    	
+        playGame = new SpriteFont("PLAY GAME", 160, 150, "Comic Sans", 30, new Color(49, 207, 240));
         playGame.setOutlineColor(Color.black);
         playGame.setOutlineThickness(3);
-        credits = new SpriteFont("CREDITS", 200, 250, "Comic Sans", 30, new Color(49, 207, 240));
+        credits = new SpriteFont("CREDITS", 160, 250, "Comic Sans", 30, new Color(49, 207, 240));
         credits.setOutlineColor(Color.black);
-        options = new SpriteFont("OPTIONS", 200, 350, "Comic Sans", 30, new Color(49, 207, 240));
+        options = new SpriteFont("OPTIONS", 160, 350, "Comic Sans", 30, new Color(49, 207, 240));
         options.setOutlineColor(Color.black);
         options.setOutlineThickness(3);
         credits.setOutlineThickness(3);
@@ -69,19 +74,19 @@ public class MenuScreen extends Screen {
         	playGame.setColor(new Color(255, 215, 0));
             credits.setColor(new Color(49, 207, 240));
             options.setColor(new Color(49, 207, 240));
-            pointerLocationX = 170;
+            pointerLocationX = 130;
             pointerLocationY = 130;
         } else if (currentMenuItemHovered == 1) {
         	playGame.setColor(new Color(49, 207, 240));
             credits.setColor(new Color(255, 215, 0));
             options.setColor(new Color(49, 207, 240));
-            pointerLocationX = 170;
+            pointerLocationX = 130;
             pointerLocationY = 230;
         } else if (currentMenuItemHovered == 2) {
             playGame.setColor(new Color(49, 207, 240));
             credits.setColor(new Color(49, 207, 240));
             options.setColor(new Color(255, 215, 0));
-            pointerLocationX = 170;
+            pointerLocationX = 130;
             pointerLocationY = 330;
         }
 
@@ -103,6 +108,7 @@ public class MenuScreen extends Screen {
 
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
+        title.draw(graphicsHandler);
         playGame.draw(graphicsHandler);
         credits.draw(graphicsHandler);
         options.draw(graphicsHandler);
