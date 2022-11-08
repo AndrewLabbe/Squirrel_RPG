@@ -417,7 +417,7 @@ public abstract class Player extends GameObject {
     	projectileY = Math.round(getY()) + 30;
     	
     	//Creates a new bullet 
-    	Acorn acorn = new Acorn(projectileX, projectileY, directionX, directionY, damage); 
+    	Acorn acorn = new Acorn(projectileX, projectileY, directionX, directionY, damage, this); 
     	map.addProjectiles(acorn); 
     	fireDelay.reset(); 
     	
@@ -438,6 +438,16 @@ public abstract class Player extends GameObject {
 		sound.setFile(i);
 		sound.play();
 	} 
+	
+	//confirms when a projectile hits an enemy
+	public boolean getUpdate() {
+		return this.updateKillCount;
+	}
+	
+	public void setUpdate(boolean set) {
+		this.updateKillCount = set;
+
+	}
 	//Returns current player speed 
 	public float getWalkSpeed() {
 		return walkSpeed;
@@ -471,13 +481,6 @@ public abstract class Player extends GameObject {
 				damage = 10; 
 			}
 		}
-		}
-		public boolean getUpdate() {
-			return this.updateKillCount;
-		}
+	}
 		
-		public void setUpdate(boolean set) {
-			this.updateKillCount = set;
-	
-		}
 	}
