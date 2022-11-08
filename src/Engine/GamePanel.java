@@ -33,8 +33,10 @@ public class GamePanel extends JPanel {
 	private KeyLocker keyLocker = new KeyLocker();
 	private final Key pauseKey = Key.P;
 	
-	//Initialize sound
-	public Sound sound = new Sound();
+	//Initialize background music
+	public Sound music = new Sound();
+	//Initialize sound effects
+	public Sound se = new Sound ();
 	
 	//Game time 
 	private int time; 
@@ -89,7 +91,7 @@ public class GamePanel extends JPanel {
 		doPaint = true;
 		
 		//Play background music
-		//playMusic(0);
+		playMusic(0);
 	}
 
 	// this starts the timer (the game loop is started here
@@ -133,16 +135,16 @@ public class GamePanel extends JPanel {
 	}
 	
 	public void playMusic(int i) {
-			sound.setFile(i);
-			sound.play();
-			sound.loop();
+			music.setFile(i);
+			music.play();
+			music.loop();
 		}
 		public void stopMusic() {
-			sound.stop();
+			music.stop();
 		}
 		public void playSE(int i) {
-			sound.setFile(i);
-			sound.play();
+			se.setFile(i);
+			se.play();
 		}
 			
 		//Fade to day/night
