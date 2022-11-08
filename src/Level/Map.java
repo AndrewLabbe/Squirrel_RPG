@@ -764,24 +764,28 @@ public abstract class Map {
   			}
   		}
   	} 
+  	//Decreases player health bar
   	public void dealDamage() {
 		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - 2);
 	} 
   	
+  	//Spawns certain number of enemies around each spawner 
   	public void spawnEnemies(int spawnNumber) {
   		for (Spawner spawner : this.spawners) {
         	spawner.spawnEnemies(spawnNumber);
         }
   	} 
   	
+  	//Removes all enemies from the map
   	public void removeEnemies() {
   		for (Enemy enemy : this.enemies) {
   			enemy.mapEntityStatus = MapEntityStatus.REMOVED;
   		}
   	} 
   	
+  	//Spawns a power up where an enemy was eliminated if one is not currently active and the cool down is up 
   	public void spawnPowerUp(Point spawnLocation) {
-  		if(powerUpCoolDown.isTimeUp()) {
+  		if(powerUpActive == false && powerUpCoolDown.isTimeUp()) {
   			PowerUp powerUp;
   			int randomNum = rng.nextInt(3); 
   			randomNum = randomNum % 3;
@@ -799,13 +803,16 @@ public abstract class Map {
   					powerUp = new SpeedBoost(spawnLocation);
   			}
   			addPowerUp(powerUp); 
-  			powerUpActive = true;
   			powerUpCoolDown.setWaitTime(20000); 
   		}
   	} 
-  	
+  	//Returns if the player has a power-up activated 
   	public boolean getPowerUpActive() {
   		return powerUpActive;
   	} 
+  	//Sets the player power-up status
+  	public void setPowerUpActive() {
+  		powerUpActive =! powerUpActive;
+  	}
     
 }

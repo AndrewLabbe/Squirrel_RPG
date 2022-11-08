@@ -24,6 +24,7 @@ public class SpeedBoost extends PowerUp {
 		if(intersects(player)) { 
 			player.setWalkSpeed(player.getWalkSpeed()*2.0f); 
 			player.setSpeedBoostActive();
+			map.setPowerUpActive();
 			setMapEntityStatus(MapEntityStatus.REMOVED);
 		} 
 	} 

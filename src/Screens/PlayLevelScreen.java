@@ -69,7 +69,9 @@ public class PlayLevelScreen extends Screen {
 	//Displays the power up timer 
 	private SpriteFont powerUpTimer; 
 	
-	private int time1;
+	private int time1; 
+	
+	private Color powerUpTimerColor;
 	
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -140,7 +142,7 @@ public class PlayLevelScreen extends Screen {
         
         time = 0; 
         
-        time1 = 20;
+        time1 = 300;
         
         spawnNumber = 1; 
         
@@ -149,6 +151,8 @@ public class PlayLevelScreen extends Screen {
         day = false;
         
         powerUpTimer = new SpriteFont("Power-Up", 5, 115, "Comic Sans", 20, new Color(0, 0, 0)); 
+        
+        powerUpTimerColor = new Color(150,0,0);
         
         winScreen = new WinScreen(this);
     }
@@ -252,12 +256,23 @@ public class PlayLevelScreen extends Screen {
       	//Updates wave
       	waveTracker();
       	
+      	if(time % 10 == 0) {
+      		int temp = powerUpTimerColor.getRed();
+      		if(temp == 150) {
+      			powerUpTimerColor = new Color(100, 0, 0);
+      		} 
+      		else {
+      			powerUpTimerColor = new Color(150, 0, 0);
+      		}
+      	}
+      	
       	if(map.getPowerUpActive()) {
-      		powerUpTimer.setText("Power-Up: " + time1);
+      		powerUpTimer.setText("Power-Up: " + (time1/10));
+      		powerUpTimer.setColor(powerUpTimerColor);
       		time1--;
       	} 
       	else {
-      		time1 = 20;
+      		time1 = 300;
       	}
       	
         screenCoordinator.setLevelScreen(this);

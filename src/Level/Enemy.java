@@ -16,7 +16,7 @@ public class Enemy extends MapEntity {
 		super.update(); 
 	}
 	
-	//Remove enemy from the screen
+	//Remove enemy from the screen, add coins, and spawn a power-up
 	public void eliminateEnemy(Enemy enemy) {
 		enemy.mapEntityStatus = mapEntityStatus.REMOVED; 
 		map.addCoins(); 

@@ -21,7 +21,8 @@ public class DoublePoints extends PowerUp {
 	public void update(Player player, Map map) {
 		super.update(player, map); 
 		if(intersects(player)) { 
-			map.doublePointsStart();
+			map.doublePointsStart(); 
+			map.setPowerUpActive();
 			setMapEntityStatus(MapEntityStatus.REMOVED);
 		} 
 	} 
