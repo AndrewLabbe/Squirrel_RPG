@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import Enemies.GhostEnemy;
@@ -14,6 +15,10 @@ import Engine.Keyboard;
 import Engine.ScreenManager;
 import GameObject.Rectangle;
 import NPCs.Currency;
+import PowerUps.DoublePoints;
+import PowerUps.InstaElim;
+import PowerUps.MaxHealth;
+import PowerUps.SpeedBoost;
 import Utils.Direction;
 import Utils.Point;
 import Utils.Stopwatch;
@@ -98,8 +103,14 @@ public abstract class Map {
     private boolean doublePoints; 
     //Double points timeout 
     private Stopwatch doublePointsTimeout; 
-    
+    //Duration powerup is active for
     private final int powerUpDuration = 20000; 
+    //Random number generator for scrambling power up drop 
+    private Random rng;
+    //Powerup cool down 
+    private Stopwatch powerUpCoolDown; 
+    //Powerup active 
+    private boolean powerUpActive;
     
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
@@ -117,6 +128,9 @@ public abstract class Map {
         elimPoints = 10; 
         doublePointsTimeout = new Stopwatch();
         doublePoints = false; 
+        rng = new Random(); 
+        powerUpCoolDown = new Stopwatch(); 
+        powerUpActive = false;
     }
 
     // sets up map by reading in the map file to create the tile map
@@ -551,7 +565,7 @@ public abstract class Map {
             }
             healthCheck = false;
         } 
-        handlePowerUps();
+        handlePowerUps(); 
     }
 
     // based on the player's current X position (which in a level can potentially be updated each frame),
@@ -739,7 +753,10 @@ public abstract class Map {
 		doublePointsTimeout.setWaitTime(powerUpDuration);
     } 
     //Handles power-ups
-  	public void handlePowerUps() {
+  	public void handlePowerUps() { 
+  		if(powerUpActive && powerUpCoolDown.isTimeUp()) {
+  			powerUpActive = !powerUpActive;
+  		}
   		if(doublePoints == true) {
   			if(doublePointsTimeout.isTimeUp() == true) {
   				doublePoints = false; 
@@ -761,6 +778,34 @@ public abstract class Map {
   		for (Enemy enemy : this.enemies) {
   			enemy.mapEntityStatus = MapEntityStatus.REMOVED;
   		}
-  	}
+  	} 
+  	
+  	public void spawnPowerUp(Point spawnLocation) {
+  		if(powerUpCoolDown.isTimeUp()) {
+  			PowerUp powerUp;
+  			int randomNum = rng.nextInt(3); 
+  			randomNum = randomNum % 3;
+  			switch(randomNum) {
+  				case 0: 
+  					powerUp = new DoublePoints(spawnLocation); 
+  					break;
+  				case 1: 
+  					powerUp = new InstaElim(spawnLocation); 
+  					break;
+  				case 2: 
+  					powerUp = new MaxHealth(spawnLocation); 
+  					break;
+  				default: 
+  					powerUp = new SpeedBoost(spawnLocation);
+  			}
+  			addPowerUp(powerUp); 
+  			powerUpActive = true;
+  			powerUpCoolDown.setWaitTime(20000); 
+  		}
+  	} 
+  	
+  	public boolean getPowerUpActive() {
+  		return powerUpActive;
+  	} 
     
 }

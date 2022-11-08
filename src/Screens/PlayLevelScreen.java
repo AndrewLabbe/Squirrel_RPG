@@ -65,7 +65,11 @@ public class PlayLevelScreen extends Screen {
 	//Displays the wave
 	private SpriteFont wave; 
 	//Specifies if it is day or night 
-	private boolean day;
+	private boolean day; 
+	//Displays the power up timer 
+	private SpriteFont powerUpTimer; 
+	
+	private int time1;
 	
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -136,11 +140,15 @@ public class PlayLevelScreen extends Screen {
         
         time = 0; 
         
+        time1 = 20;
+        
         spawnNumber = 1; 
         
         wave = new SpriteFont("Wave: I", 350, 30, "Comic Sans", 20, new Color(255, 0, 0)); 
         
         day = false;
+        
+        powerUpTimer = new SpriteFont("Power-Up", 5, 115, "Comic Sans", 20, new Color(0, 0, 0)); 
         
         winScreen = new WinScreen(this);
     }
@@ -244,6 +252,14 @@ public class PlayLevelScreen extends Screen {
       	//Updates wave
       	waveTracker();
       	
+      	if(map.getPowerUpActive()) {
+      		powerUpTimer.setText("Power-Up: " + time1);
+      		time1--;
+      	} 
+      	else {
+      		time1 = 20;
+      	}
+      	
         screenCoordinator.setLevelScreen(this);
         
     }
@@ -295,6 +311,10 @@ public class PlayLevelScreen extends Screen {
         // Shade for Day Night Cycle
         graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, shade));
     
+        if(map.getPowerUpActive()) {
+        	powerUpTimer.draw(graphicsHandler);
+        }
+        
         wave.draw(graphicsHandler);
         
     }

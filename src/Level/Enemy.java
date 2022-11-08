@@ -1,6 +1,7 @@
 package Level;
 
 import GameObject.SpriteSheet;
+import Utils.Point;
 
 public class Enemy extends MapEntity {
 	
@@ -18,7 +19,9 @@ public class Enemy extends MapEntity {
 	//Remove enemy from the screen
 	public void eliminateEnemy(Enemy enemy) {
 		enemy.mapEntityStatus = mapEntityStatus.REMOVED; 
-		map.addCoins();
+		map.addCoins(); 
+		Point elimPoint = new Point(this.x, this.y);
+		map.spawnPowerUp(elimPoint);
 	} 
 	//Damage enemy 
 	public void damageEnemy(Enemy enemy, int damage) {
