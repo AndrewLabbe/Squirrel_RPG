@@ -240,6 +240,26 @@ public class templeTileset extends Tileset {
 
 		templeTiles.add(reverseLWallTile);
 		
+		// Left corner dirt tile
+		Frame dirtLeftCorner = new FrameBuilder(getSubImage(7, 2))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder dirtLeftCornerTile = new MapTileBuilder(dirtLeftCorner)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		templeTiles.add(dirtLeftCornerTile);
+				
+		// Right corner dirt tile
+		Frame dirtRightCorner = new FrameBuilder(getSubImage(8, 0))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder dirtRightCornerTile = new MapTileBuilder(dirtRightCorner)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		templeTiles.add(dirtRightCornerTile);
+		
 		return templeTiles;
 	}
 
