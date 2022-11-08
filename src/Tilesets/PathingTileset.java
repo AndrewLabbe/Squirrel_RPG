@@ -374,7 +374,8 @@ public class PathingTileset extends Tileset {
 				.withScale(tileScale)
 				.build();
 
-		MapTileBuilder chestTilePiece = new MapTileBuilder(chestTile)
+		MapTileBuilder chestTilePiece = new MapTileBuilder(grassColorTile)
+				.withTopLayer(chestTile)
 				.withTileType(TileType.NOT_PASSABLE);
 
 		pathTiles.add(chestTilePiece);
@@ -685,6 +686,78 @@ public class PathingTileset extends Tileset {
 				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(middleBridgeTile);
+
+		// Left Temple Entrance
+		Frame leftTempleEntrance = new FrameBuilder(getSubImage(14, 0))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder leftTempleEntranceTile = new MapTileBuilder(leftTempleEntrance)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(leftTempleEntranceTile);
+
+		// Middle Temple Entrance
+		Frame middleTempleEntrance = new FrameBuilder(getSubImage(14, 1))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder middleTempleEntranceTile = new MapTileBuilder(middleTempleEntrance)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(middleTempleEntranceTile);
+
+		// Right Temple Entrance
+		Frame rightTempleEntrance = new FrameBuilder(getSubImage(14, 2))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder rightTempleEntranceTile = new MapTileBuilder(rightTempleEntrance)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(rightTempleEntranceTile);
+
+		// Stair Temple Entrance
+		Frame stairTemple = new FrameBuilder(getSubImage(14, 3))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder stairTempleTile = new MapTileBuilder(stairTemple)
+				.withTileType(TileType.PASSABLE);
+
+		pathTiles.add(stairTempleTile);
+
+		// Left Temple Corner
+		Frame leftTempleCorner = new FrameBuilder(getSubImage(15, 0))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder leftTempleCornerTile = new MapTileBuilder(leftTempleCorner)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(leftTempleCornerTile);
+
+		// Temple Wall
+		Frame templeWall = new FrameBuilder(getSubImage(15, 1))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder templeWallTile = new MapTileBuilder(templeWall)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(templeWallTile);
+
+		// Right Temple Corner
+		Frame rightTempleCorner = new FrameBuilder(getSubImage(15, 2))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder rightTempleCornerTile = new MapTileBuilder(rightTempleCorner)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(rightTempleCornerTile);
+
+
 
 
 		return pathTiles;
