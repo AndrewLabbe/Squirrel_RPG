@@ -35,6 +35,9 @@ public class Camera extends Rectangle {
     
     //Active power-up map entities 
     private ArrayList<PowerUp> activePowerUps = new ArrayList(); 
+    
+    //Active spawner map entities 
+    private ArrayList<Spawner> activeSpawners = new ArrayList();
 
     // determines how many tiles off screen an entity can be before it will be deemed inactive and not included in the update/draw cycles until it comes back in range
     private final int UPDATE_OFF_SCREEN_RANGE = 4;
@@ -79,7 +82,9 @@ public class Camera extends Rectangle {
         //Define active enemies 
         activeEnemies = loadActiveEnemies(); 
         //Define active power-ups 
-        activePowerUps = loadActivePowerUps();
+        activePowerUps = loadActivePowerUps(); 
+        //Define active spawners 
+        activeSpawners = loadActiveSpawners();
         
         for (EnhancedMapTile enhancedMapTile : activeEnhancedMapTiles) {
             enhancedMapTile.update(player);
@@ -102,6 +107,11 @@ public class Camera extends Rectangle {
         //For each active power-up call its update method 
         for(PowerUp powerUp : activePowerUps) {
         	powerUp.update(player, map);
+        } 
+        
+        //For each active spawner call its update method 
+        for(Spawner spawner : activeSpawners) {
+        	spawner.update();
         }
     }
 
@@ -280,7 +290,13 @@ public class Camera extends Rectangle {
         		powerUp.draw(graphicsHandler);
         	}
         }
-
+        //Draws the active spawners to the screen 
+        for(Spawner spawner : activeSpawners) {
+        	if(containsDraw(spawner)) {
+        		spawner.draw(graphicsHandler);
+        	}
+        }
+        
         // player is drawn to screen
         player.draw(graphicsHandler);
 
@@ -432,5 +448,34 @@ public class Camera extends Rectangle {
     //Returns active power-ups 
     public ArrayList<PowerUp> getActivePowerUps() {
     	return activePowerUps;
+    } 
+    
+    //Determines which spawners are on the screen and returns them 
+    private ArrayList<Spawner> loadActiveSpawners() {
+    	ArrayList<Spawner> activeSpawners = new ArrayList(); 
+    	for (int i = map.getSpawners().size() - 1; i >= 0; i--) {
+            Spawner spawner = map.getSpawners().get(i);
+
+            if (isMapEntityActive(spawner)) {
+                activeSpawners.add(spawner);
+                if (spawner.mapEntityStatus == MapEntityStatus.INACTIVE) {
+                    spawner.setMapEntityStatus(MapEntityStatus.ACTIVE);
+                }
+                
+            } 
+            else if (spawner.getMapEntityStatus() == MapEntityStatus.ACTIVE) {
+                spawner.setMapEntityStatus(MapEntityStatus.INACTIVE);
+                
+            } 
+            else if (spawner.getMapEntityStatus() == MapEntityStatus.REMOVED) {
+                map.getSpawners().remove(i);
+            }
+        }
+        return activeSpawners;
+    } 
+    
+    //Returns active spawners
+    public ArrayList<Spawner> getActiveSpawners() {
+    	return activeSpawners;
     }
 }

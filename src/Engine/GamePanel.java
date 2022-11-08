@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import Game.GameState;
 import GameObject.Rectangle;
+import Screens.PlayLevelScreen;
 import SpriteFont.SpriteFont;
 import Utils.Colors;
 
@@ -21,7 +23,7 @@ public class GamePanel extends JPanel {
 	// loads Screens on to the JPanel
 	// each screen has its own update and draw methods defined to handle a "section" of the game.
 	private ScreenManager screenManager;
-
+	
 	// used to create the game loop and cycle between update and draw calls
 	private Timer timer;
 
@@ -41,15 +43,6 @@ public class GamePanel extends JPanel {
 	
 	//Game time 
 	private int time; 
-	
-	//Opacity for Day/Night Cycle 
-	private int shade = 0; 
-	//Changing to night or day 
-	private boolean fading = true; 
-	//Day or night is happening 
-	private boolean changeDay = true; 
-	//Length of day/night
-	private static final int dayLength = 500;
 	
 	/*
 	 * The JPanel and various important class instances are setup here
@@ -81,7 +74,7 @@ public class GamePanel extends JPanel {
 				time++;
 			}
 		});
-		timer.setRepeats(true);
+		timer.setRepeats(true); 
 	}
 
 	// this is called later after instantiation, and will initialize screenManager
@@ -123,16 +116,7 @@ public class GamePanel extends JPanel {
 		if (time % 200 == 0) {
 			System.out.println("Time: " + time);
 		} 
-		//If day/night time has ended commence fade 
-		if(time % dayLength == 0) {
-			changeDay = true; 
-		} 
-		//If day/night is changing call the day/night fade 
-		if(changeDay == true) {
-			if (time % 5 == 0) {
-				cycleDay(); 
-			}
-		} 
+		
 	}
 	
 	public void playMusic(int i) {
@@ -146,30 +130,6 @@ public class GamePanel extends JPanel {
 		public void playSE(int i) {
 			sound.setFile(i);
 			sound.play();
-		}
-			
-		//Fade to day/night
-		public void cycleDay() {
-			if (fading == true) { 
-				//System.out.println("Turning Night");
-				if(shade < 125) {
-					shade = shade + 5; 
-				} 
-				else {
-					fading = false; 
-					changeDay = false;
-				}
-			}
-			else { 
-				//System.out.println("Turning Day");
-				if(shade > 0) {
-					shade = shade - 5;
-				}
-				else {
-					fading = true;
-					changeDay = false;
-				}
-			}
 		}
 
 	public void draw() {
@@ -185,8 +145,6 @@ public class GamePanel extends JPanel {
 			graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));
 		}
 		
-		// Shade for Day Night Cycle
-		graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, shade));
 	}
 
 	@Override

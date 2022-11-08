@@ -2,11 +2,16 @@ package Screens;
 
 
 
+import java.awt.Color;
+
+import javax.swing.Timer;
+
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import Engine.Screen;
+import Engine.ScreenManager;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.EnhancedMapTile;
@@ -38,11 +43,22 @@ public class PlayLevelScreen extends Screen {
     private boolean wasSpacePressed = false;
     private boolean wasFPressed = false;
     //protected Key MOVE_LEFT_KEY = Key.LEFT;
-   // protected Key MOVE_RIGHT_KEY = Key.RIGHT;
+    //protected Key MOVE_RIGHT_KEY = Key.RIGHT;
     private final Key invKey = Key.I;
     private final Key opsKey = Key.O;
 	private final Key buyKey = Key.ONE;
-	private final Key sellKey = Key.TWO;
+	private final Key sellKey = Key.TWO; 
+	
+	//Play Level time 
+	private int time; 	
+	//Opacity for Day/Night Cycle 
+	private int shade = 0; 
+	//Changing to night or day 
+	private boolean fading = true; 
+	//Day or night is happening 
+	private boolean changeDay = true; 
+	//Length of day/night
+	private static final int dayLength = 500; 
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -112,6 +128,8 @@ public class PlayLevelScreen extends Screen {
             }
         }
 
+        time = 0;
+        
         winScreen = new WinScreen(this);
     }
 
@@ -171,10 +189,47 @@ public class PlayLevelScreen extends Screen {
         	System.out.println("Shop entered");
         }
         
+        //If day/night time has ended commence fade 
+        if(time % dayLength == 0) {
+      		changeDay = true; 
+      	} 
+      	//If day/night is changing call the day/night fade 
+      	if(changeDay == true) {
+      		if (time % 5 == 0) {
+      			cycleDay(); 
+      		}
+      	} 
+        
+      	time++;	
+      	
         screenCoordinator.setLevelScreen(this);
         
     }
 
+    //Fade to day/night
+  	public void cycleDay() {
+  		if (fading == true) { 
+  			//System.out.println("Turning Night");
+  			if(shade < 125) {
+  				shade = shade + 5; 
+  			} 
+  			else {
+  				fading = false; 
+  				changeDay = false;
+  			}
+  		}
+  		else { 
+  			//System.out.println("Turning Day");
+  			if(shade > 0) {
+  				shade = shade - 5;
+  			}
+  			else {
+  				fading = true;
+  				changeDay = false;
+  			}
+  		}
+  	}    	
+    
     public void draw(GraphicsHandler graphicsHandler) {
         // based on screen state, draw appropriate graphics
         switch (playLevelScreenState) {
@@ -185,7 +240,11 @@ public class PlayLevelScreen extends Screen {
             case LEVEL_COMPLETED:
                 winScreen.draw(graphicsHandler);
                 break;
-        }
+        } 
+        
+        // Shade for Day Night Cycle
+        graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, shade));
+    
     }
 
     public PlayLevelScreenState getPlayLevelScreenState() {

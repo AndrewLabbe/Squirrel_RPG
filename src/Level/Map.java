@@ -66,6 +66,8 @@ public abstract class Map {
     protected ArrayList<Enemy> enemies; 
     //Array which holds all of the power-ups in game 
     protected ArrayList<PowerUp> powerUps; 
+    //Spawner objects array
+    protected ArrayList<Spawner> spawners;
 
     protected Script activeInteractScript;
 
@@ -154,6 +156,12 @@ public abstract class Map {
         this.powerUps = loadPowerUps(); 
         for (PowerUp powerUp : this.powerUps) {
         	powerUp.setMap(this);
+        } 
+        
+        //Puts spawners on the map 
+        this.spawners = loadSpawners(); 
+        for (Spawner spawner : this.spawners) {
+        	spawner.setMap(this);
         }
         
         this.loadScripts();
@@ -687,6 +695,26 @@ public abstract class Map {
     public ArrayList<PowerUp> getActivePowerUps() {
     	return camera.getActivePowerUps();
     } 
+    
+    //Spawner methods 
+    //Load spawners onto the map 
+    public ArrayList<Spawner> loadSpawners() {
+    	return new ArrayList();
+    } 
+    //Adds spawners to the map 
+    public void addSpawner(Spawner spawner) {
+    	spawner.setMap(this); 
+    	this.spawners.add(spawner); 
+    } 
+    //Returns all spawners 
+    public ArrayList<Spawner> getSpawners() {
+    	return spawners; 
+    }
+    //Returns all active spawners
+    public ArrayList<Spawner> getActiveSpawners() {
+    	return camera.getActiveSpawners();
+    } 
+    
     //Reset healthbar 
     public void resetHealthBar() {
     	healthBar.setGreenBarWidth(healthBar.getActualHealthBarWidth());

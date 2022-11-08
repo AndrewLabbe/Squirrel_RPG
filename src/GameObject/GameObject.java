@@ -4,10 +4,15 @@ import java.awt.Color;
 import java.util.HashMap;
 
 import Engine.GraphicsHandler;
+import Level.Enemy;
 import Level.Map;
 import Level.MapCollisionCheckResult;
 import Level.MapCollisionHandler;
 import Level.MapEntity;
+import Level.Player;
+import Level.PowerUp;
+import Level.Projectile;
+import Level.Spawner;
 import Level.Trigger;
 import Utils.Direction;
 import Utils.ImageUtils;
@@ -300,7 +305,7 @@ public class GameObject extends AnimatedSprite {
 
 			// Uncomment this to draw player's bounds to screen -- useful for debugging
 			
-			/*if (this instanceof Enemy) {
+			if (this instanceof Enemy) {
 				drawBounds(graphicsHandler, new Color(255, 0, 0, 100));
 			} 
 			if (this instanceof Player) {
@@ -311,7 +316,10 @@ public class GameObject extends AnimatedSprite {
 			} 
 			if (this instanceof PowerUp) {
 				drawBounds(graphicsHandler, new Color(255, 0, 200, 100));
-			}*/
+			} 
+			if (this instanceof Spawner) {
+				drawBounds(graphicsHandler, new Color(255, 0, 200, 100));
+			}
 			
 		} else {
 			super.draw(graphicsHandler);

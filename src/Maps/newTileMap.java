@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Level.Map;
 import Level.NPC;
+import Level.Spawner;
 import Level.Trigger;
 import NPCs.Dinosaur;
 import NPCs.Fox;
@@ -14,6 +15,7 @@ import Scripts.TestMap.IntroScript;
 import Scripts.TestMap.TempleScript;
 import Scripts.TestMap.WalrusScript;
 import Scripts.TestMap.changeShop;
+import Spawners.BasicSpawner;
 import Tilesets.PathingTileset;
 
 // Represents the Map for the Interior of Shopkeeper House
@@ -69,14 +71,24 @@ public class newTileMap extends Map {
 	 } 
 	 
 	 //Adds enemies to the map
-//	    @Override 
-//	    public ArrayList<Enemy> loadEnemies() {
-//	    	ArrayList<Enemy> enemies = new ArrayList(); 
-//	    	
+//	 @Override 
+//	 public ArrayList<Enemy> loadEnemies() {
+//		 ArrayList<Enemy> enemies = new ArrayList(); 
 //	    	enemies.add(new ZombieEnemy(getMapTile(18, 25).getLocation(), (float) 3.00));
 //	    	enemies.add(new ZombieEnemy(getMapTile(18, 10).getLocation(), (float) 3.00)); 
 //	    	enemies.add(new ZombieEnemy(getMapTile(10, 8).getLocation(), (float) 3.00)); 
 //	    	enemies.add(new ZombieEnemy(getMapTile(10, 25).getLocation(), (float) 3.00));
 //	    	return enemies;
-//	    }
+//	    } 
+	 
+	 //Adds spawners to the map
+	 @Override 
+	 public ArrayList<Spawner> loadSpawners() {
+		 ArrayList<Spawner> spawners = new ArrayList(); 
+		 
+		 spawners.add(new BasicSpawner(getMapTile(1, 25).getLocation()));
+		 
+		 return spawners;
+	 }
+	 
 }
