@@ -26,6 +26,7 @@ import Maps.newTileMap;
 import NPCs.Currency;
 import Players.Cat;
 import Players.Squirrel;
+import SpriteFont.SpriteFont;
 import Utils.Direction;
 import Utils.Point;
 
@@ -58,14 +59,19 @@ public class PlayLevelScreen extends Screen {
 	//Day or night is happening 
 	private boolean changeDay = true; 
 	//Length of day/night
-	private static final int dayLength = 500; 
-
+	private static final int dayLength = 1000; 
+	//Number of enemies that spawn 
+	private int spawnNumber;
+	//Displays the wave
+	private SpriteFont wave; 
+	//Specifies if it is day or night 
+	private boolean day;
+	
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
     }
 
     public void initialize() {
-    	
     	
     	// Kill Count 
     	screenKill = new KillCount();
@@ -127,8 +133,14 @@ public class PlayLevelScreen extends Screen {
                 trigger.getTriggerScript().setPlayer(player);
             }
         }
-
-        time = 0;
+        
+        time = 0; 
+        
+        spawnNumber = 1; 
+        
+        wave = new SpriteFont("Wave: I", 350, 30, "Comic Sans", 20, new Color(255, 0, 0)); 
+        
+        day = false;
         
         winScreen = new WinScreen(this);
     }
@@ -192,6 +204,22 @@ public class PlayLevelScreen extends Screen {
         //If day/night time has ended commence fade 
         if(time % dayLength == 0) {
       		changeDay = true; 
+      		if(time % (dayLength*2) == 0) {
+      			if(spawnNumber == 1)
+      				wave.setText("Wave: I"); 
+      			else if(spawnNumber == 2) {
+      				wave.setText("Wave: II"); 
+      			}
+      			else if(spawnNumber == 3) {
+      				wave.setText("Wave: III"); 
+      			}
+      			else if(spawnNumber == 4) {
+      				wave.setText("Wave: IV"); 
+      			}
+      			else {
+      				wave.setText("Wave: V"); 
+      			}
+      		}
       	} 
       	//If day/night is changing call the day/night fade 
       	if(changeDay == true) {
@@ -199,8 +227,22 @@ public class PlayLevelScreen extends Screen {
       			cycleDay(); 
       		}
       	} 
-        
-      	time++;	
+      	//Spawns enemies when night falls 
+      	if(time == 0 || time % (dayLength*2) == 0) {
+        	map.spawnEnemies(spawnNumber);
+        } 
+      	//Increaments time
+      	time++;
+      	//Removes enemies when day rises 
+      	if(time == dayLength || time % ((dayLength*2)+dayLength) == 0) {
+      		map.removeEnemies();
+      	}
+      	//Changes day night
+      	if(time % dayLength == 0) {
+      		day = !day;
+      	} 
+      	//Updates wave
+      	waveTracker();
       	
         screenCoordinator.setLevelScreen(this);
         
@@ -228,7 +270,15 @@ public class PlayLevelScreen extends Screen {
   				changeDay = false;
   			}
   		}
-  	}    	
+  	} 
+  	
+  	public void waveTracker() {
+  		if(spawnNumber < 5) {
+  			if(time % (dayLength*2) == 0) {
+  				spawnNumber++;
+  			}
+  		}
+  	}
     
     public void draw(GraphicsHandler graphicsHandler) {
         // based on screen state, draw appropriate graphics
@@ -245,6 +295,8 @@ public class PlayLevelScreen extends Screen {
         // Shade for Day Night Cycle
         graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, shade));
     
+        wave.draw(graphicsHandler);
+        
     }
 
     public PlayLevelScreenState getPlayLevelScreenState() {
@@ -263,5 +315,6 @@ public class PlayLevelScreen extends Screen {
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
         RUNNING, LEVEL_COMPLETED
-    }
+    } 
+    
 }

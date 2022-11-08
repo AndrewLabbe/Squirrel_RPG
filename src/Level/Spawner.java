@@ -13,6 +13,11 @@ public class Spawner extends MapEntity {
 
 	public void update(Player player) {
 		super.update();
+	}
+
+	//Override in subclass 
+	public void spawnEnemies(int spawnNumber) {
+		
 	} 
 
 }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Enemies.GhostEnemy;
 import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.Keyboard;
@@ -748,6 +749,18 @@ public abstract class Map {
   	} 
   	public void dealDamage() {
 		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - 2);
-	}
+	} 
+  	
+  	public void spawnEnemies(int spawnNumber) {
+  		for (Spawner spawner : this.spawners) {
+        	spawner.spawnEnemies(spawnNumber);
+        }
+  	} 
+  	
+  	public void removeEnemies() {
+  		for (Enemy enemy : this.enemies) {
+  			enemy.mapEntityStatus = MapEntityStatus.REMOVED;
+  		}
+  	}
     
 }
