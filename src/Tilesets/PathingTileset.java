@@ -757,6 +757,115 @@ public class PathingTileset extends Tileset {
 
 		pathTiles.add(rightTempleCornerTile);
 
+		// Front Raised Tile
+		Frame frontRaised = new FrameBuilder(getSubImage(12, 4))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder frontRaisedTile = new MapTileBuilder(frontRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(frontRaisedTile);
+
+		// Front Raised Grass Tile
+		Frame frontRaisedGrass = new FrameBuilder(getSubImage(13, 4))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder frontRaisedGrassTile = new MapTileBuilder(frontRaisedGrass)
+				.withTileType(TileType.PASSABLE);
+
+		pathTiles.add(frontRaisedGrassTile);
+
+		// Left Raised Tile
+		Frame leftRaised = new FrameBuilder(getSubImage(13, 3))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder leftRaisedTile = new MapTileBuilder(leftRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(leftRaisedTile);
+
+		// Right Raised Tile
+		Frame rightRaised = new FrameBuilder(getSubImage(14, 4))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder rightRaisedTile = new MapTileBuilder(rightRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(rightRaisedTile);
+
+		// Back Raised Tile
+		Frame backRaised = new FrameBuilder(getSubImage(15, 3))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder backRaisedTile = new MapTileBuilder(backRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(backRaisedTile);
+
+		// Raised Tile Staircase
+		Frame raiseStaircase = new FrameBuilder(getSubImage(15, 4))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder raiseStaircaseTile = new MapTileBuilder(raiseStaircase)
+				.withTileType(TileType.PASSABLE);
+
+		pathTiles.add(raiseStaircaseTile);
+
+		// Raised Tile Staircase Grass
+		Frame raiseStaircaseGrass = new FrameBuilder(getSubImage(16, 4))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder raiseStaircaseGrassTile = new MapTileBuilder(raiseStaircaseGrass)
+				.withTileType(TileType.PASSABLE);
+
+		pathTiles.add(raiseStaircaseGrassTile);
+
+		// Left Top Corner Raised Tile
+		Frame leftTopCornerRaised = new FrameBuilder(getSubImage(16, 0))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder leftTopCornerRaisedTile = new MapTileBuilder(leftTopCornerRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(leftTopCornerRaisedTile);
+
+		// Right Top Corner Raised Tile
+		Frame rightTopCornerRaised = new FrameBuilder(getSubImage(16, 1))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder rightTopCornerRaisedTile = new MapTileBuilder(rightTopCornerRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(rightTopCornerRaisedTile);
+
+		// Left Bottom Corner Raised Tile
+		Frame leftBottomCornerRaised = new FrameBuilder(getSubImage(16, 2))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder leftBottomCornerRaisedTile = new MapTileBuilder(leftBottomCornerRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(leftBottomCornerRaisedTile);
+
+		// Right Bottom Corner Raised Tile
+		Frame rightBottomCornerRaised = new FrameBuilder(getSubImage(16, 3))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder rightBottomCornerRaisedTile = new MapTileBuilder(rightBottomCornerRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(rightBottomCornerRaisedTile);
 
 
 
