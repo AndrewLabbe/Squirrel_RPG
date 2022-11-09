@@ -779,6 +779,7 @@ public abstract class Map {
   	//Decreases player health bar
   	public void dealDamage() {
 		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - 1);
+		System.out.println(healthBar.getGreenBarWidth());
 	} 
   	
   	//Spawns certain number of enemies around each spawner 

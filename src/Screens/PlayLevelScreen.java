@@ -320,7 +320,7 @@ public class PlayLevelScreen extends Screen {
                 break;
         } 
         
-        // Shade for Day Night Cycle
+        //Shade for Day Night Cycle
         graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, shade));
     
         if(map.getPowerUpActive()) {
