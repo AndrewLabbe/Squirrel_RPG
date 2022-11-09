@@ -74,6 +74,9 @@ public abstract class Map {
     protected ArrayList<PowerUp> powerUps; 
     //Spawner objects array
     protected ArrayList<Spawner> spawners;
+    
+    //Array which holds the enemies in game 
+    protected ArrayList<CollectibleItem> collectibles;
 
     protected Script activeInteractScript;
 
@@ -177,6 +180,12 @@ public abstract class Map {
         for (Enemy enemy : this.enemies) {
         	enemy.setMap(this);
         } 
+        
+      //Puts collectibles on the map
+        this.collectibles = loadCollectibles();
+        for (CollectibleItem collectible: this.collectibles) {
+        	collectible.setMap(this);
+        }
         
         //Puts power-ups on the map 
         this.powerUps = loadPowerUps(); 
@@ -843,5 +852,24 @@ public abstract class Map {
     
     public int getHealthBarLeft() {
     	return healthBarLeft;
+    }
+    
+    //collectible map methods
+    public ArrayList<CollectibleItem> getActiveCollectibles() {
+    	return camera.getActiveCollectibles(); 
+    }
+    
+    //
+    public ArrayList<CollectibleItem> loadCollectibles() {
+    	return new ArrayList();
+    }
+
+    public void addCollectibles(CollectibleItem collectible) {
+    	collectible.setMap(this);
+    	this.collectibles.add(collectible);
+    } 
+
+    public ArrayList<CollectibleItem> getCollectibles() {
+    	return collectibles;
     }
 }

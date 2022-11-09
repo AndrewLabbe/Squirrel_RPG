@@ -38,6 +38,9 @@ public class Camera extends Rectangle {
     
     //Active spawner map entities 
     private ArrayList<Spawner> activeSpawners = new ArrayList();
+    
+  //Collectible items
+    private ArrayList<CollectibleItem> activeCollectibles = new ArrayList();
 
     // determines how many tiles off screen an entity can be before it will be deemed inactive and not included in the update/draw cycles until it comes back in range
     private final int UPDATE_OFF_SCREEN_RANGE = 4;
@@ -478,4 +481,31 @@ public class Camera extends Rectangle {
     public ArrayList<Spawner> getActiveSpawners() {
     	return activeSpawners;
     }
+    
+    private ArrayList<CollectibleItem> loadActiveCollectibles() {
+        ArrayList<CollectibleItem> activeCollectibles = new ArrayList<>();
+        for (int i = map.getCollectibles().size() - 1; i >= 0; i--) {
+            CollectibleItem collectible = map.getCollectibles().get(i);
+
+            if (isMapEntityActive(collectible)) {
+                activeCollectibles.add(collectible);
+                if (collectible.mapEntityStatus == MapEntityStatus.INACTIVE) {
+                    collectible.setMapEntityStatus(MapEntityStatus.ACTIVE);
+                }
+                
+            } 
+            else if (collectible.getMapEntityStatus() == MapEntityStatus.ACTIVE) {
+                collectible.setMapEntityStatus(MapEntityStatus.INACTIVE);
+                
+            } 
+            else if (collectible.getMapEntityStatus() == MapEntityStatus.REMOVED) {
+                map.getCollectibles().remove(i);
+            }
+        }
+        return activeCollectibles;
+    }
+
+	public ArrayList<CollectibleItem> getActiveCollectibles() {
+		return activeCollectibles;
+	}
 }

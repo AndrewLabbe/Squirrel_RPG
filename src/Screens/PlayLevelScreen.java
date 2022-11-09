@@ -3,10 +3,15 @@ package Screens;
 
 
 import java.awt.Color;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.Timer;
 
+import Engine.Config;
 import Engine.GraphicsHandler;
+import Engine.ImageLoader;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
@@ -14,6 +19,7 @@ import Engine.Screen;
 import Engine.ScreenManager;
 import Game.GameState;
 import Game.ScreenCoordinator;
+import GameObject.Sprite;
 import Level.EnhancedMapTile;
 import Level.FlagManager;
 import Level.HealthBar;
@@ -31,6 +37,7 @@ import Players.Squirrel;
 import SpriteFont.SpriteFont;
 import Utils.Direction;
 import Utils.Point;
+import Utils.Stopwatch;
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen {
@@ -75,7 +82,27 @@ public class PlayLevelScreen extends Screen {
 	//Duration power-up will be on screen 
 	private int powerUpOnScreen; 
 	//Color or power-up counter 
-	private Color powerUpTimerColor; 
+	private Color powerUpTimerColor;
+	
+	//Dedicated variables to the invScreen
+	
+    protected int currentItem = 0; // current item position
+    protected SpriteFont inventory, line1, line2, line3;
+    protected Map background;
+    protected int pointerLocationX, pointerLocationY;
+    protected Stopwatch keyTimer = new Stopwatch();
+    private final Key escKey = Key.ESC;
+    protected int yPos, range, itemBoxSize, base;
+    protected boolean openInventory = false;
+    
+    protected int numItems = 0;
+    protected Sprite sprite, itemSprite1, itemSprite2, itemSprite3, itemSprite4;
+    File file = new File("Acorn.txt");
+    Scanner sc = new Scanner("Resources" + file);
+    
+    protected float space, next;
+    protected GameObject.Rectangle box1, box2, box3, box4, box5, invTable
+    								,info1;
 	
 	
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
@@ -119,6 +146,76 @@ public class PlayLevelScreen extends Screen {
         this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
         this.player.setFacingDirection(Direction.RIGHT);
+        
+     // All objecsts and variables initialized in inventory screen
+        range = Config.GAME_WINDOW_HEIGHT/5; //range for item box and equal spaces
+    	itemBoxSize = range * 1/2;
+    	space = (range * 1/4) /2;
+    	next = itemBoxSize + space;
+    	base = range * 3/4;
+    	
+    	// inventory table
+    	invTable = new GameObject.Rectangle(2*space, 2*space, Config.GAME_WINDOW_WIDTH*1/2, Config.GAME_WINDOW_HEIGHT*3/4);
+    	invTable.setColor(new Color(77, 75, 115));
+    	invTable.setBorderColor(Color.black);
+    	invTable.setBorderThickness(3);
+    	
+        inventory = new SpriteFont("Inventory", itemBoxSize, base*3/4, "Comic Sans", 32, new Color(49, 207, 240));
+        inventory.setOutlineColor(Color.black);
+        inventory.setOutlineThickness(3);
+    	
+//    	Rectangle box = new Rectangle(space, yPos+space, itemBoxSize, itemBoxSize);  
+    	box1 = new GameObject.Rectangle(itemBoxSize, base, itemBoxSize, itemBoxSize);
+    	box2 = new GameObject.Rectangle(itemBoxSize, base+(1*next), itemBoxSize, itemBoxSize);
+    	box3 = new GameObject.Rectangle(itemBoxSize, base+(2*next), itemBoxSize, itemBoxSize);
+    	box4 = new GameObject.Rectangle(itemBoxSize, base+(3*next), itemBoxSize, itemBoxSize);
+    	box5 = new GameObject.Rectangle(itemBoxSize, base+(4*next), itemBoxSize, itemBoxSize);
+    	
+//    	itemSprite1 = new Sprite(ImageLoader.load(testMap.addInvItem("Acorn").get(1)), next+itemBoxSize, base+(numItems*next));
+    	itemSprite1 = new Sprite(ImageLoader.load("Acorn.png"));
+    	    	
+//    	while (sc.hasNextLine()) {
+		line1 = new SpriteFont("A", itemBoxSize*5/2, base*2, "Comic Sans", 32, new Color(49, 207, 240));
+		line1.setOutlineColor(Color.black);
+		line1.setOutlineThickness(3);
+		
+		line2 = new SpriteFont("A", itemBoxSize*5/2, base*3, "Comic Sans", 24, new Color(49, 207, 240));
+		line2.setOutlineColor(Color.black);
+		line2.setOutlineThickness(3);
+		
+		line3 = new SpriteFont("A", itemBoxSize*5/2, base*4, "Comic Sans", 24, new Color(49, 207, 240));
+		line3.setOutlineColor(Color.black);
+		line3.setOutlineThickness(3);
+		
+		box1.setColor(new Color(90, 89, 110));
+    	box1.setBorderColor(Color.black);
+    	box1.setBorderThickness(3);
+    	
+    	box2.setColor(new Color(90, 89, 110));
+    	box2.setBorderColor(Color.black);
+    	box2.setBorderThickness(3);
+    	
+    	box3.setColor(new Color(90, 89, 110));
+    	box3.setBorderColor(Color.black);
+    	box3.setBorderThickness(3);
+    	
+    	box4.setColor(new Color(90, 89, 110));
+    	box4.setBorderColor(Color.black);
+    	box4.setBorderThickness(3);
+    	
+    	box5.setColor(new Color(90, 89, 110));
+    	box5.setBorderColor(Color.black);
+    	box5.setBorderThickness(3);
+    	
+    	info1 = new GameObject.Rectangle(next+itemBoxSize, base, itemBoxSize*4, itemBoxSize*6);
+    	
+//    	info1.setColor(new Color(90, 89, 110));
+    	info1.setBorderColor(Color.black);
+    	info1.setBorderThickness(3);
+    	
+    	inventory = new SpriteFont("Inventory", itemBoxSize, base*3/4, "Comic Sans", 32, new Color(49, 207, 240));
+        inventory.setOutlineColor(Color.black);
+        inventory.setOutlineThickness(3);
 
         // let pieces of map know which button to listen for as the "interact" button
         map.getTextbox().setInteractKey(player.getInteractKey());
@@ -190,10 +287,63 @@ public class PlayLevelScreen extends Screen {
             player.setUpdate(false);
     	}
         
-        if (Keyboard.isKeyDown(invKey)) {
-    		screenCoordinator.setGameState(GameState.INVENTORY);
-    		keyLocker.lockKey(buyKey);
+//        if (Keyboard.isKeyDown(invKey)) {
+//    		screenCoordinator.setGameState(GameState.INVENTORY);
+//    		keyLocker.lockKey(buyKey);
+//    	}
+        
+        //Switches boolean statement when invkey is pressed
+        if (Keyboard.isKeyDown(invKey) && !keyLocker.isKeyLocked(invKey)) {
+//        	player.setPlayerState(PlayerState.STANDING);
+    		openInventory = !openInventory;
+        	
+    		keyLocker.lockKey(invKey);
     	}
+        
+        if (Keyboard.isKeyUp(invKey)) {
+			keyLocker.unlockKey(invKey);
+		}
+        
+        // Removing items keyboard logic
+        if (Keyboard.isKeyDown(Key.D) && !keyLocker.isKeyLocked(Key.D)) {
+        	if (currentItem == player.getInvItem().indexOf("Acorn.png")) {
+        		removeItem("Acorn.png");
+        	}
+        	
+        	else {
+        		System.out.println("No item is here. Therefore it cannot be droped");
+        	}
+        	
+    		keyLocker.lockKey(Key.D);
+    	}
+        
+        if (Keyboard.isKeyUp(Key.D)) {
+			keyLocker.unlockKey(Key.D);
+		}
+        
+        // keyboard logic for selecting an item
+        if (Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE)) {
+        	if (currentItem == player.getInvItem().indexOf("Acorn.png")) {
+//        		file = new File("Acorn.txt");
+//        		sc = new Scanner("src/" + file);
+//        		System.out.println(sc.next());
+        		line1.setText("Acorn");
+        		line2.setText("Damage: 5");
+        		line3.setText("Durability: UNKOWN");
+        	}
+        	
+        	else {
+        		line1.setText("");
+        		line2.setText("");
+        		line3.setText("");
+        	}
+        	
+    		keyLocker.lockKey(Key.SPACE);
+    	}
+        
+        if (Keyboard.isKeyUp(Key.SPACE)) {
+			keyLocker.unlockKey(Key.SPACE);
+		}
         
         if (Keyboard.isKeyDown(opsKey)) {
     		screenCoordinator.setGameState(GameState.OPTIONS);
@@ -224,6 +374,49 @@ public class PlayLevelScreen extends Screen {
         if (map.getFlagManager().isFlagSet("hasEnteredShop")) {
         	screenCoordinator.setGameState(GameState.SHOPKEEP);
         	System.out.println("Shop entered");
+        }
+        
+        // if down or up is pressed, change selected item position. avoids currentItem from being out of bounds
+        if (Keyboard.isKeyDown(Key.DOWN) && currentItem != 4 && !keyLocker.isKeyLocked(Key.DOWN)) {
+            currentItem++;
+            keyLocker.lockKey(Key.DOWN);
+        } else if (Keyboard.isKeyDown(Key.UP) && currentItem != 0 && !keyLocker.isKeyLocked(Key.UP)) {
+            currentItem--;
+            keyLocker.lockKey(Key.UP);
+        }
+        
+        if (Keyboard.isKeyUp(Key.DOWN)) {
+			keyLocker.unlockKey(Key.DOWN);
+		}
+        if (Keyboard.isKeyUp(Key.UP)) {
+			keyLocker.unlockKey(Key.UP);
+		}
+        
+
+        // sets color of spritefont text based on which menu item is being hovered
+        if (currentItem == 0) {
+        	box1.setColor(new Color(255, 215, 0)); // selected color
+        	box2.setColor(new Color(90, 89, 110)); // natural color
+
+        } else if (currentItem == 1) {
+        	box1.setColor(new Color(90, 89, 110));
+        	box2.setColor(new Color(255, 215, 0));
+        	box3.setColor(new Color(90, 89, 110));
+
+        } else if (currentItem == 2) {
+        	box2.setColor(new Color(90, 89, 110));
+        	box3.setColor(new Color(255, 215, 0));
+        	box4.setColor(new Color(90, 89, 110));
+
+        } else if (currentItem == 3) {
+        	box3.setColor(new Color(90, 89, 110));
+        	box4.setColor(new Color(255, 215, 0));
+        	box5.setColor(new Color(90, 89, 110));
+
+        } else if (currentItem == 4) {
+        	box4.setColor(new Color(90, 89, 110));
+        	box5.setColor(new Color(255, 215, 0));
+
         }
         
         //If day/night time has ended commence fade 
@@ -346,6 +539,29 @@ public class PlayLevelScreen extends Screen {
         } 
         
         //Shade for Day Night Cycle
+        if (openInventory) {
+        	
+            invTable.draw(graphicsHandler);
+            inventory.draw(graphicsHandler);
+            
+            box1.draw(graphicsHandler);
+            box2.draw(graphicsHandler);
+            box3.draw(graphicsHandler);
+            box4.draw(graphicsHandler);
+            box5.draw(graphicsHandler);
+            
+            if (player.getInvItem().contains("Acorn.png")) {
+            	itemSprite1.draw(graphicsHandler);
+            }
+//            itemSprite1.draw(graphicsHandler);
+            
+            info1.draw(graphicsHandler);
+            line1.draw(graphicsHandler);
+            line2.draw(graphicsHandler);
+            line3.draw(graphicsHandler);
+        }
+        
+        // Shade for Day Night Cycle
         graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, shade));
     
         if(map.getPowerUpActive()) {
@@ -374,5 +590,21 @@ public class PlayLevelScreen extends Screen {
     private enum PlayLevelScreenState {
         RUNNING, LEVEL_COMPLETED, DIED
     } 
+    
+    public Sprite addItem(String image) {
+		numItems++;
+		return new Sprite(ImageLoader.load(image), next+itemBoxSize, base+(numItems*next));
+		
+		
+	}
+	
+	public void removeItem(String image) {
+		// TODO Auto-generated method stub
+		ArrayList<String> items = player.getInvItem();
+		if (items.contains(image)) {
+			int itemIndex = items.indexOf(image);
+			items.remove(itemIndex);
+		}
+	}
     
 }

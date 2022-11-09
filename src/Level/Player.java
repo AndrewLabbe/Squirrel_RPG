@@ -41,6 +41,9 @@ public abstract class Player extends GameObject {
 
     // classes that listen to player events can be added to this list
     protected ArrayList<PlayerListener> listeners = new ArrayList<>();
+    
+  //A list of all .png colletible items
+  	protected ArrayList<String> invItems = new ArrayList();
 
     // define keyscd cd 
     protected KeyLocker keyLocker = new KeyLocker();
@@ -482,5 +485,25 @@ public abstract class Player extends GameObject {
 			}
 		}
 	}
+	
+	// stores inventory items in array for later
+	public void addInvItem(String string) {
+		this.invItems.add(string);
 		
 	}
+	public ArrayList<String> getInvItem() {
+		return invItems;
+	}
+
+	public void removeCollectibles(String string) {
+		// TODO Auto-generated method stub
+		ArrayList<CollectibleItem> collectibles = map.getCollectibles();
+		if (collectibles.contains(string)) {
+			int collectibleIndex = collectibles.indexOf(string);
+			collectibles.remove(collectibleIndex);
+			CollectibleItem collectible = collectibles.get(collectibleIndex);
+			collectible.removeCollectible(collectible);
+		}
+	}
+		
+}

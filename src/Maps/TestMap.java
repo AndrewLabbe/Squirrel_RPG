@@ -2,8 +2,10 @@ package Maps;
 
 import java.util.ArrayList;
 
+import Colletibles.CollectibleAcorn;
 import Enemies.GhostEnemy;
 import EnhancedMapTiles.Rock;
+import Level.CollectibleItem;
 import Level.Enemy;
 import Level.EnhancedMapTile;
 import Level.Map;
@@ -116,6 +118,16 @@ public class TestMap extends Map {
     	powerUps.add(new DoublePoints(getMapTile(21,25).getLocation())); 
     	powerUps.add(new InstaElim(getMapTile(21,24).getLocation()));
     	return powerUps;
+    }
+    
+  //Adds collectibles to the map
+    @Override 
+    public ArrayList<CollectibleItem> loadCollectibles() {
+    	ArrayList<CollectibleItem> collectibles = new ArrayList(); 
+    	
+    	collectibles.add(new CollectibleAcorn(getMapTile(20, 48).getLocation()));
+
+    	return collectibles;
     }
 }
 
