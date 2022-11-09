@@ -93,6 +93,7 @@ public abstract class Map {
     protected HealthBar healthBar;
 
     private boolean healthCheck = false; 
+    private int healthBarLeft;
     
     //Currency tracker 
     private Currency coins; 
@@ -118,6 +119,7 @@ public abstract class Map {
     //Game time of the start of a power-up
     private int powerUpStartTime;
     
+    
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
         this.tileset = tileset;
@@ -139,6 +141,7 @@ public abstract class Map {
         powerUpActive = false; 
         gameStart = (int)System.currentTimeMillis();
         currentTime = gameStart;
+        
     }
 
     // sets up map by reading in the map file to create the tile map
@@ -577,7 +580,7 @@ public abstract class Map {
         currentTime = ((int)System.currentTimeMillis() - gameStart)/1000;
 
         handlePowerUps(); 
-        
+        healthBarLeft = healthBar.getGreenBarWidth();
     }
 
     // based on the player's current X position (which in a level can potentially be updated each frame),
@@ -836,5 +839,9 @@ public abstract class Map {
     //Returns game time that power-up was started at
     public int getPowerUpStartTime() {
     	return powerUpStartTime;
+    }
+    
+    public int getHealthBarLeft() {
+    	return healthBarLeft;
     }
 }
