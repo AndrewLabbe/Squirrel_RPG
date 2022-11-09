@@ -791,6 +791,7 @@ public abstract class Map {
   	//Decreases player health bar
   	public void dealDamage() {
 		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - 1);
+		//System.out.println(healthBar.getGreenBarWidth());
 	} 
   	
   	//Spawns certain number of enemies around each spawner 
@@ -813,7 +814,7 @@ public abstract class Map {
   			PowerUp powerUp;
   			int randomNum = rng.nextInt(3); 
   			randomNum = randomNum % 3;
-  			System.out.println(randomNum);
+  			//System.out.println(randomNum);
   			switch(randomNum) {
   				case 0: 
   					powerUp = new DoublePoints(spawnLocation); 

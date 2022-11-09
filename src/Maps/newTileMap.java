@@ -64,8 +64,8 @@ public class newTileMap extends Map {
 	 public ArrayList<Spawner> loadSpawners() {
 		 ArrayList<Spawner> spawners = new ArrayList(); 
 		 
-		 spawners.add(new BasicSpawner(getMapTile(10, 5).getLocation()));
-		 spawners.add(new BasicSpawner(getMapTile(10, 15).getLocation()));
+		 spawners.add(new BasicSpawner(getMapTile(7, 21).getLocation()));
+		 spawners.add(new BasicSpawner(getMapTile(20, 40).getLocation()));
 		 return spawners;
 	 }
 	 

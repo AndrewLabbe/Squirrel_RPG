@@ -256,7 +256,7 @@ public class PlayLevelScreen extends Screen {
         
         day = false;
         
-        powerUpTimer = new SpriteFont("Power-Up", 5, 115, "Comic Sans", 20, new Color(0, 0, 0)); 
+        powerUpTimer = new SpriteFont("Power-Up", 5, 150, "Comic Sans", 20, new Color(0, 0, 0)); 
         
         powerUpTimerColor = new Color(150,0,0);
         
@@ -487,7 +487,7 @@ public class PlayLevelScreen extends Screen {
       	keyLock.updateKeyText();
       	
         screenCoordinator.setLevelScreen(this);
-        
+        powerUpTimer.setColor(powerUpTimerColor);
     }
 
     //Fade to day/night
@@ -538,6 +538,7 @@ public class PlayLevelScreen extends Screen {
                 break;
         } 
         
+        //Shade for Day Night Cycle
         if (openInventory) {
         	
             invTable.draw(graphicsHandler);
