@@ -5,6 +5,7 @@ import Engine.GraphicsHandler;
 import Engine.Screen;
 import Screens.BuyScreen;
 import Screens.CreditsScreen;
+import Screens.DeathScreen;
 import Screens.InventoryScreen;
 import Screens.MenuScreen;
 import Screens.OptionsScreen;

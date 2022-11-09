@@ -16,6 +16,7 @@ import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.EnhancedMapTile;
 import Level.FlagManager;
+import Level.HealthBar;
 import Level.KillCount;
 import Level.Map;
 import Level.MapTile;
@@ -37,6 +38,7 @@ public class PlayLevelScreen extends Screen {
     protected Player player;
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
+    protected DeathScreen deathScreen;
     protected FlagManager flagManager;
     private KeyLocker keyLocker = new KeyLocker();
     public Currency screenCoin;
@@ -59,7 +61,7 @@ public class PlayLevelScreen extends Screen {
 	//Day or night is happening 
 	private boolean changeDay = true; 
 	//Length of day/night
-	private static final int dayLength = 100; 
+	private static final int dayLength = 1000; 
 	//Number of enemies that spawn 
 	private int spawnNumber;
 	//Displays the wave
@@ -72,6 +74,7 @@ public class PlayLevelScreen extends Screen {
 	private int powerUpOnScreen; 
 	//Color or power-up counter 
 	private Color powerUpTimerColor; 
+	
 	
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -155,6 +158,7 @@ public class PlayLevelScreen extends Screen {
         powerUpTimerColor = new Color(150,0,0);
         
         winScreen = new WinScreen(this);
+        deathScreen = new DeathScreen(this);
     }
 
     public void update() {
@@ -271,7 +275,13 @@ public class PlayLevelScreen extends Screen {
       		powerUpTimer.setText("Power-up: " + powerUpOnScreen);
       	} 
       		
-    
+      	
+      	if (map.getHealthBarLeft() <= 0) {
+      		playLevelScreenState = PlayLevelScreenState.DIED;
+      	}
+      	
+      	
+      	
         screenCoordinator.setLevelScreen(this);
         
     }
@@ -315,6 +325,9 @@ public class PlayLevelScreen extends Screen {
                 map.draw(player, graphicsHandler);
                 screenKill.draw(graphicsHandler);
                 break;
+            case DIED:
+            	deathScreen.draw(graphicsHandler);
+            	break;
             case LEVEL_COMPLETED:
                 winScreen.draw(graphicsHandler);
                 break;
@@ -346,7 +359,7 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED
+        RUNNING, LEVEL_COMPLETED, DIED
     } 
     
 }

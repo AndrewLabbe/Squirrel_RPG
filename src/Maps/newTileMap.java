@@ -29,26 +29,11 @@ public class newTileMap extends Map {
 	 @Override
 	    public ArrayList<NPC> loadNPCs() {
 	        ArrayList<NPC> npcs = new ArrayList<>();
-
-	        Walrus walrus = new Walrus(1, getMapTile(27, 34).getLocation().subtractY(40));
-	        walrus.setInteractScript(new WalrusScript());
-	        npcs.add(walrus);
-
-	        Dinosaur dinosaur = new Dinosaur(2, getMapTile(21, 15).getLocation());
-	        dinosaur.setExistenceFlag("hasTalkedToDinosaur");
-	        dinosaur.setInteractScript(new DinoScript());
-	        npcs.add(dinosaur); 
 	       
 	        Fox fox = new Fox(3, getMapTile(14, 21).getLocation());
 	        fox.setInteractScript(new FoxScript());
 	        npcs.add(fox);
 
-	        //Zombie zombie = new Zombie(4, getMapTile(21, 25).getLocation()); 
-	        //npcs.add(zombie); 
-	        
-//	        Wolf wolf = new Wolf(5, getMapTile(1, 18).getLocation());
-//	        wolf.setInteractScript(new WolfScript());
-//	        npcs.add(wolf);
 	        
 	        return npcs;
 	    }
@@ -70,16 +55,6 @@ public class newTileMap extends Map {
 	     getMapTile(24, 0).setInteractScript(new TempleScript());
 	 } 
 	 
-	 //Adds enemies to the map
-//	 @Override 
-//	 public ArrayList<Enemy> loadEnemies() {
-//		 ArrayList<Enemy> enemies = new ArrayList(); 
-//	    	enemies.add(new ZombieEnemy(getMapTile(18, 25).getLocation(), (float) 3.00));
-//	    	enemies.add(new ZombieEnemy(getMapTile(18, 10).getLocation(), (float) 3.00)); 
-//	    	enemies.add(new ZombieEnemy(getMapTile(10, 8).getLocation(), (float) 3.00)); 
-//	    	enemies.add(new ZombieEnemy(getMapTile(10, 25).getLocation(), (float) 3.00));
-//	    	return enemies;
-//	    } 
 	 
 	 //Adds spawners to the map
 	 @Override 

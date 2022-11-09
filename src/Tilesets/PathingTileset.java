@@ -663,7 +663,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder middleWaterBridgePoleTile = new MapTileBuilder(middleWaterBridgePole)
-				.withTileType(TileType.PASSABLE);
+				.withTileType(TileType.NOT_PASSABLE);
 
 		pathTiles.add(middleWaterBridgePoleTile);
 
