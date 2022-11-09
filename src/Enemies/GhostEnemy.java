@@ -47,12 +47,6 @@ public class GhostEnemy extends Enemy {
 					direction = 0.0F; 
 				}
 				moveX(direction); 
-				/*if(direction > 0) {
-					this.currentAnimationName = "STAND_RIGHT"; 
-				} 
-				else {
-					this.currentAnimationName = "STAND_LEFT";
-				}*/
 				if(player.getY() + 4 > this.y) {
 					direction = 1.0F;
 				} 

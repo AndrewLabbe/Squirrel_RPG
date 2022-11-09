@@ -51,6 +51,7 @@ public class Acorn extends Projectile {
 			this.currentAnimationName = "FIRE_LEFT";
 		} 
 		super.update(enemies);
+		
 	} 
 	
 	//Creates two different animations for the acorn --> one for firing right and one for firing left

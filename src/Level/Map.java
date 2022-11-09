@@ -110,7 +110,13 @@ public abstract class Map {
     //Powerup cool down 
     private Stopwatch powerUpCoolDown; 
     //Powerup active 
-    private boolean powerUpActive;
+    private boolean powerUpActive; 
+    //Start of game time 
+    private int gameStart; 
+    //Current game time 
+    private int currentTime; 
+    //Game time of the start of a power-up
+    private int powerUpStartTime;
     
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
@@ -130,7 +136,9 @@ public abstract class Map {
         doublePoints = false; 
         rng = new Random(); 
         powerUpCoolDown = new Stopwatch(); 
-        powerUpActive = false;
+        powerUpActive = false; 
+        gameStart = (int)System.currentTimeMillis();
+        currentTime = gameStart;
     }
 
     // sets up map by reading in the map file to create the tile map
@@ -565,7 +573,11 @@ public abstract class Map {
             }
             healthCheck = false;
         } 
+        //Updates current game time
+        currentTime = ((int)System.currentTimeMillis() - gameStart)/1000;
+
         handlePowerUps(); 
+        
     }
 
     // based on the player's current X position (which in a level can potentially be updated each frame),
@@ -766,7 +778,7 @@ public abstract class Map {
   	} 
   	//Decreases player health bar
   	public void dealDamage() {
-		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - 2);
+		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - 1);
 	} 
   	
   	//Spawns certain number of enemies around each spawner 
@@ -789,6 +801,7 @@ public abstract class Map {
   			PowerUp powerUp;
   			int randomNum = rng.nextInt(3); 
   			randomNum = randomNum % 3;
+  			System.out.println(randomNum);
   			switch(randomNum) {
   				case 0: 
   					powerUp = new DoublePoints(spawnLocation); 
@@ -804,6 +817,7 @@ public abstract class Map {
   			}
   			addPowerUp(powerUp); 
   			powerUpCoolDown.setWaitTime(20000); 
+  			powerUpStartTime = currentTime;
   		}
   	} 
   	//Returns if the player has a power-up activated 
@@ -812,7 +826,14 @@ public abstract class Map {
   	} 
   	//Sets the player power-up status
   	public void setPowerUpActive() {
-  		powerUpActive =! powerUpActive;
-  	}
-    
+  		powerUpActive =! powerUpActive; 
+  	} 
+  	//Returns current game time 
+    public int getCurrentTime() {
+    	return currentTime;
+    } 
+    //Returns game time that power-up was started at
+    public int getPowerUpStartTime() {
+    	return powerUpStartTime;
+    }
 }

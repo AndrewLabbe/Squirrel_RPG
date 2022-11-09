@@ -59,7 +59,7 @@ public class PlayLevelScreen extends Screen {
 	//Day or night is happening 
 	private boolean changeDay = true; 
 	//Length of day/night
-	private static final int dayLength = 1000; 
+	private static final int dayLength = 100; 
 	//Number of enemies that spawn 
 	private int spawnNumber;
 	//Displays the wave
@@ -68,10 +68,10 @@ public class PlayLevelScreen extends Screen {
 	private boolean day; 
 	//Displays the power up timer 
 	private SpriteFont powerUpTimer; 
-	
-	private int time1; 
-	
-	private Color powerUpTimerColor;
+	//Duration power-up will be on screen 
+	private int powerUpOnScreen; 
+	//Color or power-up counter 
+	private Color powerUpTimerColor; 
 	
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -142,7 +142,7 @@ public class PlayLevelScreen extends Screen {
         
         time = 0; 
         
-        time1 = 300;
+        powerUpOnScreen = 20;
         
         spawnNumber = 1; 
         
@@ -267,14 +267,11 @@ public class PlayLevelScreen extends Screen {
       	}
       	
       	if(map.getPowerUpActive()) {
-      		powerUpTimer.setText("Power-Up: " + (time1/10));
-      		powerUpTimer.setColor(powerUpTimerColor);
-      		time1--;
+      		powerUpOnScreen = map.getPowerUpStartTime() + 20 - map.getCurrentTime();
+      		powerUpTimer.setText("Power-up: " + powerUpOnScreen);
       	} 
-      	else {
-      		time1 = 300;
-      	}
-      	
+      		
+    
         screenCoordinator.setLevelScreen(this);
         
     }
