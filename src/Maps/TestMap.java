@@ -2,7 +2,7 @@ package Maps;
 
 import java.util.ArrayList;
 
-import Colletibles.CollectibleAcorn;
+import Collectibles.CollectibleAcorn;
 import Enemies.GhostEnemy;
 import EnhancedMapTiles.Rock;
 import Level.CollectibleItem;
@@ -125,7 +125,7 @@ public class TestMap extends Map {
     public ArrayList<CollectibleItem> loadCollectibles() {
     	ArrayList<CollectibleItem> collectibles = new ArrayList(); 
     	
-    	collectibles.add(new CollectibleAcorn(getMapTile(20, 48).getLocation()));
+    	collectibles.add(new CollectibleAcorn(getMapTile(25, 25).getLocation()));
 
     	return collectibles;
     }

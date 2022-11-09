@@ -1,4 +1,4 @@
-package Colletibles;
+package Collectibles;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
