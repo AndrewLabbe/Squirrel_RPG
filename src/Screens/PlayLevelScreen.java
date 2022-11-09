@@ -17,6 +17,7 @@ import Game.ScreenCoordinator;
 import Level.EnhancedMapTile;
 import Level.FlagManager;
 import Level.HealthBar;
+import Level.Keys;
 import Level.KillCount;
 import Level.Map;
 import Level.MapTile;
@@ -42,6 +43,7 @@ public class PlayLevelScreen extends Screen {
     protected FlagManager flagManager;
     private KeyLocker keyLocker = new KeyLocker();
     public Currency screenCoin;
+    public Keys keyLock;
     public KillCount screenKill;
     private boolean wasSpacePressed = false;
     private boolean wasFPressed = false;
@@ -85,6 +87,10 @@ public class PlayLevelScreen extends Screen {
     	// Kill Count 
     	screenKill = new KillCount();
     	screenKill.setKill(0);
+    	
+    	// Key Count
+    	keyLock = new Keys();
+    	keyLock.setKeys(0);
     	
         // setup state
         flagManager = new FlagManager();
@@ -173,6 +179,9 @@ public class PlayLevelScreen extends Screen {
             case LEVEL_COMPLETED:
                 winScreen.update();
                 break;
+            case DIED:
+            	deathScreen.update();
+            	break;
         }
         
         if (player.getUpdate()) {
@@ -280,7 +289,9 @@ public class PlayLevelScreen extends Screen {
       		playLevelScreenState = PlayLevelScreenState.DIED;
       	}
       	
-      	
+      	// Show Key Count for Main Level
+      	keyLock.getKeys();
+      	keyLock.updateKeyText();
       	
         screenCoordinator.setLevelScreen(this);
         
@@ -324,6 +335,7 @@ public class PlayLevelScreen extends Screen {
             case RUNNING:
                 map.draw(player, graphicsHandler);
                 screenKill.draw(graphicsHandler);
+                keyLock.draw(graphicsHandler);
                 break;
             case DIED:
             	deathScreen.draw(graphicsHandler);
@@ -341,6 +353,7 @@ public class PlayLevelScreen extends Screen {
         }
         
         wave.draw(graphicsHandler);
+        
         
     }
 

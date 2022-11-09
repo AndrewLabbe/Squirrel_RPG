@@ -12,6 +12,7 @@ import NPCs.Walrus;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.FoxScript;
 import Scripts.TestMap.IntroScript;
+import Scripts.TestMap.KeyScript;
 import Scripts.TestMap.TempleScript;
 import Scripts.TestMap.WalrusScript;
 import Scripts.TestMap.changeShop;
@@ -53,6 +54,8 @@ public class newTileMap extends Map {
 		 getMapTile(9, 34).setInteractScript(new changeShop());
 	        
 	     getMapTile(24, 0).setInteractScript(new TempleScript());
+	     
+	     getMapTile(41, 9).setInteractScript(new KeyScript());
 	 } 
 	 
 	 
