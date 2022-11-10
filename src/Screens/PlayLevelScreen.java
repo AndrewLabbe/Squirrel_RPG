@@ -308,6 +308,8 @@ public class PlayLevelScreen extends Screen {
         if (Keyboard.isKeyDown(Key.D) && !keyLocker.isKeyLocked(Key.D)) {
         	if (currentItem == player.getInvItem().indexOf("Acorn.png")) {
         		removeItem("Acorn.png");
+        		map.addAcorn(player);
+        		
         	}
         	
         	else {
@@ -375,6 +377,14 @@ public class PlayLevelScreen extends Screen {
         	screenCoordinator.setGameState(GameState.SHOPKEEP);
         	System.out.println("Shop entered");
         }
+        
+        // 
+    	if (player.getInvItem().size() != 0) {
+    		itemSprite1 = addItem(player.getInvItem().get(player.getInvItem().indexOf("Acorn.png")));
+        	itemSprite1.setLocation(itemBoxSize, base);
+        	itemSprite1.setHeight(itemBoxSize);
+        	itemSprite1.setWidth(itemBoxSize);
+    	}
         
         // if down or up is pressed, change selected item position. avoids currentItem from being out of bounds
         if (Keyboard.isKeyDown(Key.DOWN) && currentItem != 4 && !keyLocker.isKeyLocked(Key.DOWN)) {

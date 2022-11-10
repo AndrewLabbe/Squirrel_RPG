@@ -89,6 +89,8 @@ public class Camera extends Rectangle {
         //Define active spawners 
         activeSpawners = loadActiveSpawners();
         
+        activeCollectibles = loadActiveCollectibles();
+        
         for (EnhancedMapTile enhancedMapTile : activeEnhancedMapTiles) {
             enhancedMapTile.update(player);
         }
@@ -115,6 +117,10 @@ public class Camera extends Rectangle {
         //For each active spawner call its update method 
         for(Spawner spawner : activeSpawners) {
         	spawner.update();
+        }
+        
+        for(CollectibleItem collectible : activeCollectibles) {
+        	collectible.update(player);
         }
     }
 
@@ -287,6 +293,14 @@ public class Camera extends Rectangle {
         		enemy.draw(graphicsHandler);
         	}
         } 
+        
+        //Draws collectible acorn
+        for(CollectibleItem collectible : activeCollectibles) {
+        	if(containsDraw(collectible)) {
+        		collectible.draw(graphicsHandler);
+        	}
+        }
+        
         //Draws the active power-ups to the screen 
         for(PowerUp powerUp : activePowerUps) {
         	if(containsDraw(powerUp)) {

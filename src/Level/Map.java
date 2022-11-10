@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import Collectibles.CollectibleAcorn;
 import Enemies.GhostEnemy;
 import Engine.Config;
 import Engine.GraphicsHandler;
@@ -872,4 +873,15 @@ public abstract class Map {
     public ArrayList<CollectibleItem> getCollectibles() {
     	return collectibles;
     }
+
+	public void addAcorn(Player player) {
+		Point p = player.getLocation();
+		int x = (int)p.x;
+		int y = (int)p.y;
+		x += 50;
+		Point p2 = new Point(x,y);
+		CollectibleAcorn cAcorn = new CollectibleAcorn(p2);
+		addCollectibles(cAcorn);
+		
+	}
 }

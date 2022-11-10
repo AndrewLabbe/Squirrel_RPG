@@ -2,6 +2,8 @@ package Maps;
 
 import java.util.ArrayList;
 
+import Collectibles.CollectibleAcorn;
+import Level.CollectibleItem;
 import Level.Map;
 import Level.NPC;
 import Level.Spawner;
@@ -64,9 +66,19 @@ public class newTileMap extends Map {
 	 public ArrayList<Spawner> loadSpawners() {
 		 ArrayList<Spawner> spawners = new ArrayList(); 
 		 
-		 spawners.add(new BasicSpawner(getMapTile(7, 21).getLocation()));
+		 spawners.add(new BasicSpawner(getMapTile(10, 20).getLocation()));
 		 spawners.add(new BasicSpawner(getMapTile(20, 40).getLocation()));
 		 return spawners;
 	 }
+	 
+	 //Adds collectibles to the map
+	    @Override 
+	    public ArrayList<CollectibleItem> loadCollectibles() {
+	    	ArrayList<CollectibleItem> collectibles = new ArrayList(); 
+	    	
+	    	collectibles.add(new CollectibleAcorn(getMapTile(25, 25).getLocation()));
+
+	    	return collectibles;
+	    }
 	 
 }

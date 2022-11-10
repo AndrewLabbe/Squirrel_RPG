@@ -120,14 +120,6 @@ public class TestMap extends Map {
     	return powerUps;
     }
     
-  //Adds collectibles to the map
-    @Override 
-    public ArrayList<CollectibleItem> loadCollectibles() {
-    	ArrayList<CollectibleItem> collectibles = new ArrayList(); 
-    	
-    	collectibles.add(new CollectibleAcorn(getMapTile(25, 25).getLocation()));
-
-    	return collectibles;
-    }
+  
 }
 

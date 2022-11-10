@@ -14,6 +14,7 @@ public class CollectibleItem extends MapEntity {
 	}
 
 	public void update(Player player) {
+		
 		super.update();
 		
 		

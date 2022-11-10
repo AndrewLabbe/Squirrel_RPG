@@ -51,6 +51,11 @@ public class CollectibleAcorn extends CollectibleItem {
 //	}
 	
 	public void update(Player player) {
+		
+		if(intersects(player)) {
+			this.mapEntityStatus = mapEntityStatus.REMOVED;
+			player.addInvItem("Acorn.png");
+		}
 //		map.update(player);
 //		invScreen = invScreen.getInvScreen();
 		sprite = new Sprite(ImageLoader.load("Acorn.png"));
@@ -58,9 +63,10 @@ public class CollectibleAcorn extends CollectibleItem {
 		if (player.getX() < this.x + rangeX && player.getX() > this.x - rangeX) {
 			if (player.getY() < this.y + rangeY && player.getY() > this.y - rangeY && Keyboard.isKeyDown(e) && !keyLocker.isKeyLocked(e)) {
 				System.out.println("New Item added to inv");
-				player.addInvItem("Acorn.png");
+				
 //				player.removeCollectibles("Acorn.png");
 				keyLocker.lockKey(e);
+				
 				
 			}
 			
