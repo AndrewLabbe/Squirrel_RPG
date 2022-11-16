@@ -103,7 +103,7 @@ public class Keyboard {
 				 put(Key.N, 78);
 				 put(Key.O, 79);
 				 put(Key.P, 80);
-				 put(Key.Q, 81);
+				// put(Key.Q, 81);
 				 put(Key.R, 82);
 				 put(Key.S, 83);
 				 put(Key.T, 84);
