@@ -220,6 +220,16 @@ public class templeTileset extends Tileset {
 
 		templeTiles.add(topWallWithFloorTile);
 		
+		// Blank Tile With Floor Tile
+		Frame blank = new FrameBuilder(getSubImage(6, 2))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder blankTile = new MapTileBuilder(blank)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		templeTiles.add(blankTile);
+		
 		// L Shaped Wall Tile
 		Frame LWall = new FrameBuilder(getSubImage(7, 0))
 				.withScale(tileScale)
