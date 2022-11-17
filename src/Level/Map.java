@@ -755,9 +755,10 @@ public abstract class Map {
     	return camera.getActiveSpawners();
     } 
     
-    //Reset healthbar 
+    //Reset healthbar and update healthBar left  
     public void resetHealthBar() {
     	healthBar.setGreenBarWidth(healthBar.getActualHealthBarWidth());
+    	 healthBarLeft = healthBar.getGreenBarWidth();
     } 
     //Increment coins 
     public void addCoins() {

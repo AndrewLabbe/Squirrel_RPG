@@ -486,7 +486,7 @@ public class PlayLevelScreen extends Screen {
       		powerUpOnScreen = map.getPowerUpStartTime() + 20 - map.getCurrentTime();
       		powerUpTimer.setText("Power-up: " + powerUpOnScreen);
       	} 
-      		
+    	
       	
       	if (map.getHealthBarLeft() <= 0) {
       		playLevelScreenState = PlayLevelScreenState.DIED;
@@ -587,9 +587,11 @@ public class PlayLevelScreen extends Screen {
         return playLevelScreenState;
     }
 
-
+    //reset level and Health 
     public void resetLevel() {
         initialize();
+        map.resetHealthBar();
+        
     }
 
     public void goBackToMenu() {

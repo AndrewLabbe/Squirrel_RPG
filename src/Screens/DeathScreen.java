@@ -32,6 +32,7 @@ public class DeathScreen extends Screen {
 
     @Override
     public void update() {
+    	System.out.println("Ds update");
         if (Keyboard.isKeyUp(Key.SPACE)) {
             keyLocker.unlockKey(Key.SPACE);
         }
