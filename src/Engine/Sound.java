@@ -28,6 +28,8 @@ public class Sound {
 		soundURL [5] = getClass().getResource("/sound/Dino3.wav");
 		soundURL [6] = getClass().getResource("/sound/Roar.wav"); 
 		soundURL [7] = getClass().getResource("/sound/blip.wav");
+		soundURL [8] = getClass().getResource("/sound/elim.wav"); 
+		soundURL [9] = getClass().getResource("/sound/power-up.wav");
 		
 	}
 	
