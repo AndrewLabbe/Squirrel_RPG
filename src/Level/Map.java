@@ -77,7 +77,10 @@ public abstract class Map {
     protected ArrayList<Spawner> spawners;
     
     //Array which holds the enemies in game 
-    protected ArrayList<CollectibleItem> collectibles;
+    protected ArrayList<CollectibleItem> collectibles; 
+    
+    //Array of passable tiles 
+    protected ArrayList<MapTile> unpassableMapTiles;
 
     protected Script activeInteractScript;
 
@@ -152,7 +155,10 @@ public abstract class Map {
     // loads in enemies, enhanced map tiles, and npcs
     // and instantiates a Camera
     public void setupMap() {
-        animatedMapTiles = new ArrayList<>();
+        animatedMapTiles = new ArrayList<>(); 
+        
+        //Creates array that holds all unpassable map tiles
+        unpassableMapTiles = new ArrayList<>();
 
         loadMapFile();
 
@@ -247,6 +253,11 @@ public abstract class Map {
 
                 if (tile.isAnimated()) {
                     animatedMapTiles.add(tile);
+                } 
+                
+                //If the tile is unpassable it is added to the unpassable tiles array
+                if (tile.getTileType() == TileType.NOT_PASSABLE) {
+                	unpassableMapTiles.add(tile);
                 }
             }
         }
@@ -884,5 +895,10 @@ public abstract class Map {
 		CollectibleAcorn cAcorn = new CollectibleAcorn(p2);
 		addCollectibles(cAcorn);
 		
+	} 
+	
+	//Returns array of unpassable map tiles
+	public ArrayList<MapTile> getUnpassableMapTiles() {
+		return unpassableMapTiles;
 	}
 }

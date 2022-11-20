@@ -12,7 +12,11 @@ import Level.Enemy;
 import Level.MapEntityStatus;
 import Level.Player;
 import Level.Projectile;
-import Utils.Stopwatch;
+import Utils.Stopwatch; 
+import Level.EnhancedMapTile; 
+import Level.MapTile;
+import Level.Spawner; 
+import Level.NPC;
 
 public class Acorn extends Projectile {
 
@@ -33,7 +37,7 @@ public class Acorn extends Projectile {
 	}
 
 	@Override
-	public void update(ArrayList<Enemy> enemies) {
+	public void update(ArrayList<Enemy> enemies, ArrayList<MapTile> unpassableMapTiles, ArrayList<Spawner> spawners, ArrayList<NPC> npcs) {
 		if (despawnTime.isTimeUp()) {
 			mapEntityStatus = MapEntityStatus.REMOVED;
 		}
@@ -50,7 +54,7 @@ public class Acorn extends Projectile {
 		else {
 			this.currentAnimationName = "FIRE_LEFT";
 		} 
-		super.update(enemies);
+		super.update(enemies, unpassableMapTiles, spawners, npcs);
 		
 	} 
 	

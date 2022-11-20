@@ -14,9 +14,13 @@ import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.Enemy;
+import Level.EnhancedMapTile;
 import Level.MapEntityStatus;
 import Level.Projectile;
-import Utils.Stopwatch;
+import Utils.Stopwatch; 
+import Level.MapTile;
+import Level.Spawner;
+import Level.NPC;
 
 public class Bullet extends Projectile {
 
@@ -33,7 +37,7 @@ public class Bullet extends Projectile {
 	}
 
 	@Override
-	public void update(ArrayList<Enemy> enemies) {
+	public void update(ArrayList<Enemy> enemies, ArrayList<MapTile> unpassableMapTiles, ArrayList<Spawner> spawners, ArrayList<NPC> npcs) {
 		if (despawnTime.isTimeUp()) {
 			mapEntityStatus = MapEntityStatus.REMOVED;
 		}
@@ -49,7 +53,7 @@ public class Bullet extends Projectile {
 		else {
 			this.currentAnimationName = "FIRE_LEFT";
 		} 
-		super.update(enemies);
+		super.update(enemies, unpassableMapTiles, spawners, npcs);
 	}
 	
 	//Creates two different animations for the bullet --> one for firing right and one for firing left

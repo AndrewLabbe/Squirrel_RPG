@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import Engine.GraphicsHandler;
 import Level.Enemy;
+import Level.EnhancedMapTile;
 import Level.Map;
 import Level.MapCollisionCheckResult;
 import Level.MapCollisionHandler;
@@ -304,7 +305,6 @@ public class GameObject extends AnimatedSprite {
 					currentFrame.getImageEffect());
 
 			// Uncomment this to draw player's bounds to screen -- useful for debugging
-			
 			/*if (this instanceof Enemy) {
 				drawBounds(graphicsHandler, new Color(255, 0, 0, 100));
 			} 
@@ -319,6 +319,9 @@ public class GameObject extends AnimatedSprite {
 			} 
 			if (this instanceof Spawner) {
 				drawBounds(graphicsHandler, new Color(255, 0, 200, 100));
+			} 
+			if (this instanceof EnhancedMapTile) {
+				drawBounds(graphicsHandler, new Color(255, 0, 0, 100));
 			}*/
 			
 		} else {

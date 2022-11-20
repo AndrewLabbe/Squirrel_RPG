@@ -39,8 +39,11 @@ public class Camera extends Rectangle {
     //Active spawner map entities 
     private ArrayList<Spawner> activeSpawners = new ArrayList();
     
-  //Collectible items
-    private ArrayList<CollectibleItem> activeCollectibles = new ArrayList();
+    //Collectible items
+    private ArrayList<CollectibleItem> activeCollectibles = new ArrayList(); 
+    
+    //Unpassable tiles 
+    private ArrayList<MapTile> unpassableMapTiles = new ArrayList<>();
 
     // determines how many tiles off screen an entity can be before it will be deemed inactive and not included in the update/draw cycles until it comes back in range
     private final int UPDATE_OFF_SCREEN_RANGE = 4;
@@ -51,7 +54,8 @@ public class Camera extends Rectangle {
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
         this.leftoverSpaceX = ScreenManager.getScreenWidth() % tileWidth;
-        this.leftoverSpaceY = ScreenManager.getScreenHeight() % tileHeight;
+        this.leftoverSpaceY = ScreenManager.getScreenHeight() % tileHeight;  
+        unpassableMapTiles = map.getUnpassableMapTiles();
     }
 
     // gets the tile index that the camera's x and y values are currently on (top left tile)
@@ -101,7 +105,7 @@ public class Camera extends Rectangle {
         
         //For each active projectile call its update method
         for(Projectile projectile : activeProjectiles) {
-        	projectile.update(activeEnemies);
+        	projectile.update(activeEnemies, unpassableMapTiles, activeSpawners, activeNPCs); 
         } 
         
         //For each active enemy call its update method 
