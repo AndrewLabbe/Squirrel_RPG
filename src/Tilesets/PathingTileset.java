@@ -225,7 +225,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeTopLeftPathTile = new MapTileBuilder(lakeTopLeftPath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeTopLeftPathTile);
 
@@ -235,7 +235,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeTopMiddlePathTile = new MapTileBuilder(lakeTopMiddlePath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeTopMiddlePathTile);
 
@@ -245,7 +245,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeTopRightPathTile = new MapTileBuilder(lakeTopRightPath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeTopRightPathTile);
 
@@ -255,7 +255,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeMidLeftPathTile = new MapTileBuilder(lakeMidLeftPath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeMidLeftPathTile);
 
@@ -265,7 +265,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakePathTile = new MapTileBuilder(lakePath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakePathTile);
 
@@ -275,7 +275,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeMidRightPathTile = new MapTileBuilder(lakeMidRightPath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeMidRightPathTile);
 
@@ -285,7 +285,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeBottomLeftPathTile = new MapTileBuilder(lakeBottomLeftPath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeBottomLeftPathTile);
 
@@ -295,7 +295,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeBottomMidPathTile = new MapTileBuilder(lakeBottomMidPath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeBottomMidPathTile);
 
@@ -305,7 +305,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeBottomRightPathTile = new MapTileBuilder(lakeBottomRightPath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeBottomRightPathTile);
 
@@ -315,7 +315,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeTopLeftCornerTile = new MapTileBuilder(lakeTopLeftCorner)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeTopLeftCornerTile);
 
@@ -325,7 +325,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeTopRightCornerTile = new MapTileBuilder(lakeTopRightCorner)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeTopRightCornerTile);
 
@@ -335,7 +335,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeBottomLeftCornerTile = new MapTileBuilder(lakeBottomLeftCorner)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeBottomLeftCornerTile);
 
@@ -345,7 +345,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeBottomRightCornerTile = new MapTileBuilder(lakeBottomRightCorner)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeBottomRightCornerTile);
 
