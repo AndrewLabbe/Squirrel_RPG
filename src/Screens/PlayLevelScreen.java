@@ -29,6 +29,7 @@ import Level.Map;
 import Level.MapTile;
 import Level.NPC;
 import Level.Player;
+import Level.PlayerState;
 import Level.Trigger;
 import Maps.newTileMap;
 import NPCs.Currency;
@@ -132,6 +133,7 @@ public class PlayLevelScreen extends Screen {
 //        flagManager.addFlag("hasFoundBall", false);
         flagManager.addFlag("hasEnteredTemple", false);
         flagManager.addFlag("hasEnteredShop", false);
+        flagManager.addFlag("hasSwam", false);
 
         // define/setup map
 //        this.map = new TestMap();
@@ -378,6 +380,11 @@ public class PlayLevelScreen extends Screen {
         	System.out.println("Shop entered");
         }
         
+        // If Player Enters Water Change State to Swimming
+        if (map.getFlagManager().isFlagSet("hasSwam")) {
+        	player.setPlayerState(PlayerState.SWIMMING);
+        }
+        
         // 
     	if (player.getInvItem().size() != 0) {
     		itemSprite1 = addItem(player.getInvItem().get(player.getInvItem().indexOf("Acorn.png")));
@@ -459,7 +466,7 @@ public class PlayLevelScreen extends Screen {
       	if(time == 0 || time % (dayLength*2) == 0) {
         	map.spawnEnemies(spawnNumber);
         } 
-      	//Increaments time
+      	//Increments time
       	time++;
       	//Removes enemies when day rises 
       	if(time == dayLength || time % ((dayLength*2)+dayLength) == 0) {
@@ -607,7 +614,6 @@ public class PlayLevelScreen extends Screen {
 		numItems++;
 		return new Sprite(ImageLoader.load(image), next+itemBoxSize, base+(numItems*next));
 		
-		
 	}
 	
 	public void removeItem(String image) {
@@ -618,5 +624,19 @@ public class PlayLevelScreen extends Screen {
 			items.remove(itemIndex);
 		}
 	}
-    
+	
+	// Return Player State as an Int (Idea?)
+	public int returnPlayerState() {
+		int state = 0;
+		if (player.getPlayerState() == PlayerState.STANDING) {
+			state = 1;
+		}
+		else if (player.getPlayerState() == PlayerState.WALKING) {
+			state = 2;
+		}
+		else if (player.getPlayerState() == PlayerState.SWIMMING) {
+			state = 3;
+		}
+		return state;
+	}
 }

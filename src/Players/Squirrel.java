@@ -171,30 +171,30 @@ public class Squirrel extends Player {
 			});
 			
 			put("SWIM_RIGHT", new Frame[] {
-					new FrameBuilder(spriteSheet.getSprite(2, 0), 100)
+					new FrameBuilder(spriteSheet.getSprite(2, 0), 200)
 					.withScale(3)
 					.withBounds(6, 12, 12, 7)
 					.build(),
-					new FrameBuilder(spriteSheet.getSprite(2, 1), 100)
+					new FrameBuilder(spriteSheet.getSprite(2, 1), 200)
 					.withScale(3)
 					.withBounds(6, 12, 12, 7)
 					.build(),
-					new FrameBuilder(spriteSheet.getSprite(2, 2), 100)
+					new FrameBuilder(spriteSheet.getSprite(2, 2), 200)
 					.withScale(3)
 					.withBounds(6, 12, 12, 7)
 					.build(),
 			});
 			
 			put("SWIM_LEFT", new Frame[] {
-					new FrameBuilder(spriteSheet.getSprite(2, 3), 100)
+					new FrameBuilder(spriteSheet.getSprite(2, 3), 200)
 					.withScale(3)
 					.withBounds(6, 12, 12, 7)
 					.build(),
-					new FrameBuilder(spriteSheet.getSprite(2, 4), 100)
+					new FrameBuilder(spriteSheet.getSprite(2, 4), 200)
 					.withScale(3)
 					.withBounds(6, 12, 12, 7)
 					.build(),
-					new FrameBuilder(spriteSheet.getSprite(2, 5), 100)
+					new FrameBuilder(spriteSheet.getSprite(2, 5), 200)
 					.withScale(3)
 					.withBounds(6, 12, 12, 7)
 					.build(),

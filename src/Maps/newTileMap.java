@@ -15,6 +15,7 @@ import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.FoxScript;
 import Scripts.TestMap.IntroScript;
 import Scripts.TestMap.KeyScript;
+import Scripts.TestMap.SwimScript;
 import Scripts.TestMap.TempleScript;
 import Scripts.TestMap.WalrusScript;
 import Scripts.TestMap.changeShop;
@@ -47,6 +48,8 @@ public class newTileMap extends Map {
 	        triggers.add(new Trigger(0, 1160, 120, 10, new IntroScript(), "hasLostGirlfriend"));
 	        triggers.add(new Trigger(120, 1160, 10, 130, new IntroScript(), "hasLostGirlfriend"));
 	        triggers.add(new Trigger(0, 1280, 120, 10, new IntroScript(), "hasLostGirlfriend"));
+	        
+	        triggers.add(new Trigger(288, 900, 400, 10, new SwimScript(), "hasSwam"));
 	        
 	        return triggers;
 	    }
