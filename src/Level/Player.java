@@ -269,6 +269,10 @@ public abstract class Player extends GameObject {
             // player can be told to stand or walk during Script by using the "stand" and "walk" methods
             this.currentAnimationName = facingDirection == Direction.RIGHT ? "STAND_RIGHT" : "STAND_LEFT";
         }
+        else if (playerState == PlayerState.SWIMMING) {
+        	// sets animation to SWIM when player is in water
+        	this.currentAnimationName = facingDirection == Direction.RIGHT ? "SWIM_RIGHT" : "SWIM_LEFT";
+        }
     }
 
     @Override
