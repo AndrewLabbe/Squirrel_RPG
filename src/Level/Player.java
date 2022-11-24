@@ -452,7 +452,7 @@ public abstract class Player extends GameObject {
 
 	//Creates new acorn when called
 	public void fireBullet() {
-		if(fireDelay.isTimeUp()) { 
+		if(fireDelay.isTimeUp() && playerState != playerState.SWIMMING) { 
 			int projectileX;
 			int projectileY; 
 			float directionX; 
