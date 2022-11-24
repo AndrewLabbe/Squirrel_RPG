@@ -48,7 +48,7 @@ public abstract class Script<T extends MapEntity> {
     public void update() {
         // Runs an execute cycle of the Script
         ScriptState scriptState = execute();
-
+        
         // If Script is completed, set it to inactive to allow game to carry on
         if (scriptState == ScriptState.COMPLETED) {
             this.isActive = false;

@@ -15,6 +15,7 @@ import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.FoxScript;
 import Scripts.TestMap.IntroScript;
 import Scripts.TestMap.KeyScript;
+import Scripts.TestMap.LandScript;
 import Scripts.TestMap.SwimScript;
 import Scripts.TestMap.TempleScript;
 import Scripts.TestMap.WalrusScript;
@@ -31,28 +32,48 @@ public class newTileMap extends Map {
 	}
 	
 	 @Override
-	    public ArrayList<NPC> loadNPCs() {
-	        ArrayList<NPC> npcs = new ArrayList<>();
+	 public ArrayList<NPC> loadNPCs() {
+	     ArrayList<NPC> npcs = new ArrayList<>();
 	       
-	        Fox fox = new Fox(3, getMapTile(14, 21).getLocation());
-	        fox.setInteractScript(new FoxScript());
-	        npcs.add(fox);
+	     Fox fox = new Fox(3, getMapTile(14, 21).getLocation());
+	     fox.setInteractScript(new FoxScript());
+	     npcs.add(fox);
 
 	        
-	        return npcs;
-	    }
+	     return npcs;
+	 }
 	 
 	 @Override
-	    public ArrayList<Trigger> loadTriggers() {
-	        ArrayList<Trigger> triggers = new ArrayList<>();
-	        triggers.add(new Trigger(0, 1160, 120, 10, new IntroScript(), "hasLostGirlfriend"));
-	        triggers.add(new Trigger(120, 1160, 10, 130, new IntroScript(), "hasLostGirlfriend"));
-	        triggers.add(new Trigger(0, 1280, 120, 10, new IntroScript(), "hasLostGirlfriend"));
+	 public ArrayList<Trigger> loadTriggers() {
+	     ArrayList<Trigger> triggers = new ArrayList<>();
+	     triggers.add(new Trigger(0, 1160, 120, 10, new IntroScript(), "hasLostGirlfriend"));
+	     triggers.add(new Trigger(120, 1160, 10, 130, new IntroScript(), "hasLostGirlfriend"));
+	     triggers.add(new Trigger(0, 1280, 120, 10, new IntroScript(), "hasLostGirlfriend"));
 	        
-	        triggers.add(new Trigger(288, 900, 400, 10, new SwimScript(), "hasSwam"));
-	        
-	        return triggers;
-	    }
+	     //Swimming triggers
+	     triggers.add(new Trigger(0, 780, 220, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(220, 780, 1, 50, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(220, 830, 50, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(270, 830, 1, 50, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(270, 880, 470, 1, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(740, 830, 1, 50, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(740, 830, 50, 1, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(790, 780, 1, 50, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(790, 780, 50, 1, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(840, 520, 1, 260, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(730, 0, 1, 345, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(730, 345, 50, 1, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(780, 345, 1, 60, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(470, 520, 370, 1, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(470, 405, 310, 1, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(470, 330, 1, 75, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(470, 520, 1, 75, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(230, 330, 240, 1, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(230, 595, 240, 1, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(230, 330, 1, 265, new SwimScript(), "hasSwam"));
+	     
+	     return triggers;
+	 }
 	 
 	 @Override
 	 public void loadScripts() {

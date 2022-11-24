@@ -136,13 +136,19 @@ public abstract class Player extends GameObject {
 		case STANDING:
 			playerStanding();
 			break;
-		case WALKING:
+		case WALKING: 
+			if(walkSpeed == 1.15f) {
+				walkSpeed = 2.3f;
+			}
 			playerWalking();
 			break;
 		case INTERACTING:
 			playerInteracting();
 			break;
-		case SWIMMING:
+		case SWIMMING: 
+			if(walkSpeed == 2.3f) {
+				walkSpeed = 1.15f;
+			}
 			playerSwimming();
 			break;
 		}
@@ -186,7 +192,6 @@ public abstract class Player extends GameObject {
 		// if walk right key is pressed, move player to the right 
 		//Checks to see if main character has reach map bounds
 		else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < map.getWidthPixels() - 55 && !Keyboard.isKeyDown(SPEED_KEY)) {
-			System.out.println("reached");
 			moveAmountX += walkSpeed;
 			facingDirection = Direction.RIGHT;
 			currentWalkingXDirection = Direction.RIGHT;
@@ -244,7 +249,7 @@ public abstract class Player extends GameObject {
 		}
 	}
 
-	// player SWIMMING state logic
+	//Player SWIMMING state logic
 	protected void playerSwimming() {
 		if (!keyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
 			keyLocker.lockKey(INTERACT_KEY);
@@ -269,7 +274,6 @@ public abstract class Player extends GameObject {
 		// if swim right key is pressed, move player to the right 
 		//Checks to see if main character has reach map bounds
 		else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY) && Math.round(getX()) < map.getWidthPixels() - 55 && !Keyboard.isKeyDown(SPEED_KEY)) {
-			System.out.println("reached");
 			moveAmountX += walkSpeed;
 			facingDirection = Direction.RIGHT;
 			currentWalkingXDirection = Direction.RIGHT;

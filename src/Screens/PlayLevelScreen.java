@@ -135,8 +135,8 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasEnteredShop", false);
         flagManager.addFlag("hasSwam", false);
 
+
         // define/setup map
-//        this.map = new TestMap();
         this.map = new newTileMap();
         map.reset();
         map.setFlagManager(flagManager);
@@ -380,9 +380,14 @@ public class PlayLevelScreen extends Screen {
         	System.out.println("Shop entered");
         }
         
-        // If Player Enters Water Change State to Swimming
+        //If Player Enters Water Change State to Swimming
         if (map.getFlagManager().isFlagSet("hasSwam")) {
         	player.setPlayerState(PlayerState.SWIMMING);
+        }
+        
+        //If Player Enters Land Change State to Walking
+        if (map.getFlagManager().isFlagSet("hasWalked")) {
+        	player.setPlayerState(PlayerState.WALKING);
         }
         
         // 

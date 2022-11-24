@@ -22,7 +22,7 @@ public class Trigger extends MapEntity {
 
     public Trigger(int x, int y, int width, int height, Script triggerScript, String existenceFlag) {
         super(x, y);
-        this.triggerScript = triggerScript;
+        this.triggerScript = triggerScript; 
         this.setX(x);
         this.setY(y);
         this.setWidth(width);
