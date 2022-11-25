@@ -13,6 +13,7 @@ import Screens.PlayLevelScreen;
 import Screens.SellScreen;
 import Screens.ShopkeeperScreen;
 import Screens.TempleScreen1;
+import Screens.TempleScreen1_5;
 import Screens.TempleScreen2;
 
 /*
@@ -73,6 +74,9 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case TEMPLELVL1:
 						currentScreen = new TempleScreen1(this);
+						break;
+					case TEMPLELVL1_5:
+						currentScreen = new TempleScreen1_5(this);
 						break;
 					case TEMPLELVL2:
 						currentScreen = new TempleScreen2(this);

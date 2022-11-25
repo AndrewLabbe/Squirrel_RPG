@@ -220,6 +220,16 @@ public class templeTileset extends Tileset {
 
 		templeTiles.add(topWallWithFloorTile);
 		
+		// Blank Tile With Floor Tile
+		Frame blank = new FrameBuilder(getSubImage(6, 2))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder blankTile = new MapTileBuilder(blank)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		templeTiles.add(blankTile);
+		
 		// L Shaped Wall Tile
 		Frame LWall = new FrameBuilder(getSubImage(7, 0))
 				.withScale(tileScale)
@@ -260,6 +270,26 @@ public class templeTileset extends Tileset {
 
 		templeTiles.add(dirtRightCornerTile);
 		
+		// Left Stairs Tile
+		Frame leftStairs = new FrameBuilder(getSubImage(8, 1))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder leftStairsTile = new MapTileBuilder(leftStairs)
+				.withTileType(TileType.PASSABLE);
+
+		templeTiles.add(leftStairsTile);
+		
+		// Right Stairs Tile
+		Frame rightStairs = new FrameBuilder(getSubImage(8, 2))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder rightStairsTile = new MapTileBuilder(rightStairs)
+				.withTileType(TileType.PASSABLE);
+
+		templeTiles.add(rightStairsTile);
+				
 		return templeTiles;
 	}
 

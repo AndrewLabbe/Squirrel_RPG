@@ -7,7 +7,9 @@ import Maps.TestMap;
 import Maps.TitleScreenMap;
 import Maps.newTileMap;
 import Maps.shopInterior;
-import Maps.templeMap;
+import Maps.templeLevel1Map;
+import Maps.templeLevel1_5Map;
+import Maps.templeLevel2Map;
 
 public class EditorMaps {
     public static ArrayList<String> getMapNames() {
@@ -16,7 +18,9 @@ public class EditorMaps {
             add("TitleScreen");
             add("ShopInterior");
             add("NewTileMap");
-            add("TempleMap");
+            add("TempleLevel1");
+            add("TempleLevel1.5");
+            add("TempleLevel2");
         }};
     }
 
@@ -30,8 +34,12 @@ public class EditorMaps {
             	return new shopInterior();
             case "NewTileMap":
             	return new newTileMap();
-            case "TempleMap":
-            	return new templeMap();
+            case "TempleLevel1":
+            	return new templeLevel1Map();
+            case "TempleLevel1.5":
+            	return new templeLevel1_5Map();
+            case "TempleLevel2":
+            	return new templeLevel2Map();
             default:
                 throw new RuntimeException("Unrecognized map name");
         }

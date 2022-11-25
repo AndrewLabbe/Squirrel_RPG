@@ -8,10 +8,10 @@ import Scripts.TestMap.UpperLeftTableScript;
 import Tilesets.templeTileset;
 
 // Represents the Map for the Temple
-public class templeMap extends Map {
+public class templeLevel1Map extends Map {
 	
-	public templeMap() {
-		super("temple_Map.txt", new templeTileset());
+	public templeLevel1Map() {
+		super("temple_Level1.txt", new templeTileset());
 		this.playerStartPosition = getMapTile(7, 14).getLocation();
 	}
 	
