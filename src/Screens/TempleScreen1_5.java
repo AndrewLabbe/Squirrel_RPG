@@ -28,7 +28,7 @@ public class TempleScreen1_5 extends Screen{
 	@Override
 	public void initialize() {
 		flagManager = new FlagManager();
-		flagManager.addFlag("hasEnteredLevel1.5", false);
+		flagManager.addFlag("hasEnteredLevel2", false);
 		
 		this.map = new templeLevel1_5Map();
 		map.reset();
@@ -56,11 +56,12 @@ public class TempleScreen1_5 extends Screen{
             break;
         // if level has been completed, bring up level cleared screen
         case LEVEL_COMPLETED:
+        	screenCoordinator.setGameState(GameState.TEMPLELVL2);
             break;
 		}
 		
-		if (map.getFlagManager().isFlagSet("hasEnteredLevel1.5")) {
-        	screenCoordinator.setGameState(GameState.TEMPLELVL2);
+		if (map.getFlagManager().isFlagSet("hasEnteredLevel2")) {
+        	templeScreenState = TempleScreenState.LEVEL_COMPLETED;
         }
 		
 	}
