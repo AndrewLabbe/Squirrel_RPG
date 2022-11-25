@@ -14,7 +14,7 @@ import Level.MapTile;
 import Level.NPC;
 import Level.Player;
 import Level.Trigger;
-import Maps.templeMap;
+import Maps.templeLevel1Map;
 import Players.Cat;
 import Utils.Direction;
 import Utils.Point;
@@ -39,7 +39,7 @@ public class TempleScreen extends Screen {
     	flagManager.addFlag("doneWithPuzzle", false);
     	flagManager.addFlag("hasFinishedFirstLevel", false);
 		
-    	this.map = new templeMap();
+    	this.map = new templeLevel1Map();
 		map.reset();
 		map.setFlagManager(flagManager);
 		
