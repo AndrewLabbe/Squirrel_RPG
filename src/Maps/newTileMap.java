@@ -50,7 +50,7 @@ public class newTileMap extends Map {
 	     triggers.add(new Trigger(120, 1160, 10, 130, new IntroScript(), "hasLostGirlfriend"));
 	     triggers.add(new Trigger(0, 1280, 120, 10, new IntroScript(), "hasLostGirlfriend"));
 	        
-	     //Swimming triggers
+	     //Swimming triggers for top left lake
 	     triggers.add(new Trigger(0, 780, 220, 1, new SwimScript(), "hasSwam")); 
 	     triggers.add(new Trigger(220, 780, 1, 50, new SwimScript(), "hasSwam")); 
 	     triggers.add(new Trigger(220, 830, 50, 1, new SwimScript(), "hasSwam")); 
@@ -71,6 +71,17 @@ public class newTileMap extends Map {
 	     triggers.add(new Trigger(230, 330, 240, 1, new SwimScript(), "hasSwam"));
 	     triggers.add(new Trigger(230, 595, 240, 1, new SwimScript(), "hasSwam"));
 	     triggers.add(new Trigger(230, 330, 1, 265, new SwimScript(), "hasSwam"));
+	     
+	     //Swimming triggers for top left pond
+	     triggers.add(new Trigger(1035, 85, 1, 120, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(1075, 85, 1, 120, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1035, 205, 40, 1, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(1035, 85, 40, 1, new SwimScript(), "hasSwam")); 
+	     //Swimming triggers for top right pond
+	     triggers.add(new Trigger(1275, 85, 1, 120, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(1315, 85, 1, 120, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1275, 205, 40, 1, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(1275, 85, 40, 1, new SwimScript(), "hasSwam"));
 	     
 	     return triggers;
 	 }

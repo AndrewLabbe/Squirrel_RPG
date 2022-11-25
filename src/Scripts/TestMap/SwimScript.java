@@ -53,7 +53,19 @@ public class SwimScript extends Script {
 	    triggers.add(new Trigger(430, 470, 1, 60, new LandScript(), "hasWalked"));
 	    triggers.add(new Trigger(300, 380, 130, 1, new LandScript(), "hasWalked"));
 	    triggers.add(new Trigger(300, 530, 130, 1, new LandScript(), "hasWalked"));
-	    triggers.add(new Trigger(300, 380, 1, 150, new LandScript(), "hasWalked"));
+	    triggers.add(new Trigger(300, 380, 1, 150, new LandScript(), "hasWalked")); 
+	    
+	    //Swimming triggers for top left pond
+	    triggers.add(new Trigger(1000, 50, 1, 190, new LandScript(), "hasWalked"));
+	    triggers.add(new Trigger(1110, 50, 1, 190, new LandScript(), "hasWalked")); 
+	    triggers.add(new Trigger(1000, 240, 110, 1, new LandScript(), "hasWalked"));
+	    triggers.add(new Trigger(1000, 50, 110, 1, new LandScript(), "hasWalked"));
+	    //Swimming triggers for top right pond
+	    triggers.add(new Trigger(1240, 50, 1, 190, new LandScript(), "hasWalked"));
+	    triggers.add(new Trigger(1350, 50, 1, 190, new LandScript(), "hasWalked")); 
+	    triggers.add(new Trigger(1240, 240, 110, 1, new LandScript(), "hasWalked"));
+	    triggers.add(new Trigger(1240, 50, 110, 1, new LandScript(), "hasWalked"));
+	    
 	    for(Trigger trigger : triggers) {
 	    	trigger.getTriggerScript().setMap(map); 
 	    	trigger.getTriggerScript().setPlayer(player);
