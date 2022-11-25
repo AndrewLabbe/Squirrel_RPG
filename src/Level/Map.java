@@ -825,9 +825,9 @@ public abstract class Map {
   	public void spawnPowerUp(Point spawnLocation) {
   		if(powerUpActive == false && powerUpCoolDown.isTimeUp()) {
   			PowerUp powerUp;
-  			int randomNum = rng.nextInt(3); 
-  			randomNum = randomNum % 3;
-  			//System.out.println(randomNum);
+  			int randomNum = rng.nextInt(4); 
+  			//randomNum = randomNum % 3;
+  			System.out.println(randomNum);
   			switch(randomNum) {
   				case 0: 
   					powerUp = new DoublePoints(spawnLocation); 
