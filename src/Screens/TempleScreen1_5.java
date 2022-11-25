@@ -8,12 +8,11 @@ import Level.FlagManager;
 import Level.Map;
 import Level.Player;
 import Maps.templeLevel1_5Map;
-import Maps.templeLevel2Map;
 import Players.Squirrel;
 import Utils.Direction;
 import Utils.Point;
 
-public class TempleScreen2 extends Screen{
+public class TempleScreen1_5 extends Screen{
 	
 	protected ScreenCoordinator screenCoordinator;
 	protected Map map;
@@ -22,15 +21,16 @@ public class TempleScreen2 extends Screen{
 	
 	protected TempleScreenState templeScreenState;
 
-	public TempleScreen2(ScreenCoordinator screenCoordinator) {
+	public TempleScreen1_5(ScreenCoordinator screenCoordinator) {
 		this.screenCoordinator = screenCoordinator;
 	}
 	
 	@Override
 	public void initialize() {
 		flagManager = new FlagManager();
+		flagManager.addFlag("hasEnteredLevel1.5", false);
 		
-		this.map = new templeLevel2Map();
+		this.map = new templeLevel1_5Map();
 		map.reset();
 		map.setFlagManager(flagManager);
 		
@@ -49,16 +49,19 @@ public class TempleScreen2 extends Screen{
 	@Override
 	public void update() {
 		switch (templeScreenState) {
-		// if level is "running" update player and map to keep game logic for the platformer level going
+		// if level is "running" update player and map to keep game logic
         case RUNNING:
             player.update();
             map.update(player);
             break;
         // if level has been completed, bring up level cleared screen
         case LEVEL_COMPLETED:
-        	//screenCoordinator.setGameState(GameState.TEMPLELVL2);
             break;
 		}
+		
+		if (map.getFlagManager().isFlagSet("hasEnteredLevel1.5")) {
+        	screenCoordinator.setGameState(GameState.TEMPLELVL2);
+        }
 		
 	}
 

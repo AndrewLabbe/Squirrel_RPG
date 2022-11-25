@@ -88,7 +88,7 @@ public class TempleScreen1 extends Screen {
             break;
         // if level has been completed, bring up level cleared screen
         case LEVEL_COMPLETED:
-        	screenCoordinator.setGameState(GameState.TEMPLELVL2);
+        	screenCoordinator.setGameState(GameState.TEMPLELVL1_5);
             break;
 		}
 		
