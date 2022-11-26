@@ -15,6 +15,8 @@ import Screens.ShopkeeperScreen;
 import Screens.TempleScreen1;
 import Screens.TempleScreen1_5;
 import Screens.TempleScreen2;
+import Screens.TempleScreen3;
+import Screens.TempleScreen4;
 
 /*
  * Based on the current game state, this class determines which Screen should be shown
@@ -80,6 +82,12 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case TEMPLELVL2:
 						currentScreen = new TempleScreen2(this);
+						break;
+					case TEMPLELVL3:
+						currentScreen = new TempleScreen3(this);
+						break;
+					case TEMPLELVL4:
+						currentScreen = new TempleScreen4(this);
 						break;
 					case CREDITS:
 						currentScreen = new CreditsScreen(this);
