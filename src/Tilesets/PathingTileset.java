@@ -868,22 +868,43 @@ public class PathingTileset extends Tileset {
 		pathTiles.add(rightBottomCornerRaisedTile);
 
 		// Animated water
-        Frame[] animatedWaterFrames = new Frame[] {
-            new FrameBuilder(getSubImage(17, 0), 500)
-                    .withScale(tileScale)
-                    .build(),
-            new FrameBuilder(getSubImage(17, 1), 500)
-                    .withScale(tileScale)
-                    .build(),
-            new FrameBuilder(getSubImage(17, 2), 500)
-                    .withScale(tileScale)
-                    .build()
-        };
+		Frame[] animatedWaterFrames = new Frame[] {
+				new FrameBuilder(getSubImage(17, 0), 500)
+				.withScale(tileScale)
+				.build(),
+				new FrameBuilder(getSubImage(17, 1), 500)
+				.withScale(tileScale)
+				.build(),
+				new FrameBuilder(getSubImage(17, 2), 500)
+				.withScale(tileScale)
+				.build()
+		};
 
-        MapTileBuilder animatedWaterTile = new MapTileBuilder(animatedWaterFrames)
-                .withTileType(TileType.PASSABLE);
+		MapTileBuilder animatedWaterTile = new MapTileBuilder(animatedWaterFrames)
+				.withTileType(TileType.PASSABLE);
 
-        pathTiles.add(animatedWaterTile);
+		pathTiles.add(animatedWaterTile);
+
+		// Animated Grass
+		Frame[] animatedGrassFrames = new Frame[] {
+				new FrameBuilder(getSubImage(18, 0), 500)
+				.withScale(tileScale)
+				.build(),
+				new FrameBuilder(getSubImage(18, 1), 500)
+				.withScale(tileScale)
+				.build(),
+				new FrameBuilder(getSubImage(18, 2), 500)
+				.withScale(tileScale)
+				.build(),
+				new FrameBuilder(getSubImage(18, 1), 500)
+				.withScale(tileScale)
+				.build()
+		};
+
+		MapTileBuilder animatedGrassTile = new MapTileBuilder(animatedGrassFrames)
+				.withTileType(TileType.PASSABLE);
+
+		pathTiles.add(animatedGrassTile);
 
 		return pathTiles;
 	}
