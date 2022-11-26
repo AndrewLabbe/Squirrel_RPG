@@ -18,6 +18,9 @@ public class templeLevel1_5Map extends Map{
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
         triggers.add(new Trigger(576, 1520, 196, 10, new TempleLevel1_5Script()));
+        for(Trigger trigger : triggers) {
+	    	trigger.getTriggerScript().setMap(this); 
+	    }
         
         return triggers;
     }
