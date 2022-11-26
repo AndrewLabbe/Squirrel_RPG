@@ -14,7 +14,7 @@ import Utils.Point;
 public class Chest extends NPC {
 
 	public Chest(int id, Point location) {
-		super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Dinosaur.png"), 14, 17), "STAND_LEFT");
+		super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Chests.png"), 16, 16), "STAND_LEFT");
 	}
 	
 	@Override
@@ -27,7 +27,7 @@ public class Chest extends NPC {
                             .build()
             });
             put("STAND_RIGHT", new Frame[] {
-                   new FrameBuilder(spriteSheet.getSprite(0, 0))
+                   new FrameBuilder(spriteSheet.getSprite(0, 1))
                            .withScale(3)
                            .withBounds(4, 5, 5, 10)
                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
