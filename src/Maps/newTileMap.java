@@ -8,9 +8,11 @@ import Level.Map;
 import Level.NPC;
 import Level.Spawner;
 import Level.Trigger;
+import NPCs.Chest;
 import NPCs.Dinosaur;
 import NPCs.Fox;
 import NPCs.Walrus;
+import Scripts.TestMap.ChestUnlockScript;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.FoxScript;
 import Scripts.TestMap.IntroScript;
@@ -35,11 +37,14 @@ public class newTileMap extends Map {
 	 public ArrayList<NPC> loadNPCs() {
 	     ArrayList<NPC> npcs = new ArrayList<>();
 	       
-	     Fox fox = new Fox(3, getMapTile(14, 21).getLocation());
+	     Fox fox = new Fox(1, getMapTile(14, 21).getLocation());
 	     fox.setInteractScript(new FoxScript());
 	     npcs.add(fox);
 
-	        
+	     Chest chest = new Chest(2, getMapTile(13, 21).getLocation());  
+	     chest.setInteractScript(new ChestUnlockScript());
+	     npcs.add(chest);
+	     
 	     return npcs;
 	 }
 	 
@@ -92,7 +97,9 @@ public class newTileMap extends Map {
 	        
 	     getMapTile(24, 0).setInteractScript(new TempleScript());
 	     
-	     getMapTile(41, 9).setInteractScript(new KeyScript());
+	     getMapTile(41, 9).setInteractScript(new KeyScript()); 
+	     
+	     getMapTile(23, 25).setInteractScript(new ChestUnlockScript());
 	 } 
 	 
 	 
@@ -103,6 +110,7 @@ public class newTileMap extends Map {
 		 
 		 spawners.add(new BasicSpawner(getMapTile(10, 20).getLocation()));
 		 spawners.add(new BasicSpawner(getMapTile(20, 40).getLocation()));
+		 
 		 return spawners;
 	 }
 	 
@@ -112,7 +120,8 @@ public class newTileMap extends Map {
 	    	ArrayList<CollectibleItem> collectibles = new ArrayList(); 
 	    	
 	    	collectibles.add(new CollectibleAcorn(getMapTile(25, 25).getLocation()));
-
+	    	collectibles.add(new CollectibleAcorn(getMapTile(24, 25).getLocation()));
+	    	
 	    	return collectibles;
 	    }
 	 

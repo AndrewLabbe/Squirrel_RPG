@@ -17,7 +17,7 @@ public class Squirrel extends Player {
 
 	public Squirrel(float x, float y, Map map) {
 		super(new SpriteSheet(ImageLoader.load("Squirrel.png"), 24, 24), x, y, "STAND_RIGHT", map);
-		walkSpeed = 2.3f;
+		walkSpeed = 5.3f;
 	}
 
 	public void update() {

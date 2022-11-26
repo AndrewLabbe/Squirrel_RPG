@@ -73,7 +73,9 @@ public abstract class Player extends GameObject {
 	//Insta elim active or not 
 	private boolean instaElim; 
 	//Insta elim timeout
-	private Stopwatch instaElimTimeout;
+	private Stopwatch instaElimTimeout; 
+	
+	private int numItems;
 
 	public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName, Map map) {
 		super(spriteSheet, x, y, startingAnimationName);
@@ -88,7 +90,8 @@ public abstract class Player extends GameObject {
 		speedBoostTimeout = new Stopwatch();
 		damage = 10; 
 		instaElim = false; 
-		instaElimTimeout = new Stopwatch();
+		instaElimTimeout = new Stopwatch(); 
+		numItems = 0;
 	}
 
 	public void update() {
@@ -583,7 +586,7 @@ public abstract class Player extends GameObject {
 	// stores inventory items in array for later
 	public void addInvItem(String string) {
 		this.invItems.add(string);
-
+		numItems++;
 	}
 	public ArrayList<String> getInvItem() {
 		return invItems;
@@ -596,8 +599,17 @@ public abstract class Player extends GameObject {
 			int collectibleIndex = collectibles.indexOf(string);
 			collectibles.remove(collectibleIndex);
 			CollectibleItem collectible = collectibles.get(collectibleIndex);
-			collectible.removeCollectible(collectible);
-		}
+			collectible.removeCollectible(collectible); 
+		} 
+		numItems--;
 	}
 
+	public Map getMap() {
+		return map;
+	} 
+	
+	public int getItemNum() {
+		return numItems;
+	}
+	
 }

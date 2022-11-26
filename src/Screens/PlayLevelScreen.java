@@ -20,6 +20,7 @@ import Engine.ScreenManager;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import GameObject.Sprite;
+import Level.CollectibleItem;
 import Level.EnhancedMapTile;
 import Level.FlagManager;
 import Level.HealthBar;
@@ -105,6 +106,7 @@ public class PlayLevelScreen extends Screen {
     protected GameObject.Rectangle box1, box2, box3, box4, box5, invTable
     								,info1;
 	
+    protected ArrayList<Sprite> itemSprites;
 	
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -133,7 +135,8 @@ public class PlayLevelScreen extends Screen {
 //        flagManager.addFlag("hasFoundBall", false);
         flagManager.addFlag("hasEnteredTemple", false);
         flagManager.addFlag("hasEnteredShop", false);
-        flagManager.addFlag("hasSwam", false);
+        flagManager.addFlag("hasSwam", false); 
+        flagManager.addFlag("hasOpenedChest", false);
 
 
         // define/setup map
@@ -175,6 +178,7 @@ public class PlayLevelScreen extends Screen {
     	
 //    	itemSprite1 = new Sprite(ImageLoader.load(testMap.addInvItem("Acorn").get(1)), next+itemBoxSize, base+(numItems*next));
     	itemSprite1 = new Sprite(ImageLoader.load("Acorn.png"));
+    	itemSprite2 = new Sprite(ImageLoader.load("Acorn.png"));
     	    	
 //    	while (sc.hasNextLine()) {
 		line1 = new SpriteFont("A", itemBoxSize*5/2, base*2, "Comic Sans", 32, new Color(49, 207, 240));
@@ -263,7 +267,9 @@ public class PlayLevelScreen extends Screen {
         powerUpTimerColor = new Color(150,0,0);
         
         winScreen = new WinScreen(this);
-        deathScreen = new DeathScreen(this);
+        deathScreen = new DeathScreen(this); 
+        
+        itemSprites = new ArrayList<>();
     }
 
     public void update() {
@@ -363,12 +369,6 @@ public class PlayLevelScreen extends Screen {
 		if (Keyboard.isKeyUp(invKey)) {
 			keyLocker.unlockKey(invKey);
 		}
-		
-
-        // if flag is set at any point during gameplay, game is "won"
-        if (map.getFlagManager().isFlagSet("hasFoundBall")) {
-            playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
-        }
         
         if (map.getFlagManager().isFlagSet("hasEnteredTemple")) {
         	screenCoordinator.setGameState(GameState.TEMPLELVL1);
@@ -388,16 +388,47 @@ public class PlayLevelScreen extends Screen {
         //If Player Enters Land Change State to Walking
         if (map.getFlagManager().isFlagSet("hasWalked")) {
         	player.setPlayerState(PlayerState.WALKING);
+        } 
+        
+        //If Player interacts with a chest
+        if (map.getFlagManager().isFlagSet("hasOpenedChest")) {
+        	
         }
         
-        // 
-    	if (player.getInvItem().size() != 0) {
-    		itemSprite1 = addItem(player.getInvItem().get(player.getInvItem().indexOf("Acorn.png")));
-        	itemSprite1.setLocation(itemBoxSize, base);
-        	itemSprite1.setHeight(itemBoxSize);
-        	itemSprite1.setWidth(itemBoxSize);
-    	}
-        
+        //Add picture of item to be displayed at spot in inventory 
+    	//if (player.getInvItem().size() != 0) { 
+    	/*if (player.getItemNum() - numItems > 0) { 
+    		itemSprites.clear();
+    		ArrayList<String> items = player.getInvItem();
+    		//int size = items.size();
+    		for(int i = 0; i < player.getItemNum() - numItems; i++) { 
+    			String item = items.get(i);
+    			Sprite itemSprite = addItem(item);
+    			itemSprite.setLocation(itemBoxSize, base+(i*next));
+    			itemSprite.setHeight(itemBoxSize);
+    			itemSprite.setWidth(itemBoxSize); 
+    			itemSprites.add(itemSprite);
+    		}
+    	}*/
+    	
+    	
+    	//Add picture of item to be displayed at spot in inventory 
+    	/*if (map.getCollectibles().size() != 0) { 
+    		itemSprites.clear();
+    		ArrayList<CollectibleItem> items = map.getCollectibles();
+    		int size = items.size();
+    		for(int i = 0; i < size; i++) { 
+    			CollectibleItem item = items.get(i); 
+    			String item1 = item.getImageName();
+    			Sprite itemSprite = addItem(item1);
+    			itemSprite.setLocation(itemBoxSize, base+(i*next));
+    			itemSprite.setHeight(itemBoxSize);
+    			itemSprite.setWidth(itemBoxSize); 
+    			itemSprites.add(itemSprite);
+    		}
+    	}*/
+    	
+    	
         // if down or up is pressed, change selected item position. avoids currentItem from being out of bounds
         if (Keyboard.isKeyDown(Key.DOWN) && currentItem != 4 && !keyLocker.isKeyLocked(Key.DOWN)) {
             currentItem++;
@@ -560,7 +591,6 @@ public class PlayLevelScreen extends Screen {
                 break;
         } 
         
-        //Shade for Day Night Cycle
         if (openInventory) {
         	
             invTable.draw(graphicsHandler);
@@ -572,15 +602,21 @@ public class PlayLevelScreen extends Screen {
             box4.draw(graphicsHandler);
             box5.draw(graphicsHandler);
             
-            if (player.getInvItem().contains("Acorn.png")) {
+            /*if (player.getInvItem().contains("Acorn.png")) {
             	itemSprite1.draw(graphicsHandler);
-            }
-//            itemSprite1.draw(graphicsHandler);
+            }*/
             
             info1.draw(graphicsHandler);
             line1.draw(graphicsHandler);
             line2.draw(graphicsHandler);
-            line3.draw(graphicsHandler);
+            line3.draw(graphicsHandler); 
+            
+            for(Sprite itemSprite : itemSprites) {
+            	itemSprite.draw(graphicsHandler);
+            } 
+            //System.out.println(itemSprites.size());
+            //System.out.println(player.getItemNum());
+            //System.out.println(player.getItemNum() + numItems);
         }
         
         // Shade for Day Night Cycle
@@ -616,7 +652,7 @@ public class PlayLevelScreen extends Screen {
     } 
     
     public Sprite addItem(String image) {
-		numItems++;
+		//numItems++;
 		return new Sprite(ImageLoader.load(image), next+itemBoxSize, base+(numItems*next));
 		
 	}
@@ -627,7 +663,9 @@ public class PlayLevelScreen extends Screen {
 		if (items.contains(image)) {
 			int itemIndex = items.indexOf(image);
 			items.remove(itemIndex);
-		}
+		} 
+		//System.out.println("test");
+		numItems--;
 	}
 	
 	// Return Player State as an Int (Idea?)

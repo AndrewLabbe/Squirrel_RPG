@@ -40,7 +40,7 @@ public class CollectibleAcorn extends CollectibleItem {
 	
 	public CollectibleAcorn(Utils.Point point) {
 		//, Sprite sprite
-		super(point.x, point.y, new SpriteSheet(ImageLoader.load("Acorn.png"), 29, 20), "STAND_RIGHT");
+		super(point.x, point.y, new SpriteSheet(ImageLoader.load("Acorn.png"), 29, 20), "STAND_RIGHT", "Acorn.png");
 		//, new Sprite(ImageLoader.load("Acorn.png"))
 		rangeX = 50; 
 		rangeY = 50;

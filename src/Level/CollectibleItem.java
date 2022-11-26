@@ -8,9 +8,13 @@ import Utils.Point;
 
 public class CollectibleItem extends MapEntity {
 
-	public CollectibleItem(float x, float y, SpriteSheet spriteSheet, String startingAnimation) {
+	SpriteSheet spriteSheet; 
+	String imageName;
+	
+	public CollectibleItem(float x, float y, SpriteSheet spriteSheet, String startingAnimation, String name) {
 		super(x, y, spriteSheet, startingAnimation);
-		
+		this.spriteSheet = spriteSheet;
+		imageName = name;
 	}
 
 	public void update(Player player) {
@@ -23,6 +27,10 @@ public class CollectibleItem extends MapEntity {
 	void removeCollectible(CollectibleItem item) {
 		item.mapEntityStatus = mapEntityStatus.REMOVED;
 		
+	} 
+	
+	public String getImageName() {
+		return imageName;
 	}
 
 }
