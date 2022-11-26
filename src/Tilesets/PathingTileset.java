@@ -867,7 +867,23 @@ public class PathingTileset extends Tileset {
 
 		pathTiles.add(rightBottomCornerRaisedTile);
 
+		// Animated water
+        Frame[] animatedWaterFrames = new Frame[] {
+            new FrameBuilder(getSubImage(17, 0), 500)
+                    .withScale(tileScale)
+                    .build(),
+            new FrameBuilder(getSubImage(17, 1), 500)
+                    .withScale(tileScale)
+                    .build(),
+            new FrameBuilder(getSubImage(17, 2), 500)
+                    .withScale(tileScale)
+                    .build()
+        };
 
+        MapTileBuilder animatedWaterTile = new MapTileBuilder(animatedWaterFrames)
+                .withTileType(TileType.PASSABLE);
+
+        pathTiles.add(animatedWaterTile);
 
 		return pathTiles;
 	}
