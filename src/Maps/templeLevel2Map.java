@@ -8,7 +8,7 @@ public class templeLevel2Map extends Map {
 	
 	public templeLevel2Map() {
 		super("temple_Level2.txt", new templeTileset());
-		this.playerStartPosition = getMapTile(7, 14).getLocation();
+		this.playerStartPosition = getMapTile(1, 9).getLocation();
 	}
 	
 	@Override
