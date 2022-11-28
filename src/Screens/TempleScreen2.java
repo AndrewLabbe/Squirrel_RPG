@@ -12,7 +12,6 @@ import Level.NPC;
 import Level.Player;
 import Level.PlayerState;
 import Level.Trigger;
-import Maps.templeLevel1_5Map;
 import Maps.templeLevel2Map;
 import Players.Squirrel;
 import Utils.Direction;
@@ -35,6 +34,7 @@ public class TempleScreen2 extends Screen{
 	public void initialize() {
 		flagManager = new FlagManager();
 		flagManager.addFlag("templeSwam", false);
+		flagManager.addFlag("hasEnteredLevel3", false);
 		
 		this.map = new templeLevel2Map();
 		map.reset();
@@ -88,9 +88,13 @@ public class TempleScreen2 extends Screen{
             break;
         // if level has been completed, bring up level cleared screen
         case LEVEL_COMPLETED:
-        	//screenCoordinator.setGameState(GameState.TEMPLELVL2);
+        	screenCoordinator.setGameState(GameState.TEMPLELVL3);
             break;
 		}
+		
+		if (map.getFlagManager().isFlagSet("hasEnteredLevel3")) {
+        	templeScreenState = TempleScreenState.LEVEL_COMPLETED;
+        }
 		
 		//If Player Enters Water Change State to Swimming
         if (map.getFlagManager().isFlagSet("templeSwam")) {

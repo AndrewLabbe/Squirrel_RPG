@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Level.Map;
 import Level.Trigger;
+import Scripts.TestMap.TempleLevel2Script;
 import Scripts.TestMap.TempleSwimScript;
 import Tilesets.templeTileset;
 
@@ -47,6 +48,13 @@ public class templeLevel2Map extends Map {
 		triggers.add(new Trigger(1020, 1110, 10, 170, new TempleSwimScript(), "templeSwam"));
 		triggers.add(new Trigger(1190, 1110, 10, 170, new TempleSwimScript(), "templeSwam"));
 		
+		// Go to Level 3
+		triggers.add(new Trigger(670, 1625, 200, 10, new TempleLevel2Script(), "hasEnteredLevel3"));
+		
+		 for(Trigger trigger : triggers) {
+		    	trigger.getTriggerScript().setMap(this); 
+		    }
+		 
 		return triggers;
 		
 	}
