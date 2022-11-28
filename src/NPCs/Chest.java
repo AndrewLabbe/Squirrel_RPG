@@ -26,13 +26,13 @@ public class Chest extends NPC {
             put("LOCKED", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
-                            .withBounds(0, 0, 16, 17)
+                            .withBounds(-2, -2, 17, 17)
                             .build()
             });
             put("UNLOCKED", new Frame[] {
                    new FrameBuilder(spriteSheet.getSprite(0, 1))
                            .withScale(3)
-                           .withBounds(0, 0, 16, 17)
+                           .withBounds(-2, -2, 17, 17)
                            .build()
            });
         }};

@@ -34,11 +34,14 @@ import Level.MapTile;
 import Level.NPC;
 import Level.Player;
 import Level.PlayerState;
+import Level.Script;
 import Level.Trigger;
 import Maps.newTileMap;
 import NPCs.Currency;
 import Players.Cat;
 import Players.Squirrel;
+import Scripts.TestMap.LandScript;
+import Scripts.TestMap.TempleScript;
 import SpriteFont.SpriteFont;
 import Utils.Direction;
 import Utils.Point;
@@ -100,6 +103,8 @@ public class PlayLevelScreen extends Screen {
     protected int yPos, range, itemBoxSize, base;
     protected boolean openInventory = false;
     
+    private boolean templeUnlocked;
+    
     protected int numItems = 0;
     protected Sprite sprite, itemSprite1, itemSprite2, itemSprite3, itemSprite4;
     File file = new File("Acorn.txt");
@@ -143,6 +148,7 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasOpenedChestDestiny", false);
         flagManager.addFlag("hasOpenedChestGenesis", false);
         flagManager.addFlag("hasOpenedChestRetribution", false);
+        flagManager.addFlag("hasTempleUnlocked", false);
         
         // define/setup map
         this.map = new newTileMap();
@@ -274,7 +280,9 @@ public class PlayLevelScreen extends Screen {
         winScreen = new WinScreen(this);
         deathScreen = new DeathScreen(this); 
         
-        itemSprites = new ArrayList<>();
+        itemSprites = new ArrayList<>(); 
+        
+        templeUnlocked = false;
     }
 
     public void update() {
@@ -311,7 +319,9 @@ public class PlayLevelScreen extends Screen {
 			keyLocker.unlockKey(invKey);
 		}
         
-        // Removing items keyboard logic
+        // Removing items keyboard logic 
+        
+        //Investigate this later if you have time
         if (Keyboard.isKeyDown(Key.D) && !keyLocker.isKeyLocked(Key.D)) {
         	if (currentItem == player.getInvItem().indexOf("Acorn.png")) {
         		removeItem("Acorn.png");
@@ -403,6 +413,11 @@ public class PlayLevelScreen extends Screen {
         
         //If Player interacts with the chest of retribution
         if (map.getFlagManager().isFlagSet("hasOpenedChestRetribution")) {
+         	
+        } 
+        
+        //If the temple entrance is open or not
+        if (map.getFlagManager().isFlagSet("hasTempleUnlocked")) {
          	
         }
         
@@ -551,7 +566,19 @@ public class PlayLevelScreen extends Screen {
       	keyCounter.updateKeyText();
       	
         screenCoordinator.setLevelScreen(this);
-        powerUpTimer.setColor(powerUpTimerColor);
+        powerUpTimer.setColor(powerUpTimerColor); 
+        
+        //Creates trigger to enter temple when all of the keys are collected
+        if(keyCounter.getKeys() == 4 && !templeUnlocked) {
+        	Trigger trigger = new Trigger(1120, 50, 110, 1, new TempleScript(), "hasEnteredTemple");
+    	    
+    	    trigger.getTriggerScript().setMap(map); 
+    	    trigger.getTriggerScript().setPlayer(player);
+    	    map.addTrigger(trigger); 
+    	    
+    	    templeUnlocked = true; 
+    	    flagManager.setFlag("hasTempleUnlocked");
+        }
     }
 
     //Fade to day/night

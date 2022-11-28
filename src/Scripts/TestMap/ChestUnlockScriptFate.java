@@ -16,7 +16,7 @@ public class ChestUnlockScriptFate extends Script {
 		showTextbox();
 		if(!isFlagSet("hasOpenedChestFate")) {
 			addTextToTextboxQueue("You found the key of FATE!"); 
-			Point point = new Point(player.getX() - 50f, player.getY()); 
+			Point point = new Point(player.getX() - 100f, player.getY() - 100f); 
 			CollectibleKey key = new CollectibleKey(point, "KEY_FATE");
 			map.addCollectibles(key);
 		}

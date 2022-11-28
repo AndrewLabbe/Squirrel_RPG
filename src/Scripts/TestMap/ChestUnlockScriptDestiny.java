@@ -16,7 +16,7 @@ public class ChestUnlockScriptDestiny extends Script {
 		showTextbox();
 		if(!isFlagSet("hasOpenedChestDestiny")) {
 			addTextToTextboxQueue("You found the key of DESTINY!"); 
-			Point point = new Point(player.getX() - 50f, player.getY()); 
+			Point point = new Point(player.getX() - 100f, player.getY()); 
 			CollectibleKey key = new CollectibleKey(point, "KEY_DESTINY");
 			map.addCollectibles(key);
 		}

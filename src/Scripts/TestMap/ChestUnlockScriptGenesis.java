@@ -16,7 +16,7 @@ public class ChestUnlockScriptGenesis extends Script {
 		showTextbox();
 		if(!isFlagSet("hasOpenedChestGenesis")) {
 			addTextToTextboxQueue("You found the key of GENESIS!"); 
-			Point point = new Point(player.getX() - 50f, player.getY()); 
+			Point point = new Point(player.getX() - 100f, player.getY()); 
 			CollectibleKey key = new CollectibleKey(point, "KEY_GENESIS");
 			map.addCollectibles(key);
 		}

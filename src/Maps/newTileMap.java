@@ -22,6 +22,7 @@ import Scripts.TestMap.IntroScript;
 import Scripts.TestMap.KeyScript;
 import Scripts.TestMap.LandScript;
 import Scripts.TestMap.SwimScript;
+import Scripts.TestMap.TempleLockedScript;
 import Scripts.TestMap.TempleScript;
 import Scripts.TestMap.WalrusScript;
 import Scripts.TestMap.changeShop;
@@ -66,9 +67,9 @@ public class newTileMap extends Map {
 	 @Override
 	 public ArrayList<Trigger> loadTriggers() {
 	     ArrayList<Trigger> triggers = new ArrayList<>();
-	     /*triggers.add(new Trigger(0, 1160, 120, 10, new IntroScript(), "hasLostGirlfriend"));
+	     triggers.add(new Trigger(0, 1160, 120, 10, new IntroScript(), "hasLostGirlfriend"));
 	     triggers.add(new Trigger(120, 1160, 10, 130, new IntroScript(), "hasLostGirlfriend"));
-	     triggers.add(new Trigger(0, 1280, 120, 10, new IntroScript(), "hasLostGirlfriend"));*/
+	     triggers.add(new Trigger(0, 1280, 120, 10, new IntroScript(), "hasLostGirlfriend"));
 	        
 	     //Swimming triggers for top left lake
 	     triggers.add(new Trigger(0, 780, 220, 1, new SwimScript(), "hasSwam")); 
@@ -103,6 +104,9 @@ public class newTileMap extends Map {
 	     triggers.add(new Trigger(1275, 205, 40, 1, new SwimScript(), "hasSwam"));
 	     triggers.add(new Trigger(1275, 85, 40, 1, new SwimScript(), "hasSwam"));
 	     
+	     //If player tries to enter the temple without 4 keys trigger the locked temple script
+	     triggers.add(new Trigger(1120, 50, 110, 1, new TempleLockedScript(), "hasTempleUnlocked"));
+	     
 	     return triggers;
 	 }
 	 
@@ -110,9 +114,9 @@ public class newTileMap extends Map {
 	 public void loadScripts() {
 		 getMapTile(9, 34).setInteractScript(new changeShop());
 	        
-	     getMapTile(24, 0).setInteractScript(new TempleScript());
+		 getMapTile(41, 9).setInteractScript(new KeyScript());
 	     
-	     getMapTile(41, 9).setInteractScript(new KeyScript()); 
+	     //getMapTile(24, 0).setInteractScript(new TempleLockedScript()); 
 	     
 	 } 
 	 
@@ -122,7 +126,7 @@ public class newTileMap extends Map {
 	 public ArrayList<Spawner> loadSpawners() {
 		 ArrayList<Spawner> spawners = new ArrayList(); 
 		 
-		// spawners.add(new BasicSpawner(getMapTile(10, 20).getLocation()));
+		 spawners.add(new BasicSpawner(getMapTile(10, 20).getLocation()));
 		 spawners.add(new BasicSpawner(getMapTile(20, 40).getLocation()));
 		 
 		 return spawners;

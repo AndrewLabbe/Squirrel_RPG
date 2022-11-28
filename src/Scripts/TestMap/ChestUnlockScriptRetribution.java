@@ -16,7 +16,7 @@ public class ChestUnlockScriptRetribution extends Script {
 		showTextbox();
 		if(!isFlagSet("hasOpenedChestRetribution")) {
 			addTextToTextboxQueue("You found the key of RETRIBUTION!"); 
-			Point point = new Point(player.getX() - 50f, player.getY()); 
+			Point point = new Point(player.getX() - 100f, player.getY() - 100f); 
 			CollectibleKey key = new CollectibleKey(point, "KEY_RETRIBUTION");
 			map.addCollectibles(key);
 		}
