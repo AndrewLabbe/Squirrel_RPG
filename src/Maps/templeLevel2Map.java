@@ -3,9 +3,12 @@ package Maps;
 import java.util.ArrayList;
 
 import Level.Map;
+import Level.Spawner;
 import Level.Trigger;
 import Scripts.TestMap.TempleLevel2Script;
 import Scripts.TestMap.TempleSwimScript;
+import Spawners.BasicSpawner;
+import Spawners.WaterSpawner;
 import Tilesets.templeTileset;
 
 // Represents the Map for the Temple
@@ -16,6 +19,20 @@ public class templeLevel2Map extends Map {
 		this.playerStartPosition = getMapTile(7, 1).getLocation();
 	}
 
+	//Adds spawners to the map
+	@Override 
+	public ArrayList<Spawner> loadSpawners() {
+		ArrayList<Spawner> spawners = new ArrayList(); 
+			 
+		spawners.add(new WaterSpawner(getMapTile(2, 5).getLocation()));
+		spawners.add(new WaterSpawner(getMapTile(13, 5).getLocation()));
+		spawners.add(new WaterSpawner(getMapTile(2, 10).getLocation()));
+		spawners.add(new WaterSpawner(getMapTile(13, 12).getLocation())); 
+		spawners.add(new WaterSpawner(getMapTile(8, 9).getLocation()));
+			 
+		return spawners;
+	}
+	
 	public ArrayList<Trigger> loadTriggers() {
 		ArrayList<Trigger> triggers = new ArrayList<>();
 		

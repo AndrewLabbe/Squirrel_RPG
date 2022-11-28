@@ -900,5 +900,6 @@ public abstract class Map {
 	//Returns array of unpassable map tiles
 	public ArrayList<MapTile> getUnpassableMapTiles() {
 		return unpassableMapTiles;
-	}
+	} 
+	
 }

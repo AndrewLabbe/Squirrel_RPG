@@ -14,6 +14,7 @@ import Level.PlayerState;
 import Level.Trigger;
 import Maps.templeLevel2Map;
 import Players.Squirrel;
+import Screens.PlayLevelScreen;
 import Utils.Direction;
 import Utils.Point;
 
@@ -24,7 +25,10 @@ public class TempleScreen2 extends Screen{
 	protected Player player;
 	protected FlagManager flagManager;
 	
-	protected TempleScreenState templeScreenState;
+	protected TempleScreenState templeScreenState;  
+	protected DeathScreen deathScreen;
+	
+	private int level2Time; 
 
 	public TempleScreen2(ScreenCoordinator screenCoordinator) {
 		this.screenCoordinator = screenCoordinator;
@@ -47,7 +51,9 @@ public class TempleScreen2 extends Screen{
 
 		this.player.setFacingDirection(Direction.LEFT);
 		
-		this.templeScreenState = TempleScreenState.RUNNING;
+		this.templeScreenState = TempleScreenState.RUNNING; 
+		
+		deathScreen = new DeathScreen(new PlayLevelScreen(screenCoordinator));
 		
 		map.getTextbox().setInteractKey(player.getInteractKey());
 		
@@ -75,7 +81,10 @@ public class TempleScreen2 extends Screen{
                 trigger.getTriggerScript().setMap(map);
                 trigger.getTriggerScript().setPlayer(player);
             }
-        }
+        } 
+        
+        //Level 2 game time starts at zero
+        level2Time = 0;
 	}
 
 	@Override
@@ -85,7 +94,11 @@ public class TempleScreen2 extends Screen{
         case RUNNING:
             player.update();
             map.update(player);
-            break;
+            break; 
+        //If the player is eliminated bring up the end of game screen
+        case DIED: 
+        	deathScreen.update(); 
+        	break;
         // if level has been completed, bring up level cleared screen
         case LEVEL_COMPLETED:
         	screenCoordinator.setGameState(GameState.TEMPLELVL3);
@@ -106,6 +119,18 @@ public class TempleScreen2 extends Screen{
         	player.setPlayerState(PlayerState.WALKING);
         } 
 		
+        //Spawn enemies periodically 
+        if(level2Time % 1000 == 0) {
+        	map.spawnEnemies(1);
+        }
+        
+        //If the health bar is reduced to zero change the game state to player eliminated 
+        if (map.getHealthBarLeft() <= 0) {
+      		templeScreenState = TempleScreenState.DIED;
+      	}
+        
+        //Increment level 2 game time
+        level2Time++; 
 	}
 
 	@Override
@@ -114,13 +139,17 @@ public class TempleScreen2 extends Screen{
 		 case RUNNING:
             map.draw(player, graphicsHandler);
             break;
-        case LEVEL_COMPLETED:
+		 case DIED: 
+			 deathScreen.draw(graphicsHandler);
+			 break;
+         case LEVEL_COMPLETED:
             break;
 		}
 	}
 	
+	//Contains all of the possible states of the temple level 2
 	private enum TempleScreenState {
-		RUNNING, LEVEL_COMPLETED;
+		RUNNING, LEVEL_COMPLETED, DIED;
 	}
-
+	
 }
