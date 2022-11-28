@@ -1,5 +1,9 @@
 package Maps;
 
+import java.util.ArrayList;
+
+import Enemies.WizardEnemy;
+import Level.Enemy;
 import Level.Map;
 import Tilesets.templeTileset;
 

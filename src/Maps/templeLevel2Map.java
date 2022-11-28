@@ -2,6 +2,8 @@ package Maps;
 
 import java.util.ArrayList;
 
+import Enemies.WizardEnemy;
+import Level.Enemy;
 import Level.Map;
 import Level.Spawner;
 import Level.Trigger;
@@ -21,7 +23,7 @@ public class templeLevel2Map extends Map {
 
 	//Adds spawners to the map
 	@Override 
-	public ArrayList<Spawner> loadSpawners() {
+	/*public ArrayList<Spawner> loadSpawners() {
 		ArrayList<Spawner> spawners = new ArrayList(); 
 			 
 		spawners.add(new WaterSpawner(getMapTile(2, 5).getLocation()));
@@ -31,7 +33,7 @@ public class templeLevel2Map extends Map {
 		spawners.add(new WaterSpawner(getMapTile(8, 9).getLocation()));
 			 
 		return spawners;
-	}
+	}*/
 	
 	public ArrayList<Trigger> loadTriggers() {
 		ArrayList<Trigger> triggers = new ArrayList<>();
@@ -80,5 +82,14 @@ public class templeLevel2Map extends Map {
 	public void loadScripts() {
 		// scripts
 	} 
+	
+	@Override 
+	public ArrayList<Enemy> loadEnemies() {
+		ArrayList<Enemy> enemies = new ArrayList(); 
+			 
+		enemies.add(new WizardEnemy(getMapTile(6, 8).getLocation(), 1.0f));
+			 
+		return enemies;
+	}
 
 }

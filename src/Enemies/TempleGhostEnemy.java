@@ -15,18 +15,12 @@ public class TempleGhostEnemy extends Enemy {
 
 	private float direction; 
 	
-	private int rangeX; 
-	private int rangeY; 
-	
 	private int health;
 	
 	public TempleGhostEnemy(Utils.Point point, float direction) {
 		//Placeholder
 		super(point.x, point.y, new SpriteSheet(ImageLoader.load("GhostSprite.png"), 22, 22), "MAX_HEALTH"); 
 		this.direction = direction; 
-		
-		rangeX = 200; 
-		rangeY = 200; 
 		
 		health = 30;
 	} 
