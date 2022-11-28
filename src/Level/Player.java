@@ -613,8 +613,6 @@ public abstract class Player extends GameObject {
 	
 	public void removeInvItem(String image) {
 		invItems.remove(image);
-		invItems.clear();
-		System.out.println("Test2");
 	}
 
 	public void removeCollectibles(String string) {
@@ -645,5 +643,9 @@ public abstract class Player extends GameObject {
 	//Gets the key count
 	public int getKeyCounter() {
 		return keyCounter;
+	} 
+	
+	public void setEasterEggCollected() {
+		easterEggCollected = !easterEggCollected;
 	}
 }

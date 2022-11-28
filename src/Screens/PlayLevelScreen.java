@@ -325,16 +325,15 @@ public class PlayLevelScreen extends Screen {
         //Investigate this later if you have time
         if (Keyboard.isKeyDown(Key.D) && !keyLocker.isKeyLocked(Key.D)) {
         	if (currentItem == player.getInvItem().indexOf("EasterEgg.png")) {
+        		itemSprites.remove(player.getInvItem().indexOf("EasterEgg.png"));
         		removeItem("EasterEgg.png"); 
-        		itemSprites.remove(0);
-        		System.out.println("Dropping"); 
         		Point point = new Point(player.getX() + 50f, player.getY() + 50f);
         		EasterEgg easterEgg = new EasterEgg(point);
         		map.addCollectibles(easterEgg);
         	}
         	
         	else {
-        		System.out.println("No item is here. Therefore it cannot be droped");
+        		System.out.println("You cannot drop this item");
         	}
         	
     		keyLocker.lockKey(Key.D);
@@ -700,10 +699,9 @@ public class PlayLevelScreen extends Screen {
 			int itemIndex = items.indexOf(image);
 			//items.remove(itemIndex);
 			player.getInvItem().remove(image); 
-			player.removeInvItem(image);
-			System.out.println("Test1");
+			player.removeInvItem(image); 
+			player.setEasterEggCollected();
 		} 
-		//System.out.println("test");
 		numItems--;
 	}
 	
