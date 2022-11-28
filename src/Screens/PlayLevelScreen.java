@@ -104,7 +104,9 @@ public class PlayLevelScreen extends Screen {
     protected int yPos, range, itemBoxSize, base;
     protected boolean openInventory = false;
     
-    private boolean templeUnlocked;
+    private boolean templeUnlocked; 
+    
+    private boolean load = false;
     
     protected int numItems = 0;
     protected Sprite sprite, itemSprite1, itemSprite2, itemSprite3, itemSprite4;
@@ -123,6 +125,7 @@ public class PlayLevelScreen extends Screen {
 
     public void initialize() {
     	
+    	if(load == false) {
     	// Kill Count 
     	screenKill = new KillCount();
     	screenKill.setKill(0);
@@ -283,7 +286,9 @@ public class PlayLevelScreen extends Screen {
         
         itemSprites = new ArrayList<>(); 
         
-        templeUnlocked = false;
+        templeUnlocked = false; 
+        load = true;
+    	}
     }
 
     public void update() {
@@ -568,7 +573,7 @@ public class PlayLevelScreen extends Screen {
       	keyCounter.setKeys(player.getKeyCounter());
       	keyCounter.updateKeyText();
       	
-        screenCoordinator.setLevelScreen(this);
+        //screenCoordinator.setLevelScreen(this);
         powerUpTimer.setColor(powerUpTimerColor); 
         
         //Creates trigger to enter temple when all of the keys are collected
