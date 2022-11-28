@@ -7,7 +7,7 @@ import Game.ScreenCoordinator;
 import Level.FlagManager;
 import Level.Map;
 import Level.Player;
-import Maps.templeLevel3Map;
+import Maps.templeLevel4Map;
 import Players.Squirrel;
 import Utils.Direction;
 import Utils.Point;
@@ -30,7 +30,7 @@ public class TempleScreen4 extends Screen{
 		flagManager = new FlagManager();
 		flagManager.addFlag("hasBeatenBoss", false);
 		
-		this.map = new templeLevel3Map();
+		this.map = new templeLevel4Map();
 		map.reset();
 		map.setFlagManager(flagManager);
 		
