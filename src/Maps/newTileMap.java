@@ -12,6 +12,7 @@ import Level.Trigger;
 import NPCs.Chest;
 import NPCs.Dinosaur;
 import NPCs.Fox;
+import NPCs.Girlfriend;
 import NPCs.Walrus;
 import Scripts.TestMap.ChestUnlockScriptDestiny;
 import Scripts.TestMap.ChestUnlockScriptFate;
@@ -45,6 +46,9 @@ public class newTileMap extends Map {
 	     Fox fox = new Fox(1, getMapTile(14, 21).getLocation());
 	     fox.setInteractScript(new FoxScript());
 	     npcs.add(fox);
+	     
+	     Girlfriend girlfriend = new Girlfriend(2, getMapTile(3, 21).getLocation(), "hasLostGirlfriend");
+	     npcs.add(girlfriend);
 
 	     Chest chestFate = new Chest(2, getMapTile(7, 9).getLocation(), "hasOpenedChestFate");  
 	     chestFate.setInteractScript(new ChestUnlockScriptFate());
