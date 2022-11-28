@@ -609,6 +609,12 @@ public abstract class Player extends GameObject {
 	}
 	public ArrayList<String> getInvItem() {
 		return invItems;
+	} 
+	
+	public void removeInvItem(String image) {
+		invItems.remove(image);
+		invItems.clear();
+		System.out.println("Test2");
 	}
 
 	public void removeCollectibles(String string) {

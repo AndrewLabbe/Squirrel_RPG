@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import javax.swing.Timer;
 
+import Collectibles.EasterEgg;
 import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
@@ -323,10 +324,13 @@ public class PlayLevelScreen extends Screen {
         
         //Investigate this later if you have time
         if (Keyboard.isKeyDown(Key.D) && !keyLocker.isKeyLocked(Key.D)) {
-        	if (currentItem == player.getInvItem().indexOf("Acorn.png")) {
-        		removeItem("Acorn.png");
-        		map.addAcorn(player);
-        		
+        	if (currentItem == player.getInvItem().indexOf("EasterEgg.png")) {
+        		removeItem("EasterEgg.png"); 
+        		itemSprites.remove(0);
+        		System.out.println("Dropping"); 
+        		Point point = new Point(player.getX() + 50f, player.getY() + 50f);
+        		EasterEgg easterEgg = new EasterEgg(point);
+        		map.addCollectibles(easterEgg);
         	}
         	
         	else {
@@ -437,7 +441,7 @@ public class PlayLevelScreen extends Screen {
     					itemSprite = new Sprite(keysSpriteSheet.getSprite(0, 1)); 
     				} 
     				else if(item == "KEY_GENESIS") {
-    				itemSprite = new Sprite(keysSpriteSheet.getSprite(0, 2));
+    					itemSprite = new Sprite(keysSpriteSheet.getSprite(0, 2));
     				}
     				else if(item == "KEY_RETRIBUTION") {
     					itemSprite = new Sprite(keysSpriteSheet.getSprite(0, 3));
@@ -694,7 +698,10 @@ public class PlayLevelScreen extends Screen {
 		ArrayList<String> items = player.getInvItem();
 		if (items.contains(image)) {
 			int itemIndex = items.indexOf(image);
-			items.remove(itemIndex);
+			//items.remove(itemIndex);
+			player.getInvItem().remove(image); 
+			player.removeInvItem(image);
+			System.out.println("Test1");
 		} 
 		//System.out.println("test");
 		numItems--;
