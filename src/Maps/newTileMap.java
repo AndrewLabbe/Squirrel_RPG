@@ -113,6 +113,29 @@ public class newTileMap extends Map {
 	     triggers.add(new Trigger(1275, 205, 40, 1, new SwimScript(), "hasSwam"));
 	     triggers.add(new Trigger(1275, 85, 40, 1, new SwimScript(), "hasSwam"));
 	     
+	     //Swimming triggers for top right lake
+	     triggers.add(new Trigger(2135, 785, 460, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(2135, 785, 1, 50, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(2085, 835, 50, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(2085, 835, 1, 50, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1625, 885, 460, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1625, 835, 1, 50, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1575, 835, 50, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1575, 785, 1, 50, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1515, 785, 60, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1515, 525, 1, 260, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1515, 525, 370, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1885, 525, 1, 50, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(1885, 575, 240, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(2125, 325, 1, 250, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1885, 325, 240, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1885, 325, 1, 85, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1565, 410, 320, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1565, 350, 1, 60, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1565, 350, 60, 1, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(1625, 0, 1, 350, new SwimScript(), "hasSwam"));
+	     
+	     
 	     //If player tries to enter the temple without 4 keys trigger the locked temple script
 	     triggers.add(new Trigger(1120, 50, 110, 1, new TempleLockedScript(), "hasTempleUnlocked"));
 	     
