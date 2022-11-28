@@ -26,7 +26,7 @@ public class ScreenCoordinator extends Screen {
 	// currently shown Screen
 	protected Screen currentScreen = new DefaultScreen();
 	protected Screen levelScreen; 
-	protected Screen levelScreen2 = new PlayLevelScreen(this);
+	//protected Screen levelScreen2 = new PlayLevelScreen(this);
 	protected Screen shopScreen;
 
 	// keep track of gameState so ScreenCoordinator knows which Screen to show
@@ -77,10 +77,10 @@ public class ScreenCoordinator extends Screen {
 						//currentScreen = new TempleScreen1(this);
 						//levelScreen2 = currentScreen;
 						//currentScreen = levelScreen2;
-						if(checkCurrentScreen() == levelScreen2) {
-							
-						
-						System.out.println("Test");}
+//						if(checkCurrentScreen() == levelScreen2) {
+//							
+//						
+//						System.out.println("Test");}
 						break;
 					case BUY:
 						currentScreen = new BuyScreen(this);
@@ -115,6 +115,9 @@ public class ScreenCoordinator extends Screen {
 					case SHOPKEEP:
 						//levelScreen = currentScreen;
 						currentScreen = new ShopkeeperScreen(this);
+						break;
+					case DEATH:
+						currentScreen = new DeathScreen(this);
 				}
 				currentScreen.initialize();
 			}

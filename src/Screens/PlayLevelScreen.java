@@ -288,6 +288,7 @@ public class PlayLevelScreen extends Screen {
         
         templeUnlocked = false; 
         load = true;
+
     	}
     }
 
@@ -304,6 +305,7 @@ public class PlayLevelScreen extends Screen {
                 winScreen.update();
                 break;
             case DIED:
+            screenCoordinator.setGameState(GameState.DEATH);
             	deathScreen.update();
             	break;
         }
@@ -677,9 +679,10 @@ public class PlayLevelScreen extends Screen {
 
     //reset level and Health 
     public void resetLevel() {
+    	screenCoordinator.setGameState(GameState.LEVEL);
+        //this.playLevelScreenState = PlayLevelScreenState.RUNNING;
         initialize();
         map.resetHealthBar();
-        
     }
 
     public void goBackToMenu() {
