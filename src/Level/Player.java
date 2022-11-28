@@ -10,6 +10,7 @@ import GameObject.GameObject;
 import GameObject.Rectangle;
 import GameObject.SpriteSheet;
 import Projectiles.Acorn;
+import Projectiles.Bullet;
 import Utils.Direction;
 import Utils.Stopwatch;
 
@@ -75,7 +76,10 @@ public abstract class Player extends GameObject {
 	//Insta elim timeout
 	private Stopwatch instaElimTimeout; 
 	
-	private int numItems;
+	private int numItems; 
+	
+	private int keyCounter; 
+	private boolean easterEggCollected;
 
 	public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName, Map map) {
 		super(spriteSheet, x, y, startingAnimationName);
@@ -91,7 +95,9 @@ public abstract class Player extends GameObject {
 		damage = 10; 
 		instaElim = false; 
 		instaElimTimeout = new Stopwatch(); 
-		numItems = 0;
+		numItems = 0; 
+		keyCounter = 0; 
+		easterEggCollected = false;
 	}
 
 	public void update() {
@@ -128,6 +134,10 @@ public abstract class Player extends GameObject {
 			hasHit = false;
 		}
 
+		if(!easterEggCollected && invItems.contains("EasterEgg.png") ) {
+			easterEggCollected = !easterEggCollected;
+		}
+		
 		// update player's animation
 		super.update();
 
@@ -517,8 +527,17 @@ public abstract class Player extends GameObject {
 			projectileY = Math.round(getY()) + 30;
 
 			//Creates a new bullet 
-			Acorn acorn = new Acorn(projectileX, projectileY, directionX, directionY, damage, this); 
-			map.addProjectiles(acorn); 
+			if(easterEggCollected) {
+				//Creates a new bullet 
+				//Creates a new bullet 
+				Acorn acorn = new Acorn(projectileX, projectileY, directionX, directionY, damage, this, "GOLDEN_ACORN"); 
+				map.addProjectiles(acorn); 
+			}
+			else {
+				//Creates a new bullet 
+				Acorn acorn = new Acorn(projectileX, projectileY, directionX, directionY, damage, this, "NORMAL_ACORN"); 
+				map.addProjectiles(acorn); 
+			}
 			fireDelay.reset(); 
 
 			//Firing sound 
@@ -611,5 +630,14 @@ public abstract class Player extends GameObject {
 	public int getItemNum() {
 		return numItems;
 	}
+
+	//Sets the key count
+	public void setKeyCounter(int count) {
+		keyCounter = count;
+	}
 	
+	//Gets the key count
+	public int getKeyCounter() {
+		return keyCounter;
+	}
 }

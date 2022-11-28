@@ -3,21 +3,22 @@ package Scripts.TestMap;
 import Utils.Point;
 
 import Collectibles.CollectibleAcorn;
+import Collectibles.CollectibleKey;
 import Level.Script;
 import Level.ScriptState;
 import Projectiles.Acorn;
 
-public class ChestUnlockScript extends Script {
+public class ChestUnlockScriptRetribution extends Script {
 	
 	@Override
 	protected void setup() {
 		lockPlayer();
 		showTextbox();
-		if(!isFlagSet("hasOpenedChest")) {
-			addTextToTextboxQueue("You found a key!"); 
-			Point point = new Point(player.getX() + 20f, player.getY());
-			CollectibleAcorn acorn = new CollectibleAcorn(point);
-			map.addCollectibles(acorn); 
+		if(!isFlagSet("hasOpenedChestRetribution")) {
+			addTextToTextboxQueue("You found the key of RETRIBUTION!"); 
+			Point point = new Point(player.getX() - 100f, player.getY() - 100f); 
+			CollectibleKey key = new CollectibleKey(point, "KEY_RETRIBUTION");
+			map.addCollectibles(key);
 		}
 		else {
 			addTextToTextboxQueue("This chest is empty!"); 
@@ -28,7 +29,7 @@ public class ChestUnlockScript extends Script {
 	protected void cleanup() {
 		hideTextbox();
 		unlockPlayer();
-		setFlag("hasOpenedChest");
+		setFlag("hasOpenedChestRetribution");
 	}
 
 	@Override

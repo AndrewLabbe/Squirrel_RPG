@@ -3,6 +3,7 @@ package Maps;
 import java.util.ArrayList;
 
 import Collectibles.CollectibleAcorn;
+import Collectibles.EasterEgg;
 import Level.CollectibleItem;
 import Level.Map;
 import Level.NPC;
@@ -12,13 +13,17 @@ import NPCs.Chest;
 import NPCs.Dinosaur;
 import NPCs.Fox;
 import NPCs.Walrus;
-import Scripts.TestMap.ChestUnlockScript;
+import Scripts.TestMap.ChestUnlockScriptDestiny;
+import Scripts.TestMap.ChestUnlockScriptFate;
+import Scripts.TestMap.ChestUnlockScriptGenesis;
+import Scripts.TestMap.ChestUnlockScriptRetribution;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.FoxScript;
 import Scripts.TestMap.IntroScript;
 import Scripts.TestMap.KeyScript;
 import Scripts.TestMap.LandScript;
 import Scripts.TestMap.SwimScript;
+import Scripts.TestMap.TempleLockedScript;
 import Scripts.TestMap.TempleScript;
 import Scripts.TestMap.WalrusScript;
 import Scripts.TestMap.changeShop;
@@ -41,9 +46,25 @@ public class newTileMap extends Map {
 	     fox.setInteractScript(new FoxScript());
 	     npcs.add(fox);
 
-	     Chest chest = new Chest(2, getMapTile(13, 21).getLocation());  
-	     chest.setInteractScript(new ChestUnlockScript());
-	     npcs.add(chest);
+	     Chest chestFate = new Chest(2, getMapTile(7, 9).getLocation(), "hasOpenedChestFate");  
+	     chestFate.setInteractScript(new ChestUnlockScriptFate());
+	     npcs.add(chestFate);
+	     
+	     Chest chestDestiny = new Chest(3, getMapTile(9, 40).getLocation(), "hasOpenedChestDestiny");  
+	     chestDestiny.setInteractScript(new ChestUnlockScriptDestiny());
+	     npcs.add(chestDestiny);
+	     
+	     Chest chestGenesis = new Chest(4, getMapTile(39, 40).getLocation(), "hasOpenedChestGenesis");  
+	     chestGenesis.setInteractScript(new ChestUnlockScriptGenesis());
+	     npcs.add(chestGenesis);
+	     
+	     Chest chestRetribution = new Chest(5, getMapTile(41, 9).getLocation(), "hasOpenedChestRetribution");  
+	     chestRetribution.setInteractScript(new ChestUnlockScriptRetribution());
+	     npcs.add(chestRetribution); 
+	     
+	     Walrus walrus = new Walrus(6, getMapTile(17, 17).getLocation());
+	     walrus.setInteractScript(new WalrusScript());
+	     npcs.add(walrus);
 	     
 	     return npcs;
 	 }
@@ -88,6 +109,9 @@ public class newTileMap extends Map {
 	     triggers.add(new Trigger(1275, 205, 40, 1, new SwimScript(), "hasSwam"));
 	     triggers.add(new Trigger(1275, 85, 40, 1, new SwimScript(), "hasSwam"));
 	     
+	     //If player tries to enter the temple without 4 keys trigger the locked temple script
+	     triggers.add(new Trigger(1120, 50, 110, 1, new TempleLockedScript(), "hasTempleUnlocked"));
+	     
 	     return triggers;
 	 }
 	 
@@ -95,11 +119,10 @@ public class newTileMap extends Map {
 	 public void loadScripts() {
 		 getMapTile(9, 34).setInteractScript(new changeShop());
 	        
-	     getMapTile(24, 0).setInteractScript(new TempleScript());
+		 getMapTile(41, 9).setInteractScript(new KeyScript());
 	     
-	     getMapTile(41, 9).setInteractScript(new KeyScript()); 
+	     //getMapTile(24, 0).setInteractScript(new TempleLockedScript()); 
 	     
-	     getMapTile(23, 25).setInteractScript(new ChestUnlockScript());
 	 } 
 	 
 	 
@@ -119,8 +142,10 @@ public class newTileMap extends Map {
 	    public ArrayList<CollectibleItem> loadCollectibles() {
 	    	ArrayList<CollectibleItem> collectibles = new ArrayList(); 
 	    	
-	    	collectibles.add(new CollectibleAcorn(getMapTile(25, 25).getLocation()));
-	    	collectibles.add(new CollectibleAcorn(getMapTile(24, 25).getLocation()));
+	    	//collectibles.add(new CollectibleAcorn(getMapTile(25, 25).getLocation()));
+	    	//collectibles.add(new CollectibleAcorn(getMapTile(24, 25).getLocation()));
+	    	
+	    	//collectibles.add(new EasterEgg(getMapTile(23,21).getLocation()));
 	    	
 	    	return collectibles;
 	    }

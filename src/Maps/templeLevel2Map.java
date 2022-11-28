@@ -48,6 +48,7 @@ public class templeLevel2Map extends Map {
 		triggers.add(new Trigger(1190, 1110, 10, 170, new TempleSwimScript(), "templeSwam"));
 		
 		return triggers;
+		
 	}
 
 	@Override

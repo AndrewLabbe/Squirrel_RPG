@@ -456,7 +456,7 @@ public abstract class Map {
     public void addTrigger(Trigger trigger) {
         trigger.setMap(this);
         this.triggers.add(trigger);
-    }
+    } 
 
     public void setAdjustCamera(boolean adjustCamera) {
         this.adjustCamera = adjustCamera;
