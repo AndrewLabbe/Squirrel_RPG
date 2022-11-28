@@ -4,9 +4,14 @@ import Engine.GraphicsHandler;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
+import Level.EnhancedMapTile;
 import Level.FlagManager;
 import Level.Map;
+import Level.MapTile;
+import Level.NPC;
 import Level.Player;
+import Level.PlayerState;
+import Level.Trigger;
 import Maps.templeLevel1_5Map;
 import Maps.templeLevel2Map;
 import Players.Squirrel;
@@ -29,6 +34,7 @@ public class TempleScreen2 extends Screen{
 	@Override
 	public void initialize() {
 		flagManager = new FlagManager();
+		flagManager.addFlag("templeSwam", false);
 		
 		this.map = new templeLevel2Map();
 		map.reset();
@@ -44,6 +50,32 @@ public class TempleScreen2 extends Screen{
 		this.templeScreenState = TempleScreenState.RUNNING;
 		
 		map.getTextbox().setInteractKey(player.getInteractKey());
+		
+		// setup map scripts to have references to the map and player
+        for (MapTile mapTile : map.getMapTiles()) {
+            if (mapTile.getInteractScript() != null) {
+                mapTile.getInteractScript().setMap(map);
+                mapTile.getInteractScript().setPlayer(player);
+            }
+        }
+        for (NPC npc : map.getNPCs()) {
+            if (npc.getInteractScript() != null) {
+                npc.getInteractScript().setMap(map);
+                npc.getInteractScript().setPlayer(player);
+            }
+        }
+        for (EnhancedMapTile enhancedMapTile : map.getEnhancedMapTiles()) {
+            if (enhancedMapTile.getInteractScript() != null) {
+                enhancedMapTile.getInteractScript().setMap(map);
+                enhancedMapTile.getInteractScript().setPlayer(player);
+            }
+        }
+        for (Trigger trigger : map.getTriggers()) {
+            if (trigger.getTriggerScript() != null) {
+                trigger.getTriggerScript().setMap(map);
+                trigger.getTriggerScript().setPlayer(player);
+            }
+        }
 	}
 
 	@Override
@@ -59,6 +91,16 @@ public class TempleScreen2 extends Screen{
         	//screenCoordinator.setGameState(GameState.TEMPLELVL2);
             break;
 		}
+		
+		//If Player Enters Water Change State to Swimming
+        if (map.getFlagManager().isFlagSet("templeSwam")) {
+        	player.setPlayerState(PlayerState.SWIMMING);
+        }
+        
+        //If Player Enters Land Change State to Walking
+        if (map.getFlagManager().isFlagSet("templeWalked")) {
+        	player.setPlayerState(PlayerState.WALKING);
+        } 
 		
 	}
 
