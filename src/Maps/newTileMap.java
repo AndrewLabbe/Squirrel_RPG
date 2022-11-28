@@ -12,7 +12,10 @@ import NPCs.Chest;
 import NPCs.Dinosaur;
 import NPCs.Fox;
 import NPCs.Walrus;
-import Scripts.TestMap.ChestUnlockScript;
+import Scripts.TestMap.ChestUnlockScriptDestiny;
+import Scripts.TestMap.ChestUnlockScriptFate;
+import Scripts.TestMap.ChestUnlockScriptGenesis;
+import Scripts.TestMap.ChestUnlockScriptRetribution;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.FoxScript;
 import Scripts.TestMap.IntroScript;
@@ -41,9 +44,21 @@ public class newTileMap extends Map {
 	     fox.setInteractScript(new FoxScript());
 	     npcs.add(fox);
 
-	     Chest chest = new Chest(2, getMapTile(13, 21).getLocation());  
-	     chest.setInteractScript(new ChestUnlockScript());
-	     npcs.add(chest);
+	     Chest chestFate = new Chest(2, getMapTile(7, 9).getLocation(), "hasOpenedChestFate");  
+	     chestFate.setInteractScript(new ChestUnlockScriptFate());
+	     npcs.add(chestFate);
+	     
+	     Chest chestDestiny = new Chest(3, getMapTile(9, 40).getLocation(), "hasOpenedChestDestiny");  
+	     chestDestiny.setInteractScript(new ChestUnlockScriptDestiny());
+	     npcs.add(chestDestiny);
+	     
+	     Chest chestGenesis = new Chest(4, getMapTile(39, 40).getLocation(), "hasOpenedChestGenesis");  
+	     chestGenesis.setInteractScript(new ChestUnlockScriptGenesis());
+	     npcs.add(chestGenesis);
+	     
+	     Chest chestRetribution = new Chest(5, getMapTile(41, 9).getLocation(), "hasOpenedChestRetribution");  
+	     chestRetribution.setInteractScript(new ChestUnlockScriptRetribution());
+	     npcs.add(chestRetribution);
 	     
 	     return npcs;
 	 }
@@ -51,9 +66,9 @@ public class newTileMap extends Map {
 	 @Override
 	 public ArrayList<Trigger> loadTriggers() {
 	     ArrayList<Trigger> triggers = new ArrayList<>();
-	     triggers.add(new Trigger(0, 1160, 120, 10, new IntroScript(), "hasLostGirlfriend"));
+	     /*triggers.add(new Trigger(0, 1160, 120, 10, new IntroScript(), "hasLostGirlfriend"));
 	     triggers.add(new Trigger(120, 1160, 10, 130, new IntroScript(), "hasLostGirlfriend"));
-	     triggers.add(new Trigger(0, 1280, 120, 10, new IntroScript(), "hasLostGirlfriend"));
+	     triggers.add(new Trigger(0, 1280, 120, 10, new IntroScript(), "hasLostGirlfriend"));*/
 	        
 	     //Swimming triggers for top left lake
 	     triggers.add(new Trigger(0, 780, 220, 1, new SwimScript(), "hasSwam")); 
@@ -99,7 +114,6 @@ public class newTileMap extends Map {
 	     
 	     getMapTile(41, 9).setInteractScript(new KeyScript()); 
 	     
-	     getMapTile(23, 25).setInteractScript(new ChestUnlockScript());
 	 } 
 	 
 	 
@@ -108,7 +122,7 @@ public class newTileMap extends Map {
 	 public ArrayList<Spawner> loadSpawners() {
 		 ArrayList<Spawner> spawners = new ArrayList(); 
 		 
-		 spawners.add(new BasicSpawner(getMapTile(10, 20).getLocation()));
+		// spawners.add(new BasicSpawner(getMapTile(10, 20).getLocation()));
 		 spawners.add(new BasicSpawner(getMapTile(20, 40).getLocation()));
 		 
 		 return spawners;
@@ -119,8 +133,8 @@ public class newTileMap extends Map {
 	    public ArrayList<CollectibleItem> loadCollectibles() {
 	    	ArrayList<CollectibleItem> collectibles = new ArrayList(); 
 	    	
-	    	collectibles.add(new CollectibleAcorn(getMapTile(25, 25).getLocation()));
-	    	collectibles.add(new CollectibleAcorn(getMapTile(24, 25).getLocation()));
+	    	//collectibles.add(new CollectibleAcorn(getMapTile(25, 25).getLocation()));
+	    	//collectibles.add(new CollectibleAcorn(getMapTile(24, 25).getLocation()));
 	    	
 	    	return collectibles;
 	    }

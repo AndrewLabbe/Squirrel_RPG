@@ -3,13 +3,16 @@ package GameObject;
 import java.awt.Color;
 import java.util.HashMap;
 
+import Collectibles.CollectibleKey;
 import Engine.GraphicsHandler;
+import Level.CollectibleItem;
 import Level.Enemy;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.MapCollisionCheckResult;
 import Level.MapCollisionHandler;
 import Level.MapEntity;
+import Level.NPC;
 import Level.Player;
 import Level.PowerUp;
 import Level.Projectile;
@@ -305,7 +308,7 @@ public class GameObject extends AnimatedSprite {
 					currentFrame.getImageEffect());
 
 			// Uncomment this to draw player's bounds to screen -- useful for debugging
-			/* if (this instanceof Enemy) {
+			/*if (this instanceof Enemy) {
 				drawBounds(graphicsHandler, new Color(255, 0, 0, 100));
 			} 
 			if (this instanceof Player) {
@@ -322,7 +325,13 @@ public class GameObject extends AnimatedSprite {
 			} 
 			if (this instanceof EnhancedMapTile) {
 				drawBounds(graphicsHandler, new Color(255, 0, 0, 100));
-			} */
+			} 
+			if (this instanceof CollectibleItem) {
+				drawBounds(graphicsHandler, new Color(255, 0, 200, 100));
+			} 
+			if (this instanceof NPC) {
+				drawBounds(graphicsHandler, new Color(255, 0, 0, 100));
+			}*/
 			
 		} else {
 			super.draw(graphicsHandler);

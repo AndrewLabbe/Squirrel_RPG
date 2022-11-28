@@ -3,6 +3,7 @@ package Screens;
 
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -19,7 +20,9 @@ import Engine.Screen;
 import Engine.ScreenManager;
 import Game.GameState;
 import Game.ScreenCoordinator;
+import GameObject.Rectangle;
 import GameObject.Sprite;
+import GameObject.SpriteSheet;
 import Level.CollectibleItem;
 import Level.EnhancedMapTile;
 import Level.FlagManager;
@@ -52,7 +55,7 @@ public class PlayLevelScreen extends Screen {
     protected FlagManager flagManager;
     private KeyLocker keyLocker = new KeyLocker();
     public Currency screenCoin;
-    public Keys keyLock;
+    public Keys keyCounter;
     public KillCount screenKill;
     private boolean wasSpacePressed = false;
     private boolean wasFPressed = false;
@@ -119,8 +122,8 @@ public class PlayLevelScreen extends Screen {
     	screenKill.setKill(0);
     	
     	// Key Count
-    	keyLock = new Keys();
-    	keyLock.setKeys(0);
+    	keyCounter = new Keys();
+    	keyCounter.setKeys(0);
     	
         // setup state
         flagManager = new FlagManager();
@@ -136,9 +139,11 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasEnteredTemple", false);
         flagManager.addFlag("hasEnteredShop", false);
         flagManager.addFlag("hasSwam", false); 
-        flagManager.addFlag("hasOpenedChest", false);
-
-
+        flagManager.addFlag("hasOpenedChestFate", false);
+        flagManager.addFlag("hasOpenedChestDestiny", false);
+        flagManager.addFlag("hasOpenedChestGenesis", false);
+        flagManager.addFlag("hasOpenedChestRetribution", false);
+        
         // define/setup map
         this.map = new newTileMap();
         map.reset();
@@ -295,14 +300,8 @@ public class PlayLevelScreen extends Screen {
             player.setUpdate(false);
     	}
         
-//        if (Keyboard.isKeyDown(invKey)) {
-//    		screenCoordinator.setGameState(GameState.INVENTORY);
-//    		keyLocker.lockKey(buyKey);
-//    	}
-        
         //Switches boolean statement when invkey is pressed
         if (Keyboard.isKeyDown(invKey) && !keyLocker.isKeyLocked(invKey)) {
-//        	player.setPlayerState(PlayerState.STANDING);
     		openInventory = !openInventory;
         	
     		keyLocker.lockKey(invKey);
@@ -334,9 +333,6 @@ public class PlayLevelScreen extends Screen {
         // keyboard logic for selecting an item
         if (Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE)) {
         	if (currentItem == player.getInvItem().indexOf("Acorn.png")) {
-//        		file = new File("Acorn.txt");
-//        		sc = new Scanner("src/" + file);
-//        		System.out.println(sc.next());
         		line1.setText("Acorn");
         		line2.setText("Damage: 5");
         		line3.setText("Durability: UNKOWN");
@@ -390,43 +386,58 @@ public class PlayLevelScreen extends Screen {
         	player.setPlayerState(PlayerState.WALKING);
         } 
         
-        //If Player interacts with a chest
-        if (map.getFlagManager().isFlagSet("hasOpenedChest")) {
+        //If Player interacts with the chest of fate
+        if (map.getFlagManager().isFlagSet("hasOpenedChestFate")) {
         	
+        } 
+        
+        //If Player interacts with the chest of destiny
+        if (map.getFlagManager().isFlagSet("hasOpenedChestDestiny")) {
+         	
+        }
+        
+        //If Player interacts with the chest of genesis
+        if (map.getFlagManager().isFlagSet("hasOpenedChestGenesis")) {
+        	
+        } 
+        
+        //If Player interacts with the chest of retribution
+        if (map.getFlagManager().isFlagSet("hasOpenedChestRetribution")) {
+         	
         }
         
         //Add picture of item to be displayed at spot in inventory 
-    	//if (player.getInvItem().size() != 0) { 
-    	/*if (player.getItemNum() - numItems > 0) { 
+    	if (player.getInvItem().size() != 0) { 
     		itemSprites.clear();
-    		ArrayList<String> items = player.getInvItem();
-    		//int size = items.size();
-    		for(int i = 0; i < player.getItemNum() - numItems; i++) { 
-    			String item = items.get(i);
-    			Sprite itemSprite = addItem(item);
-    			itemSprite.setLocation(itemBoxSize, base+(i*next));
-    			itemSprite.setHeight(itemBoxSize);
-    			itemSprite.setWidth(itemBoxSize); 
-    			itemSprites.add(itemSprite);
+    		ArrayList<String> items = player.getInvItem(); 
+    		SpriteSheet keysSpriteSheet = new SpriteSheet(ImageLoader.load("Keys.png"), 16, 16);
+    		int position = 0; 
+    		if (position < 4) {
+    			Sprite itemSprite;
+    			for(String item : items) {
+    				if(item == "KEY_FATE") {
+    					itemSprite = new Sprite(keysSpriteSheet.getSprite(0, 0));
+    				}
+    				else if(item == "KEY_DESTINY") {
+    					itemSprite = new Sprite(keysSpriteSheet.getSprite(0, 1)); 
+    				} 
+    				else if(item == "KEY_GENESIS") {
+    				itemSprite = new Sprite(keysSpriteSheet.getSprite(0, 2));
+    				}
+    				else if(item == "KEY_RETRIBUTION") {
+    					itemSprite = new Sprite(keysSpriteSheet.getSprite(0, 3));
+    				}
+    				else {
+    					itemSprite = addItem(item);
+    				}
+    				itemSprite.setLocation(itemBoxSize, base+(position*next));
+    				itemSprite.setHeight(itemBoxSize);
+    				itemSprite.setWidth(itemBoxSize); 
+    				itemSprites.add(itemSprite); 
+    				position++;
+    			}
     		}
-    	}*/
-    	
-    	
-    	//Add picture of item to be displayed at spot in inventory 
-    	/*if (map.getCollectibles().size() != 0) { 
-    		itemSprites.clear();
-    		ArrayList<CollectibleItem> items = map.getCollectibles();
-    		int size = items.size();
-    		for(int i = 0; i < size; i++) { 
-    			CollectibleItem item = items.get(i); 
-    			String item1 = item.getImageName();
-    			Sprite itemSprite = addItem(item1);
-    			itemSprite.setLocation(itemBoxSize, base+(i*next));
-    			itemSprite.setHeight(itemBoxSize);
-    			itemSprite.setWidth(itemBoxSize); 
-    			itemSprites.add(itemSprite);
-    		}
-    	}*/
+    	}
     	
     	
         // if down or up is pressed, change selected item position. avoids currentItem from being out of bounds
@@ -535,9 +546,9 @@ public class PlayLevelScreen extends Screen {
       		playLevelScreenState = PlayLevelScreenState.DIED;
       	}
       	
-      	// Show Key Count for Main Level
-      	keyLock.getKeys();
-      	keyLock.updateKeyText();
+      	//Show Key Count for Main Level
+      	keyCounter.setKeys(player.getKeyCounter());
+      	keyCounter.updateKeyText();
       	
         screenCoordinator.setLevelScreen(this);
         powerUpTimer.setColor(powerUpTimerColor);
@@ -581,7 +592,7 @@ public class PlayLevelScreen extends Screen {
             case RUNNING:
                 map.draw(player, graphicsHandler);
                 screenKill.draw(graphicsHandler);
-                keyLock.draw(graphicsHandler);
+                keyCounter.draw(graphicsHandler);
                 break;
             case DIED:
             	deathScreen.draw(graphicsHandler);
@@ -602,10 +613,6 @@ public class PlayLevelScreen extends Screen {
             box4.draw(graphicsHandler);
             box5.draw(graphicsHandler);
             
-            /*if (player.getInvItem().contains("Acorn.png")) {
-            	itemSprite1.draw(graphicsHandler);
-            }*/
-            
             info1.draw(graphicsHandler);
             line1.draw(graphicsHandler);
             line2.draw(graphicsHandler);
@@ -614,9 +621,7 @@ public class PlayLevelScreen extends Screen {
             for(Sprite itemSprite : itemSprites) {
             	itemSprite.draw(graphicsHandler);
             } 
-            //System.out.println(itemSprites.size());
-            //System.out.println(player.getItemNum());
-            //System.out.println(player.getItemNum() + numItems);
+        
         }
         
         // Shade for Day Night Cycle

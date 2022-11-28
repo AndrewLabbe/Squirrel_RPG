@@ -75,7 +75,9 @@ public abstract class Player extends GameObject {
 	//Insta elim timeout
 	private Stopwatch instaElimTimeout; 
 	
-	private int numItems;
+	private int numItems; 
+	
+	private int keyCounter;
 
 	public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName, Map map) {
 		super(spriteSheet, x, y, startingAnimationName);
@@ -91,7 +93,8 @@ public abstract class Player extends GameObject {
 		damage = 10; 
 		instaElim = false; 
 		instaElimTimeout = new Stopwatch(); 
-		numItems = 0;
+		numItems = 0; 
+		keyCounter = 0;
 	}
 
 	public void update() {
@@ -611,5 +614,14 @@ public abstract class Player extends GameObject {
 	public int getItemNum() {
 		return numItems;
 	}
+
+	//Sets the key count
+	public void setKeyCounter(int count) {
+		keyCounter = count;
+	}
 	
+	//Gets the key count
+	public int getKeyCounter() {
+		return keyCounter;
+	}
 }

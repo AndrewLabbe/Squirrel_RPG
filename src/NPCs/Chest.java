@@ -13,24 +13,26 @@ import Utils.Point;
 
 public class Chest extends NPC {
 
-	public Chest(int id, Point location) {
-		super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Chests.png"), 16, 16), "STAND_LEFT");
+	private String name;
+	
+	public Chest(int id, Point location, String name) {
+		super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Chests.png"), 16, 16), "LOCKED");
+		this.name = name;
 	}
 	
 	@Override
     public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {
         return new HashMap<String, Frame[]>() {{
-            put("STAND_LEFT", new Frame[] {
+            put("LOCKED", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
-                            .withBounds(4, 5, 5, 10)
+                            .withBounds(0, 0, 16, 17)
                             .build()
             });
-            put("STAND_RIGHT", new Frame[] {
+            put("UNLOCKED", new Frame[] {
                    new FrameBuilder(spriteSheet.getSprite(0, 1))
                            .withScale(3)
-                           .withBounds(4, 5, 5, 10)
-                           .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                           .withBounds(0, 0, 16, 17)
                            .build()
            });
         }};
@@ -38,8 +40,8 @@ public class Chest extends NPC {
 	
 	@Override
 	public void update(Player player) {
-		if(player.getMap().getFlagManager().isFlagSet("hasOpenedChest")) {
-			setCurrentAnimationName("STAND_RIGHT");
+		if(player.getMap().getFlagManager().isFlagSet(name)) {
+			setCurrentAnimationName("UNLOCKED");
 		}
         super.update(player); 
     }
