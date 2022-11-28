@@ -40,7 +40,7 @@ public class TempleScreen4 extends Screen{
 		Point playerStartPosition = map.getPlayerStartPosition();
 		this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
 
-		this.player.setFacingDirection(Direction.RIGHT);
+		this.player.setFacingDirection(Direction.LEFT);
 		
 		this.templeScreenState = TempleScreenState.RUNNING;
 		

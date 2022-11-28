@@ -14,7 +14,7 @@ public class templeLevel4Map extends Map {
 	
 	public templeLevel4Map() {
 		super("temple_Level4.txt", new templeTileset());
-		this.playerStartPosition = getMapTile(5, 0).getLocation();
+		this.playerStartPosition = getMapTile(6, 0).getLocation();
 	}
 	
 	
@@ -22,7 +22,7 @@ public class templeLevel4Map extends Map {
 	public ArrayList<Enemy> loadEnemies() {
 		ArrayList<Enemy> enemies = new ArrayList(); 
 			 
-		enemies.add(new WizardEnemy(getMapTile(2, 5).getLocation(), 1.0f));
+		enemies.add(new WizardEnemy(getMapTile(6, 7).getLocation(), 1.0f));
 			 
 		return enemies;
 	}

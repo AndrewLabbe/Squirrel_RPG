@@ -58,7 +58,7 @@ public class ScreenCoordinator extends Screen {
 	public void initialize() {
 		// start game off with Menu Screen
 		//gameState = GameState.MENU; 
-		gameState = GameState.TEMPLELVL4; 
+		gameState = GameState.MENU; 
 	}
 
 	@Override
@@ -120,8 +120,10 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case DEATH:
 						currentScreen = new DeathScreen(this);
+						break;
 					case WIN:
 						currentScreen = new WinScreen(this);
+						break;
 				}
 				currentScreen.initialize();
 			}
