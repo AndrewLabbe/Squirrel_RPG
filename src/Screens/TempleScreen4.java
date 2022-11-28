@@ -9,6 +9,7 @@ import Level.Map;
 import Level.Player;
 import Maps.templeLevel4Map;
 import Players.Squirrel;
+import Screens.TempleScreen2;
 import Utils.Direction;
 import Utils.Point;
 
@@ -56,14 +57,23 @@ public class TempleScreen4 extends Screen{
             break;
         // if level has been completed, bring up level cleared screen
         case LEVEL_COMPLETED:
-        	screenCoordinator.setGameState(GameState.CREDITS);
+        	screenCoordinator.setGameState(GameState.WIN);
             break;
 		}
 		
-		if (map.getFlagManager().isFlagSet("hasEnteredLevel4")) {
+		if (flagManager.isFlagSet("hasEnteredLevel4")) {
         	templeScreenState = TempleScreenState.LEVEL_COMPLETED;
         }
 		
+		//If the health bar is reduced to zero change the game state to player eliminated 
+        if (map.getHealthBarLeft() <= 0) {
+      		templeScreenState = TempleScreenState.DIED;
+      	} 
+        
+        //If the boss is beaten set the level to completed 
+        if (flagManager.isFlagSet("hasBeatenBoss")) {
+    	    templeScreenState = TempleScreenState.LEVEL_COMPLETED;
+        } 
 	}
 
 	@Override
@@ -74,11 +84,14 @@ public class TempleScreen4 extends Screen{
             break;
         case LEVEL_COMPLETED:
             break;
+		case DIED: 
+			screenCoordinator.setGameState(GameState.DEATH); 
+			break;
 		}
 	}
 	
 	private enum TempleScreenState {
-		RUNNING, LEVEL_COMPLETED;
+		RUNNING, LEVEL_COMPLETED, DIED;
 	}
 
 }

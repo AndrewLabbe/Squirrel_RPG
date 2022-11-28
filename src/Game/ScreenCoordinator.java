@@ -17,6 +17,7 @@ import Screens.TempleScreen1_5;
 import Screens.TempleScreen2;
 import Screens.TempleScreen3;
 import Screens.TempleScreen4;
+import Screens.WinScreen;
 
 /*
  * Based on the current game state, this class determines which Screen should be shown
@@ -119,6 +120,8 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case DEATH:
 						currentScreen = new DeathScreen(this);
+					case WIN:
+						currentScreen = new WinScreen(this);
 				}
 				currentScreen.initialize();
 			}

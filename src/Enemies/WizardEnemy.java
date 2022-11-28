@@ -4,12 +4,15 @@ import java.util.HashMap;
 
 import Builders.FrameBuilder;
 import Engine.ImageLoader;
+import Game.GameState;
+import Game.ScreenCoordinator;
 import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.Enemy;
 import Level.Map;
 import Level.Player;
+import Utils.Point;
 
 public class WizardEnemy extends Enemy {
 
@@ -25,7 +28,7 @@ public class WizardEnemy extends Enemy {
 		super(point.x, point.y, new SpriteSheet(ImageLoader.load("Warlock-1.png.png"), 64, 64), "FACE_CENTER"); 
 		this.direction = direction; 
 	
-		health = 30;
+		health = 100;
 	} 
 	
 	//Updates enemy location 
@@ -73,7 +76,17 @@ public class WizardEnemy extends Enemy {
     @Override
     public void damageEnemy(Enemy enemy, int damage) {
     	health = health - damage; 
+    	if(health <= 0) { 
+    		eliminateEnemy(enemy);
+    	}
     }
+    
+    @Override
+    public void eliminateEnemy(Enemy enemy) {
+		this.mapEntityStatus = mapEntityStatus.REMOVED; 
+		playSound(8); 
+		map.getFlagManager().setFlag("hasBeatenBoss");
+	} 
     
     //Gets health 
     public int getHealth() {
