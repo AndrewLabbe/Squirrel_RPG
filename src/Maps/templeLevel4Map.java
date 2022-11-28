@@ -17,6 +17,7 @@ public class templeLevel4Map extends Map {
 		this.playerStartPosition = getMapTile(0, 5).getLocation();
 	}
 	
+	
 	@Override 
 	public ArrayList<Enemy> loadEnemies() {
 		ArrayList<Enemy> enemies = new ArrayList(); 
