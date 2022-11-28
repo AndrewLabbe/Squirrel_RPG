@@ -26,8 +26,8 @@ public class Acorn extends Projectile {
 	private int damage;
 	private Player player;
 	
-	public Acorn(int x, int y, float directionX, float directionY, int damage, Player player) {
-		super(x, y, damage, new SpriteSheet(ImageLoader.load("Acorn.png"), 29, 20), "FIRE_RIGHT"); 
+	public Acorn(int x, int y, float directionX, float directionY, int damage, Player player, String acorn) {
+		super(x, y, damage, new SpriteSheet(ImageLoader.load("Acorns.png"), 20, 20), acorn); 
 		despawnTime = new Stopwatch();
 		despawnTime.setWaitTime(5000);
 		this.directionX = directionX; 
@@ -48,12 +48,12 @@ public class Acorn extends Projectile {
 		} 
 		
 		//Sets animation based on direction the main character is facing
-		if(directionX == 1) {
+		/*if(directionX == 1) {
 			this.currentAnimationName = "FIRE_RIGHT"; 
 		}
 		else {
 			this.currentAnimationName = "FIRE_LEFT";
-		} 
+		}*/
 		super.update(enemies, unpassableMapTiles, spawners, npcs);
 		
 	} 
@@ -62,17 +62,17 @@ public class Acorn extends Projectile {
 	@Override
     public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {
         return new HashMap<String, Frame[]>() {{
-            put("FIRE_RIGHT", new Frame[]{
+            put("NORMAL_ACORN", new Frame[]{
                     new FrameBuilder(spriteSheet.getSprite(0, 0), 0)
                             .withScale(1)
-                            .withBounds(8, 0, 13, 19) 
+                            .withBounds(4, 4, 13, 16) 
                             .build()
             });
-            put("FIRE_LEFT", new Frame[]{
-                    new FrameBuilder(spriteSheet.getSprite(0, 0), 0)
+            put("GOLDEN_ACORN", new Frame[]{
+                    new FrameBuilder(spriteSheet.getSprite(0, 1), 0)
                             .withScale(1)
-                            .withBounds(8, 0, 13, 19) 
-                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                            .withBounds(4, 4, 13, 16) 
+                            //.withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
             });
         }}; 

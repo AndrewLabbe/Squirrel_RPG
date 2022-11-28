@@ -3,6 +3,7 @@ package Maps;
 import java.util.ArrayList;
 
 import Collectibles.CollectibleAcorn;
+import Collectibles.EasterEgg;
 import Level.CollectibleItem;
 import Level.Map;
 import Level.NPC;
@@ -59,7 +60,11 @@ public class newTileMap extends Map {
 	     
 	     Chest chestRetribution = new Chest(5, getMapTile(41, 9).getLocation(), "hasOpenedChestRetribution");  
 	     chestRetribution.setInteractScript(new ChestUnlockScriptRetribution());
-	     npcs.add(chestRetribution);
+	     npcs.add(chestRetribution); 
+	     
+	     Walrus walrus = new Walrus(6, getMapTile(17, 17).getLocation());
+	     walrus.setInteractScript(new WalrusScript());
+	     npcs.add(walrus);
 	     
 	     return npcs;
 	 }
@@ -139,6 +144,8 @@ public class newTileMap extends Map {
 	    	
 	    	//collectibles.add(new CollectibleAcorn(getMapTile(25, 25).getLocation()));
 	    	//collectibles.add(new CollectibleAcorn(getMapTile(24, 25).getLocation()));
+	    	
+	    	//collectibles.add(new EasterEgg(getMapTile(23,21).getLocation()));
 	    	
 	    	return collectibles;
 	    }
