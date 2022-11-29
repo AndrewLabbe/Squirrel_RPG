@@ -51,10 +51,10 @@ public class ShopkeeperScreen extends Screen {
 		//		screenCoin = new Currency();
 		//		screenCoin = screenCoin.getCoin();
 		
-		 flagManager = new FlagManager();
-		 flagManager.addFlag("inShop", false);
-		 flagManager.addFlag("hasExitedShop", false);
-		 flagManager.addFlag("leftShop", false);
+		flagManager = new FlagManager();
+		flagManager.addFlag("inShop", false);
+		flagManager.addFlag("hasExitedShop", false);
+		flagManager.addFlag("leftShop", false);
 
 		this.map = new shopInterior();
 		map.reset();
@@ -147,7 +147,7 @@ public class ShopkeeperScreen extends Screen {
 		
 		if (map.getFlagManager().isFlagSet("hasExitedShop")) {
         	screenCoordinator.setGameState(GameState.LEVEL);
-        	System.out.println("Shop entered");
+        	System.out.println("Shop exited");
         }
 
 		//screenCoordinator.setShopScreen(this);
