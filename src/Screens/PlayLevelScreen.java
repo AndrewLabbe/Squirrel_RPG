@@ -281,8 +281,8 @@ public class PlayLevelScreen extends Screen {
         
         powerUpTimerColor = new Color(150,0,0);
         
-        winScreen = new WinScreen(this);
-        deathScreen = new DeathScreen(this); 
+        winScreen = new WinScreen(screenCoordinator);
+        deathScreen = new DeathScreen(screenCoordinator); 
         
         itemSprites = new ArrayList<>(); 
         

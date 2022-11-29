@@ -28,7 +28,8 @@ public class TempleScreen3 extends Screen{
 	@Override
 	public void initialize() {
 		flagManager = new FlagManager();
-		flagManager.addFlag("hasEnteredLevel4", false);
+		flagManager.addFlag("hasEnteredLevel4", false); 
+		flagManager.addFlag("hasOpenedChestTempleLvl3", false);
 		
 		this.map = new templeLevel3Map();
 		map.reset();
@@ -62,6 +63,10 @@ public class TempleScreen3 extends Screen{
 		
 		if (map.getFlagManager().isFlagSet("hasEnteredLevel4")) {
         	templeScreenState = TempleScreenState.LEVEL_COMPLETED;
+        } 
+		
+		if (map.getFlagManager().isFlagSet("hasOpenedChestTempleLvl3")) {
+        	
         }
 		
 	}

@@ -769,7 +769,7 @@ public abstract class Map {
     //Reset healthbar and update healthBar left  
     public void resetHealthBar() {
     	healthBar.setGreenBarWidth(healthBar.getActualHealthBarWidth());
-    	 healthBarLeft = healthBar.getGreenBarWidth();
+    	healthBarLeft = healthBar.getGreenBarWidth();
     } 
     //Increment coins 
     public void addCoins() {
@@ -802,8 +802,8 @@ public abstract class Map {
   		}
   	} 
   	//Decreases player health bar
-  	public void dealDamage() {
-		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - 1);
+  	public void dealDamage(int damage) {
+		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - damage);
 		//System.out.println(healthBar.getGreenBarWidth());
 	} 
   	

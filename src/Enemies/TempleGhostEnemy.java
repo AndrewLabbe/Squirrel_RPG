@@ -15,18 +15,12 @@ public class TempleGhostEnemy extends Enemy {
 
 	private float direction; 
 	
-	private int rangeX; 
-	private int rangeY; 
-	
 	private int health;
 	
 	public TempleGhostEnemy(Utils.Point point, float direction) {
 		//Placeholder
 		super(point.x, point.y, new SpriteSheet(ImageLoader.load("GhostSprite.png"), 22, 22), "MAX_HEALTH"); 
 		this.direction = direction; 
-		
-		rangeX = 200; 
-		rangeY = 200; 
 		
 		health = 30;
 	} 
@@ -44,7 +38,7 @@ public class TempleGhostEnemy extends Enemy {
 				else {
 					direction = 0.0F; 
 				}
-				moveX(direction*2); 
+				moveX(direction); 
 				if(player.getY() + 4 > this.y) {
 					direction = 1.0F;
 				} 
@@ -54,7 +48,7 @@ public class TempleGhostEnemy extends Enemy {
 				else {
 					direction = 0.0F;
 				}
-				moveY(direction*2);
+				moveY(direction);
 			//}
 		//}
 		super.update(player, map);
