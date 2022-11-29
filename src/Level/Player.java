@@ -177,9 +177,11 @@ public abstract class Player extends GameObject {
 			map.entityInteract(this);
 		} 
 		
+		idleAnimationTimer.setWaitTime(5000);
+		
 		if(idleAnimationTimer.isTimeUp()) {
 			//Change animation to idle animation here 
-			
+			playerState = PlayerState.IDLE;
 			//Make sure this is the last line of code Garrett
 			idleAnimationTimer.reset();
 		}
@@ -269,7 +271,6 @@ public abstract class Player extends GameObject {
 
 		if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY) && Keyboard.isKeyUp(MOVE_UP_KEY) && Keyboard.isKeyUp(MOVE_DOWN_KEY)) {
 			playerState = PlayerState.STANDING; 
-			idleAnimationTimer.setWaitTime(500);
 		}
 	}
 
@@ -386,6 +387,10 @@ public abstract class Player extends GameObject {
 		else if (playerState == PlayerState.SWIMMING) {
 			// sets animation to SWIM when player is in water
 			this.currentAnimationName = facingDirection == Direction.RIGHT ? "SWIM_RIGHT" : "SWIM_LEFT";
+		}
+		else if (playerState == PlayerState.IDLE) {
+			// sets animation to SWIM when player is in water
+			this.currentAnimationName = facingDirection == Direction.RIGHT ? "IDLE_RIGHT" : "IDLE_LEFT";
 		}
 	}
 
