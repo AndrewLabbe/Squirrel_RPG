@@ -14,8 +14,8 @@ import Utils.Point;
 
 //Lava enhanced tiles that deal damage when the player walks across them 
 public class LavaTile extends EnhancedMapTile {
-    public LavaTile(Point location) {
-        super(location.x, location.y, new SpriteSheet(ImageLoader.load("Acorns.png"), 20, 20), TileType.PASSABLE);
+    public LavaTile(Point location, String laveTile) {
+        super(location.x, location.y, new SpriteSheet(ImageLoader.load(laveTile), 32, 32), TileType.PASSABLE);
     }
 
     @Override

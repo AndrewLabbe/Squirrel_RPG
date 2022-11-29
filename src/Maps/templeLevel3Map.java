@@ -3,7 +3,11 @@ package Maps;
 import java.util.ArrayList;
 
 import Enemies.WizardEnemy;
+import EnhancedMapTiles.AcornTile;
+import EnhancedMapTiles.LavaTile;
+import EnhancedMapTiles.ProjectileTrapTile;
 import Level.Enemy;
+import Level.EnhancedMapTile;
 import Level.Map;
 import Tilesets.temple3Tileset;
 import Level.NPC;
@@ -26,7 +30,7 @@ public class templeLevel3Map extends Map {
 	
 	public templeLevel3Map() {
 		super("temple_Level3.txt", new temple3Tileset());
-		this.playerStartPosition = getMapTile(6, 0).getLocation();
+		this.playerStartPosition = getMapTile(1, 1).getLocation();
 	}
 	
 	@Override
@@ -34,14 +38,22 @@ public class templeLevel3Map extends Map {
 	     ArrayList<NPC> npcs = new ArrayList<>();
 	     
 	     
-	     Point point = new Point(getMapTile(2,1).getX() - 24, getMapTile(2,1).getY() - 10);
+	     Point point = new Point(getMapTile(2,2).getX() + 30, getMapTile(2,2).getY() + 30);
 	     Chest chestDestiny = new Chest(3, point, "hasOpenedChestTempleLvl3");  
 	     chestDestiny.setInteractScript(new ChestUnlockScriptTemple()); 
 	     chestDestiny.getInteractScript().setMap(this);
-	     //chestDestiny.getInteractScript().setPlayer();
 	     npcs.add(chestDestiny);
 	     
-	     return npcs;
+	     return npcs; 
+	 } 
+	
+	 @Override
+	 public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
+	     ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
+	     //enhancedMapTiles.add(new ProjectileTrapTile(getMapTile(6, 20).getLocation()));   
+	     enhancedMapTiles.add(new LavaTile(getMapTile(2,4).getLocation(), "LavaTile3.png")); 
+	     
+	     return enhancedMapTiles;
 	 }
 	
 }

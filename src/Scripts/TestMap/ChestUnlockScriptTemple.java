@@ -17,7 +17,7 @@ public class ChestUnlockScriptTemple extends Script {
 		showTextbox();
 		if(!isFlagSet("hasOpenedChestTempleLvl3")) {
 			addTextToTextboxQueue("You found the key of to escape!"); 
-			Trigger trigger = new Trigger(850, 50, 225, 10, new TempleLevel3Script());
+			Trigger trigger = new Trigger(950, 90, 300, 10, new TempleLevel3Script());
 		    trigger.getTriggerScript().setMap(map); 
 		    map.addTrigger(trigger);
 		}
