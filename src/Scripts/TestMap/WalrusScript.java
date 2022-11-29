@@ -1,12 +1,11 @@
 package Scripts.TestMap;
 
-<<<<<<< HEAD
+
 import Engine.SoundE;
-=======
+
 import Collectibles.EasterEgg;
 import Engine.GamePanel;
 import Level.CollectibleItem;
->>>>>>> 5993a5ab8d8bdf256323b20be68b5febb1089efc
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
@@ -16,16 +15,16 @@ import Utils.Point;
 public class WalrusScript extends Script<NPC> {
 	SoundE se = new SoundE();
 
-<<<<<<< HEAD
+
 	@Override
 	protected void setup() {
 		lockPlayer();
 		showTextbox();
-=======
+
         // changes what walrus says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
         if (!isFlagSet("hasTalkedToWalrus")) {
         	//Plays Sound Effect
-        	gamePanel.playSE(2);
+        	se.playSE(0);
             addTextToTextboxQueue( "Greetings Mr. Squirrel!");
             addTextToTextboxQueue( "Let me help you on your Quest!");
             addTextToTextboxQueue( "I have summoned a mystical egg for you to find!"); 
@@ -34,12 +33,12 @@ public class WalrusScript extends Script<NPC> {
             map.addCollectibles(easterEgg);
         }
         else {
-        	gamePanel.playSE(2);
+        	se.playSE(0);
             addTextToTextboxQueue( "Hello again Mr. Squirrel! I do not have anymore tricks for you sadly.");
         }
         entity.facePlayer(player);
     }
->>>>>>> 5993a5ab8d8bdf256323b20be68b5febb1089efc
+
 
 		// changes what walrus says when talking to him the first time (flag is not set)
 		// vs talking to him afterwards (flag is set)

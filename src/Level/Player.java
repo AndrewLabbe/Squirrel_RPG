@@ -24,16 +24,10 @@ public abstract class Player extends GameObject {
 	protected Direction lastWalkingXDirection;
 	protected Direction lastWalkingYDirection;
 
-<<<<<<< HEAD
 	//Sound Effects
 	SoundE se = new SoundE();
-	// Map reference
-=======
-	//Initialize sound
-	Sound sound = new Sound(); 
 
 	//Map reference
->>>>>>> 5993a5ab8d8bdf256323b20be68b5febb1089efc
 	protected Map map;
 
 	// values used to handle player movement
@@ -49,7 +43,6 @@ public abstract class Player extends GameObject {
 	// classes that listen to player events can be added to this list
 	protected ArrayList<PlayerListener> listeners = new ArrayList<>();
 
-<<<<<<< HEAD
 	// define keyscd cd
 	protected KeyLocker keyLocker = new KeyLocker();
 	protected Key MOVE_LEFT_KEY = Key.LEFT;
@@ -80,46 +73,17 @@ public abstract class Player extends GameObject {
 	// Insta elim timeout
 	private Stopwatch instaElimTimeout;
 
-=======
+
 	//A list of all .png colletible items
 	protected ArrayList<String> invItems = new ArrayList();
 
-	// define keyscd cd 
-	protected KeyLocker keyLocker = new KeyLocker();
-	protected Key MOVE_LEFT_KEY = Key.LEFT;
-	protected Key MOVE_RIGHT_KEY = Key.RIGHT;
-	protected Key MOVE_UP_KEY = Key.UP;
-	protected Key MOVE_DOWN_KEY = Key.DOWN;
-	protected Key INTERACT_KEY = Key.SPACE; 
-	//Key to walk faster
-	protected Key SPEED_KEY = Key.SHIFT;
 
-	//Key for firing projectiles
-	protected Key FIRE_BULLET_KEY = Key.F; 
-	//Puts a delay on firing which eliminates infinite firing issue
-	private Stopwatch fireDelay; 
-	private boolean hasHit = false;
-	protected boolean updateKillCount = false;
-
-	//Speed boost active or not 
-	private boolean speedBoost; 
-	//Speed boost timeout 
-	private Stopwatch speedBoostTimeout; 
-	//Duration of power-ups
-	private final int powerUpDuration = 20000; 
-	//Projectile damage 
-	private int damage; 
-	//Insta elim active or not 
-	private boolean instaElim; 
-	//Insta elim timeout
-	private Stopwatch instaElimTimeout; 
-	
 	private int numItems; 
 	
 	private int keyCounter; 
 	private boolean easterEggCollected;
 
->>>>>>> 5993a5ab8d8bdf256323b20be68b5febb1089efc
+
 	public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName, Map map) {
 		super(spriteSheet, x, y, startingAnimationName);
 		this.map = map;
@@ -128,14 +92,14 @@ public abstract class Player extends GameObject {
 		previousPlayerState = playerState;
 		this.affectedByTriggers = true;
 		fireDelay = new Stopwatch();
-<<<<<<< HEAD
+
 		fireDelay.setWaitTime(1000);
 		speedBoost = false;
 		speedBoostTimeout = new Stopwatch();
 		damage = 10;
 		instaElim = false;
 		instaElimTimeout = new Stopwatch();
-=======
+
 		fireDelay.setWaitTime(1000); 
 		speedBoost = false; 
 		speedBoostTimeout = new Stopwatch();
@@ -592,12 +556,6 @@ public abstract class Player extends GameObject {
 		} 
 	}
 
-	public void playMusic(int i) {
-		sound.setFile(i);
-		sound.play();
-		sound.loop();
->>>>>>> 5993a5ab8d8bdf256323b20be68b5febb1089efc
-	}
 
 	public void update() {
 		moveAmountX = 0;
@@ -638,7 +596,6 @@ public abstract class Player extends GameObject {
 		super.update();
 
 	}
-<<<<<<< HEAD
 
 	// based on player's current state, call appropriate player state handling
 	// method
@@ -1066,6 +1023,5 @@ public abstract class Player extends GameObject {
 	
 	public void setEasterEggCollected() {
 		easterEggCollected = !easterEggCollected;
->>>>>>> 5993a5ab8d8bdf256323b20be68b5febb1089efc
 	}
 }
