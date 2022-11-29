@@ -15,10 +15,10 @@ public class Enemy extends MapEntity {
 	
 	public void update(Player player, Map map) { 
 		if(intersects(player)) {
-			map.dealDamage(); 
+			map.dealDamage(1); 
 		} 
 		super.update(); 
-	}
+	} 
 	
 	//Remove enemy from the screen, add coins, spawn a power-up, and play a sound 
 	public void eliminateEnemy(Enemy enemy) {

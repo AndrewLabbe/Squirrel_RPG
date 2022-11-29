@@ -38,7 +38,7 @@ public class TempleGhostEnemy extends Enemy {
 				else {
 					direction = 0.0F; 
 				}
-				moveX(direction*2); 
+				moveX(direction); 
 				if(player.getY() + 4 > this.y) {
 					direction = 1.0F;
 				} 
@@ -48,7 +48,7 @@ public class TempleGhostEnemy extends Enemy {
 				else {
 					direction = 0.0F;
 				}
-				moveY(direction*2);
+				moveY(direction);
 			//}
 		//}
 		super.update(player, map);

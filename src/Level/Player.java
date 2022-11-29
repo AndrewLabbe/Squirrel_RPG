@@ -493,7 +493,7 @@ public abstract class Player extends GameObject {
 			}
 			//If player is moving right
 			else if(getCurrentWalkingXDirection() == Direction.RIGHT || getLastWalkingXDirection() == Direction.RIGHT) {
-				projectileX = Math.round(getX()) + 40; 
+				projectileX = Math.round(getX()) + 50; 
 				directionX = 1;
 				//If player is moving right and up 
 				if(getCurrentWalkingYDirection() == Direction.UP || getLastWalkingYDirection() == Direction.UP) {
@@ -510,7 +510,7 @@ public abstract class Player extends GameObject {
 				directionX = 0.0F; 
 				//If player is facing right
 				if(facingDirection == Direction.RIGHT) {
-					projectileX = Math.round(getX() + 40); 
+					projectileX = Math.round(getX() + 50); 
 				}
 			}
 			//If player is moving down 
@@ -519,7 +519,7 @@ public abstract class Player extends GameObject {
 				directionX = 0.0F;
 				//If player is facing right
 				if(facingDirection == Direction.RIGHT) {
-					projectileX = Math.round(getX() + 40); 
+					projectileX = Math.round(getX() + 50); 
 				}
 			}
 
