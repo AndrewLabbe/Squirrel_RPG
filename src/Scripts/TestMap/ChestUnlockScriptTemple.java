@@ -6,6 +6,7 @@ import Collectibles.CollectibleAcorn;
 import Collectibles.CollectibleKey;
 import Level.Script;
 import Level.ScriptState;
+import Level.Trigger;
 import Projectiles.Acorn;
 
 public class ChestUnlockScriptTemple extends Script {
@@ -16,9 +17,9 @@ public class ChestUnlockScriptTemple extends Script {
 		showTextbox();
 		if(!isFlagSet("hasOpenedChestTempleLvl3")) {
 			addTextToTextboxQueue("You found the key of to escape!"); 
-			//Point point = new Point(player.getX() - 100f, player.getY()); 
-			//CollectibleKey key = new CollectibleKey(point, "KEY_DESTINY");
-			//map.addCollectibles(key);
+			Trigger trigger = new Trigger(850, 50, 225, 10, new TempleLevel3Script());
+		    trigger.getTriggerScript().setMap(map); 
+		    map.addTrigger(trigger);
 		}
 		else {
 			addTextToTextboxQueue("This chest is empty!"); 
@@ -28,7 +29,6 @@ public class ChestUnlockScriptTemple extends Script {
 	@Override
 	protected void cleanup() {
 		hideTextbox();
-		//unlockPlayer();
 		setFlag("hasOpenedChestTempleLvl3");
 	}
 
