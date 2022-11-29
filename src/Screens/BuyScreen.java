@@ -68,11 +68,11 @@ public class BuyScreen extends Screen {
 			// Assuming that a power-up costs 10 coins
 			if (map.loadCoins() >= 10) {
 				// Here is were a power-up is applied
-				System.out.println("You made your first transaction");
+//				System.out.println("You made your first transaction");
 				map.removeCoins();
 			}
 			else {
-				System.out.println("You do not have enough coins for this power-up"); 
+//				System.out.println("You do not have enough coins for this power-up"); 
 			}
 			keyLocker.lockKey(Key.ONE);
 		}
