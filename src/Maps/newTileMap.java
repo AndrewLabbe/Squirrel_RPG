@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Collectibles.CollectibleAcorn;
 import Collectibles.EasterEgg;
 import EnhancedMapTiles.AcornTile;
+import EnhancedMapTiles.ProjectileTrapTile;
 import Level.CollectibleItem;
 import Level.EnhancedMapTile;
 import Level.Map;
@@ -183,7 +184,8 @@ public class newTileMap extends Map {
 	 public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
 	     ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 	     enhancedMapTiles.add(new AcornTile(getMapTile(27, 32).getLocation()));
-	        
+	     enhancedMapTiles.add(new ProjectileTrapTile(getMapTile(6, 20).getLocation()));   
+	     
 	     return enhancedMapTiles;
 	 }
 	 
