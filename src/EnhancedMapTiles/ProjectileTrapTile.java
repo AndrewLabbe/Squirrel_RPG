@@ -31,7 +31,7 @@ public class ProjectileTrapTile extends EnhancedMapTile {
         super.update(player); 
         if(this.overlaps(player)) {
         	if(projectileCoolDown.isTimeUp()) {
-        		Acorn acorn = new Acorn((int)this.getX() + 250, (int)this.getY() + 30, -1.0f, 0.0f, 10, player, "NORMAL_ACORN");
+        		Acorn acorn = new Acorn((int)this.getX() + 250, (int)this.getY() + 35, -1.0f, 0.0f, 10, player, "NORMAL_ACORN");
         		map.addProjectiles(acorn); 
         		projectileCoolDown.reset();
         	}

@@ -53,7 +53,6 @@ public class templeLevel3Map extends Map {
 	     //Enhanced lava tiles 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(2,4).getLocation(), "LavaTile3.png")); 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(1,5).getLocation(), "LavaTile2.png")); 
-	     enhancedMapTiles.add(new LavaTile(getMapTile(3,7).getLocation(), "LavaTile3.png")); 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(2,7).getLocation(), "LavaTile2.png")); 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(1,9).getLocation(), "LavaTile3.png")); 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(3,9).getLocation(), "LavaTile2.png")); 
@@ -61,7 +60,6 @@ public class templeLevel3Map extends Map {
 	     enhancedMapTiles.add(new LavaTile(getMapTile(2,12).getLocation(), "LavaTile2.png")); 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(1,13).getLocation(), "LavaTile3.png")); 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(7,3).getLocation(), "LavaTile3.png")); 
-	     enhancedMapTiles.add(new LavaTile(getMapTile(6,4).getLocation(), "LavaTile2.png")); 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(6,6).getLocation(), "LavaTile3.png")); 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(6,8).getLocation(), "LavaTile2.png")); 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(5,9).getLocation(), "LavaTile3.png")); 
@@ -82,7 +80,6 @@ public class templeLevel3Map extends Map {
 	     enhancedMapTiles.add(new LavaTile(getMapTile(11,8).getLocation(), "LavaTile3.png")); 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(12,5).getLocation(), "LavaTile2.png")); 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(11,6).getLocation(), "LavaTile3.png")); 
-	     enhancedMapTiles.add(new LavaTile(getMapTile(10,3).getLocation(), "LavaTile2.png")); 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(11,3).getLocation(), "LavaTile2.png")); 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(12,1).getLocation(), "LavaTile3.png")); 
 	     enhancedMapTiles.add(new LavaTile(getMapTile(4,12).getLocation(), "LavaTile2.png")); 
