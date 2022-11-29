@@ -79,7 +79,9 @@ public abstract class Player extends GameObject {
 	private int numItems; 
 	
 	private int keyCounter; 
-	private boolean easterEggCollected;
+	private boolean easterEggCollected; 
+	
+	private Stopwatch idleAnimationTimer;
 
 	public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName, Map map) {
 		super(spriteSheet, x, y, startingAnimationName);
@@ -97,7 +99,8 @@ public abstract class Player extends GameObject {
 		instaElimTimeout = new Stopwatch(); 
 		numItems = 0; 
 		keyCounter = 0; 
-		easterEggCollected = false;
+		easterEggCollected = false; 
+		idleAnimationTimer = new Stopwatch(); 
 	}
 
 	public void update() {
@@ -172,6 +175,13 @@ public abstract class Player extends GameObject {
 		if (!keyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
 			keyLocker.lockKey(INTERACT_KEY);
 			map.entityInteract(this);
+		} 
+		
+		if(idleAnimationTimer.isTimeUp()) {
+			//Change animation to idle animation here 
+			
+			//Make sure this is the last line of code Garrett
+			idleAnimationTimer.reset();
 		}
 
 		// if a walk key is pressed, player enters WALKING state
@@ -258,7 +268,8 @@ public abstract class Player extends GameObject {
 		}
 
 		if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY) && Keyboard.isKeyUp(MOVE_UP_KEY) && Keyboard.isKeyUp(MOVE_DOWN_KEY)) {
-			playerState = PlayerState.STANDING;
+			playerState = PlayerState.STANDING; 
+			idleAnimationTimer.setWaitTime(500);
 		}
 	}
 
