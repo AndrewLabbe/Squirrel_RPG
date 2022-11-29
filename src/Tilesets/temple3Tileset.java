@@ -169,7 +169,7 @@ public class temple3Tileset extends Tileset {
 				.withTileType(TileType.NOT_PASSABLE);
 
 		templeTiles.add(bottomRightCornerWallTile);
-		
+
 		// leftStairs Tile
 		Frame leftStairs = new FrameBuilder(getSubImage(6, 0))
 				.withScale(tileScale)
@@ -179,7 +179,7 @@ public class temple3Tileset extends Tileset {
 				.withTileType(TileType.PASSABLE);
 
 		templeTiles.add(leftStairsTile);
-				
+
 		// rightStairs Tile
 		Frame rightStairs = new FrameBuilder(getSubImage(6, 1))
 				.withScale(tileScale)
@@ -189,7 +189,17 @@ public class temple3Tileset extends Tileset {
 				.withTileType(TileType.PASSABLE);
 
 		templeTiles.add(rightStairsTile);
-		
+
+		// Cannon Tile
+		Frame cannonPiece = new FrameBuilder(getSubImage(7, 0))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder cannonTile = new MapTileBuilder(cannonPiece)
+				.withTileType(TileType.PASSABLE);
+
+		templeTiles.add(cannonTile);
+
 		return templeTiles;
 	}
 
