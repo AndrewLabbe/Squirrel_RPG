@@ -398,12 +398,12 @@ public class PlayLevelScreen extends Screen {
         
         //If Player Enters Water Change State to Swimming
         if (map.getFlagManager().isFlagSet("hasSwam")) {
-        	player.setPlayerState(PlayerState.SWIMMING);
+        	//player.setPlayerState(PlayerState.SWIMMING);
         }
         
         //If Player Enters Land Change State to Walking
         if (map.getFlagManager().isFlagSet("hasWalked")) {
-        	player.setPlayerState(PlayerState.WALKING);
+        	//player.setPlayerState(PlayerState.WALKING);
         } 
         
         //If Player interacts with the chest of fate

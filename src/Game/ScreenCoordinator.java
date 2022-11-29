@@ -58,7 +58,7 @@ public class ScreenCoordinator extends Screen {
 	public void initialize() {
 		// start game off with Menu Screen
 		//gameState = GameState.MENU; 
-		gameState = GameState.TEMPLELVL3; 
+		gameState = GameState.MENU; 
 	}
 
 	@Override

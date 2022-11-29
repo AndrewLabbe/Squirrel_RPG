@@ -101,6 +101,7 @@ public abstract class Player extends GameObject {
 		keyCounter = 0; 
 		easterEggCollected = false; 
 		idleAnimationTimer = new Stopwatch(); 
+		idleAnimationTimer.setWaitTime(2000);
 	}
 
 	public void update() {
@@ -167,6 +168,16 @@ public abstract class Player extends GameObject {
 			}
 			playerSwimming();
 			break;
+		case IDLE: 
+			playerIdling();
+			break;
+		}
+	}
+	
+	protected void playerIdling() {
+		// if a walk key is pressed, player enters WALKING state
+		if (Keyboard.isKeyDown(MOVE_LEFT_KEY) || Keyboard.isKeyDown(MOVE_RIGHT_KEY) || Keyboard.isKeyDown(MOVE_UP_KEY) || Keyboard.isKeyDown(MOVE_DOWN_KEY)) {
+			playerState = PlayerState.WALKING; 
 		}
 	}
 
@@ -177,21 +188,18 @@ public abstract class Player extends GameObject {
 			map.entityInteract(this);
 		} 
 		
-		idleAnimationTimer.setWaitTime(5000);
-		
 		if(idleAnimationTimer.isTimeUp()) {
-			//Change animation to idle animation here 
 			playerState = PlayerState.IDLE;
-			//Make sure this is the last line of code Garrett
-			idleAnimationTimer.reset();
 		}
 
 		// if a walk key is pressed, player enters WALKING state
 		if (Keyboard.isKeyDown(MOVE_LEFT_KEY) || Keyboard.isKeyDown(MOVE_RIGHT_KEY) || Keyboard.isKeyDown(MOVE_UP_KEY) || Keyboard.isKeyDown(MOVE_DOWN_KEY)) {
-			playerState = PlayerState.WALKING;
+			playerState = PlayerState.WALKING; 
 		}
 	}
 
+	
+	
 	// player WALKING state logic
 	protected void playerWalking() {
 		if (!keyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
@@ -271,6 +279,7 @@ public abstract class Player extends GameObject {
 
 		if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY) && Keyboard.isKeyUp(MOVE_UP_KEY) && Keyboard.isKeyUp(MOVE_DOWN_KEY)) {
 			playerState = PlayerState.STANDING; 
+			idleAnimationTimer.reset();
 		}
 	}
 
@@ -352,7 +361,7 @@ public abstract class Player extends GameObject {
 		}
 
 		if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY) && Keyboard.isKeyUp(MOVE_UP_KEY) && Keyboard.isKeyUp(MOVE_DOWN_KEY)) {
-			playerState = PlayerState.SWIMMING;
+			//playerState = PlayerState.SWIMMING;
 		}
 	}
 
