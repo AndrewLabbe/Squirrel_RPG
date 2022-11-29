@@ -59,6 +59,9 @@ public class TempleScreen4 extends Screen{
         case LEVEL_COMPLETED:
         	screenCoordinator.setGameState(GameState.WIN);
             break;
+        case DIED: 
+			screenCoordinator.setGameState(GameState.DEATH); 
+			break;
 		}
 		
 		if (flagManager.isFlagSet("hasEnteredLevel4")) {
@@ -84,9 +87,6 @@ public class TempleScreen4 extends Screen{
             break;
         case LEVEL_COMPLETED:
             break;
-		case DIED: 
-			screenCoordinator.setGameState(GameState.DEATH); 
-			break;
 		}
 	}
 	

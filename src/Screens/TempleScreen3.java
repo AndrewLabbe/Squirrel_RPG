@@ -58,7 +58,10 @@ public class TempleScreen3 extends Screen{
         // if level has been completed, bring up level cleared screen
         case LEVEL_COMPLETED:
         	screenCoordinator.setGameState(GameState.TEMPLELVL4);
-            break;
+            break; 
+        case DIED: 
+			screenCoordinator.setGameState(GameState.DEATH); 
+			break;
 		}
 		
 		if (map.getFlagManager().isFlagSet("hasEnteredLevel4")) {
@@ -67,7 +70,12 @@ public class TempleScreen3 extends Screen{
 		
 		if (map.getFlagManager().isFlagSet("hasOpenedChestTempleLvl3")) {
         	
-        }
+        } 
+		
+		//If the health bar is reduced to zero change the game state to player eliminated 
+        if (map.getHealthBarLeft() <= 0) {
+      		templeScreenState = TempleScreenState.DIED;
+      	} 
 		
 	}
 
@@ -77,13 +85,13 @@ public class TempleScreen3 extends Screen{
 		 case RUNNING:
             map.draw(player, graphicsHandler);
             break;
-        case LEVEL_COMPLETED:
+         case LEVEL_COMPLETED:
             break;
 		}
 	}
 	
 	private enum TempleScreenState {
-		RUNNING, LEVEL_COMPLETED;
+		RUNNING, LEVEL_COMPLETED, DIED;
 	}
 
 }
