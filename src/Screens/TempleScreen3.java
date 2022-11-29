@@ -1,9 +1,14 @@
 package Screens;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+
 import Engine.GraphicsHandler;
+import Engine.ImageLoader;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
+import GameObject.Sprite;
 import Level.FlagManager;
 import Level.Map;
 import Level.Player;
@@ -87,7 +92,8 @@ public class TempleScreen3 extends Screen{
             break;
          case LEVEL_COMPLETED:
             break;
-		}
+		} 
+		
 	}
 	
 	private enum TempleScreenState {

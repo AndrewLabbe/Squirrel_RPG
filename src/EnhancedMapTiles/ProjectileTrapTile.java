@@ -20,7 +20,7 @@ public class ProjectileTrapTile extends EnhancedMapTile {
 	private Stopwatch projectileCoolDown;
 	
     public ProjectileTrapTile(Point location) {
-        super(location.x, location.y, new SpriteSheet(ImageLoader.load("Acorns.png"), 20, 20), TileType.PASSABLE); 
+        super(location.x, location.y, new SpriteSheet(ImageLoader.load("LavaTile1.png"), 32, 32), TileType.PASSABLE); 
         
         projectileCoolDown = new Stopwatch();
         projectileCoolDown.setWaitTime(1000);
@@ -31,7 +31,7 @@ public class ProjectileTrapTile extends EnhancedMapTile {
         super.update(player); 
         if(this.overlaps(player)) {
         	if(projectileCoolDown.isTimeUp()) {
-        		Acorn acorn = new Acorn((int)this.getX() + 100, (int)this.getY() + 10, 1.0f, 0.0f, 10, player, "NORMAL_ACORN");
+        		Acorn acorn = new Acorn((int)this.getX() + 250, (int)this.getY() + 30, -1.0f, 0.0f, 10, player, "NORMAL_ACORN");
         		map.addProjectiles(acorn); 
         		projectileCoolDown.reset();
         	}
