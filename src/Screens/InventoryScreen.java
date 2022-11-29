@@ -166,7 +166,7 @@ public class InventoryScreen extends Screen {
         //
         if (Keyboard.isKeyDown(escKey)) {
 			screenCoordinator.setGameState(GameState.LEVEL);
-			screenCoordinator.switchBackToLevel();
+			//screenCoordinator.switchBackToLevel();
 		}
         
         // if space is pressed, go back to game

@@ -225,7 +225,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeTopLeftPathTile = new MapTileBuilder(lakeTopLeftPath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeTopLeftPathTile);
 
@@ -235,7 +235,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeTopMiddlePathTile = new MapTileBuilder(lakeTopMiddlePath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeTopMiddlePathTile);
 
@@ -245,7 +245,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeTopRightPathTile = new MapTileBuilder(lakeTopRightPath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeTopRightPathTile);
 
@@ -255,7 +255,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeMidLeftPathTile = new MapTileBuilder(lakeMidLeftPath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeMidLeftPathTile);
 
@@ -265,7 +265,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakePathTile = new MapTileBuilder(lakePath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakePathTile);
 
@@ -275,7 +275,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeMidRightPathTile = new MapTileBuilder(lakeMidRightPath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeMidRightPathTile);
 
@@ -285,7 +285,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeBottomLeftPathTile = new MapTileBuilder(lakeBottomLeftPath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeBottomLeftPathTile);
 
@@ -295,7 +295,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeBottomMidPathTile = new MapTileBuilder(lakeBottomMidPath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeBottomMidPathTile);
 
@@ -305,7 +305,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeBottomRightPathTile = new MapTileBuilder(lakeBottomRightPath)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeBottomRightPathTile);
 
@@ -315,7 +315,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeTopLeftCornerTile = new MapTileBuilder(lakeTopLeftCorner)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeTopLeftCornerTile);
 
@@ -325,7 +325,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeTopRightCornerTile = new MapTileBuilder(lakeTopRightCorner)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeTopRightCornerTile);
 
@@ -335,7 +335,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeBottomLeftCornerTile = new MapTileBuilder(lakeBottomLeftCorner)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeBottomLeftCornerTile);
 
@@ -345,7 +345,7 @@ public class PathingTileset extends Tileset {
 				.build();
 
 		MapTileBuilder lakeBottomRightCornerTile = new MapTileBuilder(lakeBottomRightCorner)
-				.withTileType(TileType.NOT_PASSABLE);
+				.withTileType(TileType.PASSABLE);
 
 		pathTiles.add(lakeBottomRightCornerTile);
 
@@ -374,7 +374,8 @@ public class PathingTileset extends Tileset {
 				.withScale(tileScale)
 				.build();
 
-		MapTileBuilder chestTilePiece = new MapTileBuilder(chestTile)
+		MapTileBuilder chestTilePiece = new MapTileBuilder(grassColorTile)
+				.withTopLayer(chestTile)
 				.withTileType(TileType.NOT_PASSABLE);
 
 		pathTiles.add(chestTilePiece);
@@ -686,6 +687,224 @@ public class PathingTileset extends Tileset {
 
 		pathTiles.add(middleBridgeTile);
 
+		// Left Temple Entrance
+		Frame leftTempleEntrance = new FrameBuilder(getSubImage(14, 0))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder leftTempleEntranceTile = new MapTileBuilder(leftTempleEntrance)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(leftTempleEntranceTile);
+
+		// Middle Temple Entrance
+		Frame middleTempleEntrance = new FrameBuilder(getSubImage(14, 1))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder middleTempleEntranceTile = new MapTileBuilder(middleTempleEntrance)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(middleTempleEntranceTile);
+
+		// Right Temple Entrance
+		Frame rightTempleEntrance = new FrameBuilder(getSubImage(14, 2))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder rightTempleEntranceTile = new MapTileBuilder(rightTempleEntrance)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(rightTempleEntranceTile);
+
+		// Stair Temple Entrance
+		Frame stairTemple = new FrameBuilder(getSubImage(14, 3))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder stairTempleTile = new MapTileBuilder(stairTemple)
+				.withTileType(TileType.PASSABLE);
+
+		pathTiles.add(stairTempleTile);
+
+		// Left Temple Corner
+		Frame leftTempleCorner = new FrameBuilder(getSubImage(15, 0))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder leftTempleCornerTile = new MapTileBuilder(leftTempleCorner)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(leftTempleCornerTile);
+
+		// Temple Wall
+		Frame templeWall = new FrameBuilder(getSubImage(15, 1))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder templeWallTile = new MapTileBuilder(templeWall)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(templeWallTile);
+
+		// Right Temple Corner
+		Frame rightTempleCorner = new FrameBuilder(getSubImage(15, 2))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder rightTempleCornerTile = new MapTileBuilder(rightTempleCorner)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(rightTempleCornerTile);
+
+		// Front Raised Tile
+		Frame frontRaised = new FrameBuilder(getSubImage(12, 4))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder frontRaisedTile = new MapTileBuilder(frontRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(frontRaisedTile);
+
+		// Front Raised Grass Tile
+		Frame frontRaisedGrass = new FrameBuilder(getSubImage(13, 4))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder frontRaisedGrassTile = new MapTileBuilder(frontRaisedGrass)
+				.withTileType(TileType.PASSABLE);
+
+		pathTiles.add(frontRaisedGrassTile);
+
+		// Left Raised Tile
+		Frame leftRaised = new FrameBuilder(getSubImage(13, 3))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder leftRaisedTile = new MapTileBuilder(leftRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(leftRaisedTile);
+
+		// Right Raised Tile
+		Frame rightRaised = new FrameBuilder(getSubImage(14, 4))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder rightRaisedTile = new MapTileBuilder(rightRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(rightRaisedTile);
+
+		// Back Raised Tile
+		Frame backRaised = new FrameBuilder(getSubImage(15, 3))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder backRaisedTile = new MapTileBuilder(backRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(backRaisedTile);
+
+		// Raised Tile Staircase
+		Frame raiseStaircase = new FrameBuilder(getSubImage(15, 4))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder raiseStaircaseTile = new MapTileBuilder(raiseStaircase)
+				.withTileType(TileType.PASSABLE);
+
+		pathTiles.add(raiseStaircaseTile);
+
+		// Raised Tile Staircase Grass
+		Frame raiseStaircaseGrass = new FrameBuilder(getSubImage(16, 4))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder raiseStaircaseGrassTile = new MapTileBuilder(raiseStaircaseGrass)
+				.withTileType(TileType.PASSABLE);
+
+		pathTiles.add(raiseStaircaseGrassTile);
+
+		// Left Top Corner Raised Tile
+		Frame leftTopCornerRaised = new FrameBuilder(getSubImage(16, 0))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder leftTopCornerRaisedTile = new MapTileBuilder(leftTopCornerRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(leftTopCornerRaisedTile);
+
+		// Right Top Corner Raised Tile
+		Frame rightTopCornerRaised = new FrameBuilder(getSubImage(16, 1))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder rightTopCornerRaisedTile = new MapTileBuilder(rightTopCornerRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(rightTopCornerRaisedTile);
+
+		// Left Bottom Corner Raised Tile
+		Frame leftBottomCornerRaised = new FrameBuilder(getSubImage(16, 2))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder leftBottomCornerRaisedTile = new MapTileBuilder(leftBottomCornerRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(leftBottomCornerRaisedTile);
+
+		// Right Bottom Corner Raised Tile
+		Frame rightBottomCornerRaised = new FrameBuilder(getSubImage(16, 3))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder rightBottomCornerRaisedTile = new MapTileBuilder(rightBottomCornerRaised)
+				.withTileType(TileType.NOT_PASSABLE);
+
+		pathTiles.add(rightBottomCornerRaisedTile);
+
+		// Animated water
+		Frame[] animatedWaterFrames = new Frame[] {
+				new FrameBuilder(getSubImage(17, 0), 500)
+				.withScale(tileScale)
+				.build(),
+				new FrameBuilder(getSubImage(17, 1), 500)
+				.withScale(tileScale)
+				.build(),
+				new FrameBuilder(getSubImage(17, 2), 500)
+				.withScale(tileScale)
+				.build()
+		};
+
+		MapTileBuilder animatedWaterTile = new MapTileBuilder(animatedWaterFrames)
+				.withTileType(TileType.PASSABLE);
+
+		pathTiles.add(animatedWaterTile);
+
+		// Animated Grass
+		Frame[] animatedGrassFrames = new Frame[] {
+				new FrameBuilder(getSubImage(18, 0), 500)
+				.withScale(tileScale)
+				.build(),
+				new FrameBuilder(getSubImage(18, 1), 500)
+				.withScale(tileScale)
+				.build(),
+				new FrameBuilder(getSubImage(18, 2), 500)
+				.withScale(tileScale)
+				.build(),
+				new FrameBuilder(getSubImage(18, 1), 500)
+				.withScale(tileScale)
+				.build()
+		};
+
+		MapTileBuilder animatedGrassTile = new MapTileBuilder(animatedGrassFrames)
+				.withTileType(TileType.PASSABLE);
+
+		pathTiles.add(animatedGrassTile);
 
 		return pathTiles;
 	}

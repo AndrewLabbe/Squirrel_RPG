@@ -311,7 +311,7 @@ public class OptionsScreen extends Screen {
 		// if escape is pressed in game, go back to game
 		if (Keyboard.isKeyDown(escKey) && screenCoordinator.checkCurrentScreen() != null) {
 			screenCoordinator.setGameState(GameState.LEVEL);
-			screenCoordinator.switchBackToLevel();
+			//screenCoordinator.switchBackToLevel();
 		}
 		// if escape i pressed in main menu, go back to menu--> It does not work
 		if (Keyboard.isKeyDown(escKey) && screenCoordinator.checkCurrentScreen() == null) {

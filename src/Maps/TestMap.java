@@ -2,8 +2,10 @@ package Maps;
 
 import java.util.ArrayList;
 
+import Collectibles.CollectibleAcorn;
 import Enemies.GhostEnemy;
 import EnhancedMapTiles.Rock;
+import Level.CollectibleItem;
 import Level.Enemy;
 import Level.EnhancedMapTile;
 import Level.Map;
@@ -117,5 +119,7 @@ public class TestMap extends Map {
     	powerUps.add(new InstaElim(getMapTile(21,24).getLocation()));
     	return powerUps;
     }
+    
+  
 }
 

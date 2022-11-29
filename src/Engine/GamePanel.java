@@ -12,7 +12,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import Game.GameState;
 import GameObject.Rectangle;
+import Screens.PlayLevelScreen;
 import SpriteFont.SpriteFont;
 import Utils.Colors;
 
@@ -25,7 +27,7 @@ public class GamePanel extends JPanel {
 	// each screen has its own update and draw methods defined to handle a "section"
 	// of the game.
 	private ScreenManager screenManager;
-
+	
 	// used to create the game loop and cycle between update and draw calls
 	private Timer timer;
 	// used to draw graphics to the panel
@@ -37,6 +39,7 @@ public class GamePanel extends JPanel {
 	private SpriteFont invLabel;
 	private KeyLocker keyLocker = new KeyLocker();
 	private final Key pauseKey = Key.P;
+<<<<<<< HEAD
 	// Music
 	Music m = new Music();
 	// Full Screen
@@ -60,6 +63,15 @@ public class GamePanel extends JPanel {
 	// Configurations
 	public Configurations config = new Configurations(this);
 
+=======
+	
+	//Initialize sound
+	public Sound sound = new Sound();
+	
+	//Game time 
+	private int time; 
+	
+>>>>>>> 5993a5ab8d8bdf256323b20be68b5febb1089efc
 	/*
 	 * The JPanel and various important class instances are setup here
 	 */
@@ -94,7 +106,7 @@ public class GamePanel extends JPanel {
 				time++;
 			}
 		});
-		timer.setRepeats(true);
+		timer.setRepeats(true); 
 	}
 
 	// this is called later after instantiation, and will initialize screenManager
@@ -142,6 +154,7 @@ public class GamePanel extends JPanel {
 
 		if (time % 200 == 0) {
 			System.out.println("Time: " + time);
+<<<<<<< HEAD
 		}
 		// If day/night time has ended commence fade
 		if (time % dayLength == 0) {
@@ -178,6 +191,24 @@ public class GamePanel extends JPanel {
 			}
 		}
 	}
+=======
+		} 
+		
+	}
+	
+	public void playMusic(int i) {
+			sound.setFile(i);
+			sound.play();
+			sound.loop();
+		}
+		public void stopMusic() {
+			sound.stop();
+		}
+		public void playSE(int i) {
+			sound.setFile(i);
+			sound.play();
+		}
+>>>>>>> 5993a5ab8d8bdf256323b20be68b5febb1089efc
 
 	public void draw() {
 		screenManager.draw(graphicsHandler);
@@ -193,10 +224,14 @@ public class GamePanel extends JPanel {
 			graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(),
 					new Color(0, 0, 0, 100));
 		}
+<<<<<<< HEAD
 
 		// Shade for Day Night Cycle
 		graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(),
 				new Color(0, 0, 0, shade));
+=======
+		
+>>>>>>> 5993a5ab8d8bdf256323b20be68b5febb1089efc
 	}
 
 	@Override

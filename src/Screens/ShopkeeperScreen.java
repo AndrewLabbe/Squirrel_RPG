@@ -150,7 +150,7 @@ public class ShopkeeperScreen extends Screen {
         	System.out.println("Shop entered");
         }
 
-		screenCoordinator.setShopScreen(this);
+		//screenCoordinator.setShopScreen(this);
 		
 	}
 

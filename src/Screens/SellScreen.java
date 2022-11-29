@@ -37,7 +37,7 @@ public class SellScreen extends Screen {
     public void update() {
 		if (Keyboard.isKeyDown(escKey)) {
 			screenCoordinator.setGameState(GameState.SHOPKEEP);
-			screenCoordinator.switchBackToShop();
+			//screenCoordinator.switchBackToShop();
 		}
 	}
 

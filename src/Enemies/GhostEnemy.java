@@ -22,7 +22,7 @@ public class GhostEnemy extends Enemy {
 	
 	public GhostEnemy(Utils.Point point, float direction) {
 		//Placeholder
-		super(point.x, point.y, new SpriteSheet(ImageLoader.load("Ghost.png"), 20, 20), "STAND_CENTER"); 
+		super(point.x, point.y, new SpriteSheet(ImageLoader.load("GhostSprite.png"), 22, 22), "MAX_HEALTH"); 
 		this.direction = direction; 
 		
 		rangeX = 200; 
@@ -47,12 +47,6 @@ public class GhostEnemy extends Enemy {
 					direction = 0.0F; 
 				}
 				moveX(direction); 
-				/*if(direction > 0) {
-					this.currentAnimationName = "STAND_RIGHT"; 
-				} 
-				else {
-					this.currentAnimationName = "STAND_LEFT";
-				}*/
 				if(player.getY() + 4 > this.y) {
 					direction = 1.0F;
 				} 
@@ -72,11 +66,22 @@ public class GhostEnemy extends Enemy {
 	@Override
     public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {
         return new HashMap<String, Frame[]>() {{
-            put("STAND_CENTER", new Frame[] {
+            put("MAX_HEALTH", new Frame[] {
+                    new FrameBuilder(spriteSheet.getSprite(0, 2))
+                            .withScale(3)
+                            .withBounds(1, 3, 20, 19)
+                            .build()
+            });
+            put("TWO_SHOT", new Frame[] {
+                    new FrameBuilder(spriteSheet.getSprite(0, 1))
+                            .withScale(3)
+                            .withBounds(1, 3, 20, 19)
+                            .build()
+            });
+            put("ONE_SHOT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
-                            .withBounds(3, 1, 15, 18)
-                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                            .withBounds(1, 3, 20, 19)
                             .build()
             });
         }};
@@ -84,7 +89,18 @@ public class GhostEnemy extends Enemy {
     
     @Override
     public void damageEnemy(Enemy enemy, int damage) {
-    	health = health - damage;
+    	health = health - damage; 
+    	//Sets health bar to correct value
+    	if(health > 20) {
+    		setCurrentAnimationName("MAX_HEALTH");
+    	}
+    	else if(health > 10 && health <= 20) {
+    		setCurrentAnimationName("TWO_SHOT");
+    	}
+    	else {
+    		setCurrentAnimationName("ONE_SHOT");
+    	} 
+    	//If health is depleted eliminate the enemy 
     	if(health <= 0) { 
     		super.damageEnemy(enemy, damage);
     	}

@@ -21,7 +21,8 @@ public class InstaElim extends PowerUp {
 	public void update(Player player, Map map) {
 		super.update(player, map); 
 		if(intersects(player)) { 
-			player.setInstaElimActive();
+			player.setInstaElimActive(); 
+			map.setPowerUpActive();
 			setMapEntityStatus(MapEntityStatus.REMOVED);
 		} 
 	} 

@@ -5,14 +5,21 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
+import Collectibles.CollectibleAcorn;
+import Enemies.GhostEnemy;
 import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.Keyboard;
 import Engine.ScreenManager;
 import GameObject.Rectangle;
 import NPCs.Currency;
+import PowerUps.DoublePoints;
+import PowerUps.InstaElim;
+import PowerUps.MaxHealth;
+import PowerUps.SpeedBoost;
 import Utils.Direction;
 import Utils.Point;
 import Utils.Stopwatch;
@@ -66,6 +73,14 @@ public abstract class Map {
     protected ArrayList<Enemy> enemies; 
     //Array which holds all of the power-ups in game 
     protected ArrayList<PowerUp> powerUps; 
+    //Spawner objects array
+    protected ArrayList<Spawner> spawners;
+    
+    //Array which holds the enemies in game 
+    protected ArrayList<CollectibleItem> collectibles; 
+    
+    //Array of passable tiles 
+    protected ArrayList<MapTile> unpassableMapTiles;
 
     protected Script activeInteractScript;
 
@@ -85,6 +100,7 @@ public abstract class Map {
     protected HealthBar healthBar;
 
     private boolean healthCheck = false; 
+    private int healthBarLeft;
     
     //Currency tracker 
     private Currency coins; 
@@ -95,8 +111,21 @@ public abstract class Map {
     private boolean doublePoints; 
     //Double points timeout 
     private Stopwatch doublePointsTimeout; 
-    
+    //Duration powerup is active for
     private final int powerUpDuration = 20000; 
+    //Random number generator for scrambling power up drop 
+    private Random rng;
+    //Powerup cool down 
+    private Stopwatch powerUpCoolDown; 
+    //Powerup active 
+    private boolean powerUpActive; 
+    //Start of game time 
+    private int gameStart; 
+    //Current game time 
+    private int currentTime; 
+    //Game time of the start of a power-up
+    private int powerUpStartTime;
+    
     
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
@@ -114,13 +143,22 @@ public abstract class Map {
         elimPoints = 10; 
         doublePointsTimeout = new Stopwatch();
         doublePoints = false; 
+        rng = new Random(); 
+        powerUpCoolDown = new Stopwatch(); 
+        powerUpActive = false; 
+        gameStart = (int)System.currentTimeMillis();
+        currentTime = gameStart;
+        
     }
 
     // sets up map by reading in the map file to create the tile map
     // loads in enemies, enhanced map tiles, and npcs
     // and instantiates a Camera
     public void setupMap() {
-        animatedMapTiles = new ArrayList<>();
+        animatedMapTiles = new ArrayList<>(); 
+        
+        //Creates array that holds all unpassable map tiles
+        unpassableMapTiles = new ArrayList<>();
 
         loadMapFile();
 
@@ -150,10 +188,22 @@ public abstract class Map {
         	enemy.setMap(this);
         } 
         
+      //Puts collectibles on the map
+        this.collectibles = loadCollectibles();
+        for (CollectibleItem collectible: this.collectibles) {
+        	collectible.setMap(this);
+        }
+        
         //Puts power-ups on the map 
         this.powerUps = loadPowerUps(); 
         for (PowerUp powerUp : this.powerUps) {
         	powerUp.setMap(this);
+        } 
+        
+        //Puts spawners on the map 
+        this.spawners = loadSpawners(); 
+        for (Spawner spawner : this.spawners) {
+        	spawner.setMap(this);
         }
         
         this.loadScripts();
@@ -203,6 +253,11 @@ public abstract class Map {
 
                 if (tile.isAnimated()) {
                     animatedMapTiles.add(tile);
+                } 
+                
+                //If the tile is unpassable it is added to the unpassable tiles array
+                if (tile.getTileType() == TileType.NOT_PASSABLE) {
+                	unpassableMapTiles.add(tile);
                 }
             }
         }
@@ -401,7 +456,7 @@ public abstract class Map {
     public void addTrigger(Trigger trigger) {
         trigger.setMap(this);
         this.triggers.add(trigger);
-    }
+    } 
 
     public void setAdjustCamera(boolean adjustCamera) {
         this.adjustCamera = adjustCamera;
@@ -542,7 +597,11 @@ public abstract class Map {
             }
             healthCheck = false;
         } 
-        handlePowerUps();
+        //Updates current game time
+        currentTime = ((int)System.currentTimeMillis() - gameStart)/1000;
+
+        handlePowerUps(); 
+        healthBarLeft = healthBar.getGreenBarWidth();
     }
 
     // based on the player's current X position (which in a level can potentially be updated each frame),
@@ -687,9 +746,30 @@ public abstract class Map {
     public ArrayList<PowerUp> getActivePowerUps() {
     	return camera.getActivePowerUps();
     } 
-    //Reset healthbar 
+    
+    //Spawner methods 
+    //Load spawners onto the map 
+    public ArrayList<Spawner> loadSpawners() {
+    	return new ArrayList();
+    } 
+    //Adds spawners to the map 
+    public void addSpawner(Spawner spawner) {
+    	spawner.setMap(this); 
+    	this.spawners.add(spawner); 
+    } 
+    //Returns all spawners 
+    public ArrayList<Spawner> getSpawners() {
+    	return spawners; 
+    }
+    //Returns all active spawners
+    public ArrayList<Spawner> getActiveSpawners() {
+    	return camera.getActiveSpawners();
+    } 
+    
+    //Reset healthbar and update healthBar left  
     public void resetHealthBar() {
     	healthBar.setGreenBarWidth(healthBar.getActualHealthBarWidth());
+    	 healthBarLeft = healthBar.getGreenBarWidth();
     } 
     //Increment coins 
     public void addCoins() {
@@ -710,7 +790,10 @@ public abstract class Map {
 		doublePointsTimeout.setWaitTime(powerUpDuration);
     } 
     //Handles power-ups
-  	public void handlePowerUps() {
+  	public void handlePowerUps() { 
+  		if(powerUpActive && powerUpCoolDown.isTimeUp()) {
+  			powerUpActive = !powerUpActive;
+  		}
   		if(doublePoints == true) {
   			if(doublePointsTimeout.isTimeUp() == true) {
   				doublePoints = false; 
@@ -718,8 +801,105 @@ public abstract class Map {
   			}
   		}
   	} 
+  	//Decreases player health bar
   	public void dealDamage() {
-		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - 2);
-	}
+		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - 1);
+		//System.out.println(healthBar.getGreenBarWidth());
+	} 
+  	
+  	//Spawns certain number of enemies around each spawner 
+  	public void spawnEnemies(int spawnNumber) {
+  		for (Spawner spawner : this.spawners) {
+        	spawner.spawnEnemies(spawnNumber);
+        }
+  	} 
+  	
+  	//Removes all enemies from the map
+  	public void removeEnemies() {
+  		for (Enemy enemy : this.enemies) {
+  			enemy.mapEntityStatus = MapEntityStatus.REMOVED;
+  		}
+  	} 
+  	
+  	//Spawns a power up where an enemy was eliminated if one is not currently active and the cool down is up 
+  	public void spawnPowerUp(Point spawnLocation) {
+  		if(powerUpActive == false && powerUpCoolDown.isTimeUp()) {
+  			PowerUp powerUp;
+  			int randomNum = rng.nextInt(4); 
+  			//randomNum = randomNum % 3;
+  			System.out.println(randomNum);
+  			switch(randomNum) {
+  				case 0: 
+  					powerUp = new DoublePoints(spawnLocation); 
+  					break;
+  				case 1: 
+  					powerUp = new InstaElim(spawnLocation); 
+  					break;
+  				case 2: 
+  					powerUp = new MaxHealth(spawnLocation); 
+  					break;
+  				default: 
+  					powerUp = new SpeedBoost(spawnLocation);
+  			}
+  			addPowerUp(powerUp); 
+  			powerUpCoolDown.setWaitTime(20000); 
+  			powerUpStartTime = currentTime;
+  		}
+  	} 
+  	//Returns if the player has a power-up activated 
+  	public boolean getPowerUpActive() {
+  		return powerUpActive;
+  	} 
+  	//Sets the player power-up status
+  	public void setPowerUpActive() {
+  		powerUpActive =! powerUpActive; 
+  	} 
+  	//Returns current game time 
+    public int getCurrentTime() {
+    	return currentTime;
+    } 
+    //Returns game time that power-up was started at
+    public int getPowerUpStartTime() {
+    	return powerUpStartTime;
+    }
     
+    public int getHealthBarLeft() {
+    	return healthBarLeft;
+    }
+    
+    //collectible map methods
+    public ArrayList<CollectibleItem> getActiveCollectibles() {
+    	return camera.getActiveCollectibles(); 
+    }
+    
+    //
+    public ArrayList<CollectibleItem> loadCollectibles() {
+    	return new ArrayList();
+    }
+
+    public void addCollectibles(CollectibleItem collectible) {
+    	collectible.setMap(this);
+    	this.collectibles.add(collectible);
+    } 
+
+    public ArrayList<CollectibleItem> getCollectibles() {
+    	return collectibles;
+    }
+
+	public void addAcorn(Player player) {
+		Point p = player.getLocation();
+		int x = (int)p.x;
+		int y = (int)p.y;
+		x += 50;
+		Point p2 = new Point(x,y);
+		CollectibleAcorn cAcorn = new CollectibleAcorn(p2);
+		addCollectibles(cAcorn);
+		
+	} 
+	
+	//Returns array of unpassable map tiles
+	public ArrayList<MapTile> getUnpassableMapTiles() {
+		return unpassableMapTiles;
+	} 
+	
 }
