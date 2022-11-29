@@ -61,8 +61,6 @@ public class PlayLevelScreen extends Screen {
     public Currency screenCoin;
     public Keys keyCounter;
     public KillCount screenKill;
-    private boolean wasSpacePressed = false;
-    private boolean wasFPressed = false;
     //protected Key MOVE_LEFT_KEY = Key.LEFT;
     //protected Key MOVE_RIGHT_KEY = Key.RIGHT;
     private final Key invKey = Key.I;
@@ -311,8 +309,7 @@ public class PlayLevelScreen extends Screen {
         }
         
         if (player.getUpdate()) {
-    		screenKill.addKill(1);
-            wasFPressed = true; 
+    		screenKill.addKill(1); 
             player.setUpdate(false);
     	}
         
@@ -589,6 +586,8 @@ public class PlayLevelScreen extends Screen {
     	    templeUnlocked = true; 
     	    flagManager.setFlag("hasTempleUnlocked");
         }
+        
+        screenCoordinator.setLevelScreen(this);
     }
 
     //Fade to day/night
