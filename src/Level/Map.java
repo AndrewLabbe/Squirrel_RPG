@@ -775,7 +775,17 @@ public abstract class Map {
     public void addCoins() {
     	coins.setCoin(coins.getCoin() + elimPoints); 
     	coins.updateCoin();
-    } 
+    }
+    
+    public void removeCoins() {
+    	coins.setCoin(coins.getCoin() - 10);
+    	coins.updateCoin();
+    	saveCoins();
+    	System.out.println(coins.getCoin());
+    	
+    	
+    }
+    
     //Returns points per elimination 
     public int getElimPoints() {
     	return elimPoints;
@@ -900,6 +910,43 @@ public abstract class Map {
 	//Returns array of unpassable map tiles
 	public ArrayList<MapTile> getUnpassableMapTiles() {
 		return unpassableMapTiles;
+	}
+
+	public void saveCoins() {
+		int save = coins.getCoin();
+		File file = new File("Resources/saved_Coins.txt");
+		FileWriter writer;
+		
+		try {
+			writer = new FileWriter(file);
+			writer.write(""+save);
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	} 
+	
+	public int loadCoins() {
+		int numCoins;
+		File file = new File("Resources/saved_Coins.txt");
+		Scanner reader;
+		
+		try {
+			reader = new Scanner(file);
+			numCoins = reader.nextInt();
+			coins.setCoin(numCoins);
+			coins.updateCoin();
+			reader.close();
+		} catch (IOException e) {
+			numCoins = 0;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return numCoins;
+	}
 	
 }
