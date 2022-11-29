@@ -146,12 +146,10 @@ public class ShopkeeperScreen extends Screen {
 		}
 		
 		if (map.getFlagManager().isFlagSet("hasExitedShop")) {
-        	screenCoordinator.switchBackToLevel();
-        	System.out.println("Shop exited");
+        	screenCoordinator.setGameState(GameState.RETURN);
+        	flagManager.unsetFlag("hasExitedShop");
         }
 
-		//screenCoordinator.setShopScreen(this);
-		
 	}
 
 

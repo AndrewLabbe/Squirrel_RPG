@@ -44,15 +44,11 @@ public class ScreenCoordinator extends Screen {
 	// Other Screens can set the gameState of this class to force it to change the currentScreen
 	public void setGameState(GameState gameState) {
 		this.gameState = gameState; 
-		if(this.gameState == GameState.SHOPKEEP) {
-			//levelScreen = currentScreen;
-		}
 	}
 	
 	@Override
 	public void initialize() {
-		// start game off with Menu Screen
-		//gameState = GameState.MENU; 
+		//Start off game with the main menu screen 
 		gameState = GameState.MENU; 
 	}
 
@@ -62,7 +58,6 @@ public class ScreenCoordinator extends Screen {
 			// if previousGameState does not equal gameState, it means there was a change in gameState
 			// this triggers ScreenCoordinator to bring up a new Screen based on what the gameState is
 			if (previousGameState != gameState) {
-				//levelScreen = currentScreen;
 				switch(gameState) {
 					case MENU:
 						currentScreen = new MenuScreen(this);
@@ -101,7 +96,6 @@ public class ScreenCoordinator extends Screen {
 						currentScreen = new OptionsScreen(this);
 						break;
 					case SHOPKEEP:
-						//levelScreen = currentScreen;
 						currentScreen = new ShopkeeperScreen(this);
 						break;
 					case DEATH:
@@ -110,9 +104,15 @@ public class ScreenCoordinator extends Screen {
 					case WIN:
 						currentScreen = new WinScreen(this);
 						break;
+					case RETURN: 
+						currentScreen = levelScreen;
+						break;
+				} 
+				
+				if(gameState != GameState.RETURN) {
+					currentScreen.initialize();}
 				}
-				currentScreen.initialize();
-			}
+			
 			previousGameState = gameState;
 
 			// call the update method for the currentScreen
@@ -120,18 +120,6 @@ public class ScreenCoordinator extends Screen {
 			
 		} while (previousGameState != gameState);
 	}
-	
-	public void switchBackToLevel() {
-		currentScreen = levelScreen;
-		previousGameState = gameState;
-		currentScreen.update();
-	}
-	
-	/*public void switchBackToShop() {
-		currentScreen = shopScreen;
-		previousGameState = gameState;
-		currentScreen.update();
-	}*/
 	
 	public Screen checkCurrentScreen() {
 		return currentScreen;}
