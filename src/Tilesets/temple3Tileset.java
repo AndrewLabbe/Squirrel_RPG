@@ -170,6 +170,26 @@ public class temple3Tileset extends Tileset {
 
 		templeTiles.add(bottomRightCornerWallTile);
 		
+		// leftStairs Tile
+		Frame leftStairs = new FrameBuilder(getSubImage(6, 0))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder leftStairsTile = new MapTileBuilder(leftStairs)
+				.withTileType(TileType.PASSABLE);
+
+		templeTiles.add(leftStairsTile);
+				
+		// rightStairs Tile
+		Frame rightStairs = new FrameBuilder(getSubImage(6, 1))
+				.withScale(tileScale)
+				.build();
+
+		MapTileBuilder rightStairsTile = new MapTileBuilder(rightStairs)
+				.withTileType(TileType.PASSABLE);
+
+		templeTiles.add(rightStairsTile);
+		
 		return templeTiles;
 	}
 
