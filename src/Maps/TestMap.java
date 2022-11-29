@@ -1,5 +1,8 @@
 package Maps;
 
+import java.util.ArrayList;
+
+import Enemies.GhostEnemy;
 import EnhancedMapTiles.Rock;
 import Level.Enemy;
 import Level.EnhancedMapTile;
@@ -10,8 +13,6 @@ import Level.Trigger;
 import NPCs.Dinosaur;
 import NPCs.Fox;
 import NPCs.Walrus;
-import NPCs.Wolf;
-import NPCs.Zombie;
 import PowerUps.DoublePoints;
 import PowerUps.InstaElim;
 import PowerUps.MaxHealth;
@@ -23,13 +24,8 @@ import Scripts.TestMap.LostBallScript;
 import Scripts.TestMap.TempleScript;
 import Scripts.TestMap.TreeScript;
 import Scripts.TestMap.WalrusScript;
-import Scripts.TestMap.WolfScript;
 import Scripts.TestMap.changeShop;
 import Tilesets.CommonTileset;
-
-import java.util.ArrayList;
-
-import Enemies.GhostEnemy;
 
 // Represents a test map to be used in a level
 public class TestMap extends Map {
@@ -96,6 +92,7 @@ public class TestMap extends Map {
         getMapTile(2, 6).setInteractScript(new TreeScript());
         
         getMapTile(4, 19).setInteractScript(new changeShop());
+       
     } 
     
     //Adds enemies to the map

@@ -1,13 +1,13 @@
 package MapEditor;
 
+import java.util.ArrayList;
+
 import Level.Map;
 import Maps.TestMap;
 import Maps.TitleScreenMap;
 import Maps.newTileMap;
 import Maps.shopInterior;
 import Maps.templeMap;
-
-import java.util.ArrayList;
 
 public class EditorMaps {
     public static ArrayList<String> getMapNames() {

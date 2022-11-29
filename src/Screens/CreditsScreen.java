@@ -1,13 +1,17 @@
 package Screens;
 
-import Engine.*;
+import java.awt.Color;
+
+import Engine.GraphicsHandler;
+import Engine.Key;
+import Engine.KeyLocker;
+import Engine.Keyboard;
+import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.Map;
 import Maps.TitleScreenMap;
 import SpriteFont.SpriteFont;
-
-import java.awt.*;
 
 // This class is for the credits screen
 public class CreditsScreen extends Screen {
@@ -16,6 +20,8 @@ public class CreditsScreen extends Screen {
     protected KeyLocker keyLocker = new KeyLocker();
     protected SpriteFont creditsLabel;
     protected SpriteFont createdByLabel;
+    protected SpriteFont improvedByLabel;
+    protected SpriteFont names;
     protected SpriteFont returnInstructionsLabel;
 
     public CreditsScreen(ScreenCoordinator screenCoordinator) {
@@ -28,7 +34,9 @@ public class CreditsScreen extends Screen {
         background = new TitleScreenMap();
         background.setAdjustCamera(false);
         creditsLabel = new SpriteFont("Credits", 15, 35, "Times New Roman", 30, Color.white);
-        createdByLabel = new SpriteFont("Created by Alex Thimineur", 130, 140, "Times New Roman", 20, Color.white);
+        createdByLabel = new SpriteFont("Created by Alex Thimineur", 100, 120, "Times New Roman", 20, Color.white);
+        improvedByLabel = new SpriteFont("Improved by Team Squirrel:", 100, 160, "Times New Roman", 20, Color.white);
+        names = new SpriteFont ("Phil, Andrew K, Andrew L, Mica, Garret & Alec", 100, 180, "Times New Roman", 14, Color.white);
         returnInstructionsLabel = new SpriteFont("Press Space to return to the menu", 20, 560, "Times New Roman", 30, Color.white);
         keyLocker.lockKey(Key.SPACE);
     }
@@ -50,6 +58,8 @@ public class CreditsScreen extends Screen {
         background.draw(graphicsHandler);
         creditsLabel.draw(graphicsHandler);
         createdByLabel.drawWithParsedNewLines(graphicsHandler);
+        improvedByLabel.drawWithParsedNewLines(graphicsHandler);
+        names.drawWithParsedNewLines(graphicsHandler);
         returnInstructionsLabel.draw(graphicsHandler);
     }
 }

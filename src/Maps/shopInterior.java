@@ -6,9 +6,7 @@ import Level.Map;
 import Level.NPC;
 import NPCs.Wolf;
 import Scripts.TestMap.WolfScript;
-import Scripts.TestMap.changeShop;
 import Scripts.TestMap.exitShop;
-import Tilesets.CommonTileset;
 import Tilesets.InteriorTileset;
 
 // Represents the Map for the Interior of Shopkeeper House

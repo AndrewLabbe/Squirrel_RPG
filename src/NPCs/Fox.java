@@ -1,16 +1,15 @@
 package NPCs;
 
+import java.util.HashMap;
+
 import Builders.FrameBuilder;
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import GameObject.Frame;
-import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.NPC;
 import Level.Player;
 import Utils.Point;
-
-import java.util.HashMap;
 
 // This class is for the fox NPC
 public class Fox extends NPC {

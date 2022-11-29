@@ -396,7 +396,7 @@ public class PathingTileset extends Tileset {
 
 		MapTileBuilder smallShrubFrameTile = new MapTileBuilder(grassColorTile)
 				.withTopLayer(smallShrubFrame)
-				.withTileType(TileType.PASSABLE);
+				.withTileType(TileType.NOT_PASSABLE);
 
 		pathTiles.add(smallShrubFrameTile);
 
@@ -418,7 +418,7 @@ public class PathingTileset extends Tileset {
 
 		MapTileBuilder smallTreeBottomTile = new MapTileBuilder(grassColorTile)
 				.withTopLayer(smallTreeBottom)
-				.withTileType(TileType.PASSABLE);
+				.withTileType(TileType.NOT_PASSABLE);
 
 		pathTiles.add(smallTreeBottomTile);
 
@@ -451,7 +451,7 @@ public class PathingTileset extends Tileset {
 
 		MapTileBuilder bigTreeBottomLeftTile = new MapTileBuilder(grassColorTile)
 				.withTopLayer(bigTreeBottomLeft)
-				.withTileType(TileType.PASSABLE);
+				.withTileType(TileType.NOT_PASSABLE);
 
 		pathTiles.add(bigTreeBottomLeftTile);
 
@@ -462,7 +462,7 @@ public class PathingTileset extends Tileset {
 
 		MapTileBuilder bigTreeBottomRightTile = new MapTileBuilder(grassColorTile)
 				.withTopLayer(bigTreeBottomRight)
-				.withTileType(TileType.PASSABLE);
+				.withTileType(TileType.NOT_PASSABLE);
 
 		pathTiles.add(bigTreeBottomRightTile);
 

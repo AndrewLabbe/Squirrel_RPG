@@ -1,9 +1,9 @@
 package GameObject;
 
+import java.awt.Color;
+
 import Engine.GraphicsHandler;
 import Utils.Point;
-
-import java.awt.*;
 
 // This class represents a rectangle, which at its core is (x, y, width, height)
 // it has some properties, rectangle math methods, and draw logic
@@ -17,6 +17,7 @@ public class Rectangle implements IntersectableRectangle {
 	protected Color color;
 	protected Color borderColor;
 	protected int borderThickness;
+	public Object fillRect;
 
 	public Rectangle(float x, float y, int width, int height) {
 		this.x = x;

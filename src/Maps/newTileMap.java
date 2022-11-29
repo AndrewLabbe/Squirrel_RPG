@@ -2,24 +2,18 @@ package Maps;
 
 import java.util.ArrayList;
 
-import Level.Enemy;
 import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Dinosaur;
 import NPCs.Fox;
 import NPCs.Walrus;
-import NPCs.Wolf;
-import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.FoxScript;
-import Scripts.TestMap.LostBallScript;
+import Scripts.TestMap.IntroScript;
 import Scripts.TestMap.TempleScript;
-import Scripts.TestMap.TreeScript;
 import Scripts.TestMap.WalrusScript;
-import Scripts.TestMap.WolfScript;
 import Scripts.TestMap.changeShop;
-import Tilesets.CommonTileset;
 import Tilesets.PathingTileset;
 
 // Represents the Map for the Interior of Shopkeeper House
@@ -57,22 +51,22 @@ public class newTileMap extends Map {
 	        return npcs;
 	    }
 	 
-//	 @Override
-//	    public ArrayList<Trigger> loadTriggers() {
-//	        ArrayList<Trigger> triggers = new ArrayList<>();
-//	        triggers.add(new Trigger(790, 1030, 100, 10, new LostBallScript(), "hasLostBall"));
-//	        triggers.add(new Trigger(790, 960, 10, 80, new LostBallScript(), "hasLostBall"));
-//	        triggers.add(new Trigger(890, 960, 10, 80, new LostBallScript(), "hasLostBall"));
-//	        triggers.add(new Trigger(525, 0, 48, 48, new TempleScript()));
-//	        
-//	        return triggers;
-//	    }
+	 @Override
+	    public ArrayList<Trigger> loadTriggers() {
+	        ArrayList<Trigger> triggers = new ArrayList<>();
+	        triggers.add(new Trigger(0, 1160, 120, 10, new IntroScript(), "hasLostGirlfriend"));
+	        triggers.add(new Trigger(120, 1160, 10, 130, new IntroScript(), "hasLostGirlfriend"));
+	        triggers.add(new Trigger(0, 1280, 120, 10, new IntroScript(), "hasLostGirlfriend"));
+	        
+	        return triggers;
+	    }
 	 
 	 @Override
-	    public void loadScripts() {
+	 public void loadScripts() {
+		 getMapTile(9, 34).setInteractScript(new changeShop());
 	        
-	        getMapTile(9, 34).setInteractScript(new changeShop());
-	    } 
+	     getMapTile(24, 0).setInteractScript(new TempleScript());
+	 } 
 	 
 	 //Adds enemies to the map
 //	    @Override 

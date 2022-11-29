@@ -1,10 +1,10 @@
 package GameObject;
 
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 // This class is for representing a Sprite, which is essentially a Rectangle with an image attached
 // it also includes an attribute for "bounds", which can be thought of a sub rectangle on the image where it can be interacted with (like for collisions)

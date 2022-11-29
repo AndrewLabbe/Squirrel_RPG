@@ -7,11 +7,16 @@ import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
-import Level.*;
-import Maps.TestMap;
+import Level.EnhancedMapTile;
+import Level.FlagManager;
+import Level.Map;
+import Level.MapTile;
+import Level.NPC;
+import Level.Player;
+import Level.Trigger;
 import Maps.shopInterior;
-import NPCs.Currency;
 import Players.Cat;
+import Players.Squirrel;
 import Utils.Direction;
 import Utils.Point;
 
@@ -55,7 +60,7 @@ public class ShopkeeperScreen extends Screen {
 		map.reset();
 		map.setFlagManager(flagManager);
 
-		this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+		this.player = new Squirrel(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, map);
 		this.player.setMap(map);
 		Point playerStartPosition = map.getPlayerStartPosition();
 		this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
@@ -127,7 +132,7 @@ public class ShopkeeperScreen extends Screen {
 		
 		if (Keyboard.isKeyDown(invKey)) {
 			screenCoordinator.setGameState(GameState.INVENTORY);
-			keyLocker.lockKey(buyKey);
+			keyLocker.lockKey(invKey);
 		}
 
 		if (Keyboard.isKeyUp(buyKey)) {

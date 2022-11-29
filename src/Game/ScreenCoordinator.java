@@ -3,7 +3,6 @@ package Game;
 import Engine.DefaultScreen;
 import Engine.GraphicsHandler;
 import Engine.Screen;
-import Maps.shopInterior;
 import Screens.BuyScreen;
 import Screens.CreditsScreen;
 import Screens.InventoryScreen;
@@ -11,8 +10,9 @@ import Screens.MenuScreen;
 import Screens.OptionsScreen;
 import Screens.PlayLevelScreen;
 import Screens.SellScreen;
-import Screens.TempleScreen;
 import Screens.ShopkeeperScreen;
+import Screens.TempleScreen1;
+import Screens.TempleScreen2;
 
 /*
  * Based on the current game state, this class determines which Screen should be shown
@@ -70,8 +70,11 @@ public class ScreenCoordinator extends Screen {
 					case SELL:
 						currentScreen = new SellScreen(this);
 						break;
-					case TEMPLE:
-						currentScreen = new TempleScreen(this);
+					case TEMPLELVL1:
+						currentScreen = new TempleScreen1(this);
+						break;
+					case TEMPLELVL2:
+						currentScreen = new TempleScreen2(this);
 						break;
 					case CREDITS:
 						currentScreen = new CreditsScreen(this);

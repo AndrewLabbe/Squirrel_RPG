@@ -1,5 +1,7 @@
 package Tilesets;
 
+import java.util.ArrayList;
+
 import Builders.FrameBuilder;
 import Builders.MapTileBuilder;
 import Engine.ImageLoader;
@@ -7,8 +9,6 @@ import GameObject.Frame;
 import GameObject.ImageEffect;
 import Level.TileType;
 import Level.Tileset;
-
-import java.util.ArrayList;
 
 // This class represents a "common" tileset of standard tiles defined in the CommonTileset.png file
 public class CommonTileset extends Tileset {

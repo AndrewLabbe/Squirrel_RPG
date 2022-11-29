@@ -1,14 +1,14 @@
 package Engine;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
 /*
  * The JFrame that holds the GamePanel
  * Just does some setup and exposes the gamePanel's screenManager to allow an external class to setup their own content and attach it to this engine.
  */
 public class GameWindow {
-	private JFrame gameWindow;
-	private GamePanel gamePanel;
+	public static JFrame gameWindow;
+	public static GamePanel gamePanel;
 
 	public GameWindow() {
 		gameWindow = new JFrame("Game");
@@ -20,8 +20,14 @@ public class GameWindow {
 		gameWindow.setSize(Config.GAME_WINDOW_WIDTH, Config.GAME_WINDOW_HEIGHT);
 		gameWindow.setLocationRelativeTo(null);
 		gameWindow.setVisible(true);
-		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // it'd be nice if this actually worked more than 1/3rd of the time
+		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // it'd be nice if this actually worked more than
+																	// 1/3rd of the time
 		gamePanel.setupGame();
+		// Load Configurations
+		gamePanel.config.loadConfigurations();
+		System.out.println(Music.volumeScale);
+		System.out.println(SoundE.volumeScale);
+
 	}
 
 	// triggers the game loop to start as defined in the GamePanel class

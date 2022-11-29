@@ -5,13 +5,11 @@ import java.util.HashMap;
 import Builders.FrameBuilder;
 import Engine.ImageLoader;
 import GameObject.Frame;
-import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.Map;
 import Level.MapEntityStatus;
 import Level.Player;
 import Level.PowerUp;
-import Utils.Stopwatch;
 
 //Increases player Speed for a period of time 
 public class SpeedBoost extends PowerUp {

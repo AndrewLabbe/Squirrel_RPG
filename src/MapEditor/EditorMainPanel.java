@@ -1,7 +1,10 @@
 package MapEditor;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class EditorMainPanel extends JPanel {
     private EditorControlPanel editorControlPanel;
