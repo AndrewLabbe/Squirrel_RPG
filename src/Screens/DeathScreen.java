@@ -14,12 +14,15 @@ import SpriteFont.SpriteFont;
 
 // This class is for the win level screen
 public class DeathScreen extends Screen {
-    protected SpriteFont winMessage;
-    protected SpriteFont instructions;
+	protected ScreenCoordinator screenCoordinator;
+    protected SpriteFont winMessage = new SpriteFont("You died!", 350, 270, "Comic Sans", 30, Color.RED);;
+    protected SpriteFont instructions  = new SpriteFont("Press Space to play again or Escape to go back to the main menu", 120, 300,"Comic Sans", 20, Color.white);;
     protected KeyLocker keyLocker = new KeyLocker();
     protected PlayLevelScreen playLevelScreen;
-    protected ScreenCoordinator screenCoordinator;
 
+    //winMessage = new SpriteFont("You died!", 350, 270, "Comic Sans", 30, Color.RED);
+    //instructions = new SpriteFont("Press Space to play again or Escape to go back to the main menu", 120, 300,"Comic Sans", 20, Color.white);
+    
     public DeathScreen(PlayLevelScreen playLevelScreen) {
         this.playLevelScreen = playLevelScreen;
         initialize();
@@ -31,11 +34,12 @@ public class DeathScreen extends Screen {
 
     @Override
     public void initialize() {
-        winMessage = new SpriteFont("You died!", 350, 270, "Comic Sans", 30, Color.RED);
-        instructions = new SpriteFont("Press Space to play again or Escape to go back to the main menu", 120, 300,"Comic Sans", 20, Color.white);
+        //winMessage = new SpriteFont("You died!", 350, 270, "Comic Sans", 30, Color.RED);
+        //instructions = new SpriteFont("Press Space to play again or Escape to go back to the main menu", 120, 300,"Comic Sans", 20, Color.white);
         //keyLocker.lockKey(Key.SPACE);
         //keyLocker.lockKey(Key.ESC);
-        //screenCoordinator.setGameState(GameState.DEATH);
+        //screenCoordinator.setGameState(GameState.DEATH); 
+    	System.out.println("Test");
     }
 
     @Override

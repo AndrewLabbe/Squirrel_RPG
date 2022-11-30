@@ -55,7 +55,7 @@ public class PlayLevelScreen extends Screen {
     public static Player player;
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
-    protected DeathScreen deathScreen;
+    protected DeathScreen deathScreen; 
     protected FlagManager flagManager;
     private KeyLocker keyLocker = new KeyLocker();
     public Currency screenCoin;
@@ -283,8 +283,8 @@ public class PlayLevelScreen extends Screen {
         
         powerUpTimerColor = new Color(150,0,0);
         
-        winScreen = new WinScreen(screenCoordinator);
-        deathScreen = new DeathScreen(screenCoordinator); 
+        //winScreen = new WinScreen(screenCoordinator);
+        //deathScreen = new DeathScreen(screenCoordinator); 
         
         itemSprites = new ArrayList<>(); 
         
@@ -308,7 +308,7 @@ public class PlayLevelScreen extends Screen {
                 break;
             case DIED:
             screenCoordinator.setGameState(GameState.DEATH);
-            	deathScreen.update();
+            	//deathScreen.update();
             	break;
         }
         
@@ -580,7 +580,7 @@ public class PlayLevelScreen extends Screen {
         powerUpTimer.setColor(powerUpTimerColor); 
         
         //Creates trigger to enter temple when all of the keys are collected
-        if(keyCounter.getKeys() == 4 && !templeUnlocked) {
+        if(keyCounter.getKeys() == 0 && !templeUnlocked) {
         	Trigger trigger = new Trigger(1120, 50, 110, 1, new TempleScript(), "hasEnteredTemple");
     	    
     	    trigger.getTriggerScript().setMap(map); 
@@ -635,7 +635,7 @@ public class PlayLevelScreen extends Screen {
                 keyCounter.draw(graphicsHandler);
                 break;
             case DIED:
-            	deathScreen.draw(graphicsHandler);
+            	//deathScreen.draw(graphicsHandler);
             	break;
             case LEVEL_COMPLETED:
                 winScreen.draw(graphicsHandler);

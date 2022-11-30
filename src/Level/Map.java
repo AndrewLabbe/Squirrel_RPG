@@ -2,6 +2,7 @@ package Level;
  
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import Engine.GraphicsHandler;
 import Engine.Keyboard;
 import Engine.ScreenManager;
 import GameObject.Rectangle;
+import JSON.JSONObject;
+import JSON.JSONParser;
 import NPCs.Currency;
 import PowerUps.DoublePoints;
 import PowerUps.InstaElim;
@@ -210,9 +213,26 @@ public abstract class Map {
 
         this.camera = new Camera(0, 0, tileset.getScaledSpriteWidth(), tileset.getScaledSpriteHeight(), this);
         this.textbox = new Textbox(this);
-        this.healthBar = new HealthBar(this);
+        this.healthBar = new HealthBar(this); 
+        JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject = (JSONObject) readJsonSimpleDemo("example.json");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    //System.out.println(jsonObject);
+	    int health = Integer.valueOf(jsonObject.get("HealthBar:").toString());
+	    System.out.println(health);
+        healthBar.setGreenBarWidth(health);
     }
 
+    public static Object readJsonSimpleDemo(String filename) throws Exception {
+	    FileReader reader = new FileReader(filename);
+	    JSONParser jsonParser = new JSONParser();
+	    return jsonParser.parse(reader);
+	}	
+    
     // reads in a map file to create the map's tilemap
     private void loadMapFile() {
         Scanner fileInput;

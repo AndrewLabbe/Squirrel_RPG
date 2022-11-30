@@ -1,11 +1,14 @@
 package Level;
 
 import java.awt.Color;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
+import JSON.JSONObject;
 
 public class HealthBar {
     protected boolean isActive;
@@ -91,11 +94,27 @@ public class HealthBar {
 		return greenBarWidth;
 	}
     public void setGreenBarWidth(int w){
-		this.greenBarWidth = w;
+		this.greenBarWidth = w; 
+		try {
+			writeJsonSimpleDemo("example.json", w);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 
 	public int getActualHealthBarWidth(){
 		return healthActualWidth;
 	}
+	
+	//Make the .json File 
+		public static void writeJsonSimpleDemo(String filename, int x) throws Exception {
+			JSONObject sampleObject = new JSONObject();
+			sampleObject.put("HealthBar:", x);
+			//sampleObject.put("Name:", "Philip Caldarella");
+
+			Files.write(Paths.get(filename), sampleObject.toJSONString().getBytes()); 
+			System.out.println("I did it");
+		} 
 
 }
