@@ -38,7 +38,6 @@ public class TempleScreen extends Screen {
     	flagManager.addFlag("hasTalkedToTable", false);
     	flagManager.addFlag("doneWithPuzzle", false);
     	flagManager.addFlag("hasFinishedFirstLevel", false);
-    	flagManager.addFlag("hasEnteredLevel1", false);
 		
     	this.map = new templeLevel1Map();
 		map.reset();

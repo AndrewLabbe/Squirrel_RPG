@@ -1,14 +1,9 @@
 package Maps;
 
-import java.util.ArrayList;
-
 import Level.Map;
-import Level.Trigger;
 import Scripts.TestMap.CorrectTableScript;
 import Scripts.TestMap.GoldenTableScript;
-import Scripts.TestMap.IntroShop;
 import Scripts.TestMap.SimpleTableScript;
-import Scripts.TestMap.TempleLevel1IntroScript;
 import Scripts.TestMap.UpperLeftTableScript;
 import Tilesets.templeTileset;
 
@@ -74,13 +69,4 @@ public class templeLevel1Map extends Map {
         getMapTile(2, 12).setInteractScript(new CorrectTableScript());
     } 
 	
-	public ArrayList<Trigger> loadTriggers() {
-		ArrayList<Trigger> triggers = new ArrayList<>();	
-	
-		triggers.add(new Trigger(640, 1350, 160, 10, new TempleLevel1IntroScript()));
-		triggers.add(new Trigger(640, 1350, 10, 100, new TempleLevel1IntroScript()));
-		triggers.add(new Trigger(790, 1350, 10, 100, new TempleLevel1IntroScript()));
-		
-		return triggers;
-	}
 }
