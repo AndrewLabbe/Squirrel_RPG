@@ -4,10 +4,7 @@ import java.util.ArrayList;
 
 import Collectibles.CollectibleAcorn;
 import Collectibles.EasterEgg;
-import EnhancedMapTiles.AcornTile;
-import EnhancedMapTiles.ProjectileTrapTile;
 import Level.CollectibleItem;
-import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Spawner;
@@ -168,24 +165,16 @@ public class newTileMap extends Map {
 	 }
 	 
 	 //Adds collectibles to the map
-	 @Override 
-	 public ArrayList<CollectibleItem> loadCollectibles() {
-		 ArrayList<CollectibleItem> collectibles = new ArrayList(); 
+	    @Override 
+	    public ArrayList<CollectibleItem> loadCollectibles() {
+	    	ArrayList<CollectibleItem> collectibles = new ArrayList(); 
 	    	
-	     //collectibles.add(new CollectibleAcorn(getMapTile(25, 25).getLocation()));
-	     //collectibles.add(new CollectibleAcorn(getMapTile(24, 25).getLocation()));
-	     
-	     //collectibles.add(new EasterEgg(getMapTile(23,21).getLocation()));
+	    	//collectibles.add(new CollectibleAcorn(getMapTile(25, 25).getLocation()));
+	    	//collectibles.add(new CollectibleAcorn(getMapTile(24, 25).getLocation()));
 	    	
-	     return collectibles;
-	 }
-	 
-	 @Override
-	 public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
-	     ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
-	     enhancedMapTiles.add(new AcornTile(getMapTile(27, 32).getLocation()));
-	     
-	     return enhancedMapTiles;
-	 }
+	    	//collectibles.add(new EasterEgg(getMapTile(23,21).getLocation()));
+	    	
+	    	return collectibles;
+	    }
 	 
 }

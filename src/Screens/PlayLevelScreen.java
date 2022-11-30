@@ -61,6 +61,8 @@ public class PlayLevelScreen extends Screen {
     public Currency screenCoin;
     public Keys keyCounter;
     public KillCount screenKill;
+    private boolean wasSpacePressed = false;
+    private boolean wasFPressed = false;
     //protected Key MOVE_LEFT_KEY = Key.LEFT;
     //protected Key MOVE_RIGHT_KEY = Key.RIGHT;
     private final Key invKey = Key.I;
@@ -77,8 +79,7 @@ public class PlayLevelScreen extends Screen {
 	//Day or night is happening 
 	private boolean changeDay = true; 
 	//Length of day/night
-	private static final int dayLength = 1000;
-	private static final String Systsem = null; 
+	private static final int dayLength = 1000; 
 	//Number of enemies that spawn 
 	private int spawnNumber;
 	//Displays the wave
@@ -313,7 +314,8 @@ public class PlayLevelScreen extends Screen {
         }
         
         if (player.getUpdate()) {
-    		screenKill.addKill(1); 
+    		screenKill.addKill(1);
+            wasFPressed = true; 
             player.setUpdate(false);
     	}
         
@@ -392,19 +394,19 @@ public class PlayLevelScreen extends Screen {
         }
         
         // If Player Entered Door Change Map to Shop
-        if (flagManager.isFlagSet("hasEnteredShop")) {
-        	screenCoordinator.setGameState(GameState.SHOPKEEP); 
-        	flagManager.unsetFlag("hasEnteredShop");
+        if (map.getFlagManager().isFlagSet("hasEnteredShop")) {
+        	screenCoordinator.setGameState(GameState.SHOPKEEP);
+        	System.out.println("Shop entered");
         }
         
         //If Player Enters Water Change State to Swimming
         if (map.getFlagManager().isFlagSet("hasSwam")) {
-        	//player.setPlayerState(PlayerState.SWIMMING);
+        	player.setPlayerState(PlayerState.SWIMMING);
         }
         
         //If Player Enters Land Change State to Walking
         if (map.getFlagManager().isFlagSet("hasWalked")) {
-        	//player.setPlayerState(PlayerState.WALKING);
+        	player.setPlayerState(PlayerState.WALKING);
         } 
         
         //If Player interacts with the chest of fate
@@ -590,8 +592,6 @@ public class PlayLevelScreen extends Screen {
     	    templeUnlocked = true; 
     	    flagManager.setFlag("hasTempleUnlocked");
         }
-        
-        screenCoordinator.setLevelScreen(this);
     }
 
     //Fade to day/night

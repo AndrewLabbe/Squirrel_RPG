@@ -1,14 +1,9 @@
 package Screens;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-
 import Engine.GraphicsHandler;
-import Engine.ImageLoader;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
-import GameObject.Sprite;
 import Level.FlagManager;
 import Level.Map;
 import Level.Player;
@@ -33,8 +28,7 @@ public class TempleScreen3 extends Screen{
 	@Override
 	public void initialize() {
 		flagManager = new FlagManager();
-		flagManager.addFlag("hasEnteredLevel4", false); 
-		flagManager.addFlag("hasOpenedChestTempleLvl3", false);
+		flagManager.addFlag("hasEnteredLevel4", false);
 		
 		this.map = new templeLevel3Map();
 		map.reset();
@@ -63,24 +57,12 @@ public class TempleScreen3 extends Screen{
         // if level has been completed, bring up level cleared screen
         case LEVEL_COMPLETED:
         	screenCoordinator.setGameState(GameState.TEMPLELVL4);
-            break; 
-        case DIED: 
-			screenCoordinator.setGameState(GameState.DEATH); 
-			break;
+            break;
 		}
 		
 		if (map.getFlagManager().isFlagSet("hasEnteredLevel4")) {
         	templeScreenState = TempleScreenState.LEVEL_COMPLETED;
-        } 
-		
-		if (map.getFlagManager().isFlagSet("hasOpenedChestTempleLvl3")) {
-        	
-        } 
-		
-		//If the health bar is reduced to zero change the game state to player eliminated 
-        if (map.getHealthBarLeft() <= 0) {
-      		templeScreenState = TempleScreenState.DIED;
-      	} 
+        }
 		
 	}
 
@@ -90,14 +72,13 @@ public class TempleScreen3 extends Screen{
 		 case RUNNING:
             map.draw(player, graphicsHandler);
             break;
-         case LEVEL_COMPLETED:
+        case LEVEL_COMPLETED:
             break;
-		} 
-		
+		}
 	}
 	
 	private enum TempleScreenState {
-		RUNNING, LEVEL_COMPLETED, DIED;
+		RUNNING, LEVEL_COMPLETED;
 	}
 
 }
