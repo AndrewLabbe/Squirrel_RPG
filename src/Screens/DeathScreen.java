@@ -27,6 +27,7 @@ public class DeathScreen extends Screen {
     
     public DeathScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
+        initialize();
     }
 
     @Override

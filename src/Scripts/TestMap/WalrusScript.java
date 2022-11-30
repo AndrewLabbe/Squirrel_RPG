@@ -39,23 +39,6 @@ public class WalrusScript extends Script<NPC> {
         entity.facePlayer(player);
     }
 
-
-		// changes what walrus says when talking to him the first time (flag is not set)
-		// vs talking to him afterwards (flag is set)
-		if (!isFlagSet("hasTalkedToWalrus")) {
-			// Plays Sound Effect
-			se.playSE(0);
-			addTextToTextboxQueue("Hi Cat!");
-			addTextToTextboxQueue("...oh, you lost your ball?");
-			addTextToTextboxQueue(
-					"Hmmm...my walrus brain remembers seeing Dino with\nit last. Maybe you can check with him?");
-		} else {
-			se.playSE(0);
-			addTextToTextboxQueue("I sure love doing walrus things!");
-		}
-		entity.facePlayer(player);
-	}
-
 	@Override
 	protected void cleanup() {
 		unlockPlayer();
