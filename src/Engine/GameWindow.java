@@ -2,6 +2,10 @@ package Engine;
 
 import javax.swing.JFrame;
 
+import Level.Keys;
+import Level.KillCount;
+import NPCs.Currency;
+
 /*
  * The JFrame that holds the GamePanel
  * Just does some setup and exposes the gamePanel's screenManager to allow an external class to setup their own content and attach it to this engine.
@@ -25,14 +29,21 @@ public class GameWindow {
 		gamePanel.setupGame();
 		// Load Configurations
 		gamePanel.config.loadConfigurations();
-		System.out.println(Music.volumeScale);
-		System.out.println(SoundE.volumeScale);
+		//System.out.println(Music.volumeScale);
+		//System.out.println(SoundE.volumeScale);
 
 	}
 
 	// triggers the game loop to start as defined in the GamePanel class
 	public void startGame() {
+		 //Load the saved items
+		if (GamePanel.save) {
+			gamePanel.saveLoad.load();
+		}
 		gamePanel.startGame();
+		System.out.println("Starting kills: " + KillCount.KillNum);
+		System.out.println("Starting keys: " + Keys.KeyCount);
+		System.out.println("Starting COINS: " + Currency.CoinNum);
 	}
 
 	public ScreenManager getScreenManager() {

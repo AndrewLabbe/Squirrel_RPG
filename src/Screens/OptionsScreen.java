@@ -26,7 +26,7 @@ public class OptionsScreen extends Screen {
 	protected int currentItem = 0; // current item position
 	protected int previousItem;
 	protected int maxItem = 7;
-	protected SpriteFont options, s, eg, soundText, musicText, fullScreenT;
+	protected SpriteFont options, fullScreenT, eg, soundText, musicText;
 	protected Map background;
 	protected Stopwatch keyTimer = new Stopwatch();
 	protected int pointerLocationX, pointerLocationY;
@@ -34,13 +34,16 @@ public class OptionsScreen extends Screen {
 	// Volume
 	Music m = new Music();
 	SoundE se = new SoundE();
+	
+	//Game Panel
+	GamePanel gp = new GamePanel();
 
 	private final Key escKey = Key.ESC;
 	protected int yPos, range, itemBoxSize, base;
 	protected float space, next;
 	protected GameObject.Rectangle box1, box2, box3, box4, box5, box6, box7, opTable, info1, info2, info3, info4, info5;
 
-	protected GameObject.Rectangle save, endGame, sound, music, fullScreen;
+	protected GameObject.Rectangle fullScreen, endGame, sound, music;
 //    protected GameObject.Rectangle[] box = {box1, box2, box3, box4, box5, box6};
 
 	public OptionsScreen(ScreenCoordinator screenCoordinator) {
@@ -66,16 +69,16 @@ public class OptionsScreen extends Screen {
 		options.setOutlineColor(Color.black);
 		options.setOutlineThickness(3);
 
-		// Save Button
-		save = new GameObject.Rectangle(4 * space, 6 * space, Config.GAME_WINDOW_WIDTH * 1 / 4,
+		// Full Screen Button
+		fullScreen= new GameObject.Rectangle(4 * space, 6 * space, Config.GAME_WINDOW_WIDTH * 1 / 4,
 				Config.GAME_WINDOW_HEIGHT * 1 / 8);
-		save.setBorderColor(Color.black);
-		save.setColor(new Color(90, 89, 110));
-		save.setBorderThickness(5);
+		fullScreen.setBorderColor(Color.black);
+		fullScreen.setColor(new Color(90, 89, 110));
+		fullScreen.setBorderThickness(5);
 
-		s = new SpriteFont("SAVE", 9 * space, 9 * space, "Comic Sans", 21, new Color(49, 207, 240));
-		s.setOutlineColor(Color.black);
-		s.setOutlineThickness(3);
+		fullScreenT= new SpriteFont("FULL SCREEN", 6 * space, 9 * space, "Comic Sans", 21, new Color(49, 207, 240));
+		fullScreenT.setOutlineColor(Color.black);
+		fullScreenT.setOutlineThickness(3);
 
 		// End game Button
 		endGame = new GameObject.Rectangle(4 * space, 12 * space, Config.GAME_WINDOW_WIDTH * 1 / 4,
@@ -84,7 +87,7 @@ public class OptionsScreen extends Screen {
 		endGame.setColor(new Color(90, 89, 110));
 		endGame.setBorderThickness(5);
 
-		eg = new SpriteFont("END GAME", 7 * space, 15 * space, "Comic Sans", 21, new Color(49, 207, 240));
+		eg = new SpriteFont("SAVE AND EXIT", 6 * space, 15 * space, "Comic Sans", 21, new Color(49, 207, 240));
 		eg.setOutlineColor(Color.black);
 		eg.setOutlineThickness(3);
 
@@ -110,29 +113,6 @@ public class OptionsScreen extends Screen {
 		musicText.setOutlineColor(Color.black);
 		musicText.setOutlineThickness(3);
 
-		// Full Screen Button
-		fullScreen = new GameObject.Rectangle(21 * space, 18 * space, Config.GAME_WINDOW_WIDTH * 1 / 4,
-				Config.GAME_WINDOW_HEIGHT * 1 / 8);
-		fullScreen.setBorderColor(Color.black);
-		fullScreen.setColor(new Color(90, 89, 110));
-		fullScreen.setBorderThickness(5);
-
-		fullScreenT = new SpriteFont("FULL SCREEN", 23 * space, 21 * space, "Comic Sans", 21, new Color(49, 207, 240));
-		fullScreenT.setOutlineColor(Color.black);
-		fullScreenT.setOutlineThickness(3);
-
-//        night = new CheckBox();
-//        day = new CheckBox();
-//        music = new CheckBox();
-//        sounds = new CheckBox();
-
-//        for(int i = 0; i < box.length; i++) {
-//        	System.out.println(box[i]);
-////        	box[i] = new GameObject.Rectangle(itemBoxSize, base+(i*next), itemBoxSize, itemBoxSize);
-//        	box[i].setColor(new Color(90, 89, 110));
-//        	box[i].setBorderColor(Color.black);
-//        	box[i].setBorderThickness(3);
-//        }	
 
 		background = new TitleScreenMap();
 		background.setAdjustCamera(false);
@@ -158,11 +138,11 @@ public class OptionsScreen extends Screen {
 			se.playSE(5);
 		}
 
-		// Save Game button
+		// Full Screen
 		if (currentItem == 0) {
-			// Save
-			save.setBorderColor(new Color(255, 215, 0)); // selected color
-			save.setBorderThickness(5);
+			// Full Screen
+			fullScreen.setBorderColor(new Color(255, 215, 0)); // selected color
+			fullScreen.setBorderThickness(5);
 			// End Game
 			endGame.setBorderColor(new Color(90, 89, 110));
 			endGame.setBorderThickness(5);
@@ -172,10 +152,8 @@ public class OptionsScreen extends Screen {
 			// Music
 			music.setBorderColor(new Color(90, 89, 110));
 			music.setBorderThickness(5);
-			// Full Screen
-			fullScreen.setBorderColor(new Color(90, 89, 110));
-			fullScreen.setBorderThickness(5);
-			if (Keyboard.isKeyDown(Key.F)) {
+
+			if (Keyboard.isKeyDown(Key.SPACE)) {
 				if (GamePanel.fullScreen == false && keyTimer.isTimeUp()) {
 					System.out.println("era falso");
 					GamePanel.fullScreen = true;
@@ -193,9 +171,6 @@ public class OptionsScreen extends Screen {
 
 		// Ends Game by going back to the initial screen
 		else if (currentItem == 1) {
-			// Save
-			save.setBorderColor(new Color(90, 89, 110));
-			save.setBorderThickness(5);
 			// End Game
 			endGame.setBorderColor(new Color(255, 215, 0)); // selected color
 			endGame.setBorderThickness(5);
@@ -209,15 +184,15 @@ public class OptionsScreen extends Screen {
 			fullScreen.setBorderColor(new Color(90, 89, 110));
 			fullScreen.setBorderThickness(5);
 			if (Keyboard.isKeyDown(Key.SPACE)) {
+				//Save the game
+				gp.saveLoad.save();
+				GamePanel.save = true;
 				screenCoordinator.setGameState(GameState.MENU);
 				screenCoordinator.update();
 			}
 
 			// Sound Item
 		} else if (currentItem == 2) {
-			// Save
-			save.setBorderColor(new Color(90, 89, 110));
-			save.setBorderThickness(5);
 			// End Game
 			endGame.setBorderColor(new Color(90, 89, 110));
 			endGame.setBorderThickness(5);
@@ -249,9 +224,6 @@ public class OptionsScreen extends Screen {
 
 			// Music Item
 		} else if (currentItem == 3) {
-			// Save
-			save.setBorderColor(new Color(90, 89, 110));
-			save.setBorderThickness(5);
 			// End Game
 			endGame.setBorderColor(new Color(90, 89, 110));
 			endGame.setBorderThickness(5);
@@ -287,26 +259,7 @@ public class OptionsScreen extends Screen {
 				keyTimer.reset();
 			}
 
-		} else if (currentItem == 4 && Keyboard.isKeyDown(Key.F)) {
-			System.out.println(currentItem);
-			// Save
-			save.setBorderColor(new Color(90, 89, 110));
-			save.setBorderThickness(5);
-			// End Game
-			endGame.setBorderColor(new Color(90, 89, 110));
-			endGame.setBorderThickness(5);
-			// Sound
-			sound.setBorderColor(new Color(90, 89, 110));
-			sound.setBorderThickness(5);
-			// Music
-			music.setBorderColor(new Color(90, 89, 110));
-			music.setBorderThickness(5);
-			// Full Screen
-			fullScreen.setBorderColor(new Color(255, 215, 0));// selected color
-			fullScreen.setBorderThickness(5);
-			System.out.println("entro");
-			// Full Screen
-		}
+		} 
 
 		// if escape is pressed in game, go back to game
 		if (Keyboard.isKeyDown(escKey) && screenCoordinator.checkCurrentScreen() != null) {
@@ -326,8 +279,6 @@ public class OptionsScreen extends Screen {
 		background.draw(graphicsHandler);
 		opTable.draw(graphicsHandler);
 		options.draw(graphicsHandler);
-		save.draw(graphicsHandler);
-		s.draw(graphicsHandler);
 		endGame.draw(graphicsHandler);
 		eg.draw(graphicsHandler);
 		music.draw(graphicsHandler);
