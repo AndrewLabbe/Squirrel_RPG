@@ -8,7 +8,6 @@ import Level.Map;
 import Level.Spawner;
 import Level.Trigger;
 import Scripts.TestMap.TempleLandScript;
-import Scripts.TestMap.TempleLevel2IntroScript;
 import Scripts.TestMap.TempleLevel2Script;
 import Scripts.TestMap.TempleSwimScript;
 import Spawners.BasicSpawner;
@@ -73,11 +72,6 @@ public class templeLevel2Map extends Map {
 		// Go to Level 3
 		triggers.add(new Trigger(670, 1625, 200, 10, new TempleLevel2Script(), "hasEnteredLevel3"));
 		
-		// Intro to Level 2
-		triggers.add(new Trigger(650, 175, 210, 10, new TempleLevel2IntroScript(), "hasEnteredLevel2"));
-		triggers.add(new Trigger(650, 100, 10, 75, new TempleLevel2IntroScript(), "hasEnteredLevel2"));
-		triggers.add(new Trigger(850, 100, 10, 75, new TempleLevel2IntroScript(), "hasEnteredLevel2"));
-		
 		 for(Trigger trigger : triggers) {
 		    	trigger.getTriggerScript().setMap(this); 
 		    }
@@ -85,5 +79,10 @@ public class templeLevel2Map extends Map {
 		return triggers;
 		
 	}
+
+	@Override
+	public void loadScripts() {
+		// scripts
+	} 
 
 }
