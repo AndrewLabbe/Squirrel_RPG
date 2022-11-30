@@ -139,7 +139,7 @@ public abstract class Map {
         this.yMidPoint = (ScreenManager.getScreenHeight() / 2);
         this.playerStartPosition = new Point(0, 0); 
         coins = new Currency(); 
- 
+        coins.setCoin(0); 
         elimPoints = 10; 
         doublePointsTimeout = new Stopwatch();
         doublePoints = false; 

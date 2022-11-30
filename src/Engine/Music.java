@@ -13,7 +13,7 @@ public class Music {
 	AudioInputStream ais;
 	// Music Volume
 	private FloatControl fc;
-	public static int volumeScale = 3;
+	public static int volumeScale;
 	public float volume;
 
 	public void setFile() {

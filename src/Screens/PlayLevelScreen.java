@@ -52,7 +52,7 @@ import Utils.Stopwatch;
 public class PlayLevelScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected Map map;
-    public static Player player;
+    protected Player player;
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
     protected DeathScreen deathScreen;
@@ -93,9 +93,6 @@ public class PlayLevelScreen extends Screen {
 	//Color or power-up counter 
 	private Color powerUpTimerColor;
 	
-	//Get players x
-    //public float x = map.getPlayerStartPosition().x;
-    //public float y = map.getPlayerStartPosition().y;
 	//Dedicated variables to the invScreen
 	
     protected int currentItem = 0; // current item position
@@ -131,11 +128,11 @@ public class PlayLevelScreen extends Screen {
     	if(load == false) {
     	// Kill Count 
     	screenKill = new KillCount();
-    	// screenKill.setKill(0);
+    	screenKill.setKill(0);
     	
     	// Key Count
     	keyCounter = new Keys();
-    	// keyCounter.setKeys(0);
+    	keyCounter.setKeys(0);
     	
         // setup state
         flagManager = new FlagManager();
@@ -161,9 +158,9 @@ public class PlayLevelScreen extends Screen {
         this.map = new newTileMap();
         map.reset();
         map.setFlagManager(flagManager);
+
         // setup player
         this.player = new Squirrel(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, map);
-        
         this.player.setMap(map);
         Point playerStartPosition = map.getPlayerStartPosition();
         this.player.setLocation(playerStartPosition.x, playerStartPosition.y);

@@ -6,7 +6,7 @@ import Engine.GraphicsHandler;
 import SpriteFont.SpriteFont;
 
 public class Keys {
-	public static int KeyCount;
+	protected int KeyCount;
 	protected SpriteFont Key;
 	
 	public Keys() {

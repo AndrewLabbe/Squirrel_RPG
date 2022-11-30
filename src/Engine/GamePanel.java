@@ -14,12 +14,9 @@ import javax.swing.Timer;
 
 import Game.GameState;
 import GameObject.Rectangle;
-import Level.Keys;
-import Level.KillCount;
 import Screens.PlayLevelScreen;
 import SpriteFont.SpriteFont;
 import Utils.Colors;
-import data.SaveLoad;
 
 /*
  * This is where the game loop starts
@@ -44,7 +41,7 @@ public class GamePanel extends JPanel {
 	private final Key pauseKey = Key.P;
 
 	// Music
-	Music m = new Music();
+	Music m=new Music();
 	// Full Screen
 	int ScreenH = Config.GAME_WINDOW_HEIGHT;
 	int ScreenW = Config.GAME_WINDOW_WIDTH;
@@ -65,11 +62,9 @@ public class GamePanel extends JPanel {
 	private static final int dayLength = 500;
 	// Configurations
 	public Configurations config = new Configurations(this);
-	public KillCount kc = new KillCount();
-	public Keys k = new Keys();
-	// Save and Load the Game
-	public SaveLoad saveLoad = new SaveLoad(this);
-	public static boolean save = false;
+
+	// Initialize sound
+	public Sound sound = new Sound();
 
 	/*
 	 * The JPanel and various important class instances are setup here
@@ -120,16 +115,11 @@ public class GamePanel extends JPanel {
 		tempScreen = new BufferedImage(ScreenW, ScreenH, BufferedImage.TYPE_INT_ARGB);
 		g2 = (Graphics2D) tempScreen.getGraphics();
 
-		config.loadConfigurations();
 		// Play background music
 		m.playMusic();
 		if (fullScreen == true) {
 			fullScreen();
 		}
-		// Load the saved items
-		//if (save) {
-			//saveLoad.load();
-	//	}
 	}
 
 	// this starts the timer (the game loop is started here
@@ -194,6 +184,22 @@ public class GamePanel extends JPanel {
 				changeDay = false;
 			}
 		}
+	}
+
+
+	public void playMusic(int i) {
+		sound.setFile(i);
+		sound.play();
+		sound.loop();
+	}
+
+	public void stopMusic() {
+		sound.stop();
+	}
+
+	public void playSE(int i) {
+		sound.setFile(i);
+		sound.play();
 	}
 
 	public void draw() {
