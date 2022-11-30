@@ -52,7 +52,7 @@ import Utils.Stopwatch;
 public class PlayLevelScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected Map map;
-    public static Player player;
+    protected Player player;
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
     protected DeathScreen deathScreen;
@@ -61,6 +61,8 @@ public class PlayLevelScreen extends Screen {
     public Currency screenCoin;
     public Keys keyCounter;
     public KillCount screenKill;
+    private boolean wasSpacePressed = false;
+    private boolean wasFPressed = false;
     //protected Key MOVE_LEFT_KEY = Key.LEFT;
     //protected Key MOVE_RIGHT_KEY = Key.RIGHT;
     private final Key invKey = Key.I;
@@ -77,8 +79,7 @@ public class PlayLevelScreen extends Screen {
 	//Day or night is happening 
 	private boolean changeDay = true; 
 	//Length of day/night
-	private static final int dayLength = 1000;
-	private static final String Systsem = null; 
+	private static final int dayLength = 1000; 
 	//Number of enemies that spawn 
 	private int spawnNumber;
 	//Displays the wave
@@ -92,9 +93,6 @@ public class PlayLevelScreen extends Screen {
 	//Color or power-up counter 
 	private Color powerUpTimerColor;
 	
-	//Get players x
-    //public float x = map.getPlayerStartPosition().x;
-    //public float y = map.getPlayerStartPosition().y;
 	//Dedicated variables to the invScreen
 	
     protected int currentItem = 0; // current item position
@@ -130,11 +128,11 @@ public class PlayLevelScreen extends Screen {
     	if(load == false) {
     	// Kill Count 
     	screenKill = new KillCount();
-    	// screenKill.setKill(0);
+    	screenKill.setKill(0);
     	
     	// Key Count
     	keyCounter = new Keys();
-    	// keyCounter.setKeys(0);
+    	keyCounter.setKeys(0);
     	
         // setup state
         flagManager = new FlagManager();
@@ -160,9 +158,9 @@ public class PlayLevelScreen extends Screen {
         this.map = new newTileMap();
         map.reset();
         map.setFlagManager(flagManager);
+
         // setup player
         this.player = new Squirrel(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, map);
-        
         this.player.setMap(map);
         Point playerStartPosition = map.getPlayerStartPosition();
         this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
@@ -313,7 +311,8 @@ public class PlayLevelScreen extends Screen {
         }
         
         if (player.getUpdate()) {
-    		screenKill.addKill(1); 
+    		screenKill.addKill(1);
+            wasFPressed = true; 
             player.setUpdate(false);
     	}
         
@@ -392,19 +391,19 @@ public class PlayLevelScreen extends Screen {
         }
         
         // If Player Entered Door Change Map to Shop
-        if (flagManager.isFlagSet("hasEnteredShop")) {
-        	screenCoordinator.setGameState(GameState.SHOPKEEP); 
-        	flagManager.unsetFlag("hasEnteredShop");
+        if (map.getFlagManager().isFlagSet("hasEnteredShop")) {
+        	screenCoordinator.setGameState(GameState.SHOPKEEP);
+        	System.out.println("Shop entered");
         }
         
         //If Player Enters Water Change State to Swimming
         if (map.getFlagManager().isFlagSet("hasSwam")) {
-        	//player.setPlayerState(PlayerState.SWIMMING);
+        	player.setPlayerState(PlayerState.SWIMMING);
         }
         
         //If Player Enters Land Change State to Walking
         if (map.getFlagManager().isFlagSet("hasWalked")) {
-        	//player.setPlayerState(PlayerState.WALKING);
+        	player.setPlayerState(PlayerState.WALKING);
         } 
         
         //If Player interacts with the chest of fate
@@ -590,8 +589,6 @@ public class PlayLevelScreen extends Screen {
     	    templeUnlocked = true; 
     	    flagManager.setFlag("hasTempleUnlocked");
         }
-        
-        screenCoordinator.setLevelScreen(this);
     }
 
     //Fade to day/night

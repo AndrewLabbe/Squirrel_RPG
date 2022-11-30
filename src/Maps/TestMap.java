@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Collectibles.CollectibleAcorn;
 import Enemies.GhostEnemy;
-import EnhancedMapTiles.AcornTile;
+import EnhancedMapTiles.Rock;
 import Level.CollectibleItem;
 import Level.Enemy;
 import Level.EnhancedMapTile;
@@ -40,7 +40,7 @@ public class TestMap extends Map {
     @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
-        enhancedMapTiles.add(new AcornTile(getMapTile(2, 7).getLocation()));
+        enhancedMapTiles.add(new Rock(getMapTile(2, 7).getLocation()));
         
         return enhancedMapTiles;
     }

@@ -14,15 +14,14 @@ import Utils.Point;
 
 // This class is for the end level gold box tile
 // when the player touches it, it will tell the player that the level has been completed
-public class AcornTile extends EnhancedMapTile {
-    public AcornTile(Point location) {
-        super(location.x, location.y, new SpriteSheet(ImageLoader.load("Acorns.png"), 20, 20), TileType.NOT_PASSABLE);
+public class Rock extends EnhancedMapTile {
+    public Rock(Point location) {
+        super(location.x, location.y, new SpriteSheet(ImageLoader.load("Rock.png"), 16, 16), TileType.NOT_PASSABLE);
     }
 
     @Override
     public void update(Player player) {
-        super.update(player); 
-       
+        super.update(player);
         if (player.overlaps(this) && player.getPlayerState() == PlayerState.WALKING) {
             if (player.getCurrentWalkingXDirection() == Direction.LEFT) {
                 if (canMoveLeft(player)) {

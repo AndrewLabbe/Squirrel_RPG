@@ -6,18 +6,18 @@ import Engine.GraphicsHandler;
 import SpriteFont.SpriteFont;
 
 public class Currency {
-	public static int CoinNum;
+	protected int CoinNum;
 	protected SpriteFont Coin;
 	
 	public Currency() {
 		Coin = new SpriteFont("Coins: " + CoinNum, 5, 30, "Comic Sans", 20, new Color(255, 255, 255));
 	}
 	
-	public static void setCoin(int Count) {
+	public void setCoin(int Count) {
 		CoinNum = Count;
 	}
 	
-	public static int getCoin() {
+	public int getCoin() {
 		return CoinNum;
 	}
 	

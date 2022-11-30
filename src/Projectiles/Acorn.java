@@ -54,11 +54,6 @@ public class Acorn extends Projectile {
 		else {
 			this.currentAnimationName = "FIRE_LEFT";
 		}*/
-		if(this.intersects(player)) {
-			mapEntityStatus = MapEntityStatus.REMOVED; 
-			map.dealDamage(20);
-		}
-		
 		super.update(enemies, unpassableMapTiles, spawners, npcs);
 		
 	} 

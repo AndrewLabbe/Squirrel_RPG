@@ -33,16 +33,7 @@ public class Configurations {
 
 			// Sound Effects Volume
 			bw.write(String.valueOf(SoundE.volumeScale));
-			bw.newLine();
-			
-			// Load players stats
-			if (GamePanel.save == true) {
-				bw.write("Yes");
-			}
-			if (GamePanel.save == false) {
-				bw.write("No");
-			}
-			
+			// bw.newLine();
 
 			bw.close();
 		} catch (IOException e) {
@@ -62,6 +53,7 @@ public class Configurations {
 				GamePanel.fullScreen = false;
 				System.out.println("aca");
 			}
+			// It enters here every time
 			else if (s.equals("On")) {
 				GamePanel.fullScreen = true;
 			}
@@ -74,16 +66,6 @@ public class Configurations {
 			s = br.readLine();
 			System.out.println(s);
 			SoundE.volumeScale = Integer.parseInt(s);
-			
-			//Load players stats
-			s = br.readLine();
-			System.out.println(s);
-			if(s.equals("No")) {
-				GamePanel.save= false;
-			}
-			else if (s.equals("Yes")) {
-				GamePanel.save = true;
-			}
 
 			br.close();
 		} catch (Exception e) {

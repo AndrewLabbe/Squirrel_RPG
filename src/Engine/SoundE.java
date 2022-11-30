@@ -13,10 +13,10 @@ public class SoundE {
 	AudioInputStream ais;
 	// Music Volume
 	private FloatControl fc;
-	public static int volumeScale = 3;
+	public static int volumeScale;
 	public float volume;
 
-	public SoundE() {
+	public SoundE(){
 		// WalrusSE
 		soundURL[0] = getClass().getResource("/sound/Walrus.wav");
 		// WolfSE
@@ -27,11 +27,8 @@ public class SoundE {
 		soundURL[3] = getClass().getResource("/sound/Dino3.wav");
 		soundURL[4] = getClass().getResource("/sound/Roar.wav");
 		soundURL[5] = getClass().getResource("/sound/blip.wav");
-		soundURL[6] = getClass().getResource("/sound/elim.wav");
-		soundURL[7] = getClass().getResource("/sound/power-up.wav");
 
 	}
-
 	public void setFile(int i) {
 
 		try {
@@ -56,6 +53,7 @@ public class SoundE {
 		clip.start();
 
 	}
+
 
 	public void stop() {
 		clip.stop();
