@@ -19,9 +19,11 @@ public class CreditsScreen extends Screen {
     protected Map background;
     protected KeyLocker keyLocker = new KeyLocker();
     protected SpriteFont creditsLabel;
-    protected SpriteFont createdByLabel;
-    protected SpriteFont improvedByLabel;
-    protected SpriteFont names;
+    protected SpriteFont createdByLabel; 
+    protected SpriteFont createdByLabel2;
+    protected SpriteFont createdByLabel3;
+    protected SpriteFont createdByLabel4;
+    protected SpriteFont createdByLabel5;
     protected SpriteFont returnInstructionsLabel;
 
     public CreditsScreen(ScreenCoordinator screenCoordinator) {
@@ -34,9 +36,11 @@ public class CreditsScreen extends Screen {
         background = new TitleScreenMap();
         background.setAdjustCamera(false);
         creditsLabel = new SpriteFont("Credits", 15, 35, "Times New Roman", 30, Color.white);
-        createdByLabel = new SpriteFont("Created by Alex Thimineur", 100, 120, "Times New Roman", 20, Color.white);
-        improvedByLabel = new SpriteFont("Improved by Team Squirrel:", 100, 160, "Times New Roman", 20, Color.white);
-        names = new SpriteFont ("Phil, Andrew K, Andrew L, Mica, Garret & Alec", 100, 180, "Times New Roman", 14, Color.white);
+        createdByLabel = new SpriteFont("Created by: Alex Thimineur", 100, 140, "Times New Roman", 20, Color.RED); 
+        createdByLabel2 = new SpriteFont("Enhanced by: Phil Caldarella,", 100, 185, "Times New Roman", 20, Color.BLUE);
+        createdByLabel3 = new SpriteFont("Garrett Goldberg, Andrew Labbe,", 100, 210, "Times New Roman", 20, Color.BLUE);
+        createdByLabel4 = new SpriteFont("Alec Goriup, Andrew Kulowski,", 100, 235, "Times New Roman", 20, Color.BLUE);
+        createdByLabel5 = new SpriteFont("Mica Grajales", 100, 260, "Times New Roman", 20, Color.BLUE);
         returnInstructionsLabel = new SpriteFont("Press Space to return to the menu", 20, 560, "Times New Roman", 30, Color.white);
         keyLocker.lockKey(Key.SPACE);
     }
@@ -58,8 +62,10 @@ public class CreditsScreen extends Screen {
         background.draw(graphicsHandler);
         creditsLabel.draw(graphicsHandler);
         createdByLabel.drawWithParsedNewLines(graphicsHandler);
-        improvedByLabel.drawWithParsedNewLines(graphicsHandler);
-        names.drawWithParsedNewLines(graphicsHandler);
+        createdByLabel2.drawWithParsedNewLines(graphicsHandler);
+        createdByLabel3.drawWithParsedNewLines(graphicsHandler);
+        createdByLabel4.drawWithParsedNewLines(graphicsHandler);
+        createdByLabel5.drawWithParsedNewLines(graphicsHandler);
         returnInstructionsLabel.draw(graphicsHandler);
     }
 }

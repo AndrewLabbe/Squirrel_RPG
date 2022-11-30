@@ -12,23 +12,31 @@ import GameObject.SpriteSheet;
 import Level.Enemy;
 import Level.Map;
 import Level.Player;
+import Projectiles.Acorn;
 import Utils.Point;
+import Utils.Stopwatch;
 
 public class WizardEnemy extends Enemy {
 
-	private float direction; 
+	private float directionX; 
+	private float directionY;
 	
 	private int rangeX; 
 	private int rangeY; 
 	
 	private int health;
 	
+	private Stopwatch projectileCoolDown; 
+	
 	public WizardEnemy(Utils.Point point, float direction) {
 		//Placeholder
 		super(point.x, point.y, new SpriteSheet(ImageLoader.load("Warlock-1.png.png"), 64, 64), "FACE_CENTER"); 
-		this.direction = direction; 
-	
-		health = 100;
+		this.directionX = direction; 
+		this.directionY = direction; 
+		
+		health = 100; 
+		projectileCoolDown = new Stopwatch(); 
+		projectileCoolDown.setWaitTime(2000);
 	} 
 	
 	//Updates enemy location 
@@ -36,28 +44,63 @@ public class WizardEnemy extends Enemy {
 		
 		//Basic AI tracking system which enables the zombie enemy to move towards the player if the player gets close enough
 				if(player.getX() + 1 > this.x) {
-					direction = 1.0F;
+					directionX = 1.0F;
 				} 
 				else if(player.getX() + 3 < this.x) {
-					direction = -1.0F;
+					directionX = -1.0F;
 				} 
 				else {
-					direction = 0.0F; 
+					directionX = 0.0F; 
 				}
-				moveX(direction*2); 
+				moveX(directionX); 
 				if(player.getY() + 1 > this.y) {
-					direction = 1.0F;
+					directionY = 1.0F;
 				} 
 				else if(player.getY() + 3 < this.y) {
-					direction = -1.0F;
+					directionY = -1.0F;
 				} 
 				else {
-					direction = 0.0F;
+					directionY = 0.0F;
 				}
-				moveY(direction*2);
+				moveY(directionY);
 			//}
 		//}
 		super.update(player, map);
+		
+		//Fires a projectile on the current vector towards the players current position periodically
+		if(projectileCoolDown.isTimeUp()) { 
+			if(directionX < 0) {
+				if(directionY == 0) {
+					Acorn acorn = new Acorn((int)this.getX(), (int)this.getY() + 50, directionX, directionY, 10, player, "GOLDEN_ACORN");
+					map.addProjectiles(acorn); 
+				}
+				else {
+					Acorn acorn = new Acorn((int)this.getX(), (int)this.getY() + 50, directionX, directionY, 10, player, "GOLDEN_ACORN");
+					map.addProjectiles(acorn); 
+				}
+			}
+			if (directionX > 0) {
+				if(directionY == 0) {
+					Acorn acorn = new Acorn((int)this.getX() + 100, (int)this.getY() + 50, directionX, directionY, 10, player, "GOLDEN_ACORN");
+					map.addProjectiles(acorn); 
+				} 
+				else {
+					Acorn acorn = new Acorn((int)this.getX() + 100, (int)this.getY() + 50, directionX, directionY, 10, player, "GOLDEN_ACORN");
+					map.addProjectiles(acorn); 
+				}
+			} 
+			if (directionX == 0 && directionY != 0) { 
+				if(directionY > 0) {
+					Acorn acorn = new Acorn((int)this.getX() + 40, (int)this.getY() + 125, directionX, directionY, 10, player, "GOLDEN_ACORN");
+					map.addProjectiles(acorn);
+				} 
+				else {
+					Acorn acorn = new Acorn((int)this.getX() + 40, (int)this.getY() - 20, directionX, directionY, 10, player, "GOLDEN_ACORN");
+					map.addProjectiles(acorn);
+				} 
+			}
+			projectileCoolDown.reset();
+		}
 		
 	} 
 	

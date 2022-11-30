@@ -79,7 +79,9 @@ public abstract class Player extends GameObject {
 	private int numItems; 
 	
 	private int keyCounter; 
-	private boolean easterEggCollected;
+	private boolean easterEggCollected; 
+	
+	private Stopwatch idleAnimationTimer;
 
 	public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName, Map map) {
 		super(spriteSheet, x, y, startingAnimationName);
@@ -97,7 +99,9 @@ public abstract class Player extends GameObject {
 		instaElimTimeout = new Stopwatch(); 
 		numItems = 0; 
 		keyCounter = 0; 
-		easterEggCollected = false;
+		easterEggCollected = false; 
+		idleAnimationTimer = new Stopwatch(); 
+		idleAnimationTimer.setWaitTime(2000);
 	}
 
 	public void update() {
@@ -164,6 +168,16 @@ public abstract class Player extends GameObject {
 			}
 			playerSwimming();
 			break;
+		case IDLE: 
+			playerIdling();
+			break;
+		}
+	}
+	
+	protected void playerIdling() {
+		// if a walk key is pressed, player enters WALKING state
+		if (Keyboard.isKeyDown(MOVE_LEFT_KEY) || Keyboard.isKeyDown(MOVE_RIGHT_KEY) || Keyboard.isKeyDown(MOVE_UP_KEY) || Keyboard.isKeyDown(MOVE_DOWN_KEY)) {
+			playerState = PlayerState.WALKING; 
 		}
 	}
 
@@ -172,14 +186,20 @@ public abstract class Player extends GameObject {
 		if (!keyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
 			keyLocker.lockKey(INTERACT_KEY);
 			map.entityInteract(this);
+		} 
+		
+		if(idleAnimationTimer.isTimeUp()) {
+			playerState = PlayerState.IDLE;
 		}
 
 		// if a walk key is pressed, player enters WALKING state
 		if (Keyboard.isKeyDown(MOVE_LEFT_KEY) || Keyboard.isKeyDown(MOVE_RIGHT_KEY) || Keyboard.isKeyDown(MOVE_UP_KEY) || Keyboard.isKeyDown(MOVE_DOWN_KEY)) {
-			playerState = PlayerState.WALKING;
+			playerState = PlayerState.WALKING; 
 		}
 	}
 
+	
+	
 	// player WALKING state logic
 	protected void playerWalking() {
 		if (!keyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
@@ -258,7 +278,8 @@ public abstract class Player extends GameObject {
 		}
 
 		if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY) && Keyboard.isKeyUp(MOVE_UP_KEY) && Keyboard.isKeyUp(MOVE_DOWN_KEY)) {
-			playerState = PlayerState.STANDING;
+			playerState = PlayerState.STANDING; 
+			idleAnimationTimer.reset();
 		}
 	}
 
@@ -340,7 +361,7 @@ public abstract class Player extends GameObject {
 		}
 
 		if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY) && Keyboard.isKeyUp(MOVE_UP_KEY) && Keyboard.isKeyUp(MOVE_DOWN_KEY)) {
-			playerState = PlayerState.SWIMMING;
+			//playerState = PlayerState.SWIMMING;
 		}
 	}
 
@@ -375,6 +396,10 @@ public abstract class Player extends GameObject {
 		else if (playerState == PlayerState.SWIMMING) {
 			// sets animation to SWIM when player is in water
 			this.currentAnimationName = facingDirection == Direction.RIGHT ? "SWIM_RIGHT" : "SWIM_LEFT";
+		}
+		else if (playerState == PlayerState.IDLE) {
+			// sets animation to SWIM when player is in water
+			this.currentAnimationName = facingDirection == Direction.RIGHT ? "IDLE_RIGHT" : "IDLE_LEFT";
 		}
 	}
 
@@ -493,7 +518,7 @@ public abstract class Player extends GameObject {
 			}
 			//If player is moving right
 			else if(getCurrentWalkingXDirection() == Direction.RIGHT || getLastWalkingXDirection() == Direction.RIGHT) {
-				projectileX = Math.round(getX()) + 40; 
+				projectileX = Math.round(getX()) + 50; 
 				directionX = 1;
 				//If player is moving right and up 
 				if(getCurrentWalkingYDirection() == Direction.UP || getLastWalkingYDirection() == Direction.UP) {
@@ -510,7 +535,7 @@ public abstract class Player extends GameObject {
 				directionX = 0.0F; 
 				//If player is facing right
 				if(facingDirection == Direction.RIGHT) {
-					projectileX = Math.round(getX() + 40); 
+					projectileX = Math.round(getX() + 50); 
 				}
 			}
 			//If player is moving down 
@@ -519,7 +544,7 @@ public abstract class Player extends GameObject {
 				directionX = 0.0F;
 				//If player is facing right
 				if(facingDirection == Direction.RIGHT) {
-					projectileX = Math.round(getX() + 40); 
+					projectileX = Math.round(getX() + 50); 
 				}
 			}
 
