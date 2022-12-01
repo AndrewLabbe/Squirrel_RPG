@@ -864,7 +864,7 @@ public abstract class Map {
 			//randomNum = randomNum % 3;
 			//System.out.println(randomNum);
 			switch(randomNum) {
-			/*case 0: 
+			case 0: 
 				powerUp = new DoublePoints(spawnLocation); 
 				break;
 			case 1: 
@@ -872,9 +872,9 @@ public abstract class Map {
 				break;
 			case 2: 
 				powerUp = new MaxHealth(spawnLocation); 
-				break;*/
+				break;
 			default: 
-				powerUp = new MaxHealth(spawnLocation);
+				powerUp = new SpeedBoost(spawnLocation);
 			}
 			addPowerUp(powerUp); 
 			powerUpCoolDown.setWaitTime(20000); 

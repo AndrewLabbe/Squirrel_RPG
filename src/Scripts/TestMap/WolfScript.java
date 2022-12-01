@@ -15,12 +15,13 @@ public class WolfScript extends Script<NPC>{
 		//Plays Sound Effect
 		gamePanel.playSE(3);
 		addTextToTextboxQueue("Hello, adventurer. Would you like to see my wares?");
-		addTextToTextboxQueue("I am able to provide you upgrades that will lead you to exact your revenge ont his stranger you speak of.");
+		addTextToTextboxQueue("I am able to provide you upgrades that will lead you \nto exact your revenge ont his stranger you speak of.");
 		addTextToTextboxQueue("What part of your squirrel would you like to upgrade?");
-		addTextToTextboxQueue("Don't forget, I can only help you with each upgrade once.");
-		addTextToTextboxQueue("If I could increase your health to infinity that would be broken, traveler.");
+		addTextToTextboxQueue("Don't forget, I can only help \nyou with each upgrade once.");
+		addTextToTextboxQueue("If I could increase your health to infinity \nthat would be broken, traveler.");
 		addTextToTextboxQueue("Press the corresponding number key to purchase.");
 		addTextToTextboxQueue("a.Health b.Damage c.Stamina d.Speed");
+		addTextToTextboxQueue("Thank you for visiting traveler. \nBest of luck.");
 
 		/* If Player Selects 1. (health)
 		 * Increase Health Bar Length
