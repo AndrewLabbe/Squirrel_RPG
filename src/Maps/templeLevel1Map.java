@@ -76,9 +76,9 @@ public class templeLevel1Map extends Map {
 	public ArrayList<Trigger> loadTriggers() {
 		ArrayList<Trigger> triggers = new ArrayList<>();	
 
-		triggers.add(new Trigger(640, 1350, 160, 10, new TempleLevel1IntroScript()));
-		triggers.add(new Trigger(640, 1350, 10, 100, new TempleLevel1IntroScript()));
-		triggers.add(new Trigger(790, 1350, 10, 100, new TempleLevel1IntroScript()));
+		triggers.add(new Trigger(640, 1350, 160, 10, new TempleLevel1IntroScript(), "hasEnteredLevel1"));
+		triggers.add(new Trigger(640, 1350, 10, 100, new TempleLevel1IntroScript(), "hasEnteredLevel1"));
+		triggers.add(new Trigger(790, 1350, 10, 100, new TempleLevel1IntroScript(), "hasEnteredLevel1"));
 
 		return triggers;
 	}

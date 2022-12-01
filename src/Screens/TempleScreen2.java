@@ -39,6 +39,7 @@ public class TempleScreen2 extends Screen{
 		flagManager = new FlagManager();
 		flagManager.addFlag("templeSwam", false);
 		flagManager.addFlag("hasEnteredLevel3", false);
+		flagManager.addFlag("hasEnteredLevel2", false);
 		
 		this.map = new templeLevel2Map();
 		map.reset();
