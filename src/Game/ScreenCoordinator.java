@@ -50,7 +50,7 @@ public class ScreenCoordinator extends Screen {
 	public void initialize() {
 		gameState = GameState.MENU; 
 	}
-
+ 
 	@Override
 	public void update() {
 		do {

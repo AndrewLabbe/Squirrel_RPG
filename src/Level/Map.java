@@ -815,6 +815,54 @@ public abstract class Map {
   	public void dealDamage(int damage) {
 		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - damage);
 		//System.out.println(healthBar.getGreenBarWidth());
+	}
+
+	//  public void increaseHealth() {
+	// damage = damage/10;
+	//  }
+
+	//Spawns certain number of enemies around each spawner 
+	public void spawnEnemies(int spawnNumber) {
+		for (Spawner spawner : this.spawners) {
+			spawner.spawnEnemies(spawnNumber);
+		}
+	} 
+
+	//Removes all enemies from the map
+	public void removeEnemies() {
+		for (Enemy enemy : this.enemies) {
+			enemy.mapEntityStatus = MapEntityStatus.REMOVED;
+		}
+	} 
+
+	//Spawns a power up where an enemy was eliminated if one is not currently active and the cool down is up 
+	public void spawnPowerUp(Point spawnLocation) {
+		if(powerUpActive == false && powerUpCoolDown.isTimeUp()) {
+			PowerUp powerUp;
+			int randomNum = rng.nextInt(4); 
+			//randomNum = randomNum % 3;
+			//System.out.println(randomNum);
+			switch(randomNum) {
+			case 0: 
+				powerUp = new DoublePoints(spawnLocation); 
+				break;
+			case 1: 
+				powerUp = new InstaElim(spawnLocation); 
+				break;
+			case 2: 
+				powerUp = new MaxHealth(spawnLocation); 
+				break;
+			default: 
+				powerUp = new SpeedBoost(spawnLocation);
+			}
+			addPowerUp(powerUp); 
+			powerUpCoolDown.setWaitTime(20000); 
+			powerUpStartTime = currentTime;
+		}
+	} 
+	//Returns if the player has a power-up activated 
+	public boolean getPowerUpActive() {
+		return powerUpActive;
 	} 
   	
   	//Spawns certain number of enemies around each spawner 
