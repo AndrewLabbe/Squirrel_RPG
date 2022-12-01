@@ -98,7 +98,7 @@ public class TempleScreen2 extends Screen{
             break; 
         //If the player is eliminated bring up the end of game screen
         case DIED: 
-        	deathScreen.update(); 
+        	screenCoordinator.setGameState(GameState.DEATH); 
         	break;
         // if level has been completed, bring up level cleared screen
         case LEVEL_COMPLETED:
