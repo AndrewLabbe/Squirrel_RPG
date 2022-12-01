@@ -923,7 +923,7 @@ public abstract class Map {
 
 	public void saveCoins() {
 		int save = coins.getCoin();
-		File file = new File("Resources/saved_Coins.txt");
+		File file = new File("MapFiles/saved_Coins.txt");
 		FileWriter writer;
 
 		try {
@@ -940,7 +940,7 @@ public abstract class Map {
 
 	public int loadCoins() {
 		int numCoins;
-		File file = new File("Resources/saved_Coins.txt");
+		File file = new File("MapFiles/saved_Coins.txt");
 		Scanner reader;
 
 		try {
