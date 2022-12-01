@@ -20,7 +20,7 @@ public class WolfScript extends Script<NPC>{
         addTextToTextboxQueue("Don't forget, I can only help you with each upgrade once.");
         addTextToTextboxQueue("If I could increase your health to infinity that would be broken, traveler.");
         addTextToTextboxQueue("Press the corresponding number key to purchase.");
-        addTextToTextboxQueue("1. Increase Health	2. Increase Damage");
+        addTextToTextboxQueue("a.Health b.Damage c.Stamina d.Speed");
         
         /* If Player Selects 1. (health)
          * Increase Health Bar Length

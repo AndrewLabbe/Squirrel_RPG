@@ -34,19 +34,19 @@ public class BuyScreen extends Screen {
 		buyLabel.setOutlineColor(Color.black);
 		buyLabel.setOutlineThickness(5.0f);
 		
-		doubleLabel = new SpriteFont("1. Double Points", (Config.GAME_WINDOW_WIDTH / 4) - 90, Config.GAME_WINDOW_HEIGHT * 2/6, "Comic Sans", 30, Color.white);
+		doubleLabel = new SpriteFont("a. Double Points", (Config.GAME_WINDOW_WIDTH / 4) - 90, Config.GAME_WINDOW_HEIGHT * 2/6, "Comic Sans", 30, Color.white);
 		doubleLabel.setOutlineColor(Color.black);
 		doubleLabel.setOutlineThickness(3.0f);
 		
-		instaLabel = new SpriteFont("2. Insta Kill", (Config.GAME_WINDOW_WIDTH / 4) - 90, Config.GAME_WINDOW_HEIGHT * 3/6, "Comic Sans", 30, Color.white);
+		instaLabel = new SpriteFont("b. Insta Kill", (Config.GAME_WINDOW_WIDTH / 4) - 90, Config.GAME_WINDOW_HEIGHT * 3/6, "Comic Sans", 30, Color.white);
 		instaLabel.setOutlineColor(Color.black);
 		instaLabel.setOutlineThickness(3.0f);
 		
-		maxLabel = new SpriteFont("3. Max Health", (Config.GAME_WINDOW_WIDTH / 4) - 90, Config.GAME_WINDOW_HEIGHT * 4/6, "Comic Sans", 30, Color.white);
+		maxLabel = new SpriteFont("c. Max Health", (Config.GAME_WINDOW_WIDTH / 4) - 90, Config.GAME_WINDOW_HEIGHT * 4/6, "Comic Sans", 30, Color.white);
 		maxLabel.setOutlineColor(Color.black);
 		maxLabel.setOutlineThickness(3.0f);
 		
-		speedLabel = new SpriteFont("4. Speed Boost", (Config.GAME_WINDOW_WIDTH / 4) - 90, Config.GAME_WINDOW_HEIGHT * 5/6, "Comic Sans", 30, Color.white);
+		speedLabel = new SpriteFont("d. Speed Boost", (Config.GAME_WINDOW_WIDTH / 4) - 90, Config.GAME_WINDOW_HEIGHT * 5/6, "Comic Sans", 30, Color.white);
 		speedLabel.setOutlineColor(Color.black);
 		speedLabel.setOutlineThickness(3.0f);
 		
@@ -63,8 +63,8 @@ public class BuyScreen extends Screen {
 		// Here is the game logic for purchasing the power-ups in the shopkeeper
 		// if a key is pressed, check if currency is equal to price (runs script), apply power-up, deduct from currency amount
 		
-		if (Keyboard.isKeyDown(Key.ONE)) {
-			System.out.println(map.loadCoins());
+		if (Keyboard.isKeyDown(Key.A) && !keyLocker.isKeyLocked(Key.A)) {
+//			System.out.println(map.loadCoins());
 			// Assuming that a power-up costs 10 coins
 			if (map.loadCoins() >= 10) {
 				// Here is were a power-up is applied
@@ -72,51 +72,60 @@ public class BuyScreen extends Screen {
 				map.removeCoins();
 			}
 			else {
-//				System.out.println("You do not have enough coins for this power-up"); 
+				System.out.println("Not enough coins."); 
 			}
-			keyLocker.lockKey(Key.ONE);
+			keyLocker.lockKey(Key.A);
 		}
 		
-		if (Keyboard.isKeyDown(Key.TWO)) {
+		if (Keyboard.isKeyDown(Key.B) && !keyLocker.isKeyLocked(Key.B)) {
 			if (map.loadCoins() >= 10) {
 				// Here is were a power-up is applied
 				
 				map.removeCoins();
 			}
-			keyLocker.lockKey(Key.TWO);
+			else {
+				System.out.println("Not enough coins."); 
+			}
+			keyLocker.lockKey(Key.B);
 		}
 		
-		if (Keyboard.isKeyDown(Key.THREE)) {
+		if (Keyboard.isKeyDown(Key.C) && !keyLocker.isKeyLocked(Key.C)) {
 			if (map.loadCoins() >= 10) {
 				// Here is were a power-up is applied
 				
 				map.removeCoins();
 			}
-			keyLocker.lockKey(Key.THREE);
+			else {
+				System.out.println("Not enough coins."); 
+			}
+			keyLocker.lockKey(Key.C);
 		}
 		
-		if (Keyboard.isKeyDown(Key.FOUR)) {
+		if (Keyboard.isKeyDown(Key.D) && !keyLocker.isKeyLocked(Key.D)) {
 			if (map.loadCoins() >= 10) {
 				// Here is were a power-up is applied
 				
 				map.removeCoins();
 			}
-			keyLocker.lockKey(Key.FOUR);
+			else {
+				System.out.println("Not enough coins."); 
+			}
+			keyLocker.lockKey(Key.D);
 		}
 		
 		
 		// Prevents key drag
-		if (Keyboard.isKeyUp(Key.ONE)) {
-			keyLocker.unlockKey(Key.ONE);
+		if (Keyboard.isKeyUp(Key.A)) {
+			keyLocker.unlockKey(Key.A);
 		}
-		if (Keyboard.isKeyUp(Key.TWO)) {
-			keyLocker.unlockKey(Key.TWO);
+		if (Keyboard.isKeyUp(Key.B)) {
+			keyLocker.unlockKey(Key.B);
 		}
-		if (Keyboard.isKeyUp(Key.THREE)) {
-			keyLocker.unlockKey(Key.THREE);
+		if (Keyboard.isKeyUp(Key.C)) {
+			keyLocker.unlockKey(Key.C);
 		}
-		if (Keyboard.isKeyUp(Key.FOUR)) {
-			keyLocker.unlockKey(Key.FOUR);
+		if (Keyboard.isKeyUp(Key.D)) {
+			keyLocker.unlockKey(Key.D);
 		}
 		
 		if (Keyboard.isKeyDown(escKey)) {
