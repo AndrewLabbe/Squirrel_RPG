@@ -55,6 +55,7 @@ public class ShopkeeperScreen extends Screen {
 		flagManager.addFlag("inShop", false);
 		flagManager.addFlag("hasExitedShop", false);
 		flagManager.addFlag("leftShop", false);
+		flagManager.addFlag("hasMetShopkeeper", false);
 
 		this.map = new shopInterior();
 		map.reset();
