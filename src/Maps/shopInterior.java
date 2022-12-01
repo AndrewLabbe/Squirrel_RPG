@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import Level.Map;
 import Level.NPC;
+import Level.Trigger;
 import NPCs.Wolf;
+import Scripts.TestMap.IntroShop;
 import Scripts.TestMap.WolfScript;
 import Scripts.TestMap.exitShop;
 import Tilesets.InteriorTileset;
@@ -14,7 +16,7 @@ public class shopInterior extends Map {
 	
 	public shopInterior() {
 		super("shop_Interior.txt", new InteriorTileset());
-		this.playerStartPosition = getMapTile(7, 11).getLocation();
+		this.playerStartPosition = getMapTile(6, 13).getLocation();
 	}
 	
 	 @Override
@@ -35,4 +37,11 @@ public class shopInterior extends Map {
 		 getMapTile(6, 15).setInteractScript(new exitShop());
 	 }
 	 
+	 public ArrayList<Trigger> loadTriggers() {
+			ArrayList<Trigger> triggers = new ArrayList<>();
+
+			triggers.add(new Trigger(235, 610, 100, 10, new IntroShop(), "hasMetShopkeeper"));
+
+			return triggers;
+		}
 }
