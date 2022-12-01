@@ -308,7 +308,7 @@ public class PlayLevelScreen extends Screen {
                 break;
             case DIED:
             screenCoordinator.setGameState(GameState.DEATH);
-            	deathScreen.update();
+//            	deathScreen.update();
             	break;
         }
         
