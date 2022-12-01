@@ -77,7 +77,8 @@ public class PlayLevelScreen extends Screen {
 	//Day or night is happening 
 	private boolean changeDay = true; 
 	//Length of day/night
-	private static final int dayLength = 1000; 
+	private static final int dayLength = 1000;
+	private static final String Systsem = null; 
 	//Number of enemies that spawn 
 	private int spawnNumber;
 	//Displays the wave
@@ -388,9 +389,9 @@ public class PlayLevelScreen extends Screen {
         }
         
         // If Player Entered Door Change Map to Shop
-        if (map.getFlagManager().isFlagSet("hasEnteredShop")) {
-        	screenCoordinator.setGameState(GameState.SHOPKEEP);
-        	System.out.println("Shop entered");
+        if (flagManager.isFlagSet("hasEnteredShop")) {
+        	screenCoordinator.setGameState(GameState.SHOPKEEP); 
+        	flagManager.unsetFlag("hasEnteredShop");
         }
         
         //If Player Enters Water Change State to Swimming

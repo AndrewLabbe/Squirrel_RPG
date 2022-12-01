@@ -13,7 +13,7 @@ public class exitShop extends Script {
 			showTextbox();
 			addTextToTextboxQueue("You are exiting the shop...");
 		}
-
+		
 	}
 
 	@Override

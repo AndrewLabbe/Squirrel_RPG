@@ -125,7 +125,8 @@ public abstract class Map {
     private int currentTime; 
     //Game time of the start of a power-up
     private int powerUpStartTime;
-    
+    //amount of damage dealt by enemy
+    private int damage = 20;
     
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
@@ -139,7 +140,7 @@ public abstract class Map {
         this.yMidPoint = (ScreenManager.getScreenHeight() / 2);
         this.playerStartPosition = new Point(0, 0); 
         coins = new Currency(); 
-        coins.setCoin(0); 
+//        coins.setCoin(0); 
         elimPoints = 10; 
         doublePointsTimeout = new Stopwatch();
         doublePoints = false; 
@@ -672,6 +673,7 @@ public abstract class Map {
             textbox.draw(graphicsHandler);
         }
         healthBar.draw(graphicsHandler); 
+        coins.setCoin(coins.getCoin());
         coins.draw(graphicsHandler);
     }
 
@@ -764,7 +766,9 @@ public abstract class Map {
     //Returns all active spawners
     public ArrayList<Spawner> getActiveSpawners() {
     	return camera.getActiveSpawners();
-    } 
+    }
+    
+    
     
     //Reset healthbar and update healthBar left  
     public void resetHealthBar() {
@@ -775,7 +779,17 @@ public abstract class Map {
     public void addCoins() {
     	coins.setCoin(coins.getCoin() + elimPoints); 
     	coins.updateCoin();
-    } 
+    }
+    
+    public void removeCoins() {
+    	coins.setCoin(coins.getCoin() - 10);
+    	coins.updateCoin();
+    	saveCoins();
+    	System.out.println(coins.getCoin());
+    	
+    	
+    }
+    
     //Returns points per elimination 
     public int getElimPoints() {
     	return elimPoints;
@@ -803,9 +817,14 @@ public abstract class Map {
   	} 
   	//Decreases player health bar
   	public void dealDamage(int damage) {
-		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - damage);
+  		this.damage = damage;
+		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - this.damage);
 		//System.out.println(healthBar.getGreenBarWidth());
-	} 
+	}
+  	
+//  	public void increaseHealth() {
+//  		damage = damage/10;
+//  	}
   	
   	//Spawns certain number of enemies around each spawner 
   	public void spawnEnemies(int spawnNumber) {
@@ -900,6 +919,43 @@ public abstract class Map {
 	//Returns array of unpassable map tiles
 	public ArrayList<MapTile> getUnpassableMapTiles() {
 		return unpassableMapTiles;
+	}
+
+	public void saveCoins() {
+		int save = coins.getCoin();
+		File file = new File("Resources/saved_Coins.txt");
+		FileWriter writer;
+		
+		try {
+			writer = new FileWriter(file);
+			writer.write(""+save);
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	} 
+	
+	public int loadCoins() {
+		int numCoins;
+		File file = new File("Resources/saved_Coins.txt");
+		Scanner reader;
+		
+		try {
+			reader = new Scanner(file);
+			numCoins = reader.nextInt();
+			coins.setCoin(numCoins);
+			coins.updateCoin();
+			reader.close();
+		} catch (IOException e) {
+			numCoins = 0;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return numCoins;
+	}
 	
 }

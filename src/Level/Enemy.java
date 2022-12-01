@@ -24,6 +24,7 @@ public class Enemy extends MapEntity {
 	public void eliminateEnemy(Enemy enemy) {
 		enemy.mapEntityStatus = mapEntityStatus.REMOVED; 
 		map.addCoins(); 
+		map.saveCoins();
 		Point elimPoint = new Point(this.x, this.y);
 		map.spawnPowerUp(elimPoint); 
 		playSound(8);
