@@ -40,15 +40,12 @@ public class ScreenCoordinator extends Screen {
 	public void setLevelScreen(PlayLevelScreen s) {
 		this.levelScreen = s;
 	}
-	
+
 	// Other Screens can set the gameState of this class to force it to change the currentScreen
 	public void setGameState(GameState gameState) {
 		this.gameState = gameState; 
-		if(this.gameState == GameState.SHOPKEEP) {
-			//levelScreen = currentScreen;
-		}
 	}
-	
+
 	@Override
 	public void initialize() {
 		gameState = GameState.MENU; 
@@ -60,81 +57,84 @@ public class ScreenCoordinator extends Screen {
 			// if previousGameState does not equal gameState, it means there was a change in gameState
 			// this triggers ScreenCoordinator to bring up a new Screen based on what the gameState is
 			if (previousGameState != gameState) {
-				//levelScreen = currentScreen;
 				switch(gameState) {
-					case MENU:
-						currentScreen = new MenuScreen(this);
-						break;
-					case LEVEL:
-						currentScreen = new PlayLevelScreen(this); 
-						break;
-					case BUY:
-						currentScreen = new BuyScreen(this);
-						break;
-					case SELL:
-						currentScreen = new SellScreen(this);
-						break;
-					case TEMPLELVL1:
-						currentScreen = new TempleScreen1(this);
-						break;
-					case TEMPLELVL1_5:
-						currentScreen = new TempleScreen1_5(this);
-						break;
-					case TEMPLELVL2:
-						currentScreen = new TempleScreen2(this);
-						break;
-					case TEMPLELVL3:
-						currentScreen = new TempleScreen3(this);
-						break;
-					case TEMPLELVL4:
-						currentScreen = new TempleScreen4(this);
-						break;
-					case CREDITS:
-						currentScreen = new CreditsScreen(this);
-						break;
-					case INVENTORY:
-						currentScreen = new InventoryScreen(this);
-						break;
-					case OPTIONS:
-						currentScreen = new OptionsScreen(this);
-						break;
-					case SHOPKEEP:
-						//levelScreen = currentScreen;
-						currentScreen = new ShopkeeperScreen(this);
-						break;
-					case DEATH:
-						currentScreen = new DeathScreen(this);
-						break;
-					case WIN:
-						currentScreen = new WinScreen(this);
-						break;
+				case MENU:
+					currentScreen = new MenuScreen(this);
+					break;
+				case LEVEL:
+					currentScreen = new PlayLevelScreen(this); 
+					break;
+				case BUY:
+					currentScreen = new BuyScreen(this);
+					break;
+				case SELL:
+					currentScreen = new SellScreen(this);
+					break;
+				case TEMPLELVL1:
+					currentScreen = new TempleScreen1(this);
+					break;
+				case TEMPLELVL1_5:
+					currentScreen = new TempleScreen1_5(this);
+					break;
+				case TEMPLELVL2:
+					currentScreen = new TempleScreen2(this);
+					break;
+				case TEMPLELVL3:
+					currentScreen = new TempleScreen3(this);
+					break;
+				case TEMPLELVL4:
+					currentScreen = new TempleScreen4(this);
+					break;
+				case CREDITS:
+					currentScreen = new CreditsScreen(this);
+					break;
+				case INVENTORY:
+					currentScreen = new InventoryScreen(this);
+					break;
+				case OPTIONS:
+					currentScreen = new OptionsScreen(this);
+					break;
+				case SHOPKEEP:
+					currentScreen = new ShopkeeperScreen(this);
+					break;
+				case DEATH:
+					currentScreen = new DeathScreen(this);
+					break;
+				case WIN:
+					currentScreen = new WinScreen(this);
+					break;
+				case RETURN:
+					currentScreen = levelScreen;
+					break;
 				}
-				currentScreen.initialize();
+				if (gameState != gameState.RETURN) {
+					currentScreen.initialize();
+				}
 			}
 			previousGameState = gameState;
 
 			// call the update method for the currentScreen
 			currentScreen.update();
-			
+
 		} while (previousGameState != gameState);
 	}
-	
-	public void switchBackToLevel() {
-		currentScreen = levelScreen;
-		previousGameState = gameState;
-		currentScreen.update();
-	}
-	
+
+//	public void switchBackToLevel() {
+//		currentScreen = levelScreen;
+//		previousGameState = gameState;
+//		currentScreen.update();
+//	}
+
 	/*public void switchBackToShop() {
 		currentScreen = shopScreen;
 		previousGameState = gameState;
 		currentScreen.update();
 	}*/
-	
+
 	public Screen checkCurrentScreen() {
 		return currentScreen;}
-	
-	
+
+
 	@Override
 	public void draw(GraphicsHandler graphicsHandler) {
 		// call the draw method for the currentScreen

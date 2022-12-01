@@ -1,4 +1,4 @@
-package Screens;
+package Screens; 
 
 import Engine.GraphicsHandler;
 import Engine.Key;
@@ -25,12 +25,12 @@ public class ShopkeeperScreen extends Screen {
 	protected ScreenCoordinator screenCoordinator;
 	protected Map map;
 	protected Player player;
-	 protected FlagManager flagManager;
+	protected FlagManager flagManager;
 
 	protected ShopkeeperScreenState shopkeeperScreenState;
 
 	private KeyLocker keyLocker = new KeyLocker();
-	//	public Currency screenCoin;
+	//public Currency screenCoin;
 	private boolean wasSpacePressed = false;
 
 	//protected Key MOVE_LEFT_KEY = Key.LEFT;
@@ -48,9 +48,9 @@ public class ShopkeeperScreen extends Screen {
 	@Override
 	public void initialize() {
 		// TODO: Figure out Screen Coins
-		//		screenCoin = new Currency();
-		//		screenCoin = screenCoin.getCoin();
-		
+		//screenCoin = new Currency();
+		//screenCoin = screenCoin.getCoin();
+
 		flagManager = new FlagManager();
 		flagManager.addFlag("inShop", false);
 		flagManager.addFlag("hasExitedShop", false);
@@ -112,7 +112,7 @@ public class ShopkeeperScreen extends Screen {
 		}
 
 		if (!wasSpacePressed && Keyboard.isKeyDown(Key.SPACE)) {
-			//	screenCoin.addCoin(25);
+			//screenCoin.addCoin(25);
 			wasSpacePressed = true; 
 		}
 
@@ -121,38 +121,109 @@ public class ShopkeeperScreen extends Screen {
 		}
 
 		if(map.getFlagManager().isFlagSet("inShop") && !map.getFlagManager().isFlagSet("leftShop")) {
-			if (Keyboard.isKeyDown(buyKey)) {
-				screenCoordinator.setGameState(GameState.BUY);
-				keyLocker.lockKey(buyKey);
-			} 
-			if (Keyboard.isKeyDown(sellKey)) {
-				screenCoordinator.setGameState(GameState.SELL);
-				keyLocker.lockKey(sellKey);
+			// Here is the game logic for purchasing the power-ups in the shopkeeper
+			// if a key is pressed, check if currency is equal to price (runs script), apply power-up, deduct from currency amount
+
+			if (Keyboard.isKeyDown(Key.A) && !keyLocker.isKeyLocked(Key.A)) {
+				//System.out.println(map.loadCoins());
+				// Assuming that a power-up costs 10 coins
+				if (map.loadCoins() >= 10) {
+					// Here is were a power-up is applied
+					//map.increaseHealth();
+					//Hellom
+
+					System.out.println("You purchased Health imporvements");
+					map.removeCoins();
+				}
+				else {
+					System.out.println("Not enough coins."); 
+				}
+				keyLocker.lockKey(Key.A);
 			}
+
+			if (Keyboard.isKeyDown(Key.B) && !keyLocker.isKeyLocked(Key.B)) {
+				if (map.loadCoins() >= 10) {
+					// Here is were a power-up is applied
+					//map.
+
+					System.out.println("You purchased Damage imporvements");
+					map.removeCoins();
+				}
+				else {
+					System.out.println("Not enough coins."); 
+				}
+				keyLocker.lockKey(Key.B);
+			}
+
+			if (Keyboard.isKeyDown(Key.C) && !keyLocker.isKeyLocked(Key.C)) {
+				if (map.loadCoins() >= 10) {
+					// Here is were a power-up is applied
+					System.out.println("You purchased Stamina imporvements");
+					map.removeCoins();
+				}
+				else {
+					System.out.println("Not enough coins."); 
+				}
+				keyLocker.lockKey(Key.C);
+			}
+
+			if (Keyboard.isKeyDown(Key.D) && !keyLocker.isKeyLocked(Key.D)) {
+				if (map.loadCoins() >= 10) {
+					// Here is were a power-up is applied
+					System.out.println("You purchased Speed imporvements");
+					map.removeCoins();
+				}
+				else {
+					System.out.println("Not enough coins."); 
+				}
+				keyLocker.lockKey(Key.D);
+			}
+
+
+			// Prevents key drag
+			if (Keyboard.isKeyUp(Key.A)) {
+				keyLocker.unlockKey(Key.A);
+			}
+			if (Keyboard.isKeyUp(Key.B)) {
+				keyLocker.unlockKey(Key.B);
+			}
+			if (Keyboard.isKeyUp(Key.C)) {
+				keyLocker.unlockKey(Key.C);
+			}
+			if (Keyboard.isKeyUp(Key.D)) {
+				keyLocker.unlockKey(Key.D);
+			}
+
+			//if (Keyboard.isKeyDown(buyKey)) {
+			//screenCoordinator.setGameState(GameState.BUY);
+			//keyLocker.lockKey(buyKey);
+			//} 
+			//if (Keyboard.isKeyDown(sellKey)) {
+			//screenCoordinator.setGameState(GameState.SELL);
+			//keyLocker.lockKey(sellKey);
+			//}
 		}
-		
+
 		if (Keyboard.isKeyDown(invKey)) {
 			screenCoordinator.setGameState(GameState.INVENTORY);
 			keyLocker.lockKey(invKey);
 		}
 
-		if (Keyboard.isKeyUp(buyKey)) {
-			keyLocker.unlockKey(buyKey);
-		}
-		if (Keyboard.isKeyUp(sellKey)) {
-			keyLocker.unlockKey(sellKey);
-		}
-		if (Keyboard.isKeyUp(invKey)) {
-			keyLocker.unlockKey(invKey);
-		}
-		
-		if (map.getFlagManager().isFlagSet("hasExitedShop")) {
-        	screenCoordinator.switchBackToLevel();
-        	System.out.println("Shop exited");
-        }
+		//if (Keyboard.isKeyUp(buyKey)) {
+		//keyLocker.unlockKey(buyKey);
+		//}
+		//if (Keyboard.isKeyUp(sellKey)) {
+		//keyLocker.unlockKey(sellKey);
+		//}
+		//if (Keyboard.isKeyUp(invKey)) {
+		//keyLocker.unlockKey(invKey);
+		//}
 
-		//screenCoordinator.setShopScreen(this);
-		
+		if (map.getFlagManager().isFlagSet("hasExitedShop")) {
+			screenCoordinator.setGameState(GameState.RETURN);
+			flagManager.unsetFlag("hasExitedShop");
+		}
+
 	}
 
 
@@ -161,7 +232,7 @@ public class ShopkeeperScreen extends Screen {
 		switch (shopkeeperScreenState) {
 		case RUNNING:
 			map.draw(player, graphicsHandler);
-			//			screencoin.draw(graphicsHandler);
+			//screencoin.draw(graphicsHandler);
 			break;
 		}
 	}

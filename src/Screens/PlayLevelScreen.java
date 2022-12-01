@@ -388,9 +388,9 @@ public class PlayLevelScreen extends Screen {
         }
         
         // If Player Entered Door Change Map to Shop
-        if (map.getFlagManager().isFlagSet("hasEnteredShop")) {
+        if (flagManager.isFlagSet("hasEnteredShop")) {
         	screenCoordinator.setGameState(GameState.SHOPKEEP);
-        	System.out.println("Shop entered");
+        	flagManager.unsetFlag("hasEnteredShop");
         }
         
         //If Player Enters Water Change State to Swimming
