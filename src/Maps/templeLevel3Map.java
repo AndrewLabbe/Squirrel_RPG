@@ -11,6 +11,7 @@ import Level.EnhancedMapTile;
 import Level.Map;
 import Tilesets.temple3Tileset;
 import Level.NPC;
+import Level.Trigger;
 import NPCs.Chest;
 import NPCs.Fox;
 import NPCs.Girlfriend;
@@ -21,6 +22,7 @@ import Scripts.TestMap.ChestUnlockScriptGenesis;
 import Scripts.TestMap.ChestUnlockScriptRetribution;
 import Scripts.TestMap.ChestUnlockScriptTemple;
 import Scripts.TestMap.FoxScript;
+import Scripts.TestMap.TempleLevel3IntroScript;
 import Scripts.TestMap.WalrusScript;
 import Tilesets.templeTileset;
 import Utils.Point;
@@ -94,4 +96,11 @@ public class templeLevel3Map extends Map {
 	     return enhancedMapTiles;
 	 }
 	
+	 public ArrayList<Trigger> loadTriggers() {
+			ArrayList<Trigger> triggers = new ArrayList<>();
+
+			triggers.add(new Trigger(550, 200, 250, 10, new TempleLevel3IntroScript(), "hasEnteredLevel3"));
+
+			return triggers;
+		}
 }
