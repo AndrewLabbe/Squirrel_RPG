@@ -7,7 +7,7 @@ public class changeShop extends Script {
 
 	@Override
 	protected void setup() {
-		// If Shop hasn't been entered
+		// If Shop hasn't been entered yet
 		if (!isFlagSet("hasEnteredShop")) {
 			lockPlayer();
 			showTextbox();
