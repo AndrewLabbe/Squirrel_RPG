@@ -129,7 +129,7 @@ public class ShopkeeperScreen extends Screen {
 				if (map.loadCoins() >= 10) {
 					// Here is were a power-up is applied
 //					map.increaseHealth();
-//					Hello this is the change
+//					Hellom
 					
 					System.out.println("You purchased Health imporvements");
 					map.removeCoins();
