@@ -7,6 +7,7 @@ import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
+import JSON.SimpleJSON;
 import Level.EnhancedMapTile;
 import Level.FlagManager;
 import Level.Map;
@@ -131,12 +132,14 @@ public class ShopkeeperScreen extends Screen {
 					// Here is were a power-up is applied
 					//map.increaseHealth();
 					//Hellom
-
+					SimpleJSON simpleJSON = new SimpleJSON(); 
+					simpleJSON.setHealth(simpleJSON.getHealth() + 50);
 					System.out.println("You purchased Health imporvements");
 					map.removeCoins();
 				}
 				else {
 					System.out.println("Not enough coins."); 
+					
 				}
 				keyLocker.lockKey(Key.A);
 			}

@@ -56,7 +56,7 @@ public class Acorn extends Projectile {
 		}*/
 		if(this.intersects(player)) {
 			mapEntityStatus = MapEntityStatus.REMOVED; 
-			map.dealDamage(20);
+			map.dealDamage(5);
 		}
 		
 		super.update(enemies, unpassableMapTiles, spawners, npcs);

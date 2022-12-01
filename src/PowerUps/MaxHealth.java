@@ -6,6 +6,7 @@ import Builders.FrameBuilder;
 import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.SpriteSheet;
+import JSON.SimpleJSON;
 import Level.Map;
 import Level.MapEntityStatus;
 import Level.Player;
@@ -21,7 +22,8 @@ public class MaxHealth extends PowerUp {
 	public void update(Player player, Map map) {
 		super.update(player, map); 
 		if(intersects(player)) { 
-			map.resetHealthBar();
+			SimpleJSON simpleJSON = new SimpleJSON(true); 
+			//map.resetHealthBar();
 			setMapEntityStatus(MapEntityStatus.REMOVED);
 		} 
 	} 

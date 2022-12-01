@@ -6,6 +6,8 @@ import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
+import JSON.JSONObject;
+import JSON.SimpleJSON;
 
 public class HealthBar {
     protected boolean isActive;
@@ -19,14 +21,15 @@ public class HealthBar {
     protected final int height = 50;
     protected final int halfway = 250;
 	protected int greenBarWidth = 250;
-	protected final int healthActualWidth = 250;
+	protected final int healthActualWidth = 100;
     
   
 
     private KeyLocker keyLocker = new KeyLocker();
     private Map map;
     private Key interactKey = Key.Q;
-    
+    SimpleJSON simpleJSON = new SimpleJSON();
+    		
     
     public HealthBar(Map map) {
         this.map = map;
@@ -91,7 +94,11 @@ public class HealthBar {
 		return greenBarWidth;
 	}
     public void setGreenBarWidth(int w){
+    	//System.out.println(w);
 		this.greenBarWidth = w;
+		
+		simpleJSON.setHealth(w);
+		//SimpleJSON simpleJSON1 = new SimpleJSON(true);
 	}
 
 	public int getActualHealthBarWidth(){

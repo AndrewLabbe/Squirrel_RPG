@@ -10,6 +10,8 @@ import Engine.Screen;
 import Engine.ScreenManager;
 import Game.GameState;
 import Game.ScreenCoordinator;
+import JSON.JSONObject;
+import JSON.SimpleJSON;
 import SpriteFont.SpriteFont;
 
 // This class is for the win level screen
@@ -34,6 +36,8 @@ public class DeathScreen extends Screen {
     public void initialize() {
         deathMessage = new SpriteFont("You died!", 350, 270, "Comic Sans", 30, Color.RED);
         instructions = new SpriteFont("Press Space to play again or Escape to go back to the main menu", 120, 300,"Comic Sans", 20, Color.white);
+        SimpleJSON simpleJSON = new SimpleJSON(); 
+        simpleJSON.setHealth(100);
         //keyLocker.lockKey(Key.SPACE);
         //keyLocker.lockKey(Key.ESC);
         //screenCoordinator.setGameState(GameState.DEATH);

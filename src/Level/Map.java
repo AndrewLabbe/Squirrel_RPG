@@ -15,6 +15,7 @@ import Engine.GraphicsHandler;
 import Engine.Keyboard;
 import Engine.ScreenManager;
 import GameObject.Rectangle;
+import JSON.SimpleJSON;
 import NPCs.Currency;
 import PowerUps.DoublePoints;
 import PowerUps.InstaElim;
@@ -126,7 +127,9 @@ public abstract class Map {
 	//Game time of the start of a power-up
 	private int powerUpStartTime;
 	//amount of damage dealt by enemy
-	private int damage = 20;
+	private int damage = 20; 
+	
+	private SimpleJSON simpleJSON;
 
 	public Map(String mapFileName, Tileset tileset) {
 		this.mapFileName = mapFileName;
@@ -148,14 +151,16 @@ public abstract class Map {
 		powerUpCoolDown = new Stopwatch(); 
 		powerUpActive = false; 
 		gameStart = (int)System.currentTimeMillis();
-		currentTime = gameStart;
+		currentTime = gameStart; 
+		
 
 	}
 
 	// sets up map by reading in the map file to create the tile map
 	// loads in enemies, enhanced map tiles, and npcs
 	// and instantiates a Camera
-	public void setupMap() {
+	public void setupMap() { 
+		simpleJSON = new SimpleJSON(); 
 		animatedMapTiles = new ArrayList<>(); 
 
 		//Creates array that holds all unpassable map tiles
@@ -211,7 +216,10 @@ public abstract class Map {
 
 		this.camera = new Camera(0, 0, tileset.getScaledSpriteWidth(), tileset.getScaledSpriteHeight(), this);
 		this.textbox = new Textbox(this);
-		this.healthBar = new HealthBar(this);
+		this.healthBar = new HealthBar(this); 
+		//SimpleJSON simpleJSON1 = new SimpleJSON(true);
+		//System.out.println(simpleJSON.getHealth());
+		healthBar.setGreenBarWidth(simpleJSON.getHealth());
 	}
 
 	// reads in a map file to create the map's tilemap
@@ -602,7 +610,9 @@ public abstract class Map {
 		currentTime = ((int)System.currentTimeMillis() - gameStart)/1000;
 
 		handlePowerUps(); 
-		healthBarLeft = healthBar.getGreenBarWidth();
+		//healthBarLeft = healthBar.getGreenBarWidth(); 
+		healthBarLeft = simpleJSON.getHealth(); 
+		healthBar.setGreenBarWidth(simpleJSON.getHealth());
 	}
 
 	// based on the player's current X position (which in a level can potentially be updated each frame),
@@ -772,7 +782,11 @@ public abstract class Map {
 
 	//Reset healthbar and update healthBar left  
 	public void resetHealthBar() {
-		healthBar.setGreenBarWidth(healthBar.getActualHealthBarWidth());
+		//System.out.println("Test");
+		//healthBar.setGreenBarWidth(healthBar.getActualHealthBarWidth());
+		//healthBarLeft = healthBar.getGreenBarWidth(); 
+		SimpleJSON simpleJSON = new SimpleJSON(true);
+		healthBar.setGreenBarWidth(simpleJSON.getHealth());
 		healthBarLeft = healthBar.getGreenBarWidth();
 	} 
 	//Increment coins 
@@ -785,7 +799,7 @@ public abstract class Map {
 		coins.setCoin(coins.getCoin() - 10);
 		coins.updateCoin();
 		saveCoins();
-		System.out.println(coins.getCoin());
+		//System.out.println(coins.getCoin());
 
 
 	}
@@ -817,8 +831,10 @@ public abstract class Map {
 	} 
 	//Decreases player health bar
 	public void dealDamage(int damage) {
-		this.damage = damage;
-		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - this.damage);
+		//this.damage = damage; 
+		//simpleJSON.setHealth(simpleJSON.getHealth() - this.damage);
+		healthBar.setGreenBarWidth(healthBar.getGreenBarWidth() - damage);
+		//healthBar.setGreenBarWidth(simpleJSON.getHealth());
 		//System.out.println(healthBar.getGreenBarWidth());
 	}
 
@@ -846,9 +862,9 @@ public abstract class Map {
 			PowerUp powerUp;
 			int randomNum = rng.nextInt(4); 
 			//randomNum = randomNum % 3;
-			System.out.println(randomNum);
+			//System.out.println(randomNum);
 			switch(randomNum) {
-			case 0: 
+			/*case 0: 
 				powerUp = new DoublePoints(spawnLocation); 
 				break;
 			case 1: 
@@ -856,9 +872,9 @@ public abstract class Map {
 				break;
 			case 2: 
 				powerUp = new MaxHealth(spawnLocation); 
-				break;
+				break;*/
 			default: 
-				powerUp = new SpeedBoost(spawnLocation);
+				powerUp = new MaxHealth(spawnLocation);
 			}
 			addPowerUp(powerUp); 
 			powerUpCoolDown.setWaitTime(20000); 

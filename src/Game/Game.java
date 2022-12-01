@@ -2,6 +2,7 @@ package Game;
 
 import Engine.GameWindow;
 import Engine.ScreenManager;
+import JSON.SimpleJSON;
 
 /*
  * The game starts here
@@ -16,7 +17,8 @@ public class Game {
         new Game();
     }
 
-    public Game() {
+    public Game() { 
+    	SimpleJSON simpleJSON = new SimpleJSON(true);
         GameWindow gameWindow = new GameWindow();
         gameWindow.startGame();
         ScreenManager screenManager = gameWindow.getScreenManager();
