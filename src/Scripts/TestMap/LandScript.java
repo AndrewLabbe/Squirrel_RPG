@@ -12,7 +12,7 @@ public class LandScript extends Script {
 
 	@Override
 	protected void setup() {
-		
+		player.setPlayerState(PlayerState.WALKING);
 	}
 
 	@Override

@@ -3,7 +3,11 @@ package Maps;
 import java.util.ArrayList;
 
 import Collectibles.CollectibleAcorn;
+import Collectibles.EasterEgg;
+import EnhancedMapTiles.AcornTile;
+import EnhancedMapTiles.ProjectileTrapTile;
 import Level.CollectibleItem;
+import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Spawner;
@@ -11,6 +15,7 @@ import Level.Trigger;
 import NPCs.Chest;
 import NPCs.Dinosaur;
 import NPCs.Fox;
+import NPCs.Girlfriend;
 import NPCs.Walrus;
 import Scripts.TestMap.ChestUnlockScriptDestiny;
 import Scripts.TestMap.ChestUnlockScriptFate;
@@ -44,6 +49,9 @@ public class newTileMap extends Map {
 	     Fox fox = new Fox(1, getMapTile(14, 21).getLocation());
 	     fox.setInteractScript(new FoxScript());
 	     npcs.add(fox);
+	     
+	     Girlfriend girlfriend = new Girlfriend(2, getMapTile(3, 21).getLocation(), "hasLostGirlfriend");
+	     npcs.add(girlfriend);
 
 	     Chest chestFate = new Chest(2, getMapTile(7, 9).getLocation(), "hasOpenedChestFate");  
 	     chestFate.setInteractScript(new ChestUnlockScriptFate());
@@ -59,7 +67,11 @@ public class newTileMap extends Map {
 	     
 	     Chest chestRetribution = new Chest(5, getMapTile(41, 9).getLocation(), "hasOpenedChestRetribution");  
 	     chestRetribution.setInteractScript(new ChestUnlockScriptRetribution());
-	     npcs.add(chestRetribution);
+	     npcs.add(chestRetribution); 
+	     
+	     Walrus walrus = new Walrus(6, getMapTile(17, 17).getLocation());
+	     walrus.setInteractScript(new WalrusScript());
+	     npcs.add(walrus);
 	     
 	     return npcs;
 	 }
@@ -104,6 +116,29 @@ public class newTileMap extends Map {
 	     triggers.add(new Trigger(1275, 205, 40, 1, new SwimScript(), "hasSwam"));
 	     triggers.add(new Trigger(1275, 85, 40, 1, new SwimScript(), "hasSwam"));
 	     
+	     //Swimming triggers for top right lake
+	     triggers.add(new Trigger(2135, 785, 460, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(2135, 785, 1, 50, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(2085, 835, 50, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(2085, 835, 1, 50, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1625, 885, 460, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1625, 835, 1, 50, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1575, 835, 50, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1575, 785, 1, 50, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1515, 785, 60, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1515, 525, 1, 260, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1515, 525, 370, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1885, 525, 1, 50, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(1885, 575, 240, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(2125, 325, 1, 250, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1885, 325, 240, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1885, 325, 1, 85, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1565, 410, 320, 1, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1565, 350, 1, 60, new SwimScript(), "hasSwam")); 
+	     triggers.add(new Trigger(1565, 350, 60, 1, new SwimScript(), "hasSwam"));
+	     triggers.add(new Trigger(1625, 0, 1, 350, new SwimScript(), "hasSwam"));
+	     
+	     
 	     //If player tries to enter the temple without 4 keys trigger the locked temple script
 	     triggers.add(new Trigger(1120, 50, 110, 1, new TempleLockedScript(), "hasTempleUnlocked"));
 	     
@@ -133,14 +168,24 @@ public class newTileMap extends Map {
 	 }
 	 
 	 //Adds collectibles to the map
-	    @Override 
-	    public ArrayList<CollectibleItem> loadCollectibles() {
-	    	ArrayList<CollectibleItem> collectibles = new ArrayList(); 
+	 @Override 
+	 public ArrayList<CollectibleItem> loadCollectibles() {
+		 ArrayList<CollectibleItem> collectibles = new ArrayList(); 
 	    	
-	    	//collectibles.add(new CollectibleAcorn(getMapTile(25, 25).getLocation()));
-	    	//collectibles.add(new CollectibleAcorn(getMapTile(24, 25).getLocation()));
+	     //collectibles.add(new CollectibleAcorn(getMapTile(25, 25).getLocation()));
+	     //collectibles.add(new CollectibleAcorn(getMapTile(24, 25).getLocation()));
+	     
+	     //collectibles.add(new EasterEgg(getMapTile(23,21).getLocation()));
 	    	
-	    	return collectibles;
-	    }
+	     return collectibles;
+	 }
+	 
+	 @Override
+	 public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
+	     ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
+	     enhancedMapTiles.add(new AcornTile(getMapTile(27, 32).getLocation()));
+	     
+	     return enhancedMapTiles;
+	 }
 	 
 }

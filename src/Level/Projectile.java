@@ -22,7 +22,7 @@ public class Projectile extends MapEntity {
 				//eliminateEnemy(enemy); 
 				damageEnemy(enemy);
 			}
-		}
+		} 
 		//Remove projectile if it intersects an unpassable map tile 
 		for(MapTile unpassableMapTile : unpassableMapTiles) {
 			if(this.intersects(unpassableMapTile)) {

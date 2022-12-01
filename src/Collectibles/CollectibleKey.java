@@ -18,10 +18,11 @@ public class CollectibleKey extends CollectibleItem {
 	private String keyName;
 	
 	public CollectibleKey(Utils.Point point, String keyName) {
-		super(point.x, point.y, new SpriteSheet(ImageLoader.load("Keys.png"), 16, 16), keyName, "Keys.png"); 
+		super(point.x, point.y, new SpriteSheet(ImageLoader.load("Keys.png"), 16, 16), keyName, "Keys.png"); 		
 		this.keyName = keyName;
 	}
-		
+	
+	@Override
 	public void update(Player player) {
 		
 		if(this.intersects(player)) { 
@@ -42,7 +43,7 @@ public class CollectibleKey extends CollectibleItem {
                             .withScale(2)
                             .withBounds(0, 0, 16, 16)
                             .build()
-            });
+            }); 
             put("KEY_DESTINY", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 1))
                             .withScale(2)

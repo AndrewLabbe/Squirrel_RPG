@@ -3,38 +3,31 @@ package Scripts.TestMap;
 import Level.Script;
 import Level.ScriptState;
 
-public class exitShop extends Script {
+public class TempleLandScript extends Script {
 
 	@Override
 	protected void setup() {
-		// If Shop hasn't been entered
-		if (!isFlagSet("hasExitedShop")) {
-			lockPlayer();
-			showTextbox();
-			addTextToTextboxQueue("You are exiting the shop...");
-		}
 		
 	}
 
 	@Override
 	protected void cleanup() {
-		setFlag("hasExitedShop");
-		hideTextbox();
-		unlockPlayer();
-
+		setFlag("templeWalked");
+		
 	}
 
 	@Override
 	protected ScriptState execute() {
-		if (!isFlagSet("hasExitedShop")) {
+		if (!isFlagSet("templeWalked")) {
 			start();
 			if (!isTextboxQueueEmpty()) {
 				return ScriptState.RUNNING;
 			}
 			end();
 		}
+		//Create swimming trigger/flag
+		map.getFlagManager().addFlag("templeSwam", false);
 		return ScriptState.COMPLETED;
 	}
-
 
 }

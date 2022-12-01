@@ -17,6 +17,7 @@ import Screens.TempleScreen1_5;
 import Screens.TempleScreen2;
 import Screens.TempleScreen3;
 import Screens.TempleScreen4;
+import Screens.WinScreen;
 
 /*
  * Based on the current game state, this class determines which Screen should be shown
@@ -25,7 +26,7 @@ import Screens.TempleScreen4;
 public class ScreenCoordinator extends Screen {
 	// currently shown Screen
 	protected Screen currentScreen = new DefaultScreen();
-	protected Screen levelScreen;
+	protected Screen levelScreen; 
 	protected Screen shopScreen;
 
 	// keep track of gameState so ScreenCoordinator knows which Screen to show
@@ -40,19 +41,15 @@ public class ScreenCoordinator extends Screen {
 		this.levelScreen = s;
 	}
 	
-	public void setShopScreen(ShopkeeperScreen s) {
-		this.shopScreen = s;
-	}
-	
 	// Other Screens can set the gameState of this class to force it to change the currentScreen
 	public void setGameState(GameState gameState) {
-		this.gameState = gameState;
+		this.gameState = gameState; 
 	}
 	
 	@Override
 	public void initialize() {
-		// start game off with Menu Screen
-		gameState = GameState.MENU;
+		//Start off game with the main menu screen 
+		gameState = GameState.MENU; 
 	}
 
 	@Override
@@ -66,7 +63,7 @@ public class ScreenCoordinator extends Screen {
 						currentScreen = new MenuScreen(this);
 						break;
 					case LEVEL:
-						currentScreen = new PlayLevelScreen(this);
+						currentScreen = new PlayLevelScreen(this); 
 						break;
 					case BUY:
 						currentScreen = new BuyScreen(this);
@@ -100,27 +97,28 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case SHOPKEEP:
 						currentScreen = new ShopkeeperScreen(this);
+						break;
+					case DEATH:
+						currentScreen = new DeathScreen(this);
+						break;
+					case WIN:
+						currentScreen = new WinScreen(this);
+						break;
+					case RETURN: 
+						currentScreen = levelScreen;
+						break;
+				} 
+				
+				if(gameState != GameState.RETURN) {
+					currentScreen.initialize();}
 				}
-				currentScreen.initialize();
-			}
+			
 			previousGameState = gameState;
 
 			// call the update method for the currentScreen
 			currentScreen.update();
 			
 		} while (previousGameState != gameState);
-	}
-	
-	public void switchBackToLevel() {
-		currentScreen = levelScreen;
-		previousGameState = gameState;
-		currentScreen.update();
-	}
-	
-	public void switchBackToShop() {
-		currentScreen = shopScreen;
-		previousGameState = gameState;
-		currentScreen.update();
 	}
 	
 	public Screen checkCurrentScreen() {

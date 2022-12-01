@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import javax.swing.Timer;
 
+import Collectibles.EasterEgg;
 import Engine.Config;
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
@@ -60,8 +61,6 @@ public class PlayLevelScreen extends Screen {
     public Currency screenCoin;
     public Keys keyCounter;
     public KillCount screenKill;
-    private boolean wasSpacePressed = false;
-    private boolean wasFPressed = false;
     //protected Key MOVE_LEFT_KEY = Key.LEFT;
     //protected Key MOVE_RIGHT_KEY = Key.RIGHT;
     private final Key invKey = Key.I;
@@ -78,7 +77,8 @@ public class PlayLevelScreen extends Screen {
 	//Day or night is happening 
 	private boolean changeDay = true; 
 	//Length of day/night
-	private static final int dayLength = 1000; 
+	private static final int dayLength = 1000;
+	private static final String Systsem = null; 
 	//Number of enemies that spawn 
 	private int spawnNumber;
 	//Displays the wave
@@ -103,7 +103,9 @@ public class PlayLevelScreen extends Screen {
     protected int yPos, range, itemBoxSize, base;
     protected boolean openInventory = false;
     
-    private boolean templeUnlocked;
+    private boolean templeUnlocked; 
+    
+    private boolean load = false;
     
     protected int numItems = 0;
     protected Sprite sprite, itemSprite1, itemSprite2, itemSprite3, itemSprite4;
@@ -122,6 +124,7 @@ public class PlayLevelScreen extends Screen {
 
     public void initialize() {
     	
+    	if(load == false) {
     	// Kill Count 
     	screenKill = new KillCount();
     	screenKill.setKill(0);
@@ -137,7 +140,7 @@ public class PlayLevelScreen extends Screen {
         
         flagManager.addFlag("enemyKilled",false);
 //        flagManager.addFlag("hasLostBall", false);
-//        flagManager.addFlag("hasTalkedToWalrus", false);
+        flagManager.addFlag("hasTalkedToWalrus", false);
 //        flagManager.addFlag("hasTalkedToDinosaur", false);
 //        flagManager.addFlag("hasTalkedToFox", false);
 //        flagManager.addFlag("hasFoundBall", false);
@@ -277,12 +280,15 @@ public class PlayLevelScreen extends Screen {
         
         powerUpTimerColor = new Color(150,0,0);
         
-        winScreen = new WinScreen(this);
-        deathScreen = new DeathScreen(this); 
+        winScreen = new WinScreen(screenCoordinator);
+        deathScreen = new DeathScreen(screenCoordinator); 
         
         itemSprites = new ArrayList<>(); 
         
-        templeUnlocked = false;
+        templeUnlocked = false; 
+        load = true;
+
+    	}
     }
 
     public void update() {
@@ -298,13 +304,13 @@ public class PlayLevelScreen extends Screen {
                 winScreen.update();
                 break;
             case DIED:
+            screenCoordinator.setGameState(GameState.DEATH);
             	deathScreen.update();
             	break;
         }
         
         if (player.getUpdate()) {
-    		screenKill.addKill(1);
-            wasFPressed = true; 
+    		screenKill.addKill(1); 
             player.setUpdate(false);
     	}
         
@@ -323,14 +329,16 @@ public class PlayLevelScreen extends Screen {
         
         //Investigate this later if you have time
         if (Keyboard.isKeyDown(Key.D) && !keyLocker.isKeyLocked(Key.D)) {
-        	if (currentItem == player.getInvItem().indexOf("Acorn.png")) {
-        		removeItem("Acorn.png");
-        		map.addAcorn(player);
-        		
+        	if (currentItem == player.getInvItem().indexOf("EasterEgg.png")) {
+        		itemSprites.remove(player.getInvItem().indexOf("EasterEgg.png"));
+        		removeItem("EasterEgg.png"); 
+        		Point point = new Point(player.getX() + 50f, player.getY() + 50f);
+        		EasterEgg easterEgg = new EasterEgg(point);
+        		map.addCollectibles(easterEgg);
         	}
         	
         	else {
-        		System.out.println("No item is here. Therefore it cannot be droped");
+        		System.out.println("You cannot drop this item");
         	}
         	
     		keyLocker.lockKey(Key.D);
@@ -381,19 +389,19 @@ public class PlayLevelScreen extends Screen {
         }
         
         // If Player Entered Door Change Map to Shop
-        if (map.getFlagManager().isFlagSet("hasEnteredShop")) {
-        	screenCoordinator.setGameState(GameState.SHOPKEEP);
-        	System.out.println("Shop entered");
+        if (flagManager.isFlagSet("hasEnteredShop")) {
+        	screenCoordinator.setGameState(GameState.SHOPKEEP); 
+        	flagManager.unsetFlag("hasEnteredShop");
         }
         
         //If Player Enters Water Change State to Swimming
         if (map.getFlagManager().isFlagSet("hasSwam")) {
-        	player.setPlayerState(PlayerState.SWIMMING);
+        	//player.setPlayerState(PlayerState.SWIMMING);
         }
         
         //If Player Enters Land Change State to Walking
         if (map.getFlagManager().isFlagSet("hasWalked")) {
-        	player.setPlayerState(PlayerState.WALKING);
+        	//player.setPlayerState(PlayerState.WALKING);
         } 
         
         //If Player interacts with the chest of fate
@@ -437,7 +445,7 @@ public class PlayLevelScreen extends Screen {
     					itemSprite = new Sprite(keysSpriteSheet.getSprite(0, 1)); 
     				} 
     				else if(item == "KEY_GENESIS") {
-    				itemSprite = new Sprite(keysSpriteSheet.getSprite(0, 2));
+    					itemSprite = new Sprite(keysSpriteSheet.getSprite(0, 2));
     				}
     				else if(item == "KEY_RETRIBUTION") {
     					itemSprite = new Sprite(keysSpriteSheet.getSprite(0, 3));
@@ -565,7 +573,7 @@ public class PlayLevelScreen extends Screen {
       	keyCounter.setKeys(player.getKeyCounter());
       	keyCounter.updateKeyText();
       	
-        screenCoordinator.setLevelScreen(this);
+        //screenCoordinator.setLevelScreen(this);
         powerUpTimer.setColor(powerUpTimerColor); 
         
         //Creates trigger to enter temple when all of the keys are collected
@@ -579,6 +587,8 @@ public class PlayLevelScreen extends Screen {
     	    templeUnlocked = true; 
     	    flagManager.setFlag("hasTempleUnlocked");
         }
+        
+        screenCoordinator.setLevelScreen(this);
     }
 
     //Fade to day/night
@@ -669,9 +679,10 @@ public class PlayLevelScreen extends Screen {
 
     //reset level and Health 
     public void resetLevel() {
+    	screenCoordinator.setGameState(GameState.LEVEL);
+        //this.playLevelScreenState = PlayLevelScreenState.RUNNING;
         initialize();
         map.resetHealthBar();
-        
     }
 
     public void goBackToMenu() {
@@ -694,9 +705,11 @@ public class PlayLevelScreen extends Screen {
 		ArrayList<String> items = player.getInvItem();
 		if (items.contains(image)) {
 			int itemIndex = items.indexOf(image);
-			items.remove(itemIndex);
+			//items.remove(itemIndex);
+			player.getInvItem().remove(image); 
+			player.removeInvItem(image); 
+			player.setEasterEggCollected();
 		} 
-		//System.out.println("test");
 		numItems--;
 	}
 	
