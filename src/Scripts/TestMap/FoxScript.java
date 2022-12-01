@@ -1,6 +1,7 @@
 package Scripts.TestMap;
 
 import Engine.GamePanel;
+import Engine.SoundE;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
@@ -9,6 +10,7 @@ import Level.ScriptState;
 //script for talking to fox NPC
 public class FoxScript extends Script<NPC>{
 	GamePanel gamePanel = new GamePanel();
+   	SoundE soundE = new SoundE();
 	
 	@Override
 	protected void setup() {
@@ -18,7 +20,7 @@ public class FoxScript extends Script<NPC>{
         // changes what fox says when talking to him the first time (flag is not set) vs talking to him afterwards (flag is set)
         if (!isFlagSet("hasTalkedToFox")) {
         	//Plays Sound Effect
-        	gamePanel.playSE(4);
+        	soundE.playSE(1);
             addTextToTextboxQueue("Hey you, squirrel over there!");
             addTextToTextboxQueue("This place seems to be ridden with zombies,\nI don't know how they got there but they don't belong.");
             addTextToTextboxQueue("Say, if you could rid them from the forest,\nI would be forever greatful :)");
@@ -29,7 +31,7 @@ public class FoxScript extends Script<NPC>{
             addTextToTextboxQueue("A lost temple will purify the forest...");
         }
         else {
-        	gamePanel.playSE(4);
+        	soundE.playSE(1);
             addTextToTextboxQueue("Why are you bothering me for? Go defeat these things\nand don't forget what I said.");
             addTextToTextboxQueue("At the top of the tallest mountain, where no\ncreature set foot before,");
             addTextToTextboxQueue("A lost temple will purify the forest...");

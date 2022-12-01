@@ -1,6 +1,7 @@
 package Scripts.TestMap; 
 
 import Engine.GamePanel;
+import Engine.SoundE;
 import Level.NPC;
 import Level.Script;
 import Level.ScriptState;
@@ -8,12 +9,13 @@ import Level.ScriptState;
 //script for talking to fox NPC
 public class WolfScript extends Script<NPC>{
 	GamePanel gamePanel = new GamePanel();
+   	SoundE soundE = new SoundE();
 	@Override
 	protected void setup() {
 		lockPlayer();
 		showTextbox();
 		//Plays Sound Effect
-		gamePanel.playSE(3);
+		soundE.playSE(1);
 		addTextToTextboxQueue("Hello, adventurer. Would you like to see my wares?");
 		addTextToTextboxQueue("I am able to provide you upgrades that will lead you \nto exact your revenge ont his stranger you speak of.");
 		addTextToTextboxQueue("What part of your squirrel would you like to upgrade?");

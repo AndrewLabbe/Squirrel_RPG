@@ -6,7 +6,7 @@ import Engine.GraphicsHandler;
 import SpriteFont.SpriteFont;
 
 public class Currency {
-	protected int CoinNum;
+	public static int CoinNum;
 	protected SpriteFont Coin;
 	
 	public Currency() {
