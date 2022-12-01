@@ -6,7 +6,7 @@ import Engine.GraphicsHandler;
 import SpriteFont.SpriteFont;
 
 public class KillCount {
-	protected int KillNum;
+	public static  int KillNum;
 	protected SpriteFont Kill;
 	
 	public KillCount() {

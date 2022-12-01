@@ -52,7 +52,7 @@ import Utils.Stopwatch;
 public class PlayLevelScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected Map map;
-    protected Player player;
+    public static Player player;
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
     protected DeathScreen deathScreen;
@@ -77,7 +77,8 @@ public class PlayLevelScreen extends Screen {
 	//Day or night is happening 
 	private boolean changeDay = true; 
 	//Length of day/night
-	private static final int dayLength = 1000; 
+	private static final int dayLength = 1000;
+	private static final String Systsem = null; 
 	//Number of enemies that spawn 
 	private int spawnNumber;
 	//Displays the wave
@@ -91,6 +92,9 @@ public class PlayLevelScreen extends Screen {
 	//Color or power-up counter 
 	private Color powerUpTimerColor;
 	
+	//Get players x
+    //public float x = map.getPlayerStartPosition().x;
+    //public float y = map.getPlayerStartPosition().y;
 	//Dedicated variables to the invScreen
 	
     protected int currentItem = 0; // current item position
@@ -126,11 +130,11 @@ public class PlayLevelScreen extends Screen {
     	if(load == false) {
     	// Kill Count 
     	screenKill = new KillCount();
-    	screenKill.setKill(0);
+    	// screenKill.setKill(0);
     	
     	// Key Count
     	keyCounter = new Keys();
-    	keyCounter.setKeys(0);
+    	// keyCounter.setKeys(0);
     	
         // setup state
         flagManager = new FlagManager();
@@ -156,9 +160,9 @@ public class PlayLevelScreen extends Screen {
         this.map = new newTileMap();
         map.reset();
         map.setFlagManager(flagManager);
-
         // setup player
         this.player = new Squirrel(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, map);
+        
         this.player.setMap(map);
         Point playerStartPosition = map.getPlayerStartPosition();
         this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
@@ -303,8 +307,8 @@ public class PlayLevelScreen extends Screen {
                 winScreen.update();
                 break;
             case DIED:
-            	screenCoordinator.setGameState(GameState.DEATH);
-            	//deathScreen.update();
+            screenCoordinator.setGameState(GameState.DEATH);
+            	deathScreen.update();
             	break;
         }
         
@@ -389,7 +393,7 @@ public class PlayLevelScreen extends Screen {
         
         // If Player Entered Door Change Map to Shop
         if (flagManager.isFlagSet("hasEnteredShop")) {
-        	screenCoordinator.setGameState(GameState.SHOPKEEP);
+        	screenCoordinator.setGameState(GameState.SHOPKEEP); 
         	flagManager.unsetFlag("hasEnteredShop");
         }
         
