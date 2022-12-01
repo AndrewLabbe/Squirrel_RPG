@@ -100,7 +100,10 @@ public class templeLevel3Map extends Map {
 			ArrayList<Trigger> triggers = new ArrayList<>();
 
 			triggers.add(new Trigger(550, 200, 250, 10, new TempleLevel3IntroScript(), "hasEnteredLevel3"));
-
+			for(Trigger trigger : triggers) {
+				trigger.getTriggerScript().setMap(this); 
+			}
+			
 			return triggers;
 		}
 }

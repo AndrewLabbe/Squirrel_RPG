@@ -7,7 +7,7 @@ public class TempleLevel3IntroScript extends Script {
 
 	@Override
 	protected void setup() {
-		lockPlayer();
+		//lockPlayer();
 		showTextbox();
 		if(!isFlagSet("hasEnteredLevel3")) {
 			addTextToTextboxQueue("I tihink I'm close...");
@@ -22,7 +22,7 @@ public class TempleLevel3IntroScript extends Script {
 	@Override
 	protected void cleanup() {
 		setFlag("hasEnteredLevel3");
-		unlockPlayer();
+		//unlockPlayer();
 		hideTextbox();
 
 	}
